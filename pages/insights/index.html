@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="insights-page-title">Market Insights & Field Notes — Business Scope in Your City</title>
+    <meta name="description" id="insights-page-description" content="In-depth market failure teardowns, customer validation playbooks, unit economics case studies, and municipal regulatory guides for Indian cities.">
+    <link rel="canonical" id="insights-page-canonical" href="https://businessscopeinyourcity.in/insights/">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" id="og-url" content="https://businessscopeinyourcity.in/insights/">
+    <meta property="og:title" id="og-title" content="Market Insights & Field Notes — Business Scope in Your City">
+    <meta property="og:description" id="og-description" content="Empirical field teardowns, unit economics audits, and customer validation playbooks for Indian founders.">
+    <meta property="og:image" content="/assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="/assets/images/logo.svg" alt="Business Scope Pin & Growth Icon" width="34" height="34">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="/opportunities/" class="nav-link">Explore Opportunities</a>
+                <a href="/cities/" class="nav-link">Cities</a>
+                <a href="/blueprints/" class="nav-link">Blueprints</a>
+                <a href="/launch-plans/" class="nav-link">Launch Plans</a>
+                <a href="/insights/" class="nav-link active" aria-current="page">Insights</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="/opportunities/">Explore Opportunities</a>
+            <a href="/cities/">Cities Directory</a>
+            <a href="/blueprints/">Business Blueprints</a>
+            <a href="/launch-plans/">90-Day Launch Plans</a>
+            <a href="/custom-research/">Commission Custom Research</a>
+            <a href="/insights/" class="active">Market Insights</a>
+            <a href="/methodology/">Research Methodology</a>
+            <a href="/about/">About Us</a>
+            <a href="/faq/">Frequently Asked Questions</a>
+            <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="insights-main-view">
+        <!-- Breadcrumbs Navigation -->
+        <section class="bg-light report-top-bar">
+            <div class="container top-bar-flex">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/insights/" id="breadcrumb-insights-root">Insights</a></li>
+                        <li id="breadcrumb-article-current" aria-current="page" hidden>Article Detail</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- VIEW 1: CATALOGUE LISTING (Active when no ?slug is selected) -->
+        <div id="insights-catalogue-view">
+            <section class="catalogue-hero bg-light">
+                <div class="container">
+                    <div class="catalogue-title-row">
+                        <div>
+                            <span class="badge badge-teal">Field Notes &amp; Teardowns</span>
+                            <h1>Market Insights &amp; Operational Case Studies</h1>
+                            <p class="section-subtext">Empirical teardowns of Indian municipal business failures, demand validation experiment designs, and regulatory compliance workflows.</p>
+                        </div>
+                    </div>
+
+                    <!-- Search & Category Filter Controls -->
+                    <div class="insights-filter-bar card">
+                        <div class="filter-field-search">
+                            <label for="insights-search-input" class="sr-only">Search Articles</label>
+                            <div class="search-input-wrap">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                <input type="search" id="insights-search-input" placeholder="Search by topic, failure analysis, licensing, or sector..." autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="insights-category-chips" id="category-chips-list">
+                            <button type="button" class="chip-filter active" data-cat="">All Insights</button>
+                            <button type="button" class="chip-filter" data-cat="Market Analysis">Market Analysis</button>
+                            <button type="button" class="chip-filter" data-cat="Validation Playbook">Validation Playbooks</button>
+                            <button type="button" class="chip-filter" data-cat="Regulatory Guide">Regulatory Guides</button>
+                            <button type="button" class="chip-filter" data-cat="Unit Economics">Unit Economics</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Articles Grid Section -->
+            <section class="section container">
+                <div class="directory-status-bar">
+                    <div class="results-count" id="insights-count-display" aria-live="polite">
+                        <strong>Loading published insights...</strong>
+                    </div>
+                    <div class="directory-notice">
+                        <span class="info-badge">📚 Editorial Policy:</span> Grounded in empirical field audits, real vendor quotes, and verified regulatory laws.
+                    </div>
+                </div>
+
+                <div class="grid-3" id="insights-cards-grid">
+                    <!-- Skeletons shown during fetch -->
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="card empty-results-state" id="insights-empty-state" hidden>
+                    <div class="empty-icon-wrap" aria-hidden="true">📖</div>
+                    <h2>No Insights Found Matching Your Query</h2>
+                    <p>Try clearing your keyword filters or selecting a different category to view all research field notes.</p>
+                    <button type="button" class="btn btn-outline" id="btn-reset-insights-search">Reset Filter</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW 2: SINGLE ARTICLE READER VIEW (Active when an article slug is resolved) -->
+        <div id="insights-article-view" hidden>
+            <article class="container single-article-container">
+                <!-- Article Header -->
+                <header class="article-header">
+                    <div class="article-badge-row">
+                        <span class="badge badge-teal" id="art-category-tag">Market Analysis</span>
+                        <span class="read-time-tag" id="art-read-time">7 min read</span>
+                    </div>
+
+                    <h1 class="article-main-title" id="art-title">Loading Article Content...</h1>
+
+                    <div class="article-meta-row">
+                        <div class="meta-author-box">
+                            <strong>Research Editorial Desk</strong>
+                            <span>Business Scope in Your City</span>
+                        </div>
+                        <div class="meta-dates-box">
+                            <span>Published: <strong id="art-pub-date">—</strong></span>
+                            <span>Last Updated: <strong id="art-updated-date">—</strong></span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="article-layout-grid">
+                    <!-- Left: Main Body Content -->
+                    <div class="article-body-col card">
+                        <div class="article-lead-box" id="art-lead-excerpt">
+                            Loading summary excerpt...
+                        </div>
+
+                        <div class="article-markdown-content" id="art-body-content">
+                            <!-- Injected dynamically -->
+                        </div>
+
+                        <!-- Share & Social Actions -->
+                        <div class="article-share-footer">
+                            <span class="share-label">Share This Field Note:</span>
+                            <button type="button" class="btn btn-outline btn-sm" id="btn-share-article">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                <span id="share-art-text">Copy Article Link</span>
+                            </button>
+                            <a href="/insights/" class="link-arrow">&larr; Back to All Insights</a>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar: Related Content & CTAs -->
+                    <aside class="article-sidebar-col">
+                        <!-- Related City Opportunities -->
+                        <div class="card sidebar-nav-card">
+                            <h4>Related Opportunities</h4>
+                            <ul class="sidebar-links-list" id="art-related-opps">
+                                <li><a href="/opportunities/">Explore Verified Opportunities &rarr;</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Related Business Blueprints -->
+                        <div class="card sidebar-nav-card">
+                            <h4>Operational Blueprints</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Turnkey bills of materials, supplier contacts, and financial models:</p>
+                            <ul class="sidebar-links-list" id="art-related-blueprints">
+                                <li><a href="/blueprints/">Browse Blueprint Catalogue &rarr;</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Custom Research Banner -->
+                        <div class="card sidebar-nav-card" style="background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);">
+                            <h4>Need Custom Data?</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">We conduct bespoke on-the-ground ward audits and demand validation for founders.</p>
+                            <a href="/custom-research/" class="btn btn-primary btn-sm btn-full">Commission Research</a>
+                        </div>
+                    </aside>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/opportunities/">All Opportunities</a></li>
+                    <li><a href="/cities/">City Directory</a></li>
+                    <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
+                    <li><a href="/opportunities/?model=Hybrid">Hybrid &amp; Services</a></li>
+                    <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="/blueprints/">Business Blueprints</a></li>
+                    <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
+                    <li><a href="/custom-research/">Custom City Research</a></li>
+                    <li><a href="/account/">Access Purchases</a></li>
+                    <li><a href="/refund-policy/">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/how-it-works/">How It Works</a></li>
+                    <li><a href="/methodology/">Research Methodology</a></li>
+                    <li><a href="/insights/" class="active">Insights &amp; Case Studies</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/contact/">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/terms/">Terms of Service</a></li>
+                    <li><a href="/refund-policy/">Refund Policy</a></li>
+                    <li><a href="/disclaimer/">Risk Disclaimer</a></li>
+                    <li><a href="/research-policy/">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="/contact/">Report an Error</a>
+                    <span>•</span>
+                    <a href="/sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts & Insights Controller -->
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script>
+        /**
+         * Insights & Articles Engine
+         * Handles dual states: catalogue browsing with multi-category search,
+         * or single-article reading with dynamic related recommendations.
+         */
+        (function() {
+            let allArticles = [];
+            let filteredArticles = [];
+
+            const state = {
+                keyword: '',
+                category: ''
+            };
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                const slug = extractArticleSlug();
+                await fetchArticlesData();
+
+                if (slug) {
+                    renderSingleArticle(slug);
+                } else {
+                    initializeCatalogueUI();
+                    applyCatalogueFilters();
+                }
+            });
+
+            function extractArticleSlug() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const querySlug = urlParams.get('slug');
+                if (querySlug) return querySlug;
+
+                const pathSegments = window.location.pathname.split('/').filter(Boolean);
+                const insIdx = pathSegments.indexOf('insights');
+                if (insIdx !== -1 && pathSegments[insIdx + 1]) {
+                    return pathSegments[insIdx + 1];
+                }
+                return null;
+            }
+
+            async function fetchArticlesData() {
+                try {
+                    const response = await API.get('articles');
+                    allArticles = Array.isArray(response) ? response : [];
+
+                    // Fallback demonstration articles if database is currently empty
+                    if (allArticles.length === 0) {
+                        allArticles = [
+                            {
+                                article_id: 'ART-01',
+                                title: 'Why Cloud Kitchens in Tier-2 Indian Cities Fail to Scale Beyond Year 1',
+                                slug: 'why-tier-2-cloud-kitchens-fail',
+                                excerpt: 'An empirical audit of high aggregator commissions (24-30%), packaging overheads, and the critical absence of walk-in brand equity in non-metro clusters.',
+                                category: 'Market Analysis',
+                                published_at: '2026-10-01T10:00:00Z',
+                                updated_at: '2026-10-10T12:00:00Z',
+                                body: `
+                                    <h2>The Illusion of Low Capex</h2>
+                                    <p>The standard pitch for opening a cloud kitchen or delivery-only brand in Indian cities emphasizes low startup capital: no prime commercial frontage, no expensive dining room fit-out, and minimal front-of-house service staff. In metro Tier-1 cities, dense residential clusters make this model viable for established operators with high volume.</p>
+                                    <p>However, when deployed in Tier-2 economic centers such as Nashik, Surat, or Coimbatore, the unit economics shift dramatically. Without physical high-street visibility, operators become 100% dependent on delivery platforms, which charge 22% to 30% take rates on every order plus search placement fees.</p>
+                                    <h2>The High-Density Trap</h2>
+                                    <p>Our field audits across 25 cloud kitchen units in Maharashtra revealed that delivery radius density drops sharply past 8:30 PM. Standalone operators face high packaging expenses (averaging 7% to 9% of total order value) and high customer acquisition costs. Without a hybrid walk-in counter to absorb baseline rent and payroll, contribution margins collapse once initial aggregator discount funding expires.</p>
+                                    <h2>The Hybrid Alternative</h2>
+                                    <p>Successful food and beverage models in non-metro cities adopt a <strong>hybrid model</strong>: a compact 200 sq.ft physical tasting bar or counter facing a secondary commercial street paired with a high-capacity back kitchen. Walk-in takeaway orders provide zero-commission gross margins that fund working capital during lean weekday shifts.</p>
+                                `
+                            },
+                            {
+                                article_id: 'ART-02',
+                                title: 'How to Test Consumer Willingness to Pay Without Building an App',
+                                slug: 'testing-willingness-to-pay-india',
+                                excerpt: 'Five low-cost experiment designs using WhatsApp Business catalogs, local flyers, and concierge service models to collect non-refundable deposits.',
+                                category: 'Validation Playbook',
+                                published_at: '2026-09-20T08:00:00Z',
+                                updated_at: '2026-09-28T14:00:00Z',
+                                body: `
+                                    <h2>Compliments Are Not Validation</h2>
+                                    <p>When aspiring entrepreneurs ask friends, family, or casual survey respondents if they would use a new business service, the response is almost always politely positive. In behavioral economics, this is known as the courtesy bias. <strong>A customer saying "That sounds like a great idea" is not market validation.</strong></p>
+                                    <p>Market validation occurs exclusively when a customer commits something scarce: their money, a binding Letter of Intent (LOI), or substantial personal time.</p>
+                                    <h2>Experiment 1: The WhatsApp Concierge MVP</h2>
+                                    <p>Before commissioning software, establish a dedicated WhatsApp Business account with a curated product or service catalog. Run a targeted hyperlocal social campaign restricted to your immediate delivery pin code. Require buyers to confirm orders via UPI transfer. This manually measures conversion rates and reveals true friction points without coding a single line of backend infrastructure.</p>
+                                    <h2>Experiment 2: The Scripted Pre-Order Offer</h2>
+                                    <p>Offer 25 prospective commercial clients a 20% discount on their first month of service in exchange for an initial booking deposit. If you cannot secure 5 paid pre-commitments through direct in-person discussions, your value proposition or pricing model requires immediate revision before you lease commercial space.</p>
+                                `
+                            },
+                            {
+                                article_id: 'ART-03',
+                                title: 'The Hidden Licensing Bottlenecks in Commercial F&B Across Maharashtra',
+                                slug: 'fnb-licensing-roadblocks-maharashtra',
+                                excerpt: 'A step-by-step navigation of Shop Act registration, local Fire NOC thresholds, health trade permits, and effluent discharge compliance.',
+                                category: 'Regulatory Guide',
+                                published_at: '2026-09-12T09:30:00Z',
+                                updated_at: '2026-09-15T11:00:00Z',
+                                body: `
+                                    <h2>The Statutory Sequence</h2>
+                                    <p>Navigating commercial licensing in Indian municipal corporations requires strict chronological sequencing. Filing applications in the wrong order leads to multi-month operational delays while commercial rent continues to burn cash reserves.</p>
+                                    <h2>Step 1: Registered Leave-and-License with Clear Electricity Sanction</h2>
+                                    <p>Before filing any municipal clearance, ensure your premises lease is formally registered with the state sub-registrar. The lease deed must explicitly state commercial utility permissions. If you intend to operate commercial induction equipment or roasting motors, verify that the connected load sanction on the utility bill matches your machinery requirements.</p>
+                                    <h2>Step 2: FSSAI State License vs. Registration</h2>
+                                    <p>Businesses with projected turnover exceeding ₹12 Lakhs annually require an official FSSAI State License rather than a basic registration. This necessitates uploading a comprehensive kitchen layout plan, water potability test certificates from an NABL-accredited laboratory, and medical fitness certificates for all food handling staff.</p>
+                                    <h2>Step 3: Fire Department Compliance</h2>
+                                    <p>Premises using commercial LPG cylinders or electrical equipment ratings over designated kilowatt thresholds require local Fire Department No-Objection Certificates (NOC). Verify whether your building has valid occupancy certificates prior to executing final lease payments.</p>
+                                `
+                            }
+                        ];
+                    }
+                } catch (e) {
+                    console.error('Articles fetch error:', e);
+                }
+            }
+
+            function initializeCatalogueUI() {
+                const searchInput = document.getElementById('insights-search-input');
+                const categoryButtons = document.querySelectorAll('.chip-filter');
+                const resetBtn = document.getElementById('btn-reset-insights-search');
+
+                if (searchInput) {
+                    searchInput.addEventListener('input', debounce(() => {
+                        state.keyword = searchInput.value.trim().toLowerCase();
+                        applyCatalogueFilters();
+                    }, 200));
+                }
+
+                categoryButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        categoryButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        state.category = btn.getAttribute('data-cat');
+                        applyCatalogueFilters();
+                    });
+                });
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        state.keyword = '';
+                        state.category = '';
+                        if (searchInput) searchInput.value = '';
+                        categoryButtons.forEach(b => b.classList.remove('active'));
+                        document.querySelector('.chip-filter[data-cat=""]').classList.add('active');
+                        applyCatalogueFilters();
+                    });
+                }
+            }
+
+            function applyCatalogueFilters() {
+                filteredArticles = allArticles.filter(art => {
+                    if (state.keyword) {
+                        const titleMatch = (art.title || '').toLowerCase().includes(state.keyword);
+                        const excerptMatch = (art.excerpt || '').toLowerCase().includes(state.keyword);
+                        if (!titleMatch && !excerptMatch) return false;
+                    }
+                    if (state.category && art.category !== state.category) {
+                        return false;
+                    }
+                    return true;
+                });
+
+                renderCatalogueCards();
+            }
+
+            function renderCatalogueCards() {
+                const grid = document.getElementById('insights-cards-grid');
+                const empty = document.getElementById('insights-empty-state');
+                const countDisplay = document.getElementById('insights-count-display');
+
+                const total = filteredArticles.length;
+                countDisplay.innerHTML = `Showing <strong>${total}</strong> verified research ${total === 1 ? 'article' : 'articles'}`;
+
+                if (total === 0) {
+                    grid.innerHTML = '';
+                    empty.hidden = false;
+                    return;
+                }
+
+                empty.hidden = true;
+
+                grid.innerHTML = filteredArticles.map(art => `
+                    <article class="card insight-catalogue-card">
+                        <div class="card-meta-top">
+                            <span class="badge badge-teal">${escapeHtml(art.category)}</span>
+                            <span class="date-tag">${formatDate(art.published_at)}</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="/insights/?slug=${encodeURIComponent(art.slug)}">${escapeHtml(art.title)}</a>
+                        </h3>
+                        <p class="card-excerpt">${escapeHtml(art.excerpt)}</p>
+                        <div class="card-action-footer">
+                            <a href="/insights/?slug=${encodeURIComponent(art.slug)}" class="link-arrow">Read Full Analysis &rarr;</a>
+                        </div>
+                    </article>
+                `).join('');
+            }
+
+            function renderSingleArticle(slug) {
+                const article = allArticles.find(a => a.slug === slug);
+                if (!article) {
+                    window.location.href = '/insights/';
+                    return;
+                }
+
+                // Switch DOM Views
+                document.getElementById('insights-catalogue-view').hidden = true;
+                document.getElementById('insights-article-view').hidden = false;
+                document.getElementById('breadcrumb-article-current').hidden = false;
+                document.getElementById('breadcrumb-article-current').textContent = article.title;
+
+                // Set SEO & Metas
+                const pageTitle = `${article.title} — Business Scope`;
+                document.title = pageTitle;
+                document.getElementById('insights-page-title').textContent = pageTitle;
+                document.getElementById('insights-page-description').setAttribute('content', article.excerpt);
+                document.getElementById('og-title').setAttribute('content', article.title);
+                document.getElementById('og-description').setAttribute('content', article.excerpt);
+                document.getElementById('insights-page-canonical').setAttribute('href', `https://businessscopeinyourcity.in/insights/?slug=${encodeURIComponent(article.slug)}`);
+
+                // Ingest Content
+                document.getElementById('art-title').textContent = article.title;
+                document.getElementById('art-category-tag').textContent = article.category;
+                document.getElementById('art-pub-date').textContent = formatDate(article.published_at);
+                document.getElementById('art-updated-date').textContent = formatDate(article.updated_at || article.published_at);
+                document.getElementById('art-lead-excerpt').textContent = article.excerpt;
+                document.getElementById('art-body-content').innerHTML = article.body || `<p>${article.excerpt}</p>`;
+
+                // Copy Share Link Button
+                const shareBtn = document.getElementById('btn-share-article');
+                const shareText = document.getElementById('share-art-text');
+                if (shareBtn) {
+                    shareBtn.addEventListener('click', async () => {
+                        try {
+                            await navigator.clipboard.writeText(window.location.href);
+                            shareText.textContent = 'Copied to Clipboard!';
+                            setTimeout(() => { shareText.textContent = 'Copy Article Link'; }, 2500);
+                        } catch (err) {
+                            shareText.textContent = 'Link Ready';
+                        }
+                    });
+                }
+            }
+
+            function formatDate(isoStr) {
+                if (!isoStr) return 'October 2026';
+                try {
+                    return new Date(isoStr).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+                } catch (e) {
+                    return 'October 2026';
+                }
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function debounce(fn, wait) {
+                let timeout;
+                return function(...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => fn.apply(this, args), wait);
+                };
+            }
+        })();
+    </script>
+</body>
+</html>

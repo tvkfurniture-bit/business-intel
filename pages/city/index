@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">City Business Profile — Business Scope in Your City</title>
+    <meta name="description" id="page-description" content="Discover verified local business opportunities, market gaps, commercial rental trends, and customer problems in this city.">
+    <link rel="canonical" id="page-canonical" href="https://businessscopeinyourcity.in/city/">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" id="og-url" content="https://businessscopeinyourcity.in/city/">
+    <meta property="og:title" id="og-title" content="City Business Profile — Business Scope in Your City">
+    <meta property="og:description" id="og-description" content="Empirical market research, local gap analysis, and startup opportunities for this city.">
+    <meta property="og:image" content="/assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="/assets/images/logo.svg" alt="Business Scope Pin & Growth Icon" width="34" height="34">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="/opportunities/" class="nav-link">Explore Opportunities</a>
+                <a href="/cities/" class="nav-link active">Cities</a>
+                <a href="/blueprints/" class="nav-link">Blueprints</a>
+                <a href="/launch-plans/" class="nav-link">Launch Plans</a>
+                <a href="/insights/" class="nav-link">Insights</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <!-- Accessible Mobile Drawer -->
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="/opportunities/">Explore Opportunities</a>
+            <a href="/cities/" class="active">Cities Directory</a>
+            <a href="/blueprints/">Business Blueprints</a>
+            <a href="/launch-plans/">90-Day Launch Plans</a>
+            <a href="/custom-research/">Commission Custom Research</a>
+            <a href="/insights/">Market Insights</a>
+            <a href="/methodology/">Research Methodology</a>
+            <a href="/about/">About Us</a>
+            <a href="/faq/">Frequently Asked Questions</a>
+            <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main id="city-page-main" class="city-detail-main">
+        <!-- City Profile Hero -->
+        <section class="city-hero bg-light">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/cities/">Cities</a></li>
+                        <li id="breadcrumb-city-name" aria-current="page">Loading City...</li>
+                    </ol>
+                </nav>
+
+                <div class="city-hero-grid">
+                    <div class="city-hero-primary">
+                        <div class="city-meta-pill-row">
+                            <span class="badge badge-teal" id="city-coverage-badge">Coverage Loading</span>
+                            <span class="region-tag" id="city-region-tag">Region Loading</span>
+                            <span class="review-date-pill" id="city-review-date">Review Date: October 2026</span>
+                        </div>
+                        <h1 id="city-headline-name">Loading City Intelligence...</h1>
+                        <p class="city-state-lead">State Jurisdiction: <strong id="city-state-text">—</strong> &bull; Administrative Scope: <span id="city-scope-text">Municipal &amp; Metropolitan Urban Area</span></p>
+                        <p class="city-intro-paragraph" id="city-intro-text">
+                            Connecting to empirical database records to assemble local business conditions, zoning context, and retail footfall observations.
+                        </p>
+                    </div>
+
+                    <div class="city-hero-card card">
+                        <h3>City Market Metrics</h3>
+                        <div class="city-metric-row">
+                            <span class="metric-label">Published Opportunities:</span>
+                            <strong class="metric-val" id="city-stat-opps">0</strong>
+                        </div>
+                        <div class="city-metric-row">
+                            <span class="metric-label">Active Blueprint Reports:</span>
+                            <strong class="metric-val" id="city-stat-blueprints">0</strong>
+                        </div>
+                        <div class="city-metric-row">
+                            <span class="metric-label">Dominant Sector Gaps:</span>
+                            <strong class="metric-val" id="city-stat-sectors">F&B, Clean Energy, Logistics</strong>
+                        </div>
+                        <div class="city-metric-row">
+                            <span class="metric-label">Average MSME Capex Range:</span>
+                            <strong class="metric-val" id="city-stat-capex">₹5L – ₹25L</strong>
+                        </div>
+                        <div class="city-hero-cta">
+                            <a href="#city-opportunities" class="btn btn-primary btn-full btn-sm">View Local Opportunities &darr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- City-Specific Research Findings & Local Ground Truth -->
+        <section class="section container" aria-labelledby="ground-truth-heading">
+            <div class="section-header">
+                <div>
+                    <span class="badge badge-teal">Empirical Ground Truth</span>
+                    <h2 id="ground-truth-heading">Local Commercial Environment &amp; Economic Infrastructure</h2>
+                    <p class="section-subtext">Verified observations on commercial real estate rentals, consumer purchasing patterns, and regulatory constraints in this territory.</p>
+                </div>
+            </div>
+
+            <div class="grid-3 city-findings-grid" id="city-findings-container">
+                <div class="card finding-card">
+                    <div class="finding-icon">🏬</div>
+                    <h3>Commercial Space &amp; Rental Trends</h3>
+                    <p id="finding-rental-text">Analyzing commercial high-street leases versus warehouse clustering in industrial corridors. Standard security deposit practices in this municipal zone range from 3 to 6 months.</p>
+                </div>
+
+                <div class="card finding-card">
+                    <div class="finding-icon">👥</div>
+                    <h3>Consumer Purchasing Demographics</h3>
+                    <p id="finding-demographic-text">Target demographic concentration consists of urban dual-income households, corporate workforce hubs, and expanding residential suburbs seeking organized personal services.</p>
+                </div>
+
+                <div class="card finding-card">
+                    <div class="finding-icon">📜</div>
+                    <h3>Regulatory &amp; Licensing Checks</h3>
+                    <p id="finding-licensing-text">State municipal corporation trade licenses, Shop Act registrations, Fire NOC guidelines, and state pollution control board clearances applicable to MSME light manufacturers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- City Opportunities Listing with Interactive Filters -->
+        <section class="section bg-light" id="city-opportunities" aria-labelledby="city-opps-heading">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="badge badge-teal">Validated Gaps</span>
+                        <h2 id="city-opps-heading">Published Opportunities in <span class="city-name-placeholder">this City</span></h2>
+                        <p class="section-subtext">Filter opportunities located within this administrative territory by investment capital and business model.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive In-Page Filters -->
+                <div class="city-filter-controls card">
+                    <div class="filter-controls-flex">
+                        <div class="filter-field">
+                            <label for="city-model-filter">Business Model:</label>
+                            <select id="city-model-filter">
+                                <option value="">All Operating Models</option>
+                                <option value="Offline">Offline / Physical Store</option>
+                                <option value="Hybrid">Hybrid (Retail + Delivery)</option>
+                                <option value="Online">Online / B2B Service</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="city-budget-filter">Max Investment Budget:</label>
+                            <select id="city-budget-filter">
+                                <option value="">Any Budget</option>
+                                <option value="500000">Under ₹5 Lakhs</option>
+                                <option value="1500000">₹5 Lakhs – ₹15 Lakhs</option>
+                                <option value="5000000">₹15 Lakhs – ₹50 Lakhs</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="city-category-filter">Category:</label>
+                            <select id="city-category-filter">
+                                <option value="">All Categories</option>
+                                <option value="Food & Beverage">Food & Beverage</option>
+                                <option value="Clean Energy & EV">Clean Energy & EV</option>
+                                <option value="Logistics & Hyperlocal">Logistics & Hyperlocal</option>
+                                <option value="Healthcare & Elderly Care">Healthcare & Elderly Care</option>
+                                <option value="Light Manufacturing">Light Manufacturing</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunities Grid for City -->
+                <div class="grid-3" id="city-opps-grid">
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                </div>
+
+                <!-- Empty State for Filtered Opps -->
+                <div class="card empty-results-state" id="city-opps-empty" hidden>
+                    <div class="empty-icon-wrap" aria-hidden="true">🔍</div>
+                    <h3>No Opportunities Match the Selected Filters</h3>
+                    <p>Try resetting the budget or model filters to view all published research for this city.</p>
+                    <button type="button" class="btn btn-outline" id="reset-city-filters-btn">Reset In-Page Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Public Resources & Government Sources -->
+        <section class="section container" aria-labelledby="sources-heading">
+            <div class="section-header">
+                <div>
+                    <span class="badge badge-teal">Verified Citations</span>
+                    <h2 id="sources-heading">Public Portals &amp; Official Regulatory Sources</h2>
+                    <p class="section-subtext">Verified government portals and public registries relevant to establishing a business in this state jurisdiction.</p>
+                </div>
+            </div>
+
+            <div class="card sources-directory-card">
+                <ul class="verified-sources-list" id="city-sources-list">
+                    <li class="source-item">
+                        <span class="source-tag">Government Registry</span>
+                        <div class="source-content">
+                            <strong>State Industrial Development Corporation Portal</strong>
+                            <p>Information on industrial plot leasing, MSME incentive schemes, and utility clearance single-window applications.</p>
+                        </div>
+                        <a href="https://www.msme.gov.in" target="_blank" rel="noopener noreferrer" class="link-external">Visit Portal &nearr;</a>
+                    </li>
+                    <li class="source-item">
+                        <span class="source-tag">Licensing Portal</span>
+                        <div class="source-content">
+                            <strong>Municipal Corporation Health &amp; Trade Clearance Department</strong>
+                            <p>Official municipal application workflow for local Trade Licenses, Signage Clearances, and Fire Safety certificates.</p>
+                        </div>
+                        <a href="https://foscos.fssai.gov.in" target="_blank" rel="noopener noreferrer" class="link-external">FoSCoS FSSAI &nearr;</a>
+                    </li>
+                    <li class="source-item">
+                        <span class="source-tag">State Utility</span>
+                        <div class="source-content">
+                            <strong>State Electricity Distribution Utility (DISCOM)</strong>
+                            <p>Net-metering regulations, commercial load sanction processes, and commercial tariff schedules.</p>
+                        </div>
+                        <a href="https://cea.nic.in" target="_blank" rel="noopener noreferrer" class="link-external">Energy Advisory &nearr;</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Related Paid Blueprints & Reports for this City -->
+        <section class="section bg-light" aria-labelledby="blueprints-city-heading">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="badge badge-teal">Turnkey Blueprints</span>
+                        <h2 id="blueprints-city-heading">Detailed Business Blueprints for <span class="city-name-placeholder">this City</span></h2>
+                        <p class="section-subtext">Actionable, comprehensive execution packages including itemized bills of materials, financial models, and vendor contacts.</p>
+                    </div>
+                </div>
+
+                <div class="grid-3" id="city-blueprints-grid">
+                    <!-- Populated dynamically or fallback -->
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Research CTA Banner -->
+        <section class="section container">
+            <div class="custom-research-banner card">
+                <div class="banner-content">
+                    <span class="badge badge-teal">Bespoke Research</span>
+                    <h2>Need Custom Opportunity Audits in <span class="city-name-placeholder">this City</span>?</h2>
+                    <p>Our analysts conduct direct on-the-ground audits, mystery shopper evaluations, competitor mapping, and demand validation interviews across specific municipal wards.</p>
+                    <div class="banner-tags">
+                        <span>✓ Specific Ward Footfall Audits</span>
+                        <span>✓ Vendor Quoting &amp; Sourcing</span>
+                        <span>✓ Local Competitor Mystery Shopping</span>
+                    </div>
+                </div>
+                <div class="banner-action">
+                    <a href="/custom-research/" class="btn btn-teal btn-lg">Commission Custom Research</a>
+                    <small>Confidential proposals delivered within 48 hours.</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- City-Specific FAQ Section -->
+        <section class="section bg-light" aria-labelledby="city-faq-heading">
+            <div class="container">
+                <div class="section-header text-center center-block">
+                    <span class="badge badge-teal">City Intelligence FAQ</span>
+                    <h2 id="city-faq-heading">Frequently Asked Questions: <span class="city-name-placeholder">this City</span></h2>
+                    <p class="section-subtext">Key considerations for setting up a commercial venture in this municipal territory.</p>
+                </div>
+
+                <div class="faq-accordion" id="city-faq-accordion">
+                    <details class="faq-item card">
+                        <summary class="faq-question">
+                            <span>What are typical commercial deposit requirements in this city?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Commercial leases in primary retail areas generally mandate between 3 to 6 months of rental deposit, with registered 3-year or 5-year leave-and-license agreements with standard 5% to 7% annual escalation clauses.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item card">
+                        <summary class="faq-question">
+                            <span>How long does local municipal trade licensing take?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Municipal Trade Licenses and Shop Act registrations typically take between 15 to 30 working days when filed through state single-window portals, provided premises tax receipts and Fire NOC clearances are verified.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item card">
+                        <summary class="faq-question">
+                            <span>Are these opportunities suitable for first-time entrepreneurs?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Each published opportunity includes an assessment of required skills, operational workflow complexity, and a 7-day initial demand-validation test so first-time operators can gauge risk before making financial commitments.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/opportunities/">All Opportunities</a></li>
+                    <li><a href="/cities/">City Directory</a></li>
+                    <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
+                    <li><a href="/opportunities/?model=Hybrid">Hybrid &amp; Services</a></li>
+                    <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="/blueprints/">Business Blueprints</a></li>
+                    <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
+                    <li><a href="/custom-research/">Custom City Research</a></li>
+                    <li><a href="/account/">Access Purchases</a></li>
+                    <li><a href="/refund-policy/">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/how-it-works/">How It Works</a></li>
+                    <li><a href="/methodology/">Research Methodology</a></li>
+                    <li><a href="/insights/">Insights &amp; Case Studies</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/contact/">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/terms/">Terms of Service</a></li>
+                    <li><a href="/refund-policy/">Refund Policy</a></li>
+                    <li><a href="/disclaimer/">Risk Disclaimer</a></li>
+                    <li><a href="/research-policy/">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="/contact/">Report an Error</a>
+                    <span>•</span>
+                    <a href="/sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts & Dynamic City Engine -->
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/forms.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script>
+        /**
+         * Dynamic City Page Controller
+         * Resolves the city slug from the URL path or search parameter, fetches verified records,
+         * and renders city-specific opportunities, findings, and metadata.
+         */
+        (function() {
+            let currentCity = null;
+            let cityOpportunities = [];
+            let cityProducts = [];
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                const slug = extractCitySlug();
+                if (!slug) {
+                    window.location.href = '/cities/';
+                    return;
+                }
+                await loadCityPageData(slug);
+                setupCityFilterHandlers();
+            });
+
+            function extractCitySlug() {
+                // Support path format (/city/mumbai/) and query parameter (?slug=mumbai)
+                const urlParams = new URLSearchParams(window.location.search);
+                const querySlug = urlParams.get('slug');
+                if (querySlug) return querySlug;
+
+                const pathSegments = window.location.pathname.split('/').filter(Boolean);
+                const cityIdx = pathSegments.indexOf('city');
+                if (cityIdx !== -1 && pathSegments[cityIdx + 1]) {
+                    return pathSegments[cityIdx + 1];
+                }
+                return 'mumbai'; // Fallback demo city
+            }
+
+            async function loadCityPageData(slug) {
+                try {
+                    const [citiesRes, oppsRes, prodsRes] = await Promise.all([
+                        API.get('cities'),
+                        API.get('opportunities'),
+                        API.get('products')
+                    ]);
+
+                    const cities = Array.isArray(citiesRes) ? citiesRes : [];
+                    currentCity = cities.find(c => c.city_slug === slug) || cities[0];
+
+                    if (!currentCity) {
+                        window.location.href = '/cities/';
+                        return;
+                    }
+
+                    // Filter published records matching this city ID
+                    const allOpps = Array.isArray(oppsRes) ? oppsRes : [];
+                    cityOpportunities = allOpps.filter(o => o.city_id === currentCity.city_id);
+
+                    const allProds = Array.isArray(prodsRes) ? prodsRes : [];
+                    cityProducts = allProds.filter(p => p.city_id === currentCity.city_id || p.city_id === 'GLOBAL');
+
+                    applyCityMetadata();
+                    renderCityHero();
+                    renderCityOpportunities(cityOpportunities);
+                    renderCityBlueprints();
+                } catch (err) {
+                    console.error('Failed to load city records:', err);
+                }
+            }
+
+            function applyCityMetadata() {
+                const cityName = currentCity.city_name;
+                const pageTitle = `${currentCity.seo_title || `Business Opportunities in ${cityName}`} — Business Scope`;
+                const pageDesc = currentCity.seo_description || `Discover verified business opportunities, economic profiles, and market gaps in ${cityName}, ${currentCity.state}.`;
+
+                document.title = pageTitle;
+                document.getElementById('page-title').textContent = pageTitle;
+                document.getElementById('page-description').setAttribute('content', pageDesc);
+                document.getElementById('og-title').setAttribute('content', pageTitle);
+                document.getElementById('og-description').setAttribute('content', pageDesc);
+                document.getElementById('page-canonical').setAttribute('href', `https://businessscopeinyourcity.in/city/${currentCity.city_slug}/`);
+
+                // Update text placeholders throughout the page
+                document.querySelectorAll('.city-name-placeholder').forEach(el => {
+                    el.textContent = cityName;
+                });
+            }
+
+            function renderCityHero() {
+                document.getElementById('breadcrumb-city-name').textContent = currentCity.city_name;
+                document.getElementById('city-headline-name').textContent = `Business Opportunities in ${currentCity.city_name}`;
+                document.getElementById('city-state-text').textContent = currentCity.state;
+                document.getElementById('city-intro-text').textContent = currentCity.introduction;
+                document.getElementById('city-coverage-badge').textContent = `${currentCity.research_coverage} Coverage`;
+                document.getElementById('city-region-tag').textContent = currentCity.region;
+
+                // Live calculated stats
+                document.getElementById('city-stat-opps').textContent = cityOpportunities.length;
+                document.getElementById('city-stat-blueprints').textContent = cityProducts.length;
+            }
+
+            function renderCityOpportunities(list) {
+                const grid = document.getElementById('city-opps-grid');
+                const empty = document.getElementById('city-opps-empty');
+
+                if (!list || list.length === 0) {
+                    grid.innerHTML = '';
+                    empty.hidden = false;
+                    return;
+                }
+
+                empty.hidden = true;
+                grid.innerHTML = list.map(o => `
+                    <article class="card opportunity-catalogue-card">
+                        <div class="card-meta-top">
+                            <span class="badge badge-teal">${escapeHtml(o.category)}</span>
+                            <span class="evidence-tag evidence-tag-verified">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="/opportunity/${encodeURIComponent(o.slug)}/">${escapeHtml(o.title)}</a>
+                        </h3>
+                        <p class="card-location">Model: <strong>${escapeHtml(o.business_model)}</strong></p>
+                        <p class="card-summary">${escapeHtml(o.short_summary)}</p>
+                        <div class="card-budget-box">
+                            <div class="budget-col">
+                                <span class="budget-label">Startup Capex Range</span>
+                                <strong class="budget-amount">₹${Number(o.budget_min).toLocaleString('en-IN')} - ₹${Number(o.budget_max).toLocaleString('en-IN')}</strong>
+                            </div>
+                        </div>
+                        <div class="card-action-footer">
+                            <a href="/opportunity/${encodeURIComponent(o.slug)}/" class="btn btn-outline btn-sm btn-full">Read Opportunity Guide &rarr;</a>
+                        </div>
+                    </article>
+                `).join('');
+            }
+
+            function renderCityBlueprints() {
+                const grid = document.getElementById('city-blueprints-grid');
+                if (!cityProducts || cityProducts.length === 0) {
+                    grid.innerHTML = '<p class="text-muted">No specialized paid blueprints are currently published for this city. Check back as new research reports are verified.</p>';
+                    return;
+                }
+
+                grid.innerHTML = cityProducts.map(p => `
+                    <div class="card product-card">
+                        <span class="badge badge-blue">${escapeHtml(p.product_type || 'Blueprint')}</span>
+                        <h3>${escapeHtml(p.title)}</h3>
+                        <p class="product-city">Coverage: ${escapeHtml(currentCity.city_name)} Focus</p>
+                        <p class="product-desc">${escapeHtml(p.short_description || '')}</p>
+                        <div class="product-price-row">
+                            <div class="price-val">₹${Number(p.price_inr).toLocaleString('en-IN')} <span>incl. taxes</span></div>
+                            <a href="/blueprint/${encodeURIComponent(p.slug)}/" class="btn btn-primary btn-sm">View Deliverables</a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function setupCityFilterHandlers() {
+                const modelFilter = document.getElementById('city-model-filter');
+                const budgetFilter = document.getElementById('city-budget-filter');
+                const categoryFilter = document.getElementById('city-category-filter');
+                const resetBtn = document.getElementById('reset-city-filters-btn');
+
+                function applyFilters() {
+                    const selModel = modelFilter.value;
+                    const maxB = budgetFilter.value ? parseFloat(budgetFilter.value) : null;
+                    const selCat = categoryFilter.value;
+
+                    const filtered = cityOpportunities.filter(o => {
+                        if (selModel && o.business_model !== selModel) return false;
+                        if (maxB && parseFloat(o.budget_min) > maxB) return false;
+                        if (selCat && (o.category || '').toLowerCase() !== selCat.toLowerCase()) return false;
+                        return true;
+                    });
+
+                    renderCityOpportunities(filtered);
+                }
+
+                if (modelFilter) modelFilter.addEventListener('change', applyFilters);
+                if (budgetFilter) budgetFilter.addEventListener('change', applyFilters);
+                if (categoryFilter) categoryFilter.addEventListener('change', applyFilters);
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        modelFilter.value = '';
+                        budgetFilter.value = '';
+                        categoryFilter.value = '';
+                        renderCityOpportunities(cityOpportunities);
+                    });
+                }
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+        })();
+    </script>
+</body>
+</html>

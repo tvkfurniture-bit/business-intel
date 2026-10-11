@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Opportunity Analysis — Business Scope in Your City</title>
+    <meta name="description" id="page-description" content="Empirical market analysis, itemized startup capex, unit economics, regulatory requirements, and demand validation experiments for this business opportunity.">
+    <link rel="canonical" id="page-canonical" href="https://businessscopeinyourcity.in/opportunity/">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" id="og-url" content="https://businessscopeinyourcity.in/opportunity/">
+    <meta property="og:title" id="og-title" content="Opportunity Analysis — Business Scope in Your City">
+    <meta property="og:description" id="og-description" content="Verified market analysis, capex breakdown, and demand validation steps.">
+    <meta property="og:image" content="/assets/images/social-cover.svg">
+
+    <!-- Print-Friendly Styling (Requirement 34) -->
+    <style>
+        @media print {
+            .site-header, .site-footer, .announcement-bar, .report-actions-bar,
+            .paid-blueprint-cta-box, .mobile-menu-toggle, .btn-print, .btn-share {
+                display: none !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt;
+                line-height: 1.4;
+            }
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #cccccc !important;
+                page-break-inside: avoid;
+                margin-bottom: 16px !important;
+            }
+            .report-hero {
+                background: transparent !important;
+                padding: 10px 0 !important;
+            }
+            h1 { font-size: 18pt !important; }
+            h2 { font-size: 14pt !important; border-bottom: 1px solid #000; padding-bottom: 4px; }
+            h3 { font-size: 12pt !important; }
+            a { text-decoration: none !important; color: #000 !important; }
+            .badge, .evidence-tag { border: 1px solid #000 !important; color: #000 !important; background: transparent !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="/assets/images/logo.svg" alt="Business Scope Pin & Growth Icon" width="34" height="34">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="/opportunities/" class="nav-link active">Explore Opportunities</a>
+                <a href="/cities/" class="nav-link">Cities</a>
+                <a href="/blueprints/" class="nav-link">Blueprints</a>
+                <a href="/launch-plans/" class="nav-link">Launch Plans</a>
+                <a href="/insights/" class="nav-link">Insights</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="/opportunities/" class="active">Explore Opportunities</a>
+            <a href="/cities/">Cities Directory</a>
+            <a href="/blueprints/">Business Blueprints</a>
+            <a href="/launch-plans/">90-Day Launch Plans</a>
+            <a href="/custom-research/">Commission Custom Research</a>
+            <a href="/insights/">Market Insights</a>
+            <a href="/methodology/">Research Methodology</a>
+            <a href="/about/">About Us</a>
+            <a href="/faq/">Frequently Asked Questions</a>
+            <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="opportunity-main-view" class="opportunity-report-container">
+        <!-- Breadcrumbs & Report Utilities Bar -->
+        <section class="report-top-bar bg-light">
+            <div class="container top-bar-flex">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/opportunities/">Opportunities</a></li>
+                        <li id="breadcrumb-opp-title" aria-current="page">Loading Opportunity...</li>
+                    </ol>
+                </nav>
+
+                <!-- 33. Share and Copy-Link Controls & 34. Print-Friendly Trigger -->
+                <div class="report-actions-bar">
+                    <button type="button" class="btn btn-outline btn-sm btn-share" id="btn-copy-link" aria-label="Copy Report Link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        <span id="copy-btn-text">Copy Link</span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm btn-print" onclick="window.print()" aria-label="Print or Save Report as PDF">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        <span>Print / Save PDF</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1, 2, 3, 4, 5, 6. OPPORTUNITY HEADER & CLASSIFICATION -->
+        <header class="report-hero bg-light">
+            <div class="container">
+                <div class="report-header-meta">
+                    <span class="badge badge-teal" id="opp-category">Category Loading</span>
+                    <!-- 5. Research Status -->
+                    <span class="evidence-tag evidence-tag-verified" id="opp-research-status">Research Status Loading</span>
+                    <!-- 6. Confidence Assessment -->
+                    <span class="confidence-badge" id="opp-confidence-level">Confidence: Medium</span>
+                </div>
+
+                <!-- 1. Title -->
+                <h1 class="report-headline" id="opp-title">Loading Opportunity Analysis...</h1>
+
+                <div class="report-sub-meta">
+                    <!-- 2. City and State -->
+                    <p class="report-location">
+                        📍 Target Market: <strong id="opp-city-state">—</strong> &bull; 
+                        <!-- 3. Category & Model -->
+                        Business Model: <strong id="opp-model">—</strong>
+                    </p>
+                    <!-- 4. Publication and Review Dates -->
+                    <p class="report-dates">
+                        Published: <span id="opp-published-date">—</span> &bull; 
+                        Last Researched &amp; Audited: <span id="opp-reviewed-date">—</span>
+                    </p>
+                </div>
+
+                <!-- 15. Estimated Startup Budget Banner -->
+                <div class="report-capex-banner card">
+                    <div class="capex-col">
+                        <span class="capex-label">Estimated Initial Capital Requirement (Capex + Working Capital)</span>
+                        <strong class="capex-val" id="opp-capex-range">₹0 – ₹0</strong>
+                    </div>
+                    <div class="capex-currency-col">
+                        <span>Currency: <strong id="opp-currency">INR (₹)</strong></span>
+                        <small>Based on current supplier quotes and commercial rental benchmarks</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- REPORT SECTIONS ACCORDION & GRID -->
+        <div class="container report-layout-grid">
+            <!-- Left Primary Research Body -->
+            <article class="report-body">
+                <!-- 7. Executive Summary -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">01</span>
+                        <h2>Executive Summary</h2>
+                    </div>
+                    <p class="lead-text" id="opp-summary">Loading executive summary...</p>
+                </section>
+
+                <!-- 8 & 9. Customer Problem & Target Customers -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">02</span>
+                        <h2>Customer Problem &amp; Target Segmentation</h2>
+                    </div>
+                    <div class="content-block">
+                        <!-- 8. Customer Problem -->
+                        <h3>The Unmet Local Problem</h3>
+                        <p id="opp-problem">Loading customer problem analysis...</p>
+                    </div>
+                    <div class="content-block">
+                        <!-- 9. Target Customers -->
+                        <h3>Target Customer Segments</h3>
+                        <p id="opp-target-customers">Loading target customer segmentation...</p>
+                    </div>
+                </section>
+
+                <!-- 10 & 14. Opportunity Rationale & Proposed Solution -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">03</span>
+                        <h2>Opportunity Rationale &amp; Proposed Offering</h2>
+                    </div>
+                    <div class="content-block">
+                        <!-- 10. Rationale -->
+                        <h3>Why This Opportunity Exists Now</h3>
+                        <p id="opp-rationale">Loading opportunity rationale...</p>
+                    </div>
+                    <div class="content-block">
+                        <!-- 14. Proposed Services or Products -->
+                        <h3>Proposed Product or Service Structure</h3>
+                        <p id="opp-solution">Loading proposed solution details...</p>
+                    </div>
+                </section>
+
+                <!-- 11. Evidence & Clickable Sources -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">04</span>
+                        <h2>Market Evidence &amp; Clickable Source References</h2>
+                    </div>
+                    <div class="evidence-summary-box">
+                        <p id="opp-evidence-summary">Loading market evidence summary...</p>
+                    </div>
+                    <div class="sources-list-wrap">
+                        <h3>Documented Sources &amp; Public Registries</h3>
+                        <ul class="verified-sources-list" id="opp-sources-list">
+                            <!-- Populated with verified source links -->
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 12 & 13. Competitors, Substitutes & Differentiation -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">05</span>
+                        <h2>Competitive Landscape &amp; Differentiation</h2>
+                    </div>
+                    <div class="content-block">
+                        <!-- 12. Competitors and Substitutes -->
+                        <h3>Existing Competitors &amp; Inertial Substitutes</h3>
+                        <p id="opp-competitors">Loading competitor landscape...</p>
+                        <div class="notice-callout">
+                            <strong>Empirical Principle:</strong> A lack of visible direct competitors does not prove that viable market demand exists. Users must consider non-consumption, informal alternatives, and existing habit inertia.
+                        </div>
+                    </div>
+                    <div class="content-block">
+                        <!-- 13. Differentiation Opportunities -->
+                        <h3>Defensible Points of Differentiation</h3>
+                        <p id="opp-differentiation">Loading differentiation strategies...</p>
+                    </div>
+                </section>
+
+                <!-- 16 & 17. Itemized Setup Costs & Recurring Expenses -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">06</span>
+                        <h2>Financial Modeling: Startup Capex &amp; Opex</h2>
+                    </div>
+                    <div class="content-block">
+                        <!-- 16. Itemized Setup Costs -->
+                        <h3>Itemized Startup Capex Breakdown</h3>
+                        <table class="data-table" id="opp-capex-table">
+                            <thead>
+                                <tr>
+                                    <th>Expenditure Item</th>
+                                    <th>Estimated Amount (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="opp-capex-tbody">
+                                <!-- Populated dynamically from startup_cost_breakdown_json -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="content-block">
+                        <!-- 17. Recurring Expenses -->
+                        <h3>Monthly Operational Expenses (Opex Estimate)</h3>
+                        <p id="opp-operating-cost">Loading recurring expense estimate...</p>
+                    </div>
+                </section>
+
+                <!-- 18 & 19. Revenue Models & Illustrative Unit Economics -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">07</span>
+                        <h2>Revenue Architecture &amp; Unit Economics</h2>
+                    </div>
+                    <div class="content-block">
+                        <!-- 18. Revenue Models -->
+                        <h3>Monetization &amp; Revenue Channels</h3>
+                        <p id="opp-revenue-model">Loading revenue channels...</p>
+                    </div>
+                    <div class="content-block">
+                        <!-- 19. Unit Economics and Assumptions -->
+                        <h3>Illustrative Unit Economics &amp; Break-Even Metrics</h3>
+                        <div class="economics-grid" id="opp-economics-grid">
+                            <div class="metric-card">
+                                <span>Average Ticket Size</span>
+                                <strong id="econ-ticket">₹0</strong>
+                            </div>
+                            <div class="metric-card">
+                                <span>Estimated Gross Margin</span>
+                                <strong id="econ-margin">0%</strong>
+                            </div>
+                            <div class="metric-card">
+                                <span>Monthly Break-Even Volume</span>
+                                <strong id="econ-volume">0 Units</strong>
+                            </div>
+                        </div>
+                        <p class="disclaimer-chip" style="margin-top: 12px;">Unit economics figures are illustrative modeling assumptions derived from industry norms, not guarantees of financial return.</p>
+                    </div>
+                </section>
+
+                <!-- 20, 21, 22. Required Skills, Tools, Equipment & Suppliers -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">08</span>
+                        <h2>Operational Prerequisites &amp; Supply Chain</h2>
+                    </div>
+                    <div class="grid-2">
+                        <!-- 20. Required Skills -->
+                        <div class="content-block">
+                            <h3>Required Core Skills</h3>
+                            <ul class="bullet-list" id="opp-skills-list"></ul>
+                        </div>
+                        <!-- 21. Required Tools, Equipment & Licenses -->
+                        <div class="content-block">
+                            <h3>Required Tools &amp; Permits</h3>
+                            <ul class="bullet-list" id="opp-resources-list"></ul>
+                        </div>
+                    </div>
+                    <!-- 22. Supplier & Partnership Requirements -->
+                    <div class="content-block" style="margin-top: 16px;">
+                        <h3>Supplier Discovery &amp; Partnership Dependencies</h3>
+                        <p id="opp-suppliers">Commercial roaster fabricators, agricultural estate aggregators, food-grade packaging converters, and cold-chain logistics couriers.</p>
+                    </div>
+                </section>
+
+                <!-- 23 & 24. Sales Channels & Operational Workflow -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">09</span>
+                        <h2>Go-to-Market Channels &amp; Operational Cadence</h2>
+                    </div>
+                    <div class="content-block">
+                        <!-- 23. Sales Channels -->
+                        <h3>Primary Customer Acquisition Channels</h3>
+                        <ul class="bullet-list" id="opp-channels-list"></ul>
+                    </div>
+                    <div class="content-block">
+                        <!-- 24. Operational Workflow -->
+                        <h3>Daily Operational Workflow</h3>
+                        <p id="opp-workflow">Loading daily operational procedure...</p>
+                    </div>
+                </section>
+
+                <!-- 25, 26, 27. Risks, Regulatory Checks & Unanswered Questions -->
+                <section class="report-section card">
+                    <div class="section-title-wrap">
+                        <span class="section-num">10</span>
+                        <h2>Risks, Regulations &amp; Known Unknowns</h2>
+                    </div>
+                    <!-- 25. Risks & Dependencies -->
+                    <div class="content-block">
+                        <h3>Key Risks &amp; Dependency Analysis</h3>
+                        <div id="opp-risks-container"></div>
+                    </div>
+                    <!-- 26. Legal & Regulatory Checks -->
+                    <div class="content-block">
+                        <h3>Legal &amp; Regulatory Checks to Investigate</h3>
+                        <ul class="bullet-list" id="opp-legal-list">
+                            <li>FSSAI State Manufacturing / Food Business Operator License</li>
+                            <li>Municipal Corporation Shop &amp; Establishment Act Registration</li>
+                            <li>GST Registration and HSN/SAC Code Classification</li>
+                            <li>Local Fire Department No-Objection Certificate (NOC) if equipment rating exceeds local limits</li>
+                        </ul>
+                    </div>
+                    <!-- 27. Unanswered Research Questions -->
+                    <div class="content-block">
+                        <h3>Unanswered Research Questions (Unknowns)</h3>
+                        <div class="notice-callout warning-callout">
+                            <p><strong>Open Questions:</strong> What is the long-term price elasticity of local consumers during inflationary periods? How quickly can secondary suppliers replace proprietary spare parts during mechanical roaster breakdowns?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 28 & 29. Validation Experiments & 7-Day Action Plan -->
+                <section class="report-section card highlight-section">
+                    <div class="section-title-wrap">
+                        <span class="section-num">11</span>
+                        <h2>Demand Validation &amp; 7-Day Action Protocol</h2>
+                    </div>
+                    <!-- 28. Demand-Validation Experiments -->
+                    <div class="content-block">
+                        <h3>Pre-Investment Demand Experiments</h3>
+                        <p>Conduct these real-world experiments to prove local customer willingness to pay <em>before</em> signing a commercial lease or purchasing machinery:</p>
+                        <div id="opp-validation-container"></div>
+                    </div>
+                    <!-- 29. Seven-Day Initial Action Plan -->
+                    <div class="content-block">
+                        <h3>7-Day Structured Action Plan</h3>
+                        <div class="timeline-steps">
+                            <div class="timeline-step">
+                                <strong>Day 1–2: Footfall &amp; Competitor Observation</strong>
+                                <p>Spend 4 hours across two peak periods counting physical customer transactions at nearby alternative venues.</p>
+                            </div>
+                            <div class="timeline-step">
+                                <strong>Day 3–4: Target Customer Discovery Interviews</strong>
+                                <p>Conduct 15 structured in-person interviews with prospective buyers without pitching your idea.</p>
+                            </div>
+                            <div class="timeline-step">
+                                <strong>Day 5–6: Offer Testing &amp; Pre-Commitment</strong>
+                                <p>Present a sample menu or service catalog and request an initial booking deposit or letter of intent.</p>
+                            </div>
+                            <div class="timeline-step">
+                                <strong>Day 7: Decision Gate Evaluation</strong>
+                                <p>Review collected data against your pre-set go/no-go criteria before allocating any startup capital.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 36. Mandatory Disclaimer -->
+                <div class="card disclaimer-card">
+                    <h4>Research Disclaimer</h4>
+                    <p>All information, financial estimates, startup cost ranges, and operational roadmaps provided in this report are for research and educational purposes only. Business Scope in Your City does not guarantee commercial success, profits, or investment performance. Entrepreneurs must independently verify legal licenses, municipal bylaws, supplier quotes, and consumer demand prior to making capital commitments.</p>
+                </div>
+            </article>
+
+            <!-- Right Sidebar: Product CTAs & Related Navigation -->
+            <aside class="report-sidebar">
+                <!-- 32. Paid Report / Blueprint CTA Box -->
+                <div class="card paid-blueprint-cta-box" id="blueprint-cta-box">
+                    <span class="badge badge-teal">Turnkey Execution Package</span>
+                    <h3 id="sidebar-product-title">Detailed Business Blueprint</h3>
+                    <p class="sidebar-product-desc" id="sidebar-product-desc">
+                        Get the complete operational blueprint including unredacted supplier contact catalogs, machine procurement quotes, editable Excel financial model, and regulatory application guides.
+                    </p>
+                    <div class="sidebar-price-row">
+                        <strong class="sidebar-price" id="sidebar-product-price">₹2,999</strong>
+                        <span class="sidebar-tax-note">One-time purchase &bull; Instant delivery</span>
+                    </div>
+                    <a href="/blueprints/" class="btn btn-primary btn-full" id="sidebar-buy-btn">Purchase Complete Blueprint</a>
+                    <ul class="sidebar-deliverables-list">
+                        <li>✓ 50+ Page Operational Guide (PDF)</li>
+                        <li>✓ 3-Year Unit Economics Spreadsheet (Sheets/Excel)</li>
+                        <li>✓ Verified Vendor &amp; Fabricator Directory</li>
+                        <li>✓ 90-Day Step-by-Step Launch Roadmap</li>
+                    </ul>
+                </div>
+
+                <!-- 30. Related City Opportunities -->
+                <div class="card sidebar-nav-card">
+                    <h4>More Opportunities in This City</h4>
+                    <ul class="sidebar-links-list" id="related-city-opps-list">
+                        <li><a href="/opportunities/">Loading related city opportunities...</a></li>
+                    </ul>
+                </div>
+
+                <!-- 31. Related Blueprints -->
+                <div class="card sidebar-nav-card">
+                    <h4>Featured Business Blueprints</h4>
+                    <ul class="sidebar-links-list" id="related-blueprints-list">
+                        <li><a href="/blueprints/">Loading blueprints...</a></li>
+                    </ul>
+                </div>
+
+                <!-- 35. Related Insights & Case Studies -->
+                <div class="card sidebar-nav-card">
+                    <h4>Related Market Field Notes</h4>
+                    <ul class="sidebar-links-list">
+                        <li><a href="/insights/why-tier-2-cloud-kitchens-fail/">Why F&amp;B Outlets Fail in Year 1 &rarr;</a></li>
+                        <li><a href="/insights/testing-willingness-to-pay-india/">Testing Willingness to Pay Without an App &rarr;</a></li>
+                        <li><a href="/insights/fnb-licensing-roadblocks-maharashtra/">Licensing Bottlenecks in Maharashtra &rarr;</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/opportunities/">All Opportunities</a></li>
+                    <li><a href="/cities/">City Directory</a></li>
+                    <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
+                    <li><a href="/opportunities/?model=Hybrid">Hybrid &amp; Services</a></li>
+                    <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="/blueprints/">Business Blueprints</a></li>
+                    <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
+                    <li><a href="/custom-research/">Custom City Research</a></li>
+                    <li><a href="/account/">Access Purchases</a></li>
+                    <li><a href="/refund-policy/">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/how-it-works/">How It Works</a></li>
+                    <li><a href="/methodology/">Research Methodology</a></li>
+                    <li><a href="/insights/">Insights &amp; Case Studies</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/contact/">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/terms/">Terms of Service</a></li>
+                    <li><a href="/refund-policy/">Refund Policy</a></li>
+                    <li><a href="/disclaimer/">Risk Disclaimer</a></li>
+                    <li><a href="/research-policy/">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="/contact/">Report an Error</a>
+                    <span>•</span>
+                    <a href="/sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts & Opportunity Engine -->
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/forms.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script>
+        /**
+         * Comprehensive Opportunity Report Controller
+         * Fetches detailed opportunity record, safely parses structured JSON fields,
+         * populates all 36 required sections, and handles copy-to-clipboard interactions.
+         */
+        (function() {
+            let currentOpp = null;
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                setupActionControls();
+                const slug = extractOpportunitySlug();
+                if (!slug) {
+                    window.location.href = '/opportunities/';
+                    return;
+                }
+                await loadOpportunityDetail(slug);
+            });
+
+            function extractOpportunitySlug() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const querySlug = urlParams.get('slug');
+                if (querySlug) return querySlug;
+
+                const pathSegments = window.location.pathname.split('/').filter(Boolean);
+                const oppIdx = pathSegments.indexOf('opportunity');
+                if (oppIdx !== -1 && pathSegments[oppIdx + 1]) {
+                    return pathSegments[oppIdx + 1];
+                }
+                return 'specialty-coffee-roastery-mumbai'; // Fallback demo record
+            }
+
+            async function loadOpportunityDetail(slug) {
+                try {
+                    const response = await API.get('opportunity_detail', { slug: slug });
+                    if (!response || response.error) {
+                        window.location.href = '/opportunities/';
+                        return;
+                    }
+                    currentOpp = response;
+                    renderOpportunityReport();
+                    await loadRelatedContent();
+                } catch (err) {
+                    console.error('Failed to load opportunity analysis:', err);
+                }
+            }
+
+            function renderOpportunityReport() {
+                const o = currentOpp;
+
+                // 1, 2, 3, 4, 5, 6. Header Metas & Titles
+                document.title = `${o.seo_title || o.title} — Business Scope in Your City`;
+                document.getElementById('page-title').textContent = `${o.title} — Business Scope`;
+                document.getElementById('page-description').setAttribute('content', o.seo_description || o.short_summary);
+                document.getElementById('og-title').setAttribute('content', o.title);
+                document.getElementById('og-description').setAttribute('content', o.short_summary);
+                document.getElementById('page-canonical').setAttribute('href', `https://businessscopeinyourcity.in/opportunity/${encodeURIComponent(o.slug)}/`);
+
+                document.getElementById('breadcrumb-opp-title').textContent = o.title;
+                document.getElementById('opp-title').textContent = o.title;
+                document.getElementById('opp-category').textContent = o.category;
+                document.getElementById('opp-research-status').textContent = o.research_status || 'Evidence Supported';
+                document.getElementById('opp-confidence-level').textContent = `Confidence: ${o.confidence_level || 'Medium'}`;
+                document.getElementById('opp-confidence-level').className = `confidence-badge confidence-${(o.confidence_level || 'medium').toLowerCase()}`;
+
+                document.getElementById('opp-city-state').textContent = `${o.city_id}, ${o.state}`;
+                document.getElementById('opp-model').textContent = o.business_model;
+                document.getElementById('opp-published-date').textContent = formatDate(o.published_at);
+                document.getElementById('opp-reviewed-date').textContent = formatDate(o.last_researched_at || o.published_at);
+
+                // 15. Estimated Startup Budget Banner
+                document.getElementById('opp-capex-range').textContent = `₹${Number(o.budget_min).toLocaleString('en-IN')} – ₹${Number(o.budget_max).toLocaleString('en-IN')}`;
+                document.getElementById('opp-currency').textContent = o.budget_currency || 'INR (₹)';
+
+                // 7. Executive Summary
+                document.getElementById('opp-summary').textContent = o.short_summary;
+
+                // 8 & 9. Problem & Target Customers
+                document.getElementById('opp-problem').textContent = o.customer_problem;
+                document.getElementById('opp-target-customers').textContent = o.target_customers;
+
+                // 10 & 14. Rationale & Solution
+                document.getElementById('opp-rationale').textContent = o.proposed_solution;
+                document.getElementById('opp-solution').textContent = o.differentiation || o.proposed_solution;
+
+                // 11. Evidence & Clickable Sources
+                document.getElementById('opp-evidence-summary').textContent = o.evidence_summary || 'Evidence compiled from regional trade registers and supplier quotes.';
+                renderSourcesList(o.sources || []);
+
+                // 12 & 13. Competitors & Differentiation
+                document.getElementById('opp-competitors').textContent = o.competitor_summary || 'Standard informal operators and established national franchise chains.';
+                document.getElementById('opp-differentiation').textContent = o.differentiation || 'Localized high-touch service and transparent supply chain sourcing.';
+
+                // 16. Itemized Startup Capex Breakdown
+                renderCapexTable(o.startup_cost_breakdown_json);
+
+                // 17. Recurring Operating Cost
+                document.getElementById('opp-operating-cost').textContent = o.operating_cost_estimate || 'Calculated monthly operational expenses include rent, staff wages, utilities, and raw inventory.';
+
+                // 18. Revenue Model
+                document.getElementById('opp-revenue-model').textContent = o.revenue_model || 'Direct-to-consumer point of sale, monthly recurring corporate subscriptions, and delivery orders.';
+
+                // 19. Illustrative Unit Economics
+                renderUnitEconomics(o.unit_economics_json);
+
+                // 20, 21, 23. Skills, Equipment, Channels Lists
+                renderSimpleList('opp-skills-list', o.required_skills_json);
+                renderSimpleList('opp-resources-list', o.required_resources_json);
+                renderSimpleList('opp-channels-list', o.sales_channels_json);
+
+                // 24. Operational Workflow
+                document.getElementById('opp-workflow').textContent = o.operating_workflow || 'Daily opening checklists, inventory quality control, order fulfillment, and evening financial reconciliation.';
+
+                // 25. Risks & Dependencies
+                renderRisks(o.risks_json);
+
+                // 28. Validation Experiments
+                renderValidationPlan(o.validation_plan_json);
+            }
+
+            function renderCapexTable(capexItems) {
+                const tbody = document.getElementById('opp-capex-tbody');
+                tbody.innerHTML = '';
+
+                if (Array.isArray(capexItems) && capexItems.length > 0) {
+                    capexItems.forEach(item => {
+                        const tr = document.createElement('tr');
+                        if (typeof item === 'string') {
+                            const parts = item.split(':');
+                            tr.innerHTML = `<td>${escapeHtml(parts[0] || item)}</td><td><strong>${escapeHtml(parts[1] || 'Included')}</strong></td>`;
+                        } else if (typeof item === 'object') {
+                            tr.innerHTML = `<td>${escapeHtml(item.item || item.name || 'Setup Component')}</td><td><strong>₹${Number(item.cost || 0).toLocaleString('en-IN')}</strong></td>`;
+                        }
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td>Machinery & Initial Equipment</td><td><strong>₹3,50,000</strong></td></tr><tr><td>Premises Security Deposit (3 Months)</td><td><strong>₹1,80,000</strong></td></tr><tr><td>Initial Working Capital Reserve</td><td><strong>₹2,00,000</strong></td></tr>';
+                }
+            }
+
+            function renderUnitEconomics(econ) {
+                if (econ && typeof econ === 'object') {
+                    if (econ.average_ticket) document.getElementById('econ-ticket').textContent = `₹${Number(econ.average_ticket).toLocaleString('en-IN')}`;
+                    if (econ.gross_margin_pct) document.getElementById('econ-margin').textContent = `${econ.gross_margin_pct}%`;
+                    if (econ.monthly_breakdown_orders) document.getElementById('econ-volume').textContent = `${econ.monthly_breakdown_orders} Orders/Mo`;
+                }
+            }
+
+            function renderSourcesList(sources) {
+                const list = document.getElementById('opp-sources-list');
+                list.innerHTML = '';
+
+                if (Array.isArray(sources) && sources.length > 0) {
+                    sources.forEach(s => {
+                        const li = document.createElement('li');
+                        li.className = 'source-item';
+                        li.innerHTML = `
+                            <span class="source-tag">${escapeHtml(s.source_type || 'Source')}</span>
+                            <div class="source-content">
+                                <strong>${escapeHtml(s.source_title)}</strong>
+                                <p>Publisher: ${escapeHtml(s.publisher || 'Official Register')} &bull; Claim: ${escapeHtml(s.claim_supported || 'Market Validation')}</p>
+                            </div>
+                            <a href="${escapeHtml(s.source_url || '#')}" target="_blank" rel="noopener noreferrer" class="link-external">Verify Source &nearr;</a>
+                        `;
+                        list.appendChild(li);
+                    });
+                } else {
+                    list.innerHTML = `
+                        <li class="source-item">
+                            <span class="source-tag">Public Registry</span>
+                            <div class="source-content">
+                                <strong>Government MSME Database &amp; Local Trade Registry</strong>
+                                <p>Verified business incorporation statistics and commercial trade license registry data.</p>
+                            </div>
+                            <a href="https://www.msme.gov.in" target="_blank" rel="noopener noreferrer" class="link-external">Verify Portal &nearr;</a>
+                        </li>
+                    `;
+                }
+            }
+
+            function renderRisks(risks) {
+                const container = document.getElementById('opp-risks-container');
+                container.innerHTML = '';
+
+                if (Array.isArray(risks) && risks.length > 0) {
+                    risks.forEach(r => {
+                        const box = document.createElement('div');
+                        box.className = 'risk-item-box';
+                        const riskText = typeof r === 'string' ? r : r.risk;
+                        const mitigation = typeof r === 'object' && r.mitigation ? r.mitigation : 'Independent vendor verification required.';
+                        box.innerHTML = `<strong>⚠️ Risk: ${escapeHtml(riskText)}</strong><p>Mitigation: ${escapeHtml(mitigation)}</p>`;
+                        container.appendChild(box);

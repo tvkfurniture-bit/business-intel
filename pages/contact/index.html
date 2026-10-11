@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Our Research Desk — Business Scope in Your City</title>
+    <meta name="description" content="Get in touch with our research analysts. Inquire about city coverage, order delivery support, data corrections, or custom research scoping.">
+    <link rel="canonical" href="https://businessscopeinyourcity.in/contact/">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://businessscopeinyourcity.in/contact/">
+    <meta property="og:title" content="Contact Our Research Desk — Business Scope in Your City">
+    <meta property="og:description" content="Reach our analysts for questions on municipal opportunity coverage, order assistance, and bespoke research scoping.">
+    <meta property="og:image" content="/assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="/assets/images/logo.svg" alt="Business Scope Pin & Growth Icon" width="34" height="34">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="/opportunities/" class="nav-link">Explore Opportunities</a>
+                <a href="/cities/" class="nav-link">Cities</a>
+                <a href="/blueprints/" class="nav-link">Blueprints</a>
+                <a href="/launch-plans/" class="nav-link">Launch Plans</a>
+                <a href="/insights/" class="nav-link">Insights</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="/opportunities/">Explore Opportunities</a>
+            <a href="/cities/">Cities Directory</a>
+            <a href="/blueprints/">Business Blueprints</a>
+            <a href="/launch-plans/">90-Day Launch Plans</a>
+            <a href="/custom-research/">Commission Custom Research</a>
+            <a href="/insights/">Market Insights</a>
+            <a href="/methodology/">Research Methodology</a>
+            <a href="/about/">About Us</a>
+            <a href="/faq/">Frequently Asked Questions</a>
+            <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="contact-main-view">
+        <!-- Hero Header -->
+        <section class="catalogue-hero bg-light">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li aria-current="page">Contact</li>
+                    </ol>
+                </nav>
+                <div class="catalogue-title-row">
+                    <div>
+                        <span class="badge badge-teal">Direct Inquiries</span>
+                        <h1>Contact Our Research Desk</h1>
+                        <p class="section-subtext">Have a question regarding municipal research coverage, order delivery reconciliation, data corrections, or custom scoping? Send a message to our analysts below.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form and Contact Details Layout Grid -->
+        <section class="section container">
+            <div class="contact-layout-grid">
+                <!-- Left: Functional Contact Form -->
+                <div class="contact-form-col">
+                    <div class="card contact-form-card" id="contact-card-box">
+                        <div class="form-card-header">
+                            <h2>Send an Official Inquiry</h2>
+                            <p>Every message is logged directly into our master database and assigned a unique reference code. Inquiries receive a formal response within 24–48 business hours.</p>
+                        </div>
+
+                        <!-- Active Submission Form -->
+                        <form id="contact-inquiry-form" novalidate>
+                            <div class="form-row-2">
+                                <div class="form-group">
+                                    <label for="contact-name">Full Name *</label>
+                                    <input type="text" id="contact-name" name="customer_name" required placeholder="e.g. Anand Varma" autocomplete="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email">Email Address *</label>
+                                    <input type="email" id="contact-email" name="customer_email" required placeholder="anand@example.com" autocomplete="email">
+                                </div>
+                            </div>
+
+                            <div class="form-row-2">
+                                <div class="form-group">
+                                    <label for="contact-city">City / District *</label>
+                                    <input type="text" id="contact-city" name="city" required placeholder="e.g. Mumbai, Pune, Ahmedabad">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-state">State *</label>
+                                    <select id="contact-state" name="state" required>
+                                        <option value="">Select State</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Delhi NCR">Delhi NCR</option>
+                                        <option value="Other">Other State / UT</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-category">Inquiry Category *</label>
+                                <select id="contact-category" name="enquiry_type" required>
+                                    <option value="">Select Category</option>
+                                    <option value="General Platform Inquiry">General Platform Inquiry</option>
+                                    <option value="Order &amp; Delivery Support">Order &amp; File Delivery Support</option>
+                                    <option value="Custom Research Scoping">Custom Research Scoping</option>
+                                    <option value="Data Correction / Source Update">Data Correction / Source Update</option>
+                                    <option value="Institutional / Academic Inquiry">Institutional / Academic Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message">Your Message *</label>
+                                <textarea id="contact-message" name="message" rows="5" required placeholder="Please describe your query with specific details (include Order ID if requesting file assistance)..."></textarea>
+                            </div>
+
+                            <!-- Consent Checkbox -->
+                            <div class="form-consent">
+                                <input type="checkbox" id="contact-consent" name="consent" required>
+                                <label for="contact-consent">
+                                    I consent to Business Scope in Your City processing my inquiry details to provide a response. I confirm this is a legitimate commercial or research communication.
+                                </label>
+                            </div>
+
+                            <!-- Inline Form Error Alert -->
+                            <div class="form-error-msg" id="contact-error-box" role="alert" hidden></div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-full btn-lg" id="btn-submit-contact">
+                                    <span>Transmit Inquiry</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Success State (Rendered ONLY after server database confirmation) -->
+                        <div class="contact-success-state card" id="contact-success-view" hidden>
+                            <div class="success-icon-wrap" aria-hidden="true">✓</div>
+                            <h2>Inquiry Logged Successfully</h2>
+                            <p class="success-ref-lead">
+                                Your assigned reference number is: <strong id="contact-display-ref" class="highlight-order-id">ENQ-XXXX</strong>
+                            </p>
+                            <p class="success-explanation">
+                                A copy of this ticket has been routed to our research desk. An analyst will review your submission and reply to <strong id="contact-display-email">your email</strong> within 24–48 business hours.
+                            </p>
+                            <div class="success-actions">
+                                <a href="/opportunities/" class="btn btn-outline">Browse Directory</a>
+                                <a href="/" class="btn btn-primary">Return Homepage</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Configurable Contact Information & Response Timelines -->
+                <aside class="contact-details-col">
+                    <div class="card contact-info-card">
+                        <h3>Research Desk Operations</h3>
+                        <div class="info-block">
+                            <span class="info-label">Official Inquiries &amp; Support:</span>
+                            <strong class="info-value">research@businessscopeinyourcity.in</strong>
+                        </div>
+
+                        <div class="info-block">
+                            <span class="info-label">Analyst Desk Hours:</span>
+                            <span class="info-value">Monday – Friday: 9:30 AM to 6:30 PM IST</span>
+                            <small class="info-subtext">Weekend queries are reviewed on the subsequent business morning.</small>
+                        </div>
+
+                        <div class="info-block">
+                            <span class="info-label">Research Desk Coordination:</span>
+                            <span class="info-value">Fort Commercial District, Mumbai, Maharashtra 400001, India</span>
+                        </div>
+
+                        <div class="info-block">
+                            <span class="info-label">Digital Product Deliveries:</span>
+                            <p style="font-size: 0.9rem; margin-top: 4px; color: var(--text-muted);">
+                                Purchased digital blueprints and 90-day launch plans are dispatched digitally via automated email tokens upon transaction verification.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Direct Order Support Callout -->
+                    <div class="card support-quick-card">
+                        <h4>Already Placed an Order?</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+                            If you require instant access to your purchased blueprints or need to check order status, visit our customer portal.
+                        </p>
+                        <a href="/account/" class="btn btn-outline btn-sm btn-full">Access Purchased Reports &rarr;</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/opportunities/">All Opportunities</a></li>
+                    <li><a href="/cities/">City Directory</a></li>
+                    <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
+                    <li><a href="/opportunities/?model=Hybrid">Hybrid &amp; Services</a></li>
+                    <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="/blueprints/">Business Blueprints</a></li>
+                    <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
+                    <li><a href="/custom-research/">Custom City Research</a></li>
+                    <li><a href="/account/">Access Purchases</a></li>
+                    <li><a href="/refund-policy/">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/how-it-works/">How It Works</a></li>
+                    <li><a href="/methodology/">Research Methodology</a></li>
+                    <li><a href="/insights/">Insights &amp; Case Studies</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/contact/" class="active">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/terms/">Terms of Service</a></li>
+                    <li><a href="/refund-policy/">Refund Policy</a></li>
+                    <li><a href="/disclaimer/">Risk Disclaimer</a></li>
+                    <li><a href="/research-policy/">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="/contact/">Report an Error</a>
+                    <span>•</span>
+                    <a href="/sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts & Contact Submission Controller -->
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/forms.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script>
+        /**
+         * Contact Form Controller
+         * Handles client validation, prevents multi-submit, transmits payload to Apps Script,
+         * and renders confirmation references strictly upon verified database write.
+         */
+        (function() {
+            let isSubmitting = false;
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const form = document.getElementById('contact-inquiry-form');
+                if (form) {
+                    form.addEventListener('submit', handleContactSubmit);
+                }
+            });
+
+            async function handleContactSubmit(e) {
+                e.preventDefault();
+                if (isSubmitting) return;
+
+                const errorBox = document.getElementById('contact-error-box');
+                errorBox.hidden = true;
+
+                const name = document.getElementById('contact-name').value.trim();
+                const email = document.getElementById('contact-email').value.trim();
+                const city = document.getElementById('contact-city').value.trim();
+                const state = document.getElementById('contact-state').value;
+                const category = document.getElementById('contact-category').value;
+                const message = document.getElementById('contact-message').value.trim();
+                const consent = document.getElementById('contact-consent').checked;
+
+                if (!name || !email || !city || !state || !category || !message) {
+                    showError('Please complete all required fields.');
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    showError('Please enter a valid email address.');
+                    return;
+                }
+
+                if (!consent) {
+                    showError('You must provide consent for inquiry processing.');
+                    return;
+                }
+
+                isSubmitting = true;
+                const submitBtn = document.getElementById('btn-submit-contact');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>Logging Inquiry into Database...</span>';
+
+                try {
+                    const payload = {
+                        enquiry_type: category,
+                        customer_name: name,
+                        customer_email: email,
+                        city: city,
+                        state: state,
+                        budget_range: 'N/A',
+                        business_interest: category,
+                        requested_deliverable: 'General Contact Inquiry',
+                        message: message,
+                        consent_status: true
+                    };
+
+                    const response = await API.post('submit_enquiry', payload);
+
+                    if (response && response.status === 'success' && response.enquiry_id) {
+                        document.getElementById('contact-inquiry-form').hidden = true;
+                        document.querySelector('.form-card-header').hidden = true;
+
+                        const successView = document.getElementById('contact-success-view');
+                        document.getElementById('contact-display-ref').textContent = response.enquiry_id;
+                        document.getElementById('contact-display-email').textContent = email;
+                        successView.hidden = false;
+                        successView.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        throw new Error((response && response.message) ? response.message : 'Database recording failure.');
+                    }
+                } catch (err) {
+                    showError('Transmission failed: ' + err.message + '. Please check your connection.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Transmit Inquiry</span>';
+                    isSubmitting = false;
+                }
+            }
+
+            function showError(msg) {
+                const errorBox = document.getElementById('contact-error-box');
+                errorBox.textContent = msg;
+                errorBox.hidden = false;
+                errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(String(email).toLowerCase());
+            }
+        })();
+    </script>
+</body>
+</html>

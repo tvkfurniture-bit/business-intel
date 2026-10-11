@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Blueprint Catalogue — Turnkey Market Intelligence & Execution Packages</title>
+    <meta name="description" content="Browse verified business blueprints, operational manuals, itemized bills of materials, and financial models for Indian cities. Explore empirical execution packages.">
+    <link rel="canonical" href="https://businessscopeinyourcity.in/blueprints/">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://businessscopeinyourcity.in/blueprints/">
+    <meta property="og:title" content="Business Blueprint Catalogue — Business Scope in Your City">
+    <meta property="og:description" content="Turnkey operational blueprints, financial models, supplier directories, and compliance roadmaps for viable businesses in Indian cities.">
+    <meta property="og:image" content="/assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="/assets/images/logo.svg" alt="Business Scope Pin & Growth Icon" width="34" height="34">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="/opportunities/" class="nav-link">Explore Opportunities</a>
+                <a href="/cities/" class="nav-link">Cities</a>
+                <a href="/blueprints/" class="nav-link active" aria-current="page">Blueprints</a>
+                <a href="/launch-plans/" class="nav-link">Launch Plans</a>
+                <a href="/insights/" class="nav-link">Insights</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="/opportunities/">Explore Opportunities</a>
+            <a href="/cities/">Cities Directory</a>
+            <a href="/blueprints/" class="active">Business Blueprints</a>
+            <a href="/launch-plans/">90-Day Launch Plans</a>
+            <a href="/custom-research/">Commission Custom Research</a>
+            <a href="/insights/">Market Insights</a>
+            <a href="/methodology/">Research Methodology</a>
+            <a href="/about/">About Us</a>
+            <a href="/faq/">Frequently Asked Questions</a>
+            <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="catalogue-main">
+        <!-- Hero Header -->
+        <section class="catalogue-hero bg-light">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li aria-current="page">Business Blueprints</li>
+                    </ol>
+                </nav>
+                <div class="catalogue-title-row">
+                    <div>
+                        <h1>Business Blueprint Catalogue</h1>
+                        <p class="section-subtext">Comprehensive operational execution packages. Every blueprint provides unredacted equipment bills of materials, supplier contacts, financial models, licensing checklists, and 90-day launch protocols.</p>
+                    </div>
+                </div>
+
+                <!-- Instant Search & Quick Filter Bar -->
+                <div class="blueprint-filter-bar card">
+                    <div class="filter-field-search">
+                        <label for="blueprint-search-input" class="sr-only">Search Blueprints</label>
+                        <div class="search-input-wrap">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="search" id="blueprint-search-input" placeholder="Search by model, machinery, or sector (e.g. Roastery, Solar EPC, EV Depot)..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="filter-controls-row">
+                        <!-- City Filter -->
+                        <div class="filter-field-inline">
+                            <label for="blueprint-city-select">City Focus:</label>
+                            <select id="blueprint-city-select">
+                                <option value="">All Regions / Multi-City</option>
+                                <option value="mum_01">Mumbai</option>
+                                <option value="blr_01">Bengaluru</option>
+                                <option value="pun_01">Pune</option>
+                                <option value="ahm_01">Ahmedabad</option>
+                                <option value="hyd_01">Hyderabad</option>
+                            </select>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="filter-field-inline">
+                            <label for="blueprint-category-select">Category:</label>
+                            <select id="blueprint-category-select">
+                                <option value="">All Categories</option>
+                                <option value="Food & Beverage">Food & Beverage</option>
+                                <option value="Clean Energy & EV">Clean Energy & EV</option>
+                                <option value="Logistics & Hyperlocal">Logistics & Hyperlocal</option>
+                                <option value="Healthcare & Elderly Care">Healthcare & Elderly Care</option>
+                                <option value="Light Manufacturing">Light Manufacturing</option>
+                                <option value="B2B Services">B2B Services</option>
+                            </select>
+                        </div>
+
+                        <!-- Product Type Filter -->
+                        <div class="filter-field-inline">
+                            <label for="blueprint-type-select">Product Type:</label>
+                            <select id="blueprint-type-select">
+                                <option value="">All Deliverable Types</option>
+                                <option value="Blueprint">Detailed Business Blueprint</option>
+                                <option value="Report">Opportunity Deep-Dive Report</option>
+                                <option value="Roadmap">90-Day Execution Roadmap</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-reset-filters">Reset Filters</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Catalogue Grid Section -->
+        <section class="section container">
+            <div class="directory-status-bar">
+                <div class="results-count" id="blueprint-count-display" aria-live="polite">
+                    <strong>Loading published blueprints...</strong>
+                </div>
+                <div class="directory-notice">
+                    <span class="info-badge">🔒 Digital Delivery:</span> Verified instant delivery or manual secure download link dispatched within 2 hours.
+                </div>
+            </div>
+
+            <!-- Active Filter Chips -->
+            <div class="active-filter-chips" id="blueprint-chips-container" style="margin-bottom: 24px;"></div>
+
+            <!-- Products Grid Container -->
+            <div class="grid-3" id="blueprints-display-grid">
+                <!-- Skeletons shown during initial data fetch -->
+                <div class="card skeleton-card" aria-hidden="true"></div>
+                <div class="card skeleton-card" aria-hidden="true"></div>
+                <div class="card skeleton-card" aria-hidden="true"></div>
+            </div>
+
+            <!-- Empty Results State -->
+            <div class="card empty-results-state" id="blueprint-empty-state" hidden>
+                <div class="empty-icon-wrap" aria-hidden="true">📑</div>
+                <h2>No Blueprints Found Matching Criteria</h2>
+                <p>We could not find any published commercial blueprints matching your selected filters. You can request a bespoke research package or clear your filters to explore all available models.</p>
+                <div class="empty-actions">
+                    <button type="button" class="btn btn-primary" id="btn-clear-empty-filters">Clear Filter Criteria</button>
+                    <a href="/custom-research/" class="btn btn-outline">Commission Custom Research</a>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div class="card error-results-state" id="blueprint-error-state" hidden>
+                <div class="empty-icon-wrap" aria-hidden="true">⚠️</div>
+                <h2>Catalogue Service Temporarily Unavailable</h2>
+                <p id="blueprint-error-message">Unable to synchronize product pricing and deliverables from the database. Please check your connection.</p>
+                <div class="empty-actions">
+                    <button type="button" class="btn btn-primary" id="btn-retry-catalogue">Retry Connection</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Makes Our Blueprints Different -->
+        <section class="section bg-light" aria-labelledby="blueprint-standards-heading">
+            <div class="container">
+                <div class="section-header text-center center-block">
+                    <span class="badge badge-teal">Rigorous Research Standard</span>
+                    <h2 id="blueprint-standards-heading">What is Included in Every Business Blueprint?</h2>
+                    <p class="section-subtext">We do not sell AI-generated fluff or generic startup advice. Each package is an engineering and commercial operational manual.</p>
+                </div>
+
+                <div class="grid-4">
+                    <div class="card value-card">
+                        <div class="value-icon">📋</div>
+                        <h3>Bill of Materials (BOM)</h3>
+                        <p>Detailed machinery specifications, recommended brand models, electrical load requirements, and current fabricator price quotes.</p>
+                    </div>
+                    <div class="card value-card">
+                        <div class="value-icon">📊</div>
+                        <h3>Financial Models</h3>
+                        <p>Editable spreadsheet templates with 36-month P&amp;L projections, cash-burn modeling, contribution margins, and break-even thresholds.</p>
+                    </div>
+                    <div class="card value-card">
+                        <div class="value-icon">🏭</div>
+                        <h3>Vendor Directories</h3>
+                        <p>Verified contact details of raw material distributors, machine tooling fabricators, and specialized commercial packaging suppliers in India.</p>
+                    </div>
+                    <div class="card value-card">
+                        <div class="value-icon">⚖️</div>
+                        <h3>Statutory Roadmaps</h3>
+                        <p>Step-by-step documentation filing guidelines for FSSAI, state Shop Act, municipal trade clearance, GST, and pollution control NOCs.</p>
+                    </div>
+                </div>
+
+                <!-- Product Inclusions Transparency Notice -->
+                <div class="card notice-card" style="margin-top: 32px; border-left: 4px solid var(--teal);">
+                    <h4>⚠️ Clear Scope &amp; No-Coaching Policy</h4>
+                    <p>Our business blueprints are self-contained digital research documents, operational frameworks, and spreadsheet models. <strong>Purchases do not include 1-on-1 personal coaching, ongoing consulting, legal representation, or investment advisory services</strong> unless explicitly booked as a bespoke custom research engagement.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/opportunities/">All Opportunities</a></li>
+                    <li><a href="/cities/">City Directory</a></li>
+                    <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
+                    <li><a href="/opportunities/?model=Hybrid">Hybrid &amp; Services</a></li>
+                    <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="/blueprints/" class="active">Business Blueprints</a></li>
+                    <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
+                    <li><a href="/custom-research/">Custom City Research</a></li>
+                    <li><a href="/account/">Access Purchases</a></li>
+                    <li><a href="/refund-policy/">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/how-it-works/">How It Works</a></li>
+                    <li><a href="/methodology/">Research Methodology</a></li>
+                    <li><a href="/insights/">Insights &amp; Case Studies</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/contact/">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/terms/">Terms of Service</a></li>
+                    <li><a href="/refund-policy/">Refund Policy</a></li>
+                    <li><a href="/disclaimer/">Risk Disclaimer</a></li>
+                    <li><a href="/research-policy/">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="/contact/">Report an Error</a>
+                    <span>•</span>
+                    <a href="/sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts & Blueprint Engine -->
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/forms.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script>
+        /**
+         * Blueprint Catalogue Controller
+         * Connects to getPublishedProducts_() and filters products by city, category,
+         * search term, and product type.
+         */
+        (function() {
+            let allProducts = [];
+            let filteredProducts = [];
+
+            const state = {
+                keyword: '',
+                city: '',
+                category: '',
+                type: ''
+            };
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                initializeUI();
+                await fetchBlueprintCatalogue();
+            });
+
+            function initializeUI() {
+                const searchInput = document.getElementById('blueprint-search-input');
+                const citySelect = document.getElementById('blueprint-city-select');
+                const categorySelect = document.getElementById('blueprint-category-select');
+                const typeSelect = document.getElementById('blueprint-type-select');
+                const resetBtn = document.getElementById('btn-reset-filters');
+                const clearEmptyBtn = document.getElementById('btn-clear-empty-filters');
+                const retryBtn = document.getElementById('btn-retry-catalogue');
+
+                if (searchInput) {
+                    searchInput.addEventListener('input', debounce(() => {
+                        state.keyword = searchInput.value.trim().toLowerCase();
+                        applyFiltersAndRender();
+                    }, 200));
+                }
+
+                if (citySelect) {
+                    citySelect.addEventListener('change', () => {
+                        state.city = citySelect.value;
+                        applyFiltersAndRender();
+                    });
+                }
+
+                if (categorySelect) {
+                    categorySelect.addEventListener('change', () => {
+                        state.category = categorySelect.value;
+                        applyFiltersAndRender();
+                    });
+                }
+
+                if (typeSelect) {
+                    typeSelect.addEventListener('change', () => {
+                        state.type = typeSelect.value;
+                        applyFiltersAndRender();
+                    });
+                }
+
+                function resetFilters() {
+                    state.keyword = '';
+                    state.city = '';
+                    state.category = '';
+                    state.type = '';
+                    if (searchInput) searchInput.value = '';
+                    if (citySelect) citySelect.value = '';
+                    if (categorySelect) categorySelect.value = '';
+                    if (typeSelect) typeSelect.value = '';
+                    applyFiltersAndRender();
+                }
+
+                if (resetBtn) resetBtn.addEventListener('click', resetFilters);
+                if (clearEmptyBtn) clearEmptyBtn.addEventListener('click', resetFilters);
+                if (retryBtn) retryBtn.addEventListener('click', fetchBlueprintCatalogue);
+            }
+
+            async function fetchBlueprintCatalogue() {
+                const grid = document.getElementById('blueprints-display-grid');
+                const errState = document.getElementById('blueprint-error-state');
+                const emptyState = document.getElementById('blueprint-empty-state');
+
+                errState.hidden = true;
+                emptyState.hidden = true;
+
+                try {
+                    const response = await API.get('products');
+                    if (response && response.error) {
+                        throw new Error(response.error);
+                    }
+                    allProducts = Array.isArray(response) ? response : [];
+                    applyFiltersAndRender();
+                } catch (err) {
+                    grid.innerHTML = '';
+                    errState.hidden = false;
+                    document.getElementById('blueprint-error-message').textContent = 'Database error: ' + err.message;
+                }
+            }
+
+            function applyFiltersAndRender() {
+                filteredProducts = allProducts.filter(p => {
+                    // Full-text keyword search across title and description
+                    if (state.keyword) {
+                        const titleMatch = (p.title || '').toLowerCase().includes(state.keyword);
+                        const descMatch = (p.short_description || '').toLowerCase().includes(state.keyword);
+                        if (!titleMatch && !descMatch) return false;
+                    }
+
+                    // City Filter
+                    if (state.city && p.city_id && p.city_id !== 'GLOBAL' && p.city_id !== state.city) {
+                        return false;
+                    }
+
+                    // Category Filter
+                    if (state.category && p.category_id && !p.category_id.toLowerCase().includes(state.category.toLowerCase())) {
+                        return false;
+                    }
+
+                    // Product Type Filter
+                    if (state.type && p.product_type !== state.type) {
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                renderActiveChips();
+                renderProductCards();
+            }
+
+            function renderActiveChips() {
+                const container = document.getElementById('blueprint-chips-container');
+                container.innerHTML = '';
+
+                const chips = [];
+                if (state.keyword) chips.push({ label: `"${state.keyword}"`, clear: () => { state.keyword = ''; document.getElementById('blueprint-search-input').value = ''; } });
+                if (state.city) {
+                    const sel = document.getElementById('blueprint-city-select');
+                    chips.push({ label: `City: ${sel.options[sel.selectedIndex].text}`, clear: () => { state.city = ''; sel.value = ''; } });
+                }
+                if (state.category) chips.push({ label: `Category: ${state.category}`, clear: () => { state.category = ''; document.getElementById('blueprint-category-select').value = ''; } });
+                if (state.type) chips.push({ label: `Type: ${state.type}`, clear: () => { state.type = ''; document.getElementById('blueprint-type-select').value = ''; } });
+
+                chips.forEach(c => {
+                    const chip = document.createElement('span');
+                    chip.className = 'filter-chip';
+                    chip.innerHTML = `${escapeHtml(c.label)} <button type="button" aria-label="Remove filter">&times;</button>`;
+                    chip.querySelector('button').addEventListener('click', () => {
+                        c.clear();
+                        applyFiltersAndRender();
+                    });
+                    container.appendChild(chip);
+                });
+            }
+
+            function renderProductCards() {
+                const grid = document.getElementById('blueprints-display-grid');
+                const empty = document.getElementById('blueprint-empty-state');
+                const countDisplay = document.getElementById('blueprint-count-display');
+
+                const total = filteredProducts.length;
+                countDisplay.innerHTML = `Showing <strong>${total}</strong> verified business ${total === 1 ? 'blueprint' : 'blueprints'}`;
+
+                if (total === 0) {
+                    grid.innerHTML = '';
+                    empty.hidden = false;
+                    return;
+                }
+
+                empty.hidden = true;
+
+                grid.innerHTML = filteredProducts.map(p => {
+                    return `
+                        <article class="card product-card">
+                            <div class="card-meta-top">
+                                <span class="badge badge-blue">${escapeHtml(p.product_type || 'Blueprint')}</span>
+                                <span class="delivery-time-tag">⏱️ ${escapeHtml(p.estimated_delivery_time || 'Instant / Within 2h')}</span>
+                            </div>
+
+                            <h3 class="product-title">
+                                <a href="/blueprint/${encodeURIComponent(p.slug)}/">${escapeHtml(p.title)}</a>
+                            </h3>
+
+                            <div class="product-audience-box">
+                                <strong>Target Operator:</strong> Aspiring Founders, F&amp;B Operators &amp; Local Investors
+                            </div>
+
+                            <p class="product-desc">${escapeHtml(p.short_description || 'Turnkey operational manual, financial models, supplier catalogs, and licensing filing workflows.')}</p>
+
+                            <div class="product-deliverables">
+                                <span>Core Inclusions:</span>
+                                <ul>
+                                    <li>✓ 45+ Page Operational Manual (PDF)</li>
+                                    <li>✓ 3-Year Dynamic Excel Financial Model</li>
+                                    <li>✓ Verified Tooling &amp; Machinery Contacts</li>
+                                    <li>✓ Statutory License Application Scripts</li>
+                                </ul>
+                            </div>
+
+                            <div class="product-price-row">
+                                <div class="price-val">₹${Number(p.price_inr).toLocaleString('en-IN')} <span>incl. GST</span></div>
+                                <div class="product-card-actions">
+                                    <a href="/blueprint/${encodeURIComponent(p.slug)}/" class="btn btn-primary btn-sm">View Deliverables &rarr;</a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function debounce(fn, wait) {
+                let timeout;
+                return function(...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => fn.apply(this, args), wait);
+                };
+            }
+        })();
+    </script>
+</body>
+</html>

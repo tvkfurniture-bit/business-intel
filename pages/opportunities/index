@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Business Opportunities — Business Scope in Your City</title>
+    <meta name="description" content="Search and filter verified local business opportunities across Indian cities by capital, category, business model, risk level, and empirical research status.">
+    <link rel="canonical" href="https://businessscopeinyourcity.in/opportunities/">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://businessscopeinyourcity.in/opportunities/">
+    <meta property="og:title" content="Explore Business Opportunities — Business Scope in Your City">
+    <meta property="og:description" content="Empirical business opportunity catalogue. Filter by startup capital, business model, and demand validation state.">
+    <meta property="og:image" content="/assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="/assets/images/logo.svg" alt="Business Scope Pin & Growth Icon" width="34" height="34">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="/opportunities/" class="nav-link active" aria-current="page">Explore Opportunities</a>
+                <a href="/cities/" class="nav-link">Cities</a>
+                <a href="/blueprints/" class="nav-link">Blueprints</a>
+                <a href="/launch-plans/" class="nav-link">Launch Plans</a>
+                <a href="/insights/" class="nav-link">Insights</a>
+                <a href="/about/" class="nav-link">About</a>
+                <a href="/faq/" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="/opportunities/" class="active">Explore Opportunities</a>
+            <a href="/cities/">Cities Directory</a>
+            <a href="/blueprints/">Business Blueprints</a>
+            <a href="/launch-plans/">90-Day Launch Plans</a>
+            <a href="/custom-research/">Commission Custom Research</a>
+            <a href="/insights/">Market Insights</a>
+            <a href="/methodology/">Research Methodology</a>
+            <a href="/about/">About Us</a>
+            <a href="/faq/">Frequently Asked Questions</a>
+            <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="catalogue-main">
+        <!-- Page Header & Breadcrumbs -->
+        <section class="catalogue-hero bg-light">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li aria-current="page">Opportunities</li>
+                    </ol>
+                </nav>
+                <div class="catalogue-title-row">
+                    <div>
+                        <h1>Explore Local Business Opportunities</h1>
+                        <p class="section-subtext">Empirical, evidence-backed market gaps researched across Indian cities. Filter by available investment budget, operating model, and validated research confidence.</p>
+                    </div>
+                    <!-- Mobile Filter Trigger -->
+                    <button type="button" class="btn btn-outline btn-filter-drawer-open" id="open-filter-drawer-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                        <span>Filter & Search</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalogue Explorer Workspace -->
+        <section class="container catalogue-layout">
+            <!-- Filter Sidebar (Desktop & Mobile Drawer Container) -->
+            <aside class="catalogue-sidebar" id="catalogue-filter-sidebar">
+                <div class="sidebar-header-mobile">
+                    <h3>Filter Directory</h3>
+                    <button type="button" class="btn-close-drawer" id="close-filter-drawer-btn" aria-label="Close Filter Drawer">&times;</button>
+                </div>
+
+                <form id="catalogue-filter-form" class="filter-form" onsubmit="event.preventDefault();">
+                    <div class="filter-group">
+                        <div class="filter-group-header">
+                            <label for="filter-keyword"><strong>Keyword Search</strong></label>
+                            <button type="button" class="btn-text-clear" data-clear="filter-keyword">Clear</button>
+                        </div>
+                        <div class="search-input-wrap">
+                            <input type="search" id="filter-keyword" name="keyword" placeholder="e.g. Cold brew, solar, packaging..." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- City Filter -->
+                    <div class="filter-group">
+                        <div class="filter-group-header">
+                            <label for="filter-city"><strong>Target City</strong></label>
+                            <button type="button" class="btn-text-clear" data-clear="filter-city">All</button>
+                        </div>
+                        <select id="filter-city" name="city">
+                            <option value="">All Indian Cities</option>
+                            <option value="mum_01">Mumbai</option>
+                            <option value="blr_01">Bengaluru</option>
+                            <option value="pun_01">Pune</option>
+                            <option value="ahm_01">Ahmedabad</option>
+                            <option value="hyd_01">Hyderabad</option>
+                        </select>
+                    </div>
+
+                    <!-- State Filter -->
+                    <div class="filter-group">
+                        <div class="filter-group-header">
+                            <label for="filter-state"><strong>State Scope</strong></label>
+                            <button type="button" class="btn-text-clear" data-clear="filter-state">All</button>
+                        </div>
+                        <select id="filter-state" name="state">
+                            <option value="">All States</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Delhi NCR">Delhi NCR</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget Range Filters (Min and Max) -->
+                    <div class="filter-group">
+                        <div class="filter-group-header">
+                            <label><strong>Startup Capital (INR)</strong></label>
+                            <button type="button" class="btn-text-clear" data-clear="budget">Reset</button>
+                        </div>
+                        <div class="budget-range-inputs">
+                            <div class="budget-field">
+                                <span class="currency-symbol">₹</span>
+                                <input type="number" id="filter-budget-min" name="budget_min" placeholder="Min" min="0" step="50000">
+                            </div>
+                            <span class="range-dash">&ndash;</span>
+                            <div class="budget-field">
+                                <span class="currency-symbol">₹</span>
+                                <input type="number" id="filter-budget-max" name="budget_max" placeholder="Max" min="0" step="50000">
+                            </div>
+                        </div>
+                        <div class="budget-presets">
+                            <button type="button" class="chip-preset" data-min="0" data-max="500000">&lt; ₹5L</button>
+                            <button type="button" class="chip-preset" data-min="500000" data-max="1500000">₹5L - ₹15L</button>
+                            <button type="button" class="chip-preset" data-min="1500000" data-max="5000000">₹15L - ₹50L</button>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <div class="filter-group-header">
+                            <label for="filter-category"><strong>Business Category</strong></label>
+                            <button type="button" class="btn-text-clear" data-clear="filter-category">All</button>
+                        </div>
+                        <select id="filter-category" name="category">
+                            <option value="">All Categories</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Clean Energy & EV">Clean Energy & EV</option>
+                            <option value="Logistics & Hyperlocal">Logistics & Hyperlocal</option>
+                            <option value="Healthcare & Elderly Care">Healthcare & Elderly Care</option>
+                            <option value="Education & Childcare">Education & Childcare</option>
+                            <option value="Light Manufacturing">Light Manufacturing</option>
+                            <option value="B2B Services">B2B Services</option>
+                            <option value="Home & Personal Services">Home & Personal Services</option>
+                        </select>
+                    </div>
+
+                    <!-- Business Model Filter -->
+                    <div class="filter-group">
+                        <fieldset>
+                            <legend><strong>Business Model</strong></legend>
+                            <div class="checkbox-list">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="model" value="Offline">
+                                    <span>Offline / Physical Location</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="model" value="Hybrid">
+                                    <span>Hybrid (Physical + Digital)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="model" value="Online">
+                                    <span>Online / Platform / B2B Portal</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <!-- Required Skills Filter -->
+                    <div class="filter-group">
+                        <div class="filter-group-header">
+                            <label for="filter-skills"><strong>Required Core Skill</strong></label>
+                            <button type="button" class="btn-text-clear" data-clear="filter-skills">All</button>
+                        </div>
+                        <select id="filter-skills" name="skill">
+                            <option value="">Any Skill Level</option>
+                            <option value="B2B Sales">B2B Direct Sales</option>
+                            <option value="F&B Production">F&B Production & Brewing</option>
+                            <option value="Supply Chain">Supply Chain & Route Logistics</option>
+                            <option value="Technical Operations">Technical & Mechanical Assembly</option>
+                            <option value="Licensing & Compliance">Regulatory Filing & Compliance</option>
+                        </select>
+                    </div>
+
+                    <!-- Research Status Filter -->
+                    <div class="filter-group">
+                        <fieldset>
+                            <legend><strong>Research Status</strong></legend>
+                            <div class="checkbox-list">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_status" value="Evidence Supported">
+                                    <span>Evidence Supported</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_status" value="Demand Validated">
+                                    <span>Demand Validated</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_status" value="Desk Research">
+                                    <span>Desk Research</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <!-- Risk Classification Filter -->
+                    <div class="filter-group">
+                        <fieldset>
+                            <legend><strong>Assessed Risk Profile</strong></legend>
+                            <div class="checkbox-list">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="risk_level" value="Low">
+                                    <span>Low Initial Dependency</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="risk_level" value="Medium">
+                                    <span>Moderate Operational Risk</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="risk_level" value="High">
+                                    <span>High Capital / Regulatory Risk</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="filter-sidebar-actions">
+                        <button type="button" class="btn btn-outline btn-full" id="clear-all-filters-btn">Clear All Filters</button>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- Backdrop for Mobile Filter Drawer -->
+            <div class="filter-drawer-backdrop" id="filter-drawer-backdrop" hidden></div>
+
+            <!-- Main Results Area -->
+            <section class="catalogue-results-area" aria-label="Opportunities Search Results">
+                <!-- Bar: Count, Active Filter Chips, Sort, Layout Switcher -->
+                <div class="results-controls-bar card">
+                    <div class="results-meta-left">
+                        <div class="results-count" id="results-count-display" aria-live="polite">
+                            <strong>Loading published opportunities...</strong>
+                        </div>
+                        <div class="active-filter-chips" id="active-filter-chips-container" aria-label="Active Filters">
+                            <!-- Chips injected dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="results-meta-right">
+                        <!-- Sort Control -->
+                        <div class="sort-control-wrap">
+                            <label for="catalogue-sort-select">Sort By:</label>
+                            <select id="catalogue-sort-select" aria-label="Sort opportunities">
+                                <option value="featured">Featured First</option>
+                                <option value="newest">Newest Published</option>
+                                <option value="budget_asc">Lowest Starting Budget</option>
+                                <option value="budget_desc">Highest Starting Budget</option>
+                            </select>
+                        </div>
+
+                        <!-- View Layout Switcher (Grid vs List) -->
+                        <div class="layout-toggle" role="radiogroup" aria-label="Result layout view">
+                            <button type="button" class="btn-layout active" id="view-grid-btn" role="radio" aria-checked="true" aria-label="Grid View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            </button>
+                            <button type="button" class="btn-layout" id="view-list-btn" role="radio" aria-checked="false" aria-label="List View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunities List Container -->
+                <div class="opportunities-display-grid grid-3" id="opportunities-display-container">
+                    <!-- Skeletons shown during load -->
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                    <div class="card skeleton-card" aria-hidden="true"></div>
+                </div>
+
+                <!-- Empty Results State (Hidden by default) -->
+                <div class="card empty-results-state" id="empty-results-state" hidden>
+                    <div class="empty-icon-wrap" aria-hidden="true">🔍</div>
+                    <h2>No Matching Opportunities Found</h2>
+                    <p>We could not find any published opportunities matching your selected criteria. Try widening your budget brackets, clearing specific category filters, or exploring all cities.</p>
+                    <div class="empty-actions">
+                        <button type="button" class="btn btn-primary" id="reset-filters-empty-btn">Clear All Filters</button>
+                        <a href="/custom-research/" class="btn btn-outline">Request Custom Research for This Idea</a>
+                    </div>
+                </div>
+
+                <!-- Error State (Hidden by default) -->
+                <div class="card error-results-state" id="error-results-state" hidden>
+                    <div class="empty-icon-wrap" aria-hidden="true">⚠️</div>
+                    <h2>Unable to Load Directory Records</h2>
+                    <p id="error-results-message">An error occurred while connecting to the market database. Please check your network connection or try refreshing the view.</p>
+                    <div class="empty-actions">
+                        <button type="button" class="btn btn-primary" id="retry-fetch-btn">Retry Loading</button>
+                    </div>
+                </div>
+
+                <!-- Functional Pagination & Load More Controls -->
+                <div class="catalogue-pagination" id="catalogue-pagination-container">
+                    <button type="button" class="btn btn-outline" id="load-more-btn">Load More Opportunities</button>
+                    <div class="pagination-info" id="pagination-info">Showing 0 of 0 opportunities</div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/opportunities/">All Opportunities</a></li>
+                    <li><a href="/cities/">City Directory</a></li>
+                    <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
+                    <li><a href="/opportunities/?model=Hybrid">Hybrid & Services</a></li>
+                    <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="/blueprints/">Business Blueprints</a></li>
+                    <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
+                    <li><a href="/custom-research/">Custom City Research</a></li>
+                    <li><a href="/account/">Access Purchases</a></li>
+                    <li><a href="/refund-policy/">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/how-it-works/">How It Works</a></li>
+                    <li><a href="/methodology/">Research Methodology</a></li>
+                    <li><a href="/insights/">Insights & Case Studies</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/contact/">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="/terms/">Terms of Service</a></li>
+                    <li><a href="/refund-policy/">Refund Policy</a></li>
+                    <li><a href="/disclaimer/">Risk Disclaimer</a></li>
+                    <li><a href="/research-policy/">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="/contact/">Report an Error</a>
+                    <span>•</span>
+                    <a href="/sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client-Side Architecture Scripts -->
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/forms.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script>
+        /**
+         * State Controller & Dynamic Filter Engine for /opportunities/
+         */
+        (function() {
+            let allOpportunities = [];
+            let filteredOpportunities = [];
+            let currentPage = 1;
+            const PAGE_SIZE = 9;
+            let currentView = 'grid';
+
+            // Filter state mapped to URL search params
+            const state = {
+                keyword: '',
+                city: '',
+                state: '',
+                budget_min: '',
+                budget_max: '',
+                category: '',
+                models: [],
+                skill: '',
+                research_statuses: [],
+                risk_levels: [],
+                sort: 'featured'
+            };
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                initializeUIEvents();
+                syncStateFromUrl();
+                populateFormFromState();
+                await fetchPublishedOpportunities();
+            });
+
+            function initializeUIEvents() {
+                // Mobile Drawer Controls
+                const openDrawerBtn = document.getElementById('open-filter-drawer-btn');
+                const closeDrawerBtn = document.getElementById('close-filter-drawer-btn');
+                const sidebar = document.getElementById('catalogue-filter-sidebar');
+                const backdrop = document.getElementById('filter-drawer-backdrop');
+
+                function toggleDrawer(open) {
+                    if (open) {
+                        sidebar.classList.add('drawer-open');
+                        backdrop.hidden = false;
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        sidebar.classList.remove('drawer-open');
+                        backdrop.hidden = true;
+                        document.body.style.overflow = '';
+                    }
+                }
+
+                if (openDrawerBtn) openDrawerBtn.addEventListener('click', () => toggleDrawer(true));
+                if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', () => toggleDrawer(false));
+                if (backdrop) backdrop.addEventListener('click', () => toggleDrawer(false));
+
+                // Input events triggering re-filtering
+                const filterForm = document.getElementById('catalogue-filter-form');
+                filterForm.addEventListener('input', debounce(handleFilterFormChange, 250));
+                filterForm.addEventListener('change', handleFilterFormChange);
+
+                // Quick clear individual buttons
+                document.querySelectorAll('.btn-text-clear').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const target = e.target.getAttribute('data-clear');
+                        if (target === 'budget') {
+                            document.getElementById('filter-budget-min').value = '';
+                            document.getElementById('filter-budget-max').value = '';
+                        } else {
+                            const field = document.getElementById(target);
+                            if (field) field.value = '';
+                        }
+                        handleFilterFormChange();
+                    });
+                });
+
+                // Budget Preset Buttons
+                document.querySelectorAll('.chip-preset').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const min = e.target.getAttribute('data-min');
+                        const max = e.target.getAttribute('data-max');
+                        document.getElementById('filter-budget-min').value = min;
+                        document.getElementById('filter-budget-max').value = max;
+                        handleFilterFormChange();
+                    });
+                });
+
+                // Clear All Buttons
+                const clearAllBtn = document.getElementById('clear-all-filters-btn');
+                const resetEmptyBtn = document.getElementById('reset-filters-empty-btn');
+                if (clearAllBtn) clearAllBtn.addEventListener('click', resetAllFilters);
+                if (resetEmptyBtn) resetEmptyBtn.addEventListener('click', resetAllFilters);
+
+                // Sort Dropdown
+                const sortSelect = document.getElementById('catalogue-sort-select');
+                if (sortSelect) {
+                    sortSelect.addEventListener('change', (e) => {
+                        state.sort = e.target.value;
+                        applyFiltersAndRender();
+                    });
+                }
+
+                // Grid vs List Toggle
+                const viewGridBtn = document.getElementById('view-grid-btn');
+                const viewListBtn = document.getElementById('view-list-btn');
+                const container = document.getElementById('opportunities-display-container');
+
+                if (viewGridBtn && viewListBtn) {
+                    viewGridBtn.addEventListener('click', () => {
+                        currentView = 'grid';
+                        viewGridBtn.classList.add('active');
+                        viewGridBtn.setAttribute('aria-checked', 'true');
+                        viewListBtn.classList.remove('active');
+                        viewListBtn.setAttribute('aria-checked', 'false');
+                        container.classList.remove('list-view');
+                        container.classList.add('grid-3');
+                    });
+
+                    viewListBtn.addEventListener('click', () => {
+                        currentView = 'list';
+                        viewListBtn.classList.add('active');
+                        viewListBtn.setAttribute('aria-checked', 'true');
+                        viewGridBtn.classList.remove('active');
+                        viewGridBtn.setAttribute('aria-checked', 'false');
+                        container.classList.remove('grid-3');
+                        container.classList.add('list-view');
+                    });
+                }
+
+                // Load More Button
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', () => {
+                        currentPage++;
+                        renderOpportunityCards(true);
+                    });
+                }
+
+                // Retry Button
+                const retryBtn = document.getElementById('retry-fetch-btn');
+                if (retryBtn) retryBtn.addEventListener('click', fetchPublishedOpportunities);
+            }
+
+            function syncStateFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                state.keyword = params.get('keyword') || '';
+                state.city = params.get('city') || '';
+                state.state = params.get('state') || '';
+                state.budget_min = params.get('budget_min') || '';
+                state.budget_max = params.get('budget_max') || '';
+                state.category = params.get('category') || '';
+                state.skill = params.get('skill') || '';
+                state.sort = params.get('sort') || 'featured';
+
+                const modelsParam = params.get('model');
+                state.models = modelsParam ? modelsParam.split(',') : [];
+
+                const statusParam = params.get('research_status');
+                state.research_statuses = statusParam ? statusParam.split(',') : [];
+
+                const riskParam = params.get('risk_level');
+                state.risk_levels = riskParam ? riskParam.split(',') : [];
+            }
+
+            function populateFormFromState() {
+                document.getElementById('filter-keyword').value = state.keyword;
+                document.getElementById('filter-city').value = state.city;
+                document.getElementById('filter-state').value = state.state;
+                document.getElementById('filter-budget-min').value = state.budget_min;
+                document.getElementById('filter-budget-max').value = state.budget_max;
+                document.getElementById('filter-category').value = state.category;
+                document.getElementById('filter-skills').value = state.skill;
+                document.getElementById('catalogue-sort-select').value = state.sort;
+
+                document.querySelectorAll('input[name="model"]').forEach(cb => {
+                    cb.checked = state.models.includes(cb.value);
+                });
+                document.querySelectorAll('input[name="research_status"]').forEach(cb => {
+                    cb.checked = state.research_statuses.includes(cb.value);
+                });
+                document.querySelectorAll('input[name="risk_level"]').forEach(cb => {
+                    cb.checked = state.risk_levels.includes(cb.value);
+                });
+            }
+
+            function handleFilterFormChange() {
+                state.keyword = document.getElementById('filter-keyword').value.trim();
+                state.city = document.getElementById('filter-city').value;
+                state.state = document.getElementById('filter-state').value;
+                state.budget_min = document.getElementById('filter-budget-min').value;
+                state.budget_max = document.getElementById('filter-budget-max').value;
+                state.category = document.getElementById('filter-category').value;
+                state.skill = document.getElementById('filter-skills').value;
+
+                state.models = Array.from(document.querySelectorAll('input[name="model"]:checked')).map(cb => cb.value);
+                state.research_statuses = Array.from(document.querySelectorAll('input[name="research_status"]:checked')).map(cb => cb.value);
+                state.risk_levels = Array.from(document.querySelectorAll('input[name="risk_level"]:checked')).map(cb => cb.value);
+
+                updateUrlParams();
+                currentPage = 1;
+                applyFiltersAndRender();
+            }
+
+            function updateUrlParams() {
+                const params = new URLSearchParams();
+                if (state.keyword) params.set('keyword', state.keyword);
+                if (state.city) params.set('city', state.city);
+                if (state.state) params.set('state', state.state);
+                if (state.budget_min) params.set('budget_min', state.budget_min);
+                if (state.budget_max) params.set('budget_max', state.budget_max);
+                if (state.category) params.set('category', state.category);
+                if (state.skill) params.set('skill', state.skill);
+                if (state.sort && state.sort !== 'featured') params.set('sort', state.sort);
+                if (state.models.length) params.set('model', state.models.join(','));
+                if (state.research_statuses.length) params.set('research_status', state.research_statuses.join(','));
+                if (state.risk_levels.length) params.set('risk_level', state.risk_levels.join(','));
+
+                const query = params.toString();
+                const newUrl = window.location.pathname + (query ? '?' + query : '');
+                window.history.replaceState({}, '', newUrl);
+            }
+
+            function resetAllFilters() {
+                document.getElementById('catalogue-filter-form').reset();
+                state.keyword = '';
+                state.city = '';
+                state.state = '';
+                state.budget_min = '';
+                state.budget_max = '';
+                state.category = '';
+                state.skill = '';
+                state.models = [];
+                state.research_statuses = [];
+                state.risk_levels = [];
+                updateUrlParams();
+                currentPage = 1;
+                applyFiltersAndRender();
+            }
+
+            async function fetchPublishedOpportunities() {
+                const container = document.getElementById('opportunities-display-container');
+                const errState = document.getElementById('error-results-state');
+                const emptyState = document.getElementById('empty-results-state');
+
+                errState.hidden = true;
+                emptyState.hidden = true;
+
+                try {
+                    const response = await API.get('opportunities');
+                    if (response && response.error) {
+                        throw new Error(response.error);
+                    }
+                    allOpportunities = Array.isArray(response) ? response : [];
+                    applyFiltersAndRender();
+                } catch (err) {
+                    container.innerHTML = '';
+                    errState.hidden = false;
+                    document.getElementById('error-results-message').textContent = 'Unable to reach the database server: ' + err.message;
+                }
+            }
+
+            function applyFiltersAndRender() {
+                filteredOpportunities = allOpportunities.filter(item => {
+                    // Keyword Full-Text Search across Public Fields
+                    if (state.keyword) {
+                        const kw = state.keyword.toLowerCase();
+                        const titleMatch = (item.title || '').toLowerCase().includes(kw);
+                        const summaryMatch = (item.short_summary || '').toLowerCase().includes(kw);
+                        const categoryMatch = (item.category || '').toLowerCase().includes(kw);
+                        if (!titleMatch && !summaryMatch && !categoryMatch) return false;
+                    }
+
+                    // City Filter
+                    if (state.city && item.city_id !== state.city) return false;
+
+                    // State Filter
+                    if (state.state && (item.state || '').toLowerCase() !== state.state.toLowerCase()) return false;
+
+                    // Category Filter
+                    if (state.category && (item.category || '').toLowerCase() !== state.category.toLowerCase()) return false;
+
+                    // Budget Min Range
+                    if (state.budget_min && Number(item.budget_max) < Number(state.budget_min)) return false;
+
+                    // Budget Max Range
+                    if (state.budget_max && Number(item.budget_min) > Number(state.budget_max)) return false;
+
+                    // Business Model Filter
+                    if (state.models.length && !state.models.includes(item.business_model)) return false;
+
+                    // Research Status Filter
+                    if (state.research_statuses.length && !state.research_statuses.includes(item.research_status)) return false;
+
+                    // Assessed Risk Level Filter
+                    if (state.risk_levels.length && item.risk_level && !state.risk_levels.includes(item.risk_level)) return false;
+
+                    return true;
+                });
+
+                // Sorting Logic
+                filteredOpportunities.sort((a, b) => {
+                    if (state.sort === 'newest') {
+                        return new Date(b.published_at || 0) - new Date(a.published_at || 0);
+                    }
+                    if (state.sort === 'budget_asc') {
+                        return (Number(a.budget_min) || 0) - (Number(b.budget_min) || 0);
+                    }
+                    if (state.sort === 'budget_desc') {
+                        return (Number(b.budget_min) || 0) - (Number(a.budget_min) || 0);
+                    }
+                    // Default 'featured': prioritize featured flag, then newest
+                    return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+                });
+
+                renderActiveFilterChips();
+                renderOpportunityCards(false);
+            }
+
+            function renderActiveFilterChips() {
+                const chipsWrap = document.getElementById('active-filter-chips-container');
+                chipsWrap.innerHTML = '';
+
+                const activeFilters = [];
+
+                if (state.keyword) activeFilters.push({ label: `"${state.keyword}"`, clearFn: () => { state.keyword = ''; document.getElementById('filter-keyword').value = ''; } });
+                if (state.city) {
+                    const sel = document.getElementById('filter-city');
+                    const text = sel.options[sel.selectedIndex].text;
+                    activeFilters.push({ label: `City: ${text}`, clearFn: () => { state.city = ''; document.getElementById('filter-city').value = ''; } });
+                }
+                if (state.state) activeFilters.push({ label: `State: ${state.state}`, clearFn: () => { state.state = ''; document.getElementById('filter-state').value = ''; } });
+                if (state.category) activeFilters.push({ label: `${state.category}`, clearFn: () => { state.category = ''; document.getElementById('filter-category').value = ''; } });
+                if (state.budget_max) activeFilters.push({ label: `Max ₹${Number(state.budget_max).toLocaleString('en-IN')}`, clearFn: () => { state.budget_max = ''; document.getElementById('filter-budget-max').value = ''; } });
+                state.models.forEach(m => activeFilters.push({ label: `Model: ${m}`, clearFn: () => {
+                    state.models = state.models.filter(x => x !== m);
+                    const cb = document.querySelector(`input[name="model"][value="${m}"]`);
+                    if (cb) cb.checked = false;
+                } }));
+                state.research_statuses.forEach(rs => activeFilters.push({ label: rs, clearFn: () => {
+                    state.research_statuses = state.research_statuses.filter(x => x !== rs);
+                    const cb = document.querySelector(`input[name="research_status"][value="${rs}"]`);
+                    if (cb) cb.checked = false;
+                } }));
+
+                activeFilters.forEach(f => {
+                    const chip = document.createElement('span');
+                    chip.className = 'filter-chip';
+                    chip.innerHTML = `${escapeHtml(f.label)} <button type="button" aria-label="Remove filter">&times;</button>`;
+                    chip.querySelector('button').addEventListener('click', () => {
+                        f.clearFn();
+                        updateUrlParams();
+                        applyFiltersAndRender();
+                    });
+                    chipsWrap.appendChild(chip);
+                });
+            }
+
+            function renderOpportunityCards(append) {
+                const container = document.getElementById('opportunities-display-container');
+                const emptyState = document.getElementById('empty-results-state');
+                const countDisplay = document.getElementById('results-count-display');
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                const paginationInfo = document.getElementById('pagination-info');
+
+                const total = filteredOpportunities.length;
+                countDisplay.innerHTML = `Showing <strong>${total}</strong> verified public ${total === 1 ? 'opportunity' : 'opportunities'}`;
+
+                if (total === 0) {
+                    container.innerHTML = '';
+                    emptyState.hidden = false;
+                    loadMoreBtn.style.display = 'none';
+                    paginationInfo.textContent = 'Showing 0 of 0 opportunities';
+                    return;
+                }
+
+                emptyState.hidden = true;
+
+                const start = 0;
+                const end = currentPage * PAGE_SIZE;
+                const itemsToDisplay = filteredOpportunities.slice(start, end);
+
+                const html = itemsToDisplay.map(o => `
+                    <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}">
+                        <div class="card-meta-top">
+                            <span class="badge badge-teal">${escapeHtml(o.category || 'General')}</span>
+                            <span class="evidence-tag evidence-tag-${getEvidenceSlug(o.research_status)}">${escapeHtml(o.research_status || 'Desk Research')}</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="/opportunity/${encodeURIComponent(o.slug)}/">${escapeHtml(o.title)}</a>
+                        </h3>
+                        <p class="card-location">📍 ${escapeHtml(o.state || 'India')} &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
+                        <p class="card-summary">${escapeHtml(o.short_summary || '')}</p>
+                        <div class="card-budget-box">
+                            <div class="budget-col">
+                                <span class="budget-label">Indicative Startup Capex</span>
+                                <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} - ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
+                            </div>
+                            <div class="confidence-col">
+                                <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'Medium')} Confidence</span>
+                            </div>
+                        </div>
+                        <div class="card-action-footer">
+                            <a href="/opportunity/${encodeURIComponent(o.slug)}/" class="btn btn-outline btn-sm btn-full">Read Full Analysis &rarr;</a>
+                        </div>
+                    </article>
+                `).join('');
+
+                container.innerHTML = html;
+
+                if (end >= total) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'inline-flex';
+                }
+                paginationInfo.textContent = `Showing ${Math.min(end, total)} of ${total} opportunities`;
+            }
+
+            function getEvidenceSlug(status) {
+                if (!status) return 'desk';
+                if (status.includes('Validated')) return 'validated';
+                if (status.includes('Supported')) return 'verified';
+                return 'desk';
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function debounce(func, wait) {
+                let timeout;
+                return function(...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+        })();
+    </script>
+</body>
+</html>

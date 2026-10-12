@@ -1,323 +1,396 @@
-<!-- Global Responsive Header -->
-<header class="site-header" id="site-header">
-    <div class="container header-container">
-        <a href="/" class="brand-logo" aria-label="Business Scope in Your City Homepage">
-            <img src="../../assets/images/logo.svg" alt="Logo" class="brand-logo-img">
-            <span class="brand-text">Business Scope <small>in Your City</small></span>
-        </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Purchased Reports &amp; Blueprints — Business Scope in Your City</title>
+    <meta name="description" content="Secure portal to access your purchased business blueprints, financial models, supplier directories, and 90-day execution roadmaps.">
+    <link rel="canonical" href="https://businessscopeinyourcity.in/account/">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
 
-        <nav class="desktop-nav" aria-label="Main Navigation">
-            <a href="/opportunities/" class="nav-link">Explore Opportunities</a>
-            <a href="/cities/" class="nav-link">Cities</a>
-            <a href="/blueprints/" class="nav-link">Blueprints</a>
-            <a href="/launch-plans/" class="nav-link">Launch Plans</a>
-            <a href="/insights/" class="nav-link">Insights</a>
-            <a href="/about/" class="nav-link active" aria-current="page">About</a>
-            <a href="/faq/" class="nav-link">FAQ</a>
-        </nav>
-
-        <div class="header-actions">
-            <a href="/account/" class="btn btn-outline btn-sm">Access Purchases</a>
-            <a href="/custom-research/" class="btn btn-primary btn-sm">Custom Research</a>
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://businessscopeinyourcity.in/account/">
+    <meta property="og:title" content="Access Purchased Reports — Business Scope in Your City">
+    <meta property="og:description" content="Enter your Order Reference ID and registered email to unlock your verified digital deliverables.">
+    <meta property="og:image" content="../../assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Update</span>
+            <span id="announcement-text">Loading latest market intelligence...</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
         </div>
+    </aside>
 
-        <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-        </button>
-    </div>
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="../../index.html" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="../../assets/images/logo.svg" alt="Logo" class="brand-logo-img">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
 
-    <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
-        <a href="/opportunities/">Explore Opportunities</a>
-        <a href="/cities/">Cities Directory</a>
-        <a href="/blueprints/">Business Blueprints</a>
-        <a href="/launch-plans/">90-Day Launch Plans</a>
-        <a href="/custom-research/">Commission Custom Research</a>
-        <a href="/insights/">Market Insights</a>
-        <a href="/methodology/">Research Methodology</a>
-        <a href="/about/" class="active">About Us</a>
-        <a href="/faq/">Frequently Asked Questions</a>
-        <a href="/account/" class="mobile-nav-highlight">Access Purchased Reports</a>
-        <div class="mobile-drawer-footer">
-            <a href="/custom-research/" class="btn btn-primary btn-full">Commission Custom Research</a>
-        </div>
-    </nav>
-</header>
-
-<!-- Main Content Area -->
-<main class="about-main">
-    <!-- Hero Header -->
-    <section class="catalogue-hero bg-light">
-        <div class="container">
-            <nav class="breadcrumbs" aria-label="Breadcrumb">
-                <ol>
-                    <li><a href="/">Home</a></li>
-                    <li aria-current="page">About</li>
-                </ol>
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="../opportunities/index.html" class="nav-link">Explore Opportunities</a>
+                <a href="../cities/index.html" class="nav-link">Cities</a>
+                <a href="../blueprints/index.html" class="nav-link">Blueprints</a>
+                <a href="../launch-plans/index.html" class="nav-link">Launch Plans</a>
+                <a href="../insights/index.html" class="nav-link">Insights</a>
+                <a href="../about/index.html" class="nav-link">About</a>
+                <a href="../faq/index.html" class="nav-link">FAQ</a>
             </nav>
-            <div class="catalogue-title-row">
-                <div>
-                    <span class="badge badge-teal">Our Mission &amp; Approach</span>
-                    <h1>About Business Scope in Your City</h1>
-                    <p class="section-subtext">We are an empirical market intelligence platform built to help aspiring founders, corporate professionals, returning expatriates, and small investors identify, evaluate, and validate viable business opportunities across Indian urban centers.</p>
-                </div>
+
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-outline btn-sm active" aria-current="page">Access Purchases</a>
+                <a href="../custom-research/index.html" class="btn btn-primary btn-sm">Custom Research</a>
             </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
         </div>
-    </section>
 
-    <!-- Mission & The Problem We Solve Section -->
-    <section class="section container" aria-labelledby="mission-heading">
-        <div class="grid-2">
-            <div class="about-text-col">
-                <span class="badge badge-teal">The Problem We Solve</span>
-                <h2 id="mission-heading">Why Most Small Business Advice in India Fails Founders</h2>
-                <p>Every year, hundreds of thousands of aspiring entrepreneurs in Indian cities invest hard-earned personal savings into new commercial ventures—such as cloud kitchens, retail boutiques, logistics routes, or light manufacturing units. Tragically, a large percentage fail within the first 12 months.</p>
-                <p>The root cause is rarely a lack of hard work or capital. It is almost always <strong>premature capital commitment driven by generic advice</strong>. Founders lease physical properties, purchase expensive machinery, and register entities based on superficial internet articles or optimistic hearsay, without ever verifying whether local customers will actually pay for the offering.</p>
-                <p><strong>Business Scope in Your City was built to eliminate this blind risk.</strong> We provide rigorous, ground-level market intelligence, itemized capital expenditure budgets, unit economics models, and demand-validation frameworks tailored to specific Indian municipal contexts.</p>
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="../opportunities/index.html">Explore Opportunities</a>
+            <a href="../cities/index.html">Cities Directory</a>
+            <a href="../blueprints/index.html">Business Blueprints</a>
+            <a href="../launch-plans/index.html">90-Day Launch Plans</a>
+            <a href="../custom-research/index.html">Commission Custom Research</a>
+            <a href="../insights/index.html">Market Insights</a>
+            <a href="../methodology/index.html">Research Methodology</a>
+            <a href="../about/index.html">About Us</a>
+            <a href="../faq/index.html">Frequently Asked Questions</a>
+            <a href="index.html" class="mobile-nav-highlight active">Access Purchased Reports</a>
+            <div class="mobile-drawer-footer">
+                <a href="../custom-research/index.html" class="btn btn-primary btn-full">Commission Custom Research</a>
             </div>
+        </nav>
+    </header>
 
-            <div class="card mission-highlight-card">
-                <div class="mission-icon">🎯</div>
-                <h3>Our Core Brand Mission</h3>
-                <p class="mission-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
-                <p>“Find business opportunities based on your city, available budget, skills, and local customer needs. Explore the evidence, understand the risks, and discover how to test an idea before investing.”</p>
-                <div class="mission-metrics-box">
-                    <div class="metric-line">
-                        <strong>Empirical First:</strong> We prioritize documented evidence over inspirational theories.
+    <!-- Main Content Area -->
+    <main class="account-main">
+        <!-- Hero Header -->
+        <section class="catalogue-hero bg-light">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem; padding: 12px 0;">
+                        <li><a href="../../index.html">Home</a> &gt;</li>
+                        <li aria-current="page" style="color: var(--text-muted);">Access Purchases</li>
+                    </ol>
+                </nav>
+                <div class="catalogue-title-row">
+                    <div>
+                        <span class="badge badge-teal">Secure Digital Delivery</span>
+                        <h1>Access Purchased Blueprints &amp; Reports</h1>
+                        <p class="section-subtext">Enter your unique Order Reference ID (sent to your confirmation email) and registered email address to access your unredacted manuals, financial models, and execution roadmaps.</p>
                     </div>
-                    <div class="metric-line">
-                        <strong>Validation First:</strong> We prove customer willingness to pay before committing capital.
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Verification & Access Layout -->
+        <section class="section container">
+            <div class="account-grid" style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: start;">
+                <!-- Left: Verification Form & Unlocked Deliverables View -->
+                <div class="account-form-col">
+                    <!-- Verification Form Card -->
+                    <div class="card" id="verification-card-box">
+                        <div class="form-card-header" style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;">
+                            <h2 style="color: var(--navy); font-size: 1.4rem; margin-bottom: 6px;">Verify Order Entitlement</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">To protect proprietary supplier directories and models, access requires dual verification of both Order ID and matching purchase email.</p>
+                        </div>
+
+                        <form id="order-verify-form" novalidate style="display: flex; flex-direction: column; gap: 18px;">
+                            <div class="form-group">
+                                <label for="verify-order-id" style="display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 6px;">Order Reference ID *</label>
+                                <input type="text" id="verify-order-id" name="order_id" required placeholder="e.g. ORD-9X4K2M" autocomplete="off" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-mono); text-transform: uppercase;">
+                                <small style="display: block; color: var(--text-muted); font-size: 0.78rem; margin-top: 4px;">Found in the subject line of your order email (e.g. [ORD-XXXXXX]).</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="verify-email" style="display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 6px;">Registered Email Address *</label>
+                                <input type="email" id="verify-email" name="customer_email" required placeholder="name@domain.com" autocomplete="email" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                                <small style="display: block; color: var(--text-muted); font-size: 0.78rem; margin-top: 4px;">Must match the email address entered during checkout.</small>
+                            </div>
+
+                            <!-- Error Message Box -->
+                            <div class="form-error-msg card" id="verify-error-box" role="alert" style="background: var(--danger-bg); border-left: 4px solid var(--danger); color: var(--danger); padding: 12px 16px; font-size: 0.88rem; font-weight: 600;" hidden></div>
+
+                            <div class="form-actions" style="margin-top: 8px;">
+                                <button type="submit" class="btn btn-primary btn-full btn-lg" id="btn-submit-verify" style="padding: 14px;">
+                                    <span>Verify &amp; Unlock Deliverables</span>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="metric-line">
-                        <strong>Radical Honesty:</strong> We highlight business risks, dependencies, and known unknowns.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Who This Platform Is Built For Section -->
-    <section class="section bg-light" aria-labelledby="audience-heading">
-        <div class="container">
-            <div class="section-header text-center center-block">
-                <span class="badge badge-teal">Audience Focus</span>
-                <h2 id="audience-heading">Who We Serve Across Indian Cities</h2>
-                <p class="section-subtext">Our research is designed specifically for five distinct profiles seeking structured commercial clarity.</p>
-            </div>
+                    <!-- Unlocked Deliverables View (Rendered dynamically upon verification) -->
+                    <div class="card" id="unlocked-deliverables-view" hidden style="border-top: 4px solid var(--teal-dark);">
+                        <div class="unlocked-header" style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                                <span class="badge badge-teal">Access Verified</span>
+                                <span class="order-ref-pill" id="display-order-id" style="font-family: var(--font-mono); font-weight: 700; color: var(--navy); background: var(--bg-light); padding: 4px 10px; border-radius: var(--radius-sm);">ORD-XXXX</span>
+                            </div>
+                            <h2 id="display-product-title" style="color: var(--navy); font-size: 1.5rem; margin: 10px 0 6px;">Product Title</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Customer: <strong id="display-customer-name" style="color: var(--text-main);">—</strong> &bull; Status: <span class="status-pill status-reconciled" style="color: var(--teal-dark); font-weight: 700;">Reconciled</span></p>
+                        </div>
 
-            <div class="grid-3 audience-grid">
-                <div class="card audience-card">
-                    <div class="audience-icon">💼</div>
-                    <h3>Corporate Professionals Transitioning to Business</h3>
-                    <p>Executives and managers with operational skills seeking to build an independent commercial asset, but who cannot afford to waste capital on unvalidated ideas.</p>
-                </div>
+                        <div class="deliverables-manifest" style="margin-bottom: 24px;">
+                            <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 14px;">📦 Package Deliverables:</h3>
+                            <div class="files-stack" id="deliverables-files-list" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                        </div>
 
-                <div class="card audience-card">
-                    <div class="audience-icon">✈️</div>
-                    <h3>Returning Indian Expatriates</h3>
-                    <p>NRI professionals returning to Indian Tier-1 and Tier-2 economic hubs who understand global standards but need localized insight into domestic vendor rates and municipal bylaws.</p>
-                </div>
-
-                <div class="card audience-card">
-                    <div class="audience-icon">💰</div>
-                    <h3>Small &amp; Medium Private Investors</h3>
-                    <p>Individuals with ₹5L to ₹50L of deployable capital seeking transparent unit economics, break-even timelines, and equipment bills of materials rather than volatile financial markets.</p>
-                </div>
-
-                <div class="card audience-card">
-                    <div class="audience-icon">🏬</div>
-                    <h3>Existing Business Operators Seeking Diversification</h3>
-                    <p>Established local merchants or family-business operators looking to expand into modern hybrid models, light manufacturing, or tech-enabled services.</p>
-                </div>
-
-                <div class="card audience-card">
-                    <div class="audience-icon">🎓</div>
-                    <h3>First-Time Local Entrepreneurs</h3>
-                    <p>First-generation founders who need a structured, disciplined sequence—from customer problem discovery to a 90-day launch roadmap—to navigate their first venture safely.</p>
-                </div>
-
-                <div class="card audience-card highlight-audience">
-                    <div class="audience-icon">🛡️</div>
-                    <h3>The Common Thread</h3>
-                    <p>Every user of our platform values <strong>intellectual honesty, measurable evidence, and disciplined risk management</strong> over get-rich-quick promises.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our 5 Research & Operating Principles Section -->
-    <section class="section container" aria-labelledby="principles-heading">
-        <div class="section-header">
-            <div>
-                <span class="badge badge-teal">The Scientific Method</span>
-                <h2 id="principles-heading">Our Core Operating &amp; Research Principles</h2>
-                <p class="section-subtext">The non-negotiable guidelines that govern every piece of market research published on this website.</p>
-            </div>
-        </div>
-
-        <div class="grid-2 principles-grid">
-            <div class="card principle-card">
-                <span class="principle-number">01</span>
-                <h3>Hyperlocal Municipal Ground Truth</h3>
-                <p>National statistics obscure city-level realities. We evaluate commercial real estate rental deposits, municipal zoning restrictions, industrial electricity tariffs, and specific ward footfall density for individual Indian cities.</p>
-            </div>
-
-            <div class="card principle-card">
-                <span class="principle-number">02</span>
-                <h3>The 5-Tier Evidence Taxonomy</h3>
-                <p>We do not treat assumptions as facts. Every claim in our research is explicitly categorized: <em>Verified Source</em>, <em>Evidence Supported</em>, <em>Estimate</em>, <em>Hypothesis</em>, or <em>Unknown</em>.</p>
-            </div>
-
-            <div class="card principle-card">
-                <span class="principle-number">03</span>
-                <h3>Demand Validation Over Expansion</h3>
-                <p>We believe that no entrepreneur should sign a commercial lease or buy machinery until paying customer willingness to pay has been proven through real-world pre-orders or letters of intent.</p>
-            </div>
-
-            <div class="card principle-card">
-                <span class="principle-number">04</span>
-                <h3>Absence of Competition ≠ Market Gap</h3>
-                <p>A lack of visible competitors in a neighborhood does not prove that an opportunity exists. We rigorously evaluate whether customer apathy, regulatory friction, or unviable margins caused previous operators to exit.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Radical Transparency & Anti-Hype Commitments Section -->
-    <section class="section bg-light" aria-labelledby="transparency-heading">
-        <div class="container">
-            <div class="card transparency-card">
-                <div class="transparency-header">
-                    <span class="badge badge-teal">Zero Embellishment</span>
-                    <h2 id="transparency-heading">Our Radical Transparency Commitments</h2>
-                </div>
-                <p class="transparency-lead">
-                    In an internet environment saturated with fabricated case studies, fake earnings screenshots, and artificial corporate personas, we adhere to strict ethical commitments:
-                </p>
-
-                <div class="transparency-checklist">
-                    <div class="transparency-item">
-                        <span class="transparency-check">✓</span>
-                        <div>
-                            <strong>Zero Fabricated Testimonials or Quotes:</strong>
-                            <p>We never publish invented client testimonials, fake five-star review widgets, or stock-photo customer endorsements.</p>
+                        <div class="package-actions" style="display: flex; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 16px;">
+                            <a href="#" id="display-primary-download-btn" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">Download Master Package</a>
+                            <button type="button" id="btn-verify-another" class="btn btn-outline">Check Another Order</button>
                         </div>
                     </div>
 
-                    <div class="transparency-item">
-                        <span class="transparency-check">✓</span>
-                        <div>
-                            <strong>Zero Manufactured Corporate Embellishment:</strong>
-                            <p>We do not claim fictional multinational offices, artificial venture capital backing, or fabricated corporate advisory boards. We are an independent, research-driven platform.</p>
+                    <!-- Pending Verification View (Rendered when UTR is under review) -->
+                    <div class="card" id="pending-verification-view" hidden style="border-left: 4px solid var(--warning); padding: 24px;">
+                        <h3 style="color: var(--warning); font-size: 1.2rem; margin-bottom: 8px;">⏳ Bank Reconciliation in Progress</h3>
+                        <p style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 14px;">Your order record was located, but your payment reference is currently undergoing verification by our accounts desk.</p>
+                        <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); font-size: 0.88rem; margin-bottom: 16px;">
+                            <p style="margin: 0;"><strong>Standard Turnaround:</strong> Manual UTR matching completes within <strong>2 hours</strong> during business hours (9:00 AM – 7:00 PM IST). Deliverables will unlock automatically as soon as verified.</p>
                         </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Need expedited verification? Send your bank transaction receipt with Order ID to <a href="../contact/index.html" style="color: var(--teal-dark); font-weight: 700; text-decoration: underline;">research@businessscopeinyourcity.in</a>.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Information & FAQ Sidebar -->
+                <aside class="account-info-col" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="card">
+                        <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">🔒 Security &amp; Access Policy</h3>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: var(--text-muted); padding: 0;">
+                            <li>✓ <strong>Dual-Key Authentication:</strong> Orders cannot be queried by Order ID alone. The customer purchase email must match the verified database record.</li>
+                            <li>✓ <strong>Unlimited Downloads:</strong> Once reconciled, your access credentials do not expire. You may return to this portal at any time.</li>
+                            <li>✓ <strong>Instant Invoice:</strong> GST compliant tax invoices are available upon email request to the billing desk.</li>
+                        </ul>
                     </div>
 
-                    <div class="transparency-item">
-                        <span class="transparency-check">✓</span>
-                        <div>
-                            <strong>Zero Profit or Return Guarantees:</strong>
-                            <p>We never guarantee revenue, commercial success, or investment returns. Entrepreneurship involves substantial risk, and we communicate those risks clearly.</p>
-                        </div>
+                    <div class="card">
+                        <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">Frequently Asked Questions</h3>
+                        <details style="border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px; font-size: 0.88rem;">
+                            <summary style="font-weight: 700; cursor: pointer; color: var(--navy);">Where do I find my Order ID?</summary>
+                            <p style="color: var(--text-muted); margin-top: 6px;">Your Order Reference (format: <code>ORD-XXXXXX</code>) was generated on the checkout confirmation screen and dispatched to your email address.</p>
+                        </details>
+                        <details style="border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px; font-size: 0.88rem;">
+                            <summary style="font-weight: 700; cursor: pointer; color: var(--navy);">What formats are included?</summary>
+                            <p style="color: var(--text-muted); margin-top: 6px;">Blueprints include high-resolution PDF manuals, editable dynamic Microsoft Excel (.xlsx) financial models, and CSV supplier directories.</p>
+                        </details>
+                        <details style="font-size: 0.88rem;">
+                            <summary style="font-weight: 700; cursor: pointer; color: var(--navy);">Order not found or typo?</summary>
+                            <p style="color: var(--text-muted); margin-top: 6px;">If you made a typo during checkout, reach our support desk at <a href="../contact/index.html" style="color: var(--teal-dark); font-weight: 700;">Contact Support</a> with your payment reference.</p>
+                        </details>
                     </div>
+                </aside>
+            </div>
+        </section>
+    </main>
 
-                    <div class="transparency-item">
-                        <span class="transparency-check">✓</span>
-                        <div>
-                            <strong>Zero Vendor Brokerage Kickbacks:</strong>
-                            <p>Our supplier directories and equipment catalogs are evaluated on merit and verified pricing. We do not accept undisclosed referral commissions from machinery fabricators.</p>
-                        </div>
-                    </div>
+    <!-- Global 5-Column Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo footer-logo">
+                    <img src="../../assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="../opportunities/index.html">All Opportunities</a></li>
+                    <li><a href="../cities/index.html">City Directory</a></li>
+                    <li><a href="../opportunities/index.html?model=Offline">Offline Businesses</a></li>
+                    <li><a href="../opportunities/index.html?model=Hybrid">Hybrid &amp; Services</a></li>
+                    <li><a href="../opportunities/index.html?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="../blueprints/index.html">Business Blueprints</a></li>
+                    <li><a href="../launch-plans/index.html">90-Day Launch Plans</a></li>
+                    <li><a href="../custom-research/index.html">Custom City Research</a></li>
+                    <li><a href="index.html">Access Purchases</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Order Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="../how-it-works/index.html">How It Works</a></li>
+                    <li><a href="../methodology/index.html">Research Methodology</a></li>
+                    <li><a href="../insights/index.html">Insights &amp; Case Studies</a></li>
+                    <li><a href="../faq/index.html">Frequently Asked Questions</a></li>
+                    <li><a href="../contact/index.html">Contact Our Analysts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="../legal/index.html?policy=privacy">Privacy Policy</a></li>
+                    <li><a href="../legal/index.html?policy=terms">Terms of Service</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Refund Policy</a></li>
+                    <li><a href="../legal/index.html?policy=disclaimer">Risk Disclaimer</a></li>
+                    <li><a href="../legal/index.html?policy=research-policy">Research Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-disclaimer-box">
+                <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
+            </div>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="../contact/index.html">Report an Error</a>
+                    <span>•</span>
+                    <a href="../../sitemap.xml">XML Sitemap</a>
                 </div>
             </div>
         </div>
-    </section>
+    </footer>
 
-    <!-- Final Conversion & Engagement CTA -->
-    <section class="section container text-center">
-        <div class="conversion-box card">
-            <h2>Begin Exploring Verified Business Opportunities</h2>
-            <p>Browse our empirical directory, review unit economics, and discover how to test real demand in your city.</p>
-            <div class="conversion-actions">
-                <a href="/opportunities/" class="btn btn-primary btn-lg">Explore Directory</a>
-                <a href="/contact/" class="btn btn-outline btn-lg">Contact Our Analysts</a>
-            </div>
-        </div>
-    </section>
-</main>
+    <!-- Core Scripts & Verification Logic -->
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/navigation.js"></script>
+    <script>
+        (function() {
+            const form = document.getElementById('order-verify-form');
+            const orderIdInput = document.getElementById('verify-order-id');
+            const emailInput = document.getElementById('verify-email');
+            const errorBox = document.getElementById('verify-error-box');
+            const submitBtn = document.getElementById('btn-submit-verify');
 
-<!-- Global 5-Column Footer -->
-<footer class="site-footer" role="contentinfo">
-    <div class="container footer-grid">
-        <div class="footer-col brand-col">
-            <div class="brand-logo footer-logo">
-                <img src="/assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
-                <span>Business Scope</span>
-            </div>
-            <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
-            <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
-        </div>
+            const verifyBox = document.getElementById('verification-card-box');
+            const unlockedView = document.getElementById('unlocked-deliverables-view');
+            const pendingView = document.getElementById('pending-verification-view');
+            const resetBtn = document.getElementById('btn-verify-another');
 
-        <div class="footer-col">
-            <h4 class="footer-title">Explore</h4>
-            <ul class="footer-links">
-                <li><a href="/opportunities/">All Opportunities</a></li>
-                <li><a href="/cities/">City Directory</a></li>
-                <li><a href="/opportunities/?model=Offline">Offline Businesses</a></li>
-                <li><a href="/opportunities/?model=Hybrid">Hybrid &amp; Services</a></li>
-                <li><a href="/opportunities/?budget_max=500000">Low Capital (&lt; ₹5L)</a></li>
-            </ul>
-        </div>
+            // Pre-fill parameters if present in URL (e.g. redirected from checkout)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('order_id')) {
+                orderIdInput.value = urlParams.get('order_id');
+            }
+            if (urlParams.get('email')) {
+                emailInput.value = urlParams.get('email');
+            }
 
-        <div class="footer-col">
-            <h4 class="footer-title">Products</h4>
-            <ul class="footer-links">
-                <li><a href="/blueprints/">Business Blueprints</a></li>
-                <li><a href="/launch-plans/">90-Day Launch Plans</a></li>
-                <li><a href="/custom-research/">Custom City Research</a></li>
-                <li><a href="/account/">Access Purchases</a></li>
-                <li><a href="/refund-policy/">Order Support</a></li>
-            </ul>
-        </div>
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-        <div class="footer-col">
-            <h4 class="footer-title">Resources</h4>
-            <ul class="footer-links">
-                <li><a href="/how-it-works/">How It Works</a></li>
-                <li><a href="/methodology/">Research Methodology</a></li>
-                <li><a href="/insights/">Insights &amp; Case Studies</a></li>
-                <li><a href="/faq/">Frequently Asked Questions</a></li>
-                <li><a href="/contact/">Contact Our Analysts</a></li>
-            </ul>
-        </div>
+                const orderId = (orderIdInput.value || '').trim().toUpperCase();
+                const email = (emailInput.value || '').trim().toLowerCase();
 
-        <div class="footer-col">
-            <h4 class="footer-title">Policies</h4>
-            <ul class="footer-links">
-                <li><a href="/privacy/">Privacy Policy</a></li>
-                <li><a href="/terms/">Terms of Service</a></li>
-                <li><a href="/refund-policy/">Refund Policy</a></li>
-                <li><a href="/disclaimer/">Risk Disclaimer</a></li>
-                <li><a href="/research-policy/">Research Policy</a></li>
-            </ul>
-        </div>
-    </div>
+                errorBox.hidden = true;
+                errorBox.textContent = '';
+                pendingView.hidden = true;
+                unlockedView.hidden = true;
 
-    <div class="container footer-bottom">
-        <div class="footer-disclaimer-box">
-            <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
-        </div>
-        <div class="footer-bottom-flex">
-            <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
-            <div class="footer-secondary-links">
-                <a href="/contact/">Report an Error</a>
-                <span>•</span>
-                <a href="/sitemap.xml">XML Sitemap</a>
-            </div>
-        </div>
-    </div>
-</footer>
+                if (!orderId || !email) {
+                    errorBox.textContent = 'Please provide both your Order Reference ID and matching email address.';
+                    errorBox.hidden = false;
+                    return;
+                }
 
-<!-- Core Scripts -->
-<script src="../../assets/js/config.js"></script>
-<script src="../../assets/js/api.js"></script>
-<script src="../../assets/js/navigation.js"></script>
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Verifying Record...';
+
+                try {
+                    const response = await API.post('verify_order', {
+                        order_id: orderId,
+                        customer_email: email
+                    });
+
+                    if (!response || response.status === 'error' || !response.verified) {
+                        errorBox.textContent = (response && response.message) || 'No order matched the provided credentials. Please check your purchase confirmation.';
+                        errorBox.hidden = false;
+                        return;
+                    }
+
+                    // Order verified!
+                    if (!response.is_unlocked) {
+                        // Pending verification state
+                        pendingView.hidden = false;
+                        pendingView.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        // Unlocked state!
+                        renderUnlockedView(response);
+                    }
+                } catch (err) {
+                    errorBox.textContent = 'Verification connection failed: ' + err.message + '. Please check your connection and retry.';
+                    errorBox.hidden = false;
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Verify & Unlock Deliverables';
+                }
+            });
+
+            function renderUnlockedView(res) {
+                verifyBox.hidden = true;
+                unlockedView.hidden = false;
+
+                document.getElementById('display-order-id').textContent = res.order_id;
+                document.getElementById('display-product-title').textContent = res.product_title || 'Business Blueprint Package';
+                document.getElementById('display-customer-name').textContent = res.customer_name || 'Verified Customer';
+
+                const filesContainer = document.getElementById('deliverables-files-list');
+                const deliverables = res.deliverables || {};
+                const files = deliverables.files || [
+                    { name: 'Comprehensive Operational Manual (PDF)', format: 'PDF Manual', size_approx: '8.4 MB', url: deliverables.download_url || '#' },
+                    { name: 'Dynamic 3-Year Excel Financial Model', format: 'XLSX Spreadsheet', size_approx: '2.1 MB', url: deliverables.download_url || '#' },
+                    { name: 'Machinery Fabricators & Supplier Directory', format: 'CSV Sheet', size_approx: '450 KB', url: deliverables.download_url || '#' },
+                    { name: '90-Day Execution Milestone Checklist', format: 'PDF Checklist', size_approx: '1.2 MB', url: deliverables.download_url || '#' }
+                ];
+
+                filesContainer.innerHTML = files.map(f => `
+                    <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border);">
+                        <div>
+                            <strong style="color: var(--navy); display: block; font-size: 0.95rem;">${escapeHtml(f.name)}</strong>
+                            <small style="color: var(--text-muted); font-size: 0.8rem;">${escapeHtml(f.format)} &bull; Approx. ${escapeHtml(f.size_approx)}</small>
+                        </div>
+                        <a href="${escapeHtml(f.url)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Download</a>
+                    </div>
+                `).join('');
+
+                const masterDownload = document.getElementById('display-primary-download-btn');
+                masterDownload.setAttribute('href', deliverables.download_url || '#');
+
+                unlockedView.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    unlockedView.hidden = true;
+                    pendingView.hidden = true;
+                    verifyBox.hidden = false;
+                    form.reset();
+                });
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const d = document.createElement('div');
+                d.textContent = str;
+                return d.innerHTML;
+            }
+        })();
+    </script>
+</body>
+</html>

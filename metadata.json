@@ -1,0 +1,8 @@
+{
+  "name": "Business Scope in Your City",
+  "description": "Explore city-specific business opportunities, estimated startup budgets, customer problems, risks, and practical validation steps across India.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

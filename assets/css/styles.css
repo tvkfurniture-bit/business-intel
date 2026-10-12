@@ -1,24 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
+
 /* ==========================================================================
    BUSINESS SCOPE IN YOUR CITY — MASTER DESIGN SYSTEM & MOBILE RESPONSIVE STYLESHEET
-   Brand Palette: Deep Navy (#12304A), Teal (#56D6B0), Slate, Crisp White
+   Brand Palette: Deep Navy (#12304A), Teal (#56D6B0 / #27C6A2), Slate, Crisp White
    ========================================================================== */
 
 :root {
   /* Brand Color Tokens */
-  --navy: #12304A;
+  --navy: #10243A;
   --navy-light: #1A4469;
   --navy-dark: #0A1C2C;
-  --teal: #56D6B0;
-  --teal-dark: #0B664C;
+  --teal: #27C6A2;
+  --teal-dark: #087F70;
   --teal-light: #E6FBF5;
   --white: #FFFFFF;
   --bg-light: #F5F7FA;
   --bg-subtle: #F8FAFC;
-  --text-main: #202B36;
-  --text-muted: #667085;
+  --text-main: #17283A;
+  --text-muted: #5D6D7E;
   --text-light: #94A3B8;
-  --border: #E4E7EC;
-  --border-focus: #12304A;
+  --border: #E2E8F0;
+  --border-focus: #27C6A2;
 
   /* State Alerts */
   --danger: #B91C1C;
@@ -29,8 +31,8 @@
   --warning-bg: #FFFBEB;
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Shadows & Radius */
   --radius-sm: 4px;
@@ -199,7 +201,24 @@ input, select, textarea, button {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: clamp(10px, 1.4vw, 20px);
+  flex-shrink: 1;
+}
+
+@media (max-width: 1140px) and (min-width: 993px) {
+  .desktop-nav {
+    gap: 8px;
+  }
+  .nav-link {
+    font-size: 0.82rem;
+  }
+  .header-actions {
+    gap: 6px;
+  }
+  .header-actions .btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
 }
 
 .nav-link {
@@ -479,6 +498,7 @@ input, select, textarea, button {
 }
 
 @media (max-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-5 { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1284,3 +1304,292 @@ input, select, textarea, button {
     display: block !important;
   }
 }
+
+/* ==========================================================================
+   100% MOBILE ERGONOMICS, TOUCH TARGETS & BOTTOM TAB BAR
+   ========================================================================== */
+
+/* Universal Touch-Friendly Hit Targets */
+input, select, textarea {
+  font-size: 16px !important; /* Critical: Disables automatic iOS Safari viewport zoom on input focus */
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  color: var(--text-main);
+  background-color: var(--white);
+  width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(39, 198, 162, 0.2);
+}
+
+button, .btn, .mobile-menu-toggle, .mobile-bottom-item {
+  min-height: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.breadcrumbs ol {
+  flex-wrap: wrap !important;
+}
+
+/* Accessible Mobile Backdrop */
+.mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 28, 44, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+}
+
+/* Polished Mobile Drawer */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 74px;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  padding: 16px 20px 32px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 20px 48px rgba(10, 28, 44, 0.16);
+  max-height: calc(100vh - 74px - 60px);
+  overflow-y: auto;
+  z-index: 1000;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.mobile-nav-drawer a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--navy);
+  border-bottom: 1px solid var(--bg-light);
+  text-decoration: none;
+}
+
+.mobile-nav-drawer a:hover,
+.mobile-nav-drawer a.active {
+  color: var(--teal-dark);
+}
+
+/* Mobile Bottom Tab Bar (Ergonomic Thumb-Zone Navigation < 768px) */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 20px rgba(10, 28, 44, 0.06);
+  height: 60px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+  }
+  body {
+    padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+.mobile-bottom-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  gap: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-bottom-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform 0.15s ease, stroke 0.15s ease;
+}
+
+.mobile-bottom-item:active svg {
+  transform: scale(0.9);
+}
+
+.mobile-bottom-item.active,
+.mobile-bottom-item:hover {
+  color: var(--teal-dark);
+}
+
+.mobile-bottom-item.active svg {
+  stroke: var(--teal-dark);
+}
+
+/* Responsive Table Touch Scroller */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 16px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+
+.table-responsive table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: collapse;
+}
+
+.table-responsive th,
+.table-responsive td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.table-responsive th {
+  background: var(--bg-light);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   PAGE-BY-PAGE MOBILE RESPONSIVENESS & INLINE GRID COLLAPSE OVERRIDES
+   ========================================================================== */
+@media (max-width: 900px) {
+  .report-layout-grid,
+  .blueprint-hero-grid,
+  .account-grid,
+  .contact-layout-grid,
+  .custom-research-layout-grid,
+  .purchase-launch-plan-card,
+  .featured-insight-card,
+  .city-hero-grid,
+  .catalogue-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .product-quick-specs,
+  .deliverables-stack,
+  .form-row-2,
+  .economics-grid,
+  .city-findings-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .top-bar-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .report-actions-bar {
+    width: 100% !important;
+    display: flex !important;
+    gap: 8px !important;
+  }
+
+  .report-actions-bar .btn {
+    flex: 1 !important;
+    min-height: 44px;
+    font-size: 0.82rem;
+  }
+
+  .report-capex-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .report-capex-banner .capex-currency-col {
+    text-align: left !important;
+  }
+
+  .city-hero-card {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .card {
+    padding: 18px 16px;
+  }
+
+  .report-headline,
+  .section-header h1,
+  .section-header h2,
+  h1 {
+    font-size: 1.7rem !important;
+    line-height: 1.2 !important;
+    text-wrap: balance;
+  }
+
+  .section-subtext {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .header-actions .btn {
+    width: auto;
+  }
+
+  .filter-controls-flex {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .filter-field {
+    width: 100% !important;
+  }
+
+  .city-meta-pill-row,
+  .report-header-meta {
+    flex-wrap: wrap;
+    gap: 6px !important;
+  }
+
+  .budget-amount {
+    font-size: 0.95rem;
+  }
+}
+

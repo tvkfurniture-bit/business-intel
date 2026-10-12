@@ -13,6 +13,7 @@ const NavigationManager = (function() {
   function init() {
     initActiveNavLinks();
     initMobileDrawer();
+    initMobileBottomNav();
     initGlobalSearchModal();
     initAnnouncementBar();
     initDynamicYear();
@@ -94,6 +95,10 @@ const NavigationManager = (function() {
     menuBtn.addEventListener('click', () => toggleDrawer(!isOpen));
     backdrop.addEventListener('click', () => toggleDrawer(false));
 
+    // Expose toggler so mobile bottom nav Menu item can trigger it
+    window._toggleMobileDrawer = toggleDrawer;
+    window._isMobileDrawerOpen = () => isOpen;
+
     // Close on Escape key press
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -107,6 +112,85 @@ const NavigationManager = (function() {
         if (isOpen) toggleDrawer(false);
       });
     });
+  }
+
+  /**
+   * 2b. Ergonomic Mobile Bottom Tab Bar (<768px).
+   * Renders 5 natural thumb-zone items: Explore, Cities, Blueprints, Purchases, and Menu.
+   */
+  function initMobileBottomNav() {
+    let bottomNav = document.getElementById('mobile-bottom-nav');
+    if (!bottomNav) {
+      bottomNav = document.createElement('nav');
+      bottomNav.id = 'mobile-bottom-nav';
+      bottomNav.className = 'mobile-bottom-nav';
+      bottomNav.setAttribute('aria-label', 'Mobile Quick Navigation');
+
+      // Determine proper relative routing
+      const inPagesDir = window.location.pathname.includes('/pages/');
+      const rootPrefix = inPagesDir ? '../' : './pages/';
+      const currentPath = window.location.pathname;
+
+      const items = [
+        {
+          label: 'Explore',
+          href: inPagesDir ? '../opportunities/index.html' : 'pages/opportunities/index.html',
+          cleanHref: '/opportunities/',
+          icon: '<circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>'
+        },
+        {
+          label: 'Cities',
+          href: inPagesDir ? '../cities/index.html' : 'pages/cities/index.html',
+          cleanHref: '/cities/',
+          icon: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line><line x1="9" y1="14" x2="9" y2="14.01"></line><line x1="15" y1="14" x2="15" y2="14.01"></line>'
+        },
+        {
+          label: 'Blueprints',
+          href: inPagesDir ? '../blueprints/index.html' : 'pages/blueprints/index.html',
+          cleanHref: '/blueprints/',
+          icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line>'
+        },
+        {
+          label: 'Orders',
+          href: inPagesDir ? '../account/index.html' : 'pages/account/index.html',
+          cleanHref: '/account/',
+          icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>'
+        }
+      ];
+
+      let navHtml = items.map(item => {
+        const isActive = currentPath.includes(item.cleanHref) || currentPath.includes(item.label.toLowerCase());
+        return `
+          <a href="${item.href}" class="mobile-bottom-item ${isActive ? 'active' : ''}" aria-label="${item.label}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">${item.icon}</svg>
+            <span>${item.label}</span>
+          </a>
+        `;
+      }).join('');
+
+      navHtml += `
+        <button type="button" class="mobile-bottom-item" id="bottom-nav-menu-btn" aria-label="Toggle Navigation Drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <span>Menu</span>
+        </button>
+      `;
+
+      bottomNav.innerHTML = navHtml;
+      document.body.appendChild(bottomNav);
+    }
+
+    const bottomMenuBtn = document.getElementById('bottom-nav-menu-btn');
+    if (bottomMenuBtn) {
+      bottomMenuBtn.addEventListener('click', () => {
+        if (typeof window._toggleMobileDrawer === 'function') {
+          const isOpen = typeof window._isMobileDrawerOpen === 'function' ? window._isMobileDrawerOpen() : false;
+          window._toggleMobileDrawer(!isOpen);
+        } else {
+          const menuBtn = document.getElementById('mobile-menu-btn');
+          if (menuBtn) menuBtn.click();
+        }
+      });
+    }
   }
 
   /**

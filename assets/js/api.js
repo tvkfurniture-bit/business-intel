@@ -74,9 +74,18 @@ const API = (function() {
       }, REQUEST_TIMEOUT_MS);
 
       function cleanup() {
-        if (script.parentNode) script.parentNode.removeChild(script);
-        delete window[callbackName];
+        if (script && script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
         clearTimeout(timeoutId);
+        // Replace with inert dummy handler to prevent "Uncaught TypeError: window[callbackName] is not a function"
+        // in the global scope if late HTTP responses arrive after timeout or network error rejection.
+        window[callbackName] = function() {
+          try { delete window[callbackName]; } catch (e) {}
+        };
+        setTimeout(() => {
+          try { delete window[callbackName]; } catch (e) {}
+        }, 60000);
       }
 
       window[callbackName] = function(data) {
@@ -139,6 +148,7 @@ const API = (function() {
         headers: {
           'Accept': 'application/json'
         },
+        redirect: 'follow',
         signal: controller.signal
       });
 
@@ -148,7 +158,13 @@ const API = (function() {
         throw new Error(`HTTP network error: status ${response.status}`);
       }
 
-      const data = await response.json();
+      const rawText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (e) {
+        throw new Error('Invalid JSON payload returned by API.');
+      }
 
       if (useCache && !data.error) {
         setCachedResponse(cacheKey, data);
@@ -205,6 +221,7 @@ const API = (function() {
           'Content-Type': 'text/plain;charset=utf-8'
         },
         body: requestBody,
+        redirect: 'follow',
         signal: controller.signal
       });
 
@@ -214,7 +231,13 @@ const API = (function() {
         throw new Error(`Server returned status code ${response.status}`);
       }
 
-      const result = await response.json();
+      const rawText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(rawText);
+      } catch (e) {
+        throw new Error('Malformed server response returned by Apps Script.');
+      }
       return result;
     } catch (err) {
       clearTimeout(timeoutId);

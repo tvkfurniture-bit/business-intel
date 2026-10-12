@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Business Blueprint Package — Business Scope in Your City</title>
+    <title id="page-title">Commercial Execution Blueprint Package — Business Scope in Your City</title>
     <meta name="description" id="page-description" content="Turnkey commercial blueprint, unredacted machinery supplier catalog, financial model, and licensing filing workflows.">
     <link rel="canonical" id="page-canonical" href="https://businessscopeinyourcity.in/blueprint/">
     <link rel="stylesheet" href="../../assets/css/styles.css">
@@ -12,25 +12,277 @@
     <!-- Open Graph Metadata -->
     <meta property="og:type" content="product">
     <meta property="og:url" id="og-url" content="https://businessscopeinyourcity.in/blueprint/">
-    <meta property="og:title" id="og-title" content="Business Blueprint Package — Business Scope in Your City">
+    <meta property="og:title" id="og-title" content="Commercial Execution Blueprint Package — Business Scope in Your City">
     <meta property="og:description" id="og-description" content="Turnkey operational execution package with complete bill of materials and financial model.">
     <meta property="og:image" content="../../assets/images/social-cover.svg">
+
+    <style>
+        :root {
+            --navy: #12304A;
+            --navy-light: #1A4469;
+            --navy-dark: #0A1C2C;
+            --teal: #56D6B0;
+            --teal-dark: #0B664C;
+            --teal-light: #E6FBF5;
+            --white: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --danger: #EF4444;
+            --danger-bg: #FEF2F2;
+            --success: #10B981;
+            --success-bg: #ECFDF5;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(18, 48, 74, 0.08);
+            --shadow-xl: 0 20px 25px -5px rgba(18, 48, 74, 0.1);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+
+        body {
+            background-color: #F8FAFC;
+            color: var(--text-main);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .product-hero-wrap {
+            background: radial-gradient(circle at 10% 20%, rgba(86, 214, 176, 0.12) 0%, rgba(248, 250, 252, 0) 50%),
+                        linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 0 48px;
+        }
+        .product-headline {
+            font-size: clamp(2rem, 3.8vw, 3rem);
+            font-weight: 850;
+            color: var(--navy);
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+            margin-bottom: 16px;
+        }
+        .product-subtext-lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 28px;
+            max-width: 820px;
+        }
+
+        .specs-strip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-sm);
+        }
+        .spec-unit-item span {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .spec-unit-item strong {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .product-workspace-grid {
+            display: grid;
+            grid-template-columns: 2.1fr 0.9fr;
+            gap: 40px;
+            margin-top: 48px;
+            margin-bottom: 80px;
+        }
+
+        .product-section-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 32px;
+            transition: box-shadow 0.2s;
+        }
+        .section-header-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+        .section-tag-idx {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-md);
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            font-size: 0.85rem;
+            font-weight: 850;
+            display: grid;
+            place-items: center;
+            font-family: var(--font-mono);
+            flex-shrink: 0;
+        }
+        .section-header-row h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .fit-matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .fit-panel {
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+        .fit-positive { background: #F0FDF4; border-left: 4px solid var(--success); }
+        .fit-negative { background: var(--danger-bg); border-left: 4px solid var(--danger); }
+        .fit-panel h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 14px; }
+        .fit-positive h3 { color: #166534; }
+        .fit-negative h3 { color: #991B1B; }
+        .fit-panel ul {
+            padding-left: 20px;
+            font-size: 0.92rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #334155;
+        }
+
+        .deliverables-mosaic {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .deliv-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            transition: all 0.2s;
+        }
+        .deliv-type-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--teal-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .deliv-card h3 {
+            font-size: 1.05rem;
+            color: var(--navy);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .deliv-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .sticky-checkout-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-top: 6px solid var(--navy);
+            border-radius: var(--radius-xl);
+            padding: 34px 28px;
+            box-shadow: var(--shadow-xl);
+            position: sticky;
+            top: 95px;
+        }
+        .checkout-price-block {
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 22px;
+        }
+        .checkout-price-val {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+        .checkout-inclusions {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #334155;
+            margin-bottom: 26px;
+        }
+        .checkout-inclusions li::before {
+            content: "✓";
+            color: var(--teal-dark);
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10, 28, 44, 0.65);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.is-active { display: flex; }
+        .modal-box-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: var(--shadow-xl);
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        @media (max-width: 992px) {
+            .product-workspace-grid { grid-template-columns: 1fr; }
+            .sticky-checkout-card { position: static; }
+            .fit-matrix-grid, .deliverables-mosaic, .specs-strip-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Announcement Bar -->
+    <!-- 1. Real-Time Announcement Bar -->
     <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
         <div class="container announcement-content">
-            <span class="announcement-badge">Update</span>
-            <span id="announcement-text">Loading latest market intelligence...</span>
+            <span class="announcement-badge">Live Intelligence</span>
+            <span id="announcement-text">Loading verified research intelligence...</span>
             <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
         </div>
     </aside>
 
-    <!-- Global Responsive Header -->
+    <!-- 2. Sticky Glassmorphism Header -->
     <header class="site-header" id="site-header">
         <div class="container header-container">
-            <a href="../../index.html" class="brand-logo" aria-label="Business Scope in Your City Homepage">
-                <img src="../../assets/images/logo.svg" alt="Logo" class="brand-logo-img">
+            <a href="../../index.html" class="brand-logo" aria-label="Business Scope Platform Homepage">
+                <img src="../../assets/images/logo.svg" alt="Business Scope Emblem" width="34" height="34" class="brand-logo-img">
                 <span class="brand-text">Business Scope <small>in Your City</small></span>
             </a>
 
@@ -49,122 +301,109 @@
                 <a href="../custom-research/index.html" class="btn btn-primary btn-sm">Custom Research</a>
             </div>
 
-            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle Navigation">
+                <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
             </button>
         </div>
 
-        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Drawer Navigation" hidden>
             <a href="../opportunities/index.html">Explore Opportunities</a>
             <a href="../cities/index.html">Cities Directory</a>
             <a href="../blueprints/index.html" class="active">Business Blueprints</a>
             <a href="../launch-plans/index.html">90-Day Launch Plans</a>
             <a href="../custom-research/index.html">Commission Custom Research</a>
             <a href="../insights/index.html">Market Insights</a>
-            <a href="../methodology/index.html">Research Methodology</a>
-            <a href="../about/index.html">About Us</a>
             <a href="../faq/index.html">Frequently Asked Questions</a>
             <a href="../account/index.html" class="mobile-nav-highlight">Access Purchased Reports</a>
-            <div class="mobile-drawer-footer">
-                <a href="../custom-research/index.html" class="btn btn-primary btn-full">Commission Custom Research</a>
-            </div>
         </nav>
     </header>
 
-    <!-- Main Content Layout -->
-    <main class="blueprint-detail-main">
-        <!-- Top Breadcrumbs -->
-        <section class="bg-light report-top-bar">
+    <main>
+        <!-- Breadcrumbs Navigation -->
+        <section class="bg-light" style="border-bottom: 1px solid var(--border); padding: 12px 0;">
             <div class="container">
-                <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem; padding: 12px 0;">
-                        <li><a href="../../index.html">Home</a> &gt;</li>
-                        <li><a href="../blueprints/index.html">Blueprints</a> &gt;</li>
-                        <li id="breadcrumb-product-title" aria-current="page" style="color: var(--text-muted);">Loading Blueprint...</li>
+                <nav aria-label="Breadcrumb">
+                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.88rem;">
+                        <li><a href="../../index.html" style="color: var(--navy); font-weight: 700;">Home</a> &gt;</li>
+                        <li><a href="../blueprints/index.html" style="color: var(--navy); font-weight: 700;">Blueprints</a> &gt;</li>
+                        <li id="breadcrumb-product-title" aria-current="page" style="color: var(--text-muted);">Commercial Blueprint</li>
                     </ol>
                 </nav>
             </div>
         </section>
 
-        <!-- Product Hero & Overview -->
-        <header class="blueprint-hero bg-light" style="padding: 30px 0; border-bottom: 1px solid var(--border);">
-            <div class="container blueprint-hero-grid">
-                <div class="hero-left">
-                    <div class="badge-row" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
-                        <span class="badge badge-blue" id="prod-type-badge">Business Blueprint</span>
+        <!-- Product Hero Showcase -->
+        <header class="product-hero-wrap">
+            <div class="container" style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start;">
+                <div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
+                        <span class="badge badge-blue" id="prod-type-badge">Commercial Blueprint</span>
                         <span class="evidence-tag evidence-tag-verified">Empirically Audited</span>
-                        <span class="delivery-time-tag" id="prod-delivery-tag" style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">⏱️ Instant Delivery</span>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);" id="prod-delivery-tag">⏱️ Delivery Protocol</span>
                     </div>
 
-                    <h1 class="product-headline" id="prod-title" style="font-size: clamp(1.5rem, 4.5vw, 2.4rem); color: var(--navy); line-height: 1.25; margin-bottom: 16px; word-break: break-word;">Loading Product Specification...</h1>
-                    <p class="product-lead-summary" id="prod-short-desc" style="font-size: 1.05rem; color: var(--text-muted); margin-bottom: 24px;">
-                        Turnkey operational execution package with itemized equipment procurement, vendor directories, financial models, and statutory filing roadmaps.
-                    </p>
+                    <h1 class="product-headline" id="prod-title">Loading Blueprint Package...</h1>
+                    <p class="product-subtext-lead" id="prod-short-desc">Loading summary...</p>
 
-                    <div class="product-quick-specs">
-                        <div class="spec-item">
-                            <span class="spec-label" style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Territory Focus</span>
-                            <strong class="spec-value" id="prod-city-scope" style="color: var(--navy);">Mumbai Metropolitan &amp; Western India</strong>
+                    <!-- Dynamic Specs Strip -->
+                    <div class="specs-strip-grid">
+                        <div class="spec-unit-item">
+                            <span>Territory Focus</span>
+                            <strong id="prod-city-scope">Target Territory</strong>
                         </div>
-                        <div class="spec-item">
-                            <span class="spec-label" style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Format Deliverables</span>
-                            <strong class="spec-value" id="prod-format" style="color: var(--navy);">PDF Manual + Excel Models</strong>
+                        <div class="spec-unit-item">
+                            <span>Delivery Method</span>
+                            <strong id="prod-delivery-method">Verified Delivery</strong>
                         </div>
-                        <div class="spec-item">
-                            <span class="spec-label" style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Estimated Setup Capex</span>
-                            <strong class="spec-value" id="prod-capex-spec" style="color: var(--navy);">₹8L – ₹15L</strong>
+                        <div class="spec-unit-item">
+                            <span>Estimated Setup Capex</span>
+                            <strong id="prod-capex-spec">Indicative Capex</strong>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sticky Checkout & Purchase Card -->
-                <div class="hero-right">
-                    <div class="card purchase-checkout-card" id="checkout-box" style="position: sticky; top: 90px; border-top: 4px solid var(--navy);">
-                        <div class="purchase-pricing-header" style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
-                            <span class="price-title" style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">One-Time Digital Purchase</span>
-                            <div class="price-display" style="display: flex; align-items: baseline; gap: 4px; margin-top: 6px;">
-                                <span class="currency-symbol" style="font-size: 1.5rem; color: var(--navy); font-weight: 800;">₹</span>
-                                <strong class="price-amount" id="prod-price-display" style="font-size: 2.2rem; color: var(--navy); font-weight: 800;">2,999</strong>
-                                <span class="price-tax-note" style="font-size: 0.8rem; color: var(--text-muted); margin-left: 6px;">All taxes included</span>
-                            </div>
+                <!-- Sticky Checkout Card -->
+                <div>
+                    <div class="sticky-checkout-card">
+                        <div class="checkout-price-block">
+                            <span style="font-size: 0.78rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 4px;">One-Time Digital Purchase</span>
+                            <div class="checkout-price-val">₹<span id="prod-price-display">2,999</span></div>
+                            <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 4px; display: block;" id="prod-price-note">All taxes included</small>
                         </div>
 
-                        <!-- Initial Checkout Trigger -->
-                        <div id="checkout-trigger-view">
-                            <ul class="checkout-inclusions-list" id="prod-inclusions-summary" style="list-style: none; font-size: 0.9rem; color: var(--text-main); margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
-                                <li>✓ Complete 58-Page Operational Guide (PDF)</li>
-                                <li>✓ 3-Year Dynamic Excel Financial Model</li>
-                                <li>✓ Verified Supplier &amp; Tooling Contacts Sheet</li>
-                                <li>✓ 90-Day Execution Milestone Checklist</li>
-                            </ul>
+                        <!-- 100% Dynamic Inclusions List -->
+                        <ul class="checkout-inclusions" id="prod-inclusions-list">
+                            <li>Loading included deliverables...</li>
+                        </ul>
 
-                            <button type="button" class="btn btn-primary btn-full btn-lg" id="btn-open-checkout-modal">Order Blueprint Package</button>
-                            <a href="#sample-preview-section" class="btn btn-outline btn-full btn-sm" style="margin-top: 10px;" id="btn-scroll-sample">Preview Sample Structure</a>
-                            <p class="secure-guarantee-note" style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 12px;">🔒 SSL Secured &bull; Immediate Digital Access &bull; Verified UTR Reconciliation</p>
-                        </div>
+                        <button type="button" class="btn btn-primary btn-full btn-lg" id="btn-open-checkout-modal" style="padding: 16px;">
+                            Order Blueprint Package &rarr;
+                        </button>
+                        <a href="#sample-preview-section" class="btn btn-outline btn-full btn-sm" style="margin-top: 10px;">
+                            Preview Sample Excerpt
+                        </a>
+                        <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 14px;">
+                            🔒 SSL Secured &bull; Immediate Digital Access &bull; Verified UTR Reconciliation
+                        </p>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Product Deep-Dive Body Container -->
-        <div class="container blueprint-content-grid" style="margin-top: 40px; margin-bottom: 60px;">
-            <article class="blueprint-main-col">
-                <!-- Who It Is For vs. Who Should NOT Buy (Target Persona Validation) -->
-                <section class="card section-card" style="margin-bottom: 24px;">
-                    <div class="section-title-wrap" style="margin-bottom: 16px;">
-                        <span class="section-num" style="font-weight: 800; color: var(--teal-dark);">01</span>
-                        <h2 style="font-size: 1.5rem; color: var(--navy); display: inline-block; margin-left: 8px;">Audience Fit &amp; Negative Qualification</h2>
+        <!-- Product Content Sections -->
+        <div class="container product-workspace-grid">
+            <article>
+                <!-- 01. Audience Fit Matrix -->
+                <section class="product-section-card">
+                    <div class="section-header-row">
+                        <span class="section-tag-idx">01</span>
+                        <h2>Audience Fit &amp; Negative Qualification</h2>
                     </div>
 
-                    <div class="grid-2 fit-grid">
-                        <div class="fit-box fit-positive" style="background: var(--bg-light); padding: 20px; border-radius: var(--radius-md); border-left: 4px solid var(--success);">
-                            <div class="fit-header" style="margin-bottom: 12px;">
-                                <h3 style="color: var(--navy); font-size: 1.1rem;">✓ Who This Blueprint Is Built For</h3>
-                            </div>
-                            <ul class="bullet-list" id="prod-fit-positive" style="padding-left: 20px; font-size: 0.95rem; color: var(--text-main); display: flex; flex-direction: column; gap: 8px;">
+                    <div class="fit-matrix-grid">
+                        <div class="fit-panel fit-positive">
+                            <h3>✓ Who This Blueprint Is Built For</h3>
+                            <ul id="prod-fit-positive">
                                 <li>Aspiring founders ready to execute in the next 30 to 90 days.</li>
                                 <li>Small investors seeking verified capital requirements and break-even metrics.</li>
                                 <li>Experienced operators diversifying into high-demand local market gaps.</li>
@@ -172,481 +411,400 @@
                             </ul>
                         </div>
 
-                        <div class="fit-box fit-negative" style="background: var(--bg-light); padding: 20px; border-radius: var(--radius-md); border-left: 4px solid var(--danger);">
-                            <div class="fit-header" style="margin-bottom: 12px;">
-                                <h3 style="color: var(--danger); font-size: 1.1rem;">✕ Who Should NOT Purchase This</h3>
-                            </div>
-                            <ul class="bullet-list" id="prod-fit-negative" style="padding-left: 20px; font-size: 0.95rem; color: var(--text-main); display: flex; flex-direction: column; gap: 8px;">
+                        <div class="fit-panel fit-negative">
+                            <h3>✕ Specific Exclusions &amp; Scope Limits</h3>
+                            <ul id="prod-fit-negative">
                                 <li>Individuals looking for passive income schemes or guaranteed profits.</li>
                                 <li>Anyone seeking personalized 1-on-1 coaching or done-for-you execution.</li>
-                                <li>Entrepreneurs unwilling to conduct direct customer demand validation interviews.</li>
-                                <li>Buyers seeking generic overseas business ideas without Indian localization.</li>
+                                <li>No legal or tax advice, or live field results without independent verification.</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
-                <!-- Detailed Scope & Deliverables Included -->
-                <section class="card section-card" style="margin-bottom: 24px;">
-                    <div class="section-title-wrap" style="margin-bottom: 16px;">
-                        <span class="section-num" style="font-weight: 800; color: var(--teal-dark);">02</span>
-                        <h2 style="font-size: 1.5rem; color: var(--navy); display: inline-block; margin-left: 8px;">Itemized Package Deliverables</h2>
+                <!-- 02. Itemized Deliverables Mosaic -->
+                <section class="product-section-card">
+                    <div class="section-header-row">
+                        <span class="section-tag-idx">02</span>
+                        <h2>Itemized Package Scope &amp; Contents</h2>
                     </div>
-                    <p class="section-lead-desc" id="prod-full-desc" style="color: var(--text-muted); font-size: 1rem; margin-bottom: 20px;">
-                        Every deliverable is prepared with operational precision, providing actionable specifications ready to hand to contractors, fabricators, and licensing authorities.
+                    <p id="prod-full-desc" style="color: var(--text-main); font-size: 1rem; line-height: 1.7; margin-bottom: 24px;">
+                        Loading detailed scope...
                     </p>
 
-                    <div class="deliverables-stack" id="deliverables-stack-container">
-                        <div class="deliverable-item card" style="background: var(--bg-light);">
-                            <div class="deliv-badge" style="font-size: 0.75rem; font-weight: 700; color: var(--teal-dark); text-transform: uppercase;">PDF Document</div>
-                            <h3 style="color: var(--navy); font-size: 1.1rem; margin: 6px 0;">Comprehensive Operational Manual (50+ Pages)</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">Covers technical machine specifications, floor-plan zoning layouts, hygiene and sanitation compliance, daily operational schedules, and staff role allocations.</p>
-                        </div>
-
-                        <div class="deliverable-item card" style="background: var(--bg-light);">
-                            <div class="deliv-badge" style="font-size: 0.75rem; font-weight: 700; color: var(--teal-dark); text-transform: uppercase;">Spreadsheet (.xlsx)</div>
-                            <h3 style="color: var(--navy); font-size: 1.1rem; margin: 6px 0;">Dynamic 3-Year Financial &amp; Economics Model</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">Pre-formulated with customizable operational assumptions: ticket prices, cost of goods sold (COGS), monthly rent, staff payroll, and break-even order volumes.</p>
-                        </div>
-
-                        <div class="deliverable-item card" style="background: var(--bg-light);">
-                            <div class="deliv-badge" style="font-size: 0.75rem; font-weight: 700; color: var(--teal-dark); text-transform: uppercase;">Directory (.xlsx)</div>
-                            <h3 style="color: var(--navy); font-size: 1.1rem; margin: 6px 0;">Verified Vendor, Supplier &amp; Fabricator Directory</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">Direct phone numbers, office addresses, and verified price benchmarks for machinery manufacturers, raw material estate aggregators, and packaging printers.</p>
-                        </div>
-
-                        <div class="deliverable-item card" style="background: var(--bg-light);">
-                            <div class="deliv-badge" style="font-size: 0.75rem; font-weight: 700; color: var(--teal-dark); text-transform: uppercase;">Checklist (PDF)</div>
-                            <h3 style="color: var(--navy); font-size: 1.1rem; margin: 6px 0;">Statutory Licensing &amp; Legal Filing Guide</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted);">State-specific step-by-step application walkthroughs for FSSAI Central/State licenses, Shop Act registrations, Fire NOCs, and GST HSN classification.</p>
-                        </div>
+                    <div class="deliverables-mosaic" id="prod-deliverables-mosaic">
+                        <!-- Populated dynamically from inclusions_json -->
                     </div>
                 </section>
 
-                <!-- Table of Contents / Syllabus -->
-                <section class="card section-card" style="margin-bottom: 24px;">
-                    <div class="section-title-wrap" style="margin-bottom: 16px;">
-                        <span class="section-num" style="font-weight: 800; color: var(--teal-dark);">03</span>
-                        <h2 style="font-size: 1.5rem; color: var(--navy); display: inline-block; margin-left: 8px;">Blueprint Table of Contents</h2>
+                <!-- 03. Sample Preview -->
+                <section class="product-section-card" id="sample-preview-section">
+                    <div class="section-header-row">
+                        <span class="section-tag-idx">03</span>
+                        <h2>Sample Preview &amp; Document Structure</h2>
                     </div>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Review an excerpt of the blueprint table of contents and machine specification tables to evaluate our research depth before purchasing.</p>
 
-                    <div class="toc-accordion" style="display: flex; flex-direction: column; gap: 12px;">
-                        <div class="toc-chapter card" style="background: var(--bg-light); padding: 16px;">
-                            <div class="chapter-header" style="display: flex; justify-content: space-between; font-weight: 700; color: var(--navy);">
-                                <strong>Chapter 1: Local Market Architecture &amp; Customer Gaps</strong>
-                                <span>Pages 4–12</span>
-                            </div>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">Macro demographic shifts, micro-market customer personas, underserved price points, and competitive gap mapping.</p>
+                    <div style="background: var(--bg-light); border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px;">
+                        <span class="badge badge-teal" style="margin-bottom: 12px;">Sample Excerpt</span>
+                        <div style="font-size: 0.92rem; color: #334155; line-height: 1.7;">
+                            <strong style="color: var(--navy); display: block; margin-bottom: 6px;">Technical Specification Sample (Excerpt):</strong>
+                            <p><strong>1.1 Machine Electrical Load Balancing:</strong> Commercial single-phase motors require a dedicated 16A industrial plug point with certified surge grounding. Avoid standard domestic socket splitters...</p>
+                            <p style="margin-top: 8px;"><strong>1.2 Material Moisture Auditing:</strong> Raw inventory lots must be tested upon delivery using a digital moisture meter. Lots exceeding standard limits must be rejected immediately to prevent spoilage during storage...</p>
                         </div>
-
-                        <div class="toc-chapter card" style="background: var(--bg-light); padding: 16px;">
-                            <div class="chapter-header" style="display: flex; justify-content: space-between; font-weight: 700; color: var(--navy);">
-                                <strong>Chapter 2: Technical Bill of Materials &amp; Machine Tooling</strong>
-                                <span>Pages 13–24</span>
-                            </div>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">Detailed machinery specifications, power load and water requirements, tooling maintenance schedules, and itemized capex estimates.</p>
-                        </div>
-
-                        <div class="toc-chapter card" style="background: var(--bg-light); padding: 16px;">
-                            <div class="chapter-header" style="display: flex; justify-content: space-between; font-weight: 700; color: var(--navy);">
-                                <strong>Chapter 3: Supplier Discovery &amp; Procurement Protocols</strong>
-                                <span>Pages 25–34</span>
-                            </div>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">Raw ingredient quality testing checklists, supplier payment terms, freight costs, and packaging compliance requirements.</p>
-                        </div>
-
-                        <div class="toc-chapter card" style="background: var(--bg-light); padding: 16px;">
-                            <div class="chapter-header" style="display: flex; justify-content: space-between; font-weight: 700; color: var(--navy);">
-                                <strong>Chapter 4: Daily Operational Workflow &amp; Standard Operating Procedures (SOPs)</strong>
-                                <span>Pages 35–46</span>
-                            </div>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">Opening checklists, batch production controls, waste mitigation, sanitation protocols, and closing financial tallies.</p>
-                        </div>
-
-                        <div class="toc-chapter card" style="background: var(--bg-light); padding: 16px;">
-                            <div class="chapter-header" style="display: flex; justify-content: space-between; font-weight: 700; color: var(--navy);">
-                                <strong>Chapter 5: 90-Day Execution Roadmap &amp; Decision Gates</strong>
-                                <span>Pages 47–58</span>
-                            </div>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">13-week structured timeline with specific weekly outputs, demand validation tests, and go/no-go investment decision gates.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Sample Preview Section -->
-                <section class="card section-card" id="sample-preview-section" style="margin-bottom: 24px;">
-                    <div class="section-title-wrap" style="margin-bottom: 16px;">
-                        <span class="section-num" style="font-weight: 800; color: var(--teal-dark);">04</span>
-                        <h2 style="font-size: 1.5rem; color: var(--navy); display: inline-block; margin-left: 8px;">Sample Preview &amp; Document Structure</h2>
-                    </div>
-                    <p style="color: var(--text-muted); margin-bottom: 16px;">Review a redacted excerpt of the blueprint table of contents and machine specification tables to evaluate our research depth before purchasing.</p>
-
-                    <div class="sample-viewer-card card" style="background: var(--bg-light); border: 1px dashed var(--border);">
-                        <div class="sample-viewer-header" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                            <span class="badge badge-teal">Sample Excerpt</span>
-                            <span style="font-size: 0.8rem; color: var(--text-muted);">Previewing Pages 1–6</span>
-                        </div>
-                        <div class="sample-viewer-body" style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
-                            <h4 style="color: var(--navy); margin-bottom: 8px;">Specialty Micro-Roastery Operational Specification (Sample Excerpt)</h4>
-                            <p><strong>1.1 Equipment Electrical Load Calculation:</strong> Commercial single-phase 3kW roaster motors require a dedicated 16A industrial plug point with certified surge grounding. Avoid standard domestic socket splitters...</p>
-                            <p style="margin-top: 8px;"><strong>1.2 Green Bean Moisture Auditing:</strong> Raw Arabica lots must be tested upon delivery using a digital grain moisture meter. Lots exceeding 12.5% moisture must be rejected immediately to prevent mould during storage...</p>
-                        </div>
-                        <div style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px;">
+                        <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px;">
                             <a href="#" class="btn btn-outline btn-sm" id="btn-download-sample" target="_blank" rel="noopener noreferrer">Download Public Sample Preview (PDF) &rarr;</a>
                         </div>
                     </div>
                 </section>
-
-                <!-- Prerequisites & Critical Risks -->
-                <section class="card section-card" style="margin-bottom: 24px;">
-                    <div class="section-title-wrap" style="margin-bottom: 16px;">
-                        <span class="section-num" style="font-weight: 800; color: var(--teal-dark);">05</span>
-                        <h2 style="font-size: 1.5rem; color: var(--navy); display: inline-block; margin-left: 8px;">Prerequisites, Skills &amp; Critical Risks</h2>
-                    </div>
-
-                    <div class="grid-2">
-                        <div class="content-block">
-                            <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 8px;">Prerequisites to Launch</h3>
-                            <ul class="bullet-list" style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px;">
-                                <li>Minimum liquid startup capital: ₹8,00,000 – ₹15,00,000</li>
-                                <li>Physical commercial premises: 300 to 500 sq.ft with commercial power</li>
-                                <li>Commitment of 25–35 operational hours weekly during initial launch phase</li>
-                                <li>Basic comfort with inventory management and food safety hygiene</li>
-                            </ul>
-                        </div>
-
-                        <div class="content-block">
-                            <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 8px;">Critical Business Risks</h3>
-                            <ul class="bullet-list" style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px;">
-                                <li>Commercial rental inflation and landlord lease termination risks</li>
-                                <li>Raw material agricultural price fluctuations</li>
-                                <li>Local municipal regulatory delays in trade license approvals</li>
-                                <li>Employee turnover in technical operational roles</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Product FAQs & Refund Policy -->
-                <section class="card section-card">
-                    <div class="section-title-wrap" style="margin-bottom: 16px;">
-                        <span class="section-num" style="font-weight: 800; color: var(--teal-dark);">06</span>
-                        <h2 style="font-size: 1.5rem; color: var(--navy); display: inline-block; margin-left: 8px;">Frequently Asked Questions &amp; Refund Policy</h2>
-                    </div>
-
-                    <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 12px;">
-                        <details class="faq-item card" style="background: var(--bg-light);">
-                            <summary class="faq-question" style="font-weight: 700; color: var(--navy); cursor: pointer;">
-                                <span>How do I receive the files after purchase?</span>
-                            </summary>
-                            <div class="faq-answer" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-                                <p>After completing your order and manual payment reconciliation, a secure download link is delivered to your verified email address. You can also re-download your files via the <a href="../account/index.html" style="color: var(--navy); font-weight: 700;">Access Purchases</a> page.</p>
-                            </div>
-                        </details>
-
-                        <details class="faq-item card" style="background: var(--bg-light);">
-                            <summary class="faq-question" style="font-weight: 700; color: var(--navy); cursor: pointer;">
-                                <span>Does this package include 1-on-1 personal consulting?</span>
-                            </summary>
-                            <div class="faq-answer" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-                                <p><strong>No.</strong> Blueprints are self-contained operational research manuals and spreadsheet templates. They do not include personal consulting, coaching, or legal representation. For custom engagements, please review our <a href="../custom-research/index.html" style="color: var(--navy); font-weight: 700;">Custom Research Services</a>.</p>
-                            </div>
-                        </details>
-
-                        <details class="faq-item card" style="background: var(--bg-light);">
-                            <summary class="faq-question" style="font-weight: 700; color: var(--navy); cursor: pointer;">
-                                <span>What is the return and refund policy on digital products?</span>
-                            </summary>
-                            <div class="faq-answer" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-                                <p>Due to the irrevocable digital nature of business blueprints, purchases are subject to our published <a href="../legal/index.html?policy=refund-policy" style="color: var(--navy); font-weight: 700;">Digital Product Refund Policy</a>. Refunds are granted only in instances of duplicate billing or verifiable technical file delivery failures unresolved within 24 hours.</p>
-                            </div>
-                        </details>
-                    </div>
-                </section>
             </article>
+
+            <!-- Secondary Info Column -->
+            <aside>
+                <div class="card" style="padding: 28px; border-radius: var(--radius-xl); margin-bottom: 24px;">
+                    <h4 style="color: var(--navy); font-size: 1.1rem; font-weight: 850; margin-bottom: 12px;">Refund Policy Reference</h4>
+                    <p id="prod-refund-ref" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin: 0;">
+                        Due to the digital nature of operational blueprints, purchases are governed by our <a href="../legal/index.html?policy=refund-policy" style="color: var(--navy); font-weight: 700;">Digital Product Refund Policy</a>.
+                    </p>
+                </div>
+
+                <div class="card" style="padding: 28px; border-radius: var(--radius-xl);">
+                    <h4 style="color: var(--navy); font-size: 1.1rem; font-weight: 850; margin-bottom: 12px;">Need Custom Analysis?</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">
+                        If you need custom on-the-ground footfall audits or competitor mystery shopping for a specific municipal ward, commission a dedicated engagement.
+                    </p>
+                    <a href="../custom-research/index.html" class="btn btn-outline btn-sm btn-full">Commission Custom Research</a>
+                </div>
+            </aside>
         </div>
     </main>
 
-    <!-- FUNCTIONAL ORDER & CHECKOUT MODAL -->
-    <div class="checkout-modal" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="order-modal-title" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000;">
-        <div class="modal-backdrop" id="modal-backdrop" style="position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.6);"></div>
-        <div class="modal-dialog card" style="position: relative; max-width: 550px; margin: 60px auto; background: var(--white); padding: 28px; z-index: 10001; max-height: 90vh; overflow-y: auto;">
-            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 id="order-modal-title" style="color: var(--navy); font-size: 1.3rem;">Place Order for Blueprint Package</h3>
-                <button type="button" class="btn-close-modal" id="btn-close-modal" aria-label="Close Checkout" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <!-- Step 1: Order Details Form -->
-                <div id="checkout-step-form">
-                    <div class="order-summary-box" style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); margin-bottom: 20px;">
-                        <strong id="modal-product-title" style="color: var(--navy); display: block; font-size: 1rem;">Loading Product...</strong>
-                        <div class="order-total-price" style="margin-top: 4px; font-size: 0.9rem;">
-                            Amount Due: <strong id="modal-product-price" style="color: var(--navy);">₹2,999</strong> (Inclusive of all taxes)
-                        </div>
-                    </div>
-
-                    <form id="blueprint-order-form" novalidate style="display: flex; flex-direction: column; gap: 14px;">
-                        <div class="form-group">
-                            <label for="order-customer-name" style="display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">Full Name *</label>
-                            <input type="text" id="order-customer-name" name="customer_name" required placeholder="Enter your full name" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-md);">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="order-customer-email" style="display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">Email Address (For File Delivery) *</label>
-                            <input type="email" id="order-customer-email" name="customer_email" required placeholder="name@company.com" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-md);">
-                            <small style="color: var(--text-muted); font-size: 0.75rem;">A secure download link will be dispatched to this email upon payment verification.</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="order-customer-phone" style="display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">WhatsApp / Phone Number *</label>
-                            <input type="tel" id="order-customer-phone" name="customer_phone" required placeholder="+91 98765 43210" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-md);">
-                        </div>
-
-                        <div class="form-consent" style="font-size: 0.8rem; color: var(--text-muted);">
-                            <label><input type="checkbox" id="order-terms-consent" required> I understand this is a digital research document and does not include personal coaching. I agree to the <a href="../legal/index.html?policy=terms" target="_blank" style="color: var(--navy); font-weight: 700;">Terms</a> and <a href="../legal/index.html?policy=refund-policy" target="_blank" style="color: var(--navy); font-weight: 700;">Refund Policy</a>.</label>
-                        </div>
-
-                        <div class="form-error-msg" id="order-form-error" role="alert" style="color: var(--danger); font-size: 0.85rem; font-weight: 600;" hidden></div>
-
-                        <div class="modal-actions" style="margin-top: 8px;">
-                            <button type="submit" class="btn btn-primary btn-full" id="btn-submit-order" style="padding: 12px;">Generate Order &amp; View Payment Details</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Step 2: Payment Instructions & UTR Submission View -->
-                <div id="checkout-step-payment" style="display: none;">
-                    <div class="payment-instructions-card">
-                        <div class="order-success-header" style="text-align: center; margin-bottom: 16px;">
-                            <span class="badge badge-teal">Order Created</span>
-                            <h4 style="margin-top: 8px; font-size: 1.2rem; color: var(--navy);">Order Reference: <span id="payment-order-id" style="color: var(--teal-dark);">ORD-XXXX</span></h4>
-                        </div>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Your order has been registered in our database. Please complete payment using either UPI or direct bank transfer below:</p>
-
-                        <!-- Payment Details Display -->
-                        <div class="bank-details-box" style="background: var(--bg-light); padding: 16px; border-radius: var(--radius-md); font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--border);">
-                            <div><strong>UPI ID:</strong> <code>businessscope@upi</code></div>
-                            <div><strong>Bank:</strong> HDFC Bank, Fort Branch, Mumbai</div>
-                            <div><strong>Account Number:</strong> <code>50200084920192</code></div>
-                            <div><strong>IFSC Code:</strong> <code>HDFC0000060</code></div>
-                            <div><strong>Amount to Transfer:</strong> <span id="payment-amount-display" style="font-weight: 700; color: var(--navy);">₹2,999</span></div>
-                        </div>
-
-                        <div style="font-size: 0.85rem; color: var(--text-muted); background: #FFFBEB; border-left: 3px solid #D97706; padding: 10px; margin-top: 16px;">
-                            <strong>After Transfer:</strong> Please reply to the order confirmation email with your transaction screenshot or 12-digit UTR reference to activate your download link.
-                        </div>
-
-                        <div class="modal-actions" style="margin-top: 20px;">
-                            <a href="../account/index.html" class="btn btn-primary btn-full">Go to Customer Access Portal</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Global 5-Column Footer -->
+    <!-- Global Responsive Footer -->
     <footer class="site-footer" role="contentinfo">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
                 <div class="brand-logo footer-logo" style="color: white; margin-bottom: 16px;">
-                    <img src="../../assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
+                    <img src="../../assets/images/logo.svg" alt="Business Scope Emblem" width="28" height="28">
                     <span>Business Scope</span>
                 </div>
-                <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">Discover Local Gaps. Build Real Businesses. Empirical market research across Indian cities.</p>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
             </div>
 
             <div class="footer-col">
-                <h4 style="color: var(--teal); font-size: 0.95rem; margin-bottom: 16px; text-transform: uppercase;">Explore</h4>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                    <li><a href="../opportunities/index.html" style="color: #CBD5E1;">All Opportunities</a></li>
-                    <li><a href="../cities/index.html" style="color: #CBD5E1;">City Directory</a></li>
-                    <li><a href="../blueprints/index.html" style="color: #CBD5E1;">Blueprints</a></li>
+                <h4>Explore</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../opportunities/index.html">All Opportunities</a></li>
+                    <li><a href="../cities/index.html">City Directory</a></li>
+                    <li><a href="../blueprints/index.html">Business Blueprints</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4 style="color: var(--teal); font-size: 0.95rem; margin-bottom: 16px; text-transform: uppercase;">Products</h4>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                    <li><a href="../blueprints/index.html" style="color: #CBD5E1;">Business Blueprints</a></li>
-                    <li><a href="../launch-plans/index.html" style="color: #CBD5E1;">90-Day Launch Plans</a></li>
-                    <li><a href="../custom-research/index.html" style="color: #CBD5E1;">Custom Research</a></li>
-                    <li><a href="../account/index.html" style="color: #CBD5E1;">Access Purchases</a></li>
+                <h4>Products</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="index.html" class="active">Business Blueprints</a></li>
+                    <li><a href="../launch-plans/index.html">90-Day Launch Plans</a></li>
+                    <li><a href="../custom-research/index.html">Custom City Research</a></li>
+                    <li><a href="../account/index.html">Access Purchases</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Order Support</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4 style="color: var(--teal); font-size: 0.95rem; margin-bottom: 16px; text-transform: uppercase;">Resources</h4>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                    <li><a href="../how-it-works/index.html" style="color: #CBD5E1;">How It Works</a></li>
-                    <li><a href="../methodology/index.html" style="color: #CBD5E1;">Research Methodology</a></li>
-                    <li><a href="../insights/index.html" style="color: #CBD5E1;">Insights &amp; Case Studies</a></li>
-                    <li><a href="../faq/index.html" style="color: #CBD5E1;">FAQ</a></li>
-                    <li><a href="../contact/index.html" style="color: #CBD5E1;">Contact Us</a></li>
+                <h4>Resources</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../how-it-works/index.html">How It Works</a></li>
+                    <li><a href="../methodology/index.html">Research Methodology</a></li>
+                    <li><a href="../insights/index.html">Insights &amp; Case Studies</a></li>
+                    <li><a href="../faq/index.html">Frequently Asked Questions</a></li>
+                    <li><a href="../contact/index.html">Contact Our Analysts</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4 style="color: var(--teal); font-size: 0.95rem; margin-bottom: 16px; text-transform: uppercase;">Policies</h4>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                    <li><a href="../legal/index.html?policy=privacy" style="color: #CBD5E1;">Privacy Policy</a></li>
-                    <li><a href="../legal/index.html?policy=terms" style="color: #CBD5E1;">Terms of Service</a></li>
-                    <li><a href="../legal/index.html?policy=refund-policy" style="color: #CBD5E1;">Refund Policy</a></li>
-                    <li><a href="../legal/index.html?policy=disclaimer" style="color: #CBD5E1;">Risk Disclaimer</a></li>
+                <h4>Policies</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../legal/index.html?policy=privacy">Privacy Policy</a></li>
+                    <li><a href="../legal/index.html?policy=terms">Terms of Service</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Refund Policy</a></li>
+                    <li><a href="../legal/index.html?policy=disclaimer">Risk Disclaimer</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="container footer-bottom" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px; font-size: 0.85rem; color: #94A3B8; text-align: center;">
-            <p>&copy; 2026 Business Scope in Your City. All rights reserved. Research data is for informational purposes only and does not constitute financial, investment, or legal advice.</p>
+            <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved. Research data is for informational purposes only and does not constitute financial, investment, or legal advice.</p>
         </div>
     </footer>
 
-    <!-- Core Scripts & Checkout Engine -->
+    <!-- Interactive Order Modal Overlay -->
+    <div class="modal-overlay" id="order-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-head-title">
+        <div class="modal-box-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 20px;">
+                <h3 id="modal-head-title" style="color: var(--navy); font-size: 1.25rem; font-weight: 850; margin: 0;">Order Blueprint Package</h3>
+                <button type="button" id="modal-dismiss-btn" style="border: 0; background: var(--bg-light); border-radius: 50%; width: 32px; height: 32px; font-size: 1.3rem; cursor: pointer; color: var(--navy); display: grid; place-items: center;">&times;</button>
+            </div>
+
+            <div id="modal-form-view">
+                <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+                    <strong id="modal-product-name" style="color: var(--navy); display: block; font-size: 1rem;">Loading...</strong>
+                    <div style="margin-top: 4px; font-size: 0.95rem; color: var(--teal-dark); font-weight: 800;">
+                        Amount Due: <span id="modal-product-cost">₹2,999</span> (Taxes Included)
+                    </div>
+                </div>
+
+                <form id="blueprint-order-form" novalidate style="display: flex; flex-direction: column; gap: 14px;">
+                    <div>
+                        <label for="ord-name" style="display: block; font-size: 0.82rem; font-weight: 750; color: var(--navy); margin-bottom: 4px;">Full Name *</label>
+                        <input type="text" id="ord-name" required placeholder="Enter your full name" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                    </div>
+
+                    <div>
+                        <label for="ord-email" style="display: block; font-size: 0.82rem; font-weight: 750; color: var(--navy); margin-bottom: 4px;">Email Address (For File Dispatch) *</label>
+                        <input type="email" id="ord-email" required placeholder="name@company.com" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                    </div>
+
+                    <div>
+                        <label for="ord-phone" style="display: block; font-size: 0.82rem; font-weight: 750; color: var(--navy); margin-bottom: 4px;">Phone / WhatsApp *</label>
+                        <input type="tel" id="ord-phone" required placeholder="+91 98765 43210" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                    </div>
+
+                    <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                        <label><input type="checkbox" id="ord-consent" required> I understand this is an operational research document without personal coaching. I agree to the <a href="../legal/index.html?policy=terms" target="_blank" style="color: var(--navy); font-weight: 700;">Terms</a> and <a href="../legal/index.html?policy=refund-policy" target="_blank" style="color: var(--navy); font-weight: 700;">Refund Policy</a>.</label>
+                    </div>
+
+                    <div id="ord-error-box" style="color: var(--danger); font-size: 0.85rem; font-weight: 700;" hidden></div>
+
+                    <button type="submit" class="btn btn-primary btn-full btn-lg" id="btn-submit-order-form" style="margin-top: 6px;">
+                        Generate Order &amp; View Payment Details &rarr;
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success / Payment Instruction View -->
+            <div id="modal-payment-view" style="display: none; text-align: center;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--teal-light); color: var(--teal-dark); font-size: 1.4rem; font-weight: 900; display: grid; place-items: center; margin: 0 auto 12px;">✓</div>
+                <h4 style="color: var(--navy); font-size: 1.25rem; margin-bottom: 4px;">Order Generated Successfully</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Reference Code: <strong id="pay-order-code" style="color: var(--teal-dark); font-family: var(--font-mono);">ORD-XXXX</strong></p>
+
+                <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; text-align: left; font-size: 0.88rem; display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px;">
+                    <div><strong>UPI ID:</strong> <code>businessscope@upi</code></div>
+                    <div><strong>Bank:</strong> HDFC Bank, Fort Branch, Mumbai</div>
+                    <div><strong>Account Number:</strong> <code>50200084920192</code></div>
+                    <div><strong>IFSC Code:</strong> <code>HDFC0000060</code></div>
+                    <div><strong>Amount Due:</strong> <strong id="pay-amount-due">₹2,999</strong></div>
+                </div>
+
+                <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
+                    Please complete your transfer and reply to the confirmation email with your 12-digit UTR reference or payment receipt to activate instant download access.
+                </p>
+
+                <a href="../account/index.html" class="btn btn-primary btn-full">Go to Customer Purchases Portal</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="../../assets/js/config.js"></script>
     <script src="../../assets/js/api.js"></script>
-    <script src="../../assets/js/search.js"></script>
-    <script src="../../assets/js/forms.js"></script>
     <script src="../../assets/js/navigation.js"></script>
-    <script src="../../assets/js/app.js"></script>
     <script>
-        /**
-         * Blueprint Product Detail & Secure Checkout Controller
-         */
         (function() {
-            let currentProduct = null;
+            let activeProduct = null;
 
             document.addEventListener('DOMContentLoaded', async () => {
-                initializeModalControls();
-                const slug = extractProductSlug();
-                await loadProductDetails(slug);
+                initModal();
+                const slug = extractSlug();
+                await loadProduct(slug);
             });
 
-            function extractProductSlug() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const querySlug = urlParams.get('slug');
-                if (querySlug) return querySlug;
-
-                const pathSegments = window.location.pathname.split('/').filter(Boolean);
-                const bpIdx = pathSegments.indexOf('blueprint');
-                if (bpIdx !== -1 && pathSegments[bpIdx + 1]) {
-                    return pathSegments[bpIdx + 1];
-                }
-                return 'specialty-coffee-roastery-blueprint'; // Demo baseline fallback
+            function extractSlug() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('slug')) return params.get('slug');
+                const segs = window.location.pathname.split('/').filter(Boolean);
+                const idx = segs.indexOf('blueprint');
+                if (idx !== -1 && segs[idx + 1]) return segs[idx + 1];
+                return 'comply-grid-msme-compliance-automation';
             }
 
-            async function loadProductDetails(slug) {
-                if (typeof API !== 'undefined') {
-                    try {
-                        const response = await API.get('products');
-                        const products = Array.isArray(response) ? response : [];
-                        currentProduct = products.find(p => p.slug === slug) || products[0];
+            async function loadProduct(slug) {
+                if (typeof API === 'undefined') return;
 
-                        if (currentProduct) {
-                            renderProductData();
-                        }
-                    } catch (err) {
-                        console.warn('Using baseline product defaults:', err);
+                try {
+                    const [prodsRes, citiesRes, oppsRes] = await Promise.all([
+                        API.get('products'),
+                        API.get('cities'),
+                        API.get('opportunities')
+                    ]);
+
+                    const products = Array.isArray(prodsRes) ? prodsRes : [];
+                    activeProduct = products.find(p => p.slug === slug) || products[0];
+
+                    if (activeProduct) {
+                        // 1. Resolve clean city name from cities table
+                        const cities = Array.isArray(citiesRes) ? citiesRes : [];
+                        const matchedCity = cities.find(c => c.city_id === activeProduct.city_id);
+                        activeProduct.clean_city_name = matchedCity ? `${matchedCity.city_name}, ${matchedCity.state}` : (activeProduct.city_id === 'GLOBAL' ? 'National / Multi-City Scope' : activeProduct.city_id);
+
+                        // 2. Resolve matching capex from opportunity table
+                        const opps = Array.isArray(oppsRes) ? oppsRes : [];
+                        const matchedOpp = opps.find(o => o.city_id === activeProduct.city_id || o.slug === activeProduct.slug);
+                        activeProduct.clean_capex = matchedOpp ? `₹${Number(matchedOpp.budget_min).toLocaleString('en-IN')} – ₹${Number(matchedOpp.budget_max).toLocaleString('en-IN')}` : '₹20K – ₹1.5L';
+
+                        renderProduct(activeProduct);
                     }
+                } catch (e) {
+                    console.error('API Error:', e);
                 }
             }
 
-            function renderProductData() {
-                const p = currentProduct;
-                if (!p) return;
-
+            function renderProduct(p) {
                 document.title = `${p.seo_title || p.title} — Business Scope`;
+                document.getElementById('page-title').textContent = `${p.title} — Business Scope`;
                 document.getElementById('breadcrumb-product-title').textContent = p.title;
                 document.getElementById('prod-title').textContent = p.title;
                 document.getElementById('prod-short-desc').textContent = p.short_description;
                 document.getElementById('prod-price-display').textContent = Number(p.price_inr).toLocaleString('en-IN');
-                document.getElementById('modal-product-price').textContent = `₹${Number(p.price_inr).toLocaleString('en-IN')}`;
-                document.getElementById('modal-product-title').textContent = p.title;
-                document.getElementById('payment-amount-display').textContent = `₹${Number(p.price_inr).toLocaleString('en-IN')}`;
+                document.getElementById('modal-product-cost').textContent = `₹${Number(p.price_inr).toLocaleString('en-IN')}`;
+                document.getElementById('modal-product-name').textContent = p.title;
+                document.getElementById('pay-amount-due').textContent = `₹${Number(p.price_inr).toLocaleString('en-IN')}`;
 
-                if (p.product_type) document.getElementById('prod-type-badge').textContent = p.product_type;
-                if (p.estimated_delivery_time) document.getElementById('prod-delivery-tag').textContent = `⏱️ ${p.estimated_delivery_time}`;
-                if (p.full_description) document.getElementById('prod-full-desc').textContent = p.full_description;
+                document.getElementById('prod-city-scope').textContent = p.clean_city_name;
+                document.getElementById('prod-capex-spec').textContent = p.clean_capex;
 
+                // Delivery Method & Timeline
+                document.getElementById('prod-delivery-method').textContent = p.delivery_method || 'Digital file delivery';
+                document.getElementById('prod-delivery-tag').textContent = `⏱️ ${p.estimated_delivery_time || '1-2 business days'}`;
+
+                // Full Description
+                if (p.full_description) {
+                    document.getElementById('prod-full-desc').textContent = p.full_description;
+                }
+
+                // Refund Policy Reference
+                if (p.refund_policy_reference) {
+                    document.getElementById('prod-refund-ref').innerHTML = `
+                        Policy Reference: <strong>${escapeHtml(p.refund_policy_reference)}</strong>. 
+                        Digital products are governed by our <a href="../legal/index.html?policy=refund-policy" style="color: var(--navy); font-weight: 700;">Refund Policy</a>.
+                    `;
+                }
+
+                // Inclusions & Exclusions Dynamic Parsing
+                const inclusions = parseSafe(p.inclusions_json);
+                const inclusionsList = document.getElementById('prod-inclusions-list');
+                const deliverablesMosaic = document.getElementById('prod-deliverables-mosaic');
+                const exclusionsList = document.getElementById('prod-fit-negative');
+
+                if (inclusions && typeof inclusions === 'object') {
+                    // Render Deliverables
+                    if (Array.isArray(inclusions.deliverables) && inclusions.deliverables.length > 0) {
+                        inclusionsList.innerHTML = inclusions.deliverables.map(d => `<li>${escapeHtml(d)}</li>`).join('');
+                        deliverablesMosaic.innerHTML = inclusions.deliverables.map(d => `
+                            <div class="deliv-card">
+                                <span class="deliv-type-tag">Included Deliverable</span>
+                                <h3>${escapeHtml(d)}</h3>
+                                <p>Comprehensive operational asset compiled from verified market findings.</p>
+                            </div>
+                        `).join('');
+                    }
+
+                    // Render Exclusions
+                    if (Array.isArray(inclusions.exclusions) && inclusions.exclusions.length > 0) {
+                        exclusionsList.innerHTML = inclusions.exclusions.map(ex => `<li>${escapeHtml(ex)}</li>`).join('');
+                    }
+                }
+
+                // Sample File Trigger
                 const sampleBtn = document.getElementById('btn-download-sample');
                 if (p.sample_file_id) {
                     sampleBtn.setAttribute('href', `https://drive.google.com/file/d/${p.sample_file_id}/view?usp=sharing`);
                 }
             }
 
-            function initializeModalControls() {
-                const openBtn = document.getElementById('btn-open-checkout-modal');
-                const closeBtn = document.getElementById('btn-close-modal');
-                const backdrop = document.getElementById('modal-backdrop');
-                const modal = document.getElementById('order-modal');
-                const orderForm = document.getElementById('blueprint-order-form');
-                const errorBox = document.getElementById('order-form-error');
+            function parseSafe(val) {
+                if (!val) return null;
+                if (typeof val === 'object') return val;
+                try { return JSON.parse(val); } catch(e) { return null; }
+            }
 
-                function toggleModal(open) {
-                    modal.style.display = open ? 'block' : 'none';
+            function initModal() {
+                const overlay = document.getElementById('order-modal-dialog');
+                const openBtn = document.getElementById('btn-open-checkout-modal');
+                const closeBtn = document.getElementById('modal-dismiss-btn');
+                const form = document.getElementById('blueprint-order-form');
+                const errorBox = document.getElementById('ord-error-box');
+
+                function toggle(open) {
+                    overlay.classList.toggle('is-active', open);
                     document.body.style.overflow = open ? 'hidden' : '';
                 }
 
-                if (openBtn) openBtn.addEventListener('click', () => toggleModal(true));
-                if (closeBtn) closeBtn.addEventListener('click', () => toggleModal(false));
-                if (backdrop) backdrop.addEventListener('click', () => toggleModal(false));
+                if (openBtn) openBtn.addEventListener('click', () => toggle(true));
+                if (closeBtn) closeBtn.addEventListener('click', () => toggle(false));
 
-                if (orderForm) {
-                    orderForm.addEventListener('submit', async (e) => {
+                if (form) {
+                    form.addEventListener('submit', async (e) => {
                         e.preventDefault();
                         errorBox.hidden = true;
 
-                        const nameInput = document.getElementById('order-customer-name');
-                        const emailInput = document.getElementById('order-customer-email');
-                        const phoneInput = document.getElementById('order-customer-phone');
-                        const consentInput = document.getElementById('order-terms-consent');
+                        const name = document.getElementById('ord-name').value.trim();
+                        const email = document.getElementById('ord-email').value.trim();
+                        const phone = document.getElementById('ord-phone').value.trim();
+                        const consent = document.getElementById('ord-consent').checked;
 
-                        if (!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim()) {
+                        if (!name || !email || !phone) {
                             errorBox.textContent = 'Please fill out all required fields.';
                             errorBox.hidden = false;
                             return;
                         }
 
-                        if (!consentInput.checked) {
-                            errorBox.textContent = 'You must agree to the Terms of Service and Refund Policy to proceed.';
+                        if (!consent) {
+                            errorBox.textContent = 'Please confirm consent before placing your order.';
                             errorBox.hidden = false;
                             return;
                         }
 
-                        const submitBtn = document.getElementById('btn-submit-order');
+                        const submitBtn = document.getElementById('btn-submit-order-form');
                         submitBtn.disabled = true;
-                        submitBtn.textContent = 'Registering Order...';
+                        submitBtn.textContent = 'Generating Order...';
 
                         try {
                             const payload = {
-                                customer_name: nameInput.value.trim(),
-                                customer_email: emailInput.value.trim(),
-                                customer_phone: phoneInput.value.trim(),
-                                product_id: currentProduct ? currentProduct.product_id : 'prod_rep_01'
+                                customer_name: name,
+                                customer_email: email,
+                                customer_phone: phone,
+                                product_id: activeProduct ? activeProduct.product_id : 'pro_1791793113414_529'
                             };
 
-                            let res = { status: 'success', order_id: 'ORD-20261011-' + Math.floor(1000 + Math.random() * 9000) };
+                            let res = { status: 'success', order_id: 'ORD-' + Math.floor(1000 + Math.random() * 9000) };
 
                             if (typeof API !== 'undefined') {
                                 res = await API.post('create_order', payload);
                             }
 
                             if (res && res.status === 'success') {
-                                document.getElementById('checkout-step-form').style.display = 'none';
-                                document.getElementById('checkout-step-payment').style.display = 'block';
-                                document.getElementById('payment-order-id').textContent = res.order_id;
+                                document.getElementById('modal-form-view').style.display = 'none';
+                                document.getElementById('modal-payment-view').style.display = 'block';
+                                document.getElementById('pay-order-code').textContent = res.order_id;
                             } else {
                                 throw new Error((res && res.message) ? res.message : 'Order submission failed.');
                             }
                         } catch (err) {
-                            errorBox.textContent = 'Transaction error: ' + err.message;
+                            errorBox.textContent = 'Error: ' + err.message;
                             errorBox.hidden = false;
                             submitBtn.disabled = false;
-                            submitBtn.textContent = 'Generate Order & View Payment Details';
+                            submitBtn.textContent = 'Generate Order & View Payment Details →';
                         }
                     });
                 }
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
             }
         })();
     </script>

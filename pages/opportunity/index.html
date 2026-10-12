@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Opportunity Analysis — Business Scope in Your City</title>
-    <meta name="description" id="page-description" content="Empirical market analysis, itemized startup capex, unit economics, regulatory requirements, and demand validation experiments for this business opportunity.">
+    <title id="page-title">Opportunity Intelligence Dossier — Business Scope in Your City</title>
+    <meta name="description" id="page-description" content="Commercial feasibility study, verified setup capex, unit economics, regulatory filings, and customer demand validation experiments.">
     <link rel="canonical" id="page-canonical" href="https://businessscopeinyourcity.in/opportunity/">
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
@@ -12,63 +12,440 @@
     <!-- Open Graph Metadata -->
     <meta property="og:type" content="article">
     <meta property="og:url" id="og-url" content="https://businessscopeinyourcity.in/opportunity/">
-    <meta property="og:title" id="og-title" content="Opportunity Analysis — Business Scope in Your City">
-    <meta property="og:description" id="og-description" content="Verified market analysis, capex breakdown, and demand validation steps.">
+    <meta property="og:title" id="og-title" content="Opportunity Intelligence Dossier — Business Scope in Your City">
+    <meta property="og:description" id="og-description" content="Verified market gap, capex itemization, and step-by-step customer demand validation roadmap.">
     <meta property="og:image" content="../../assets/images/social-cover.svg">
 
+    <!-- Premium SaaS Design Tokens & Dashboard Styles -->
     <style>
-        .report-section-card {
-            border-top: 4px solid var(--navy);
+        :root {
+            --navy: #12304A;
+            --navy-light: #1A4469;
+            --navy-dark: #0A1C2C;
+            --teal: #56D6B0;
+            --teal-dark: #0B664C;
+            --teal-light: #E6FBF5;
+            --white: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --bg-subtle: #F1F5F9;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --border-hover: #CBD5E1;
+            --danger: #EF4444;
+            --danger-bg: #FEF2F2;
+            --success: #10B981;
+            --success-bg: #ECFDF5;
+            --warning: #F59E0B;
+            --warning-bg: #FFFBEB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(18, 48, 74, 0.06), 0 4px 6px -4px rgba(18, 48, 74, 0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(18, 48, 74, 0.08), 0 8px 10px -6px rgba(18, 48, 74, 0.04);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+
+        body {
+            background-color: #F8FAFC;
+            color: var(--text-main);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Breadcrumb & Actions Bar */
+        .report-subnav {
             background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
         }
-        .report-section-card h3 {
-            font-size: 1.25rem;
-            color: var(--navy);
-            margin-bottom: 12px;
-            font-weight: 800;
+        .report-subnav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
-        .report-section-card p, .report-section-card li {
+        .breadcrumbs-list {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
         }
-        .risk-score-pill {
+        .breadcrumbs-list a {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        /* Hero Intelligence Banner */
+        .hero-intelligence {
+            background: radial-gradient(circle at 10% 20%, rgba(86, 214, 176, 0.12) 0%, rgba(248, 250, 252, 0) 50%),
+                        linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 0 48px;
+            position: relative;
+        }
+        .badge-pill-cluster {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .pill-tag {
+            font-size: 0.75rem;
+            font-weight: 750;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .pill-sector { background: var(--teal-light); color: var(--teal-dark); border: 1px solid rgba(86, 214, 176, 0.4); }
+        .pill-status { background: var(--success-bg); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .pill-confidence { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
+
+        .dossier-headline {
+            font-size: clamp(2.1rem, 4vw, 3.2rem);
+            font-weight: 850;
+            color: var(--navy);
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+            margin-bottom: 18px;
+            max-width: 900px;
+        }
+        .dossier-meta-grid {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        .meta-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .meta-stat-item strong {
+            color: var(--navy);
+        }
+
+        /* Capex Spotlight Showcase */
+        .capex-spotlight-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 28px 36px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .capex-spotlight-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, var(--teal) 0%, var(--teal-dark) 100%);
+        }
+        .spotlight-metric-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 6px;
+        }
+        .spotlight-amount-display {
+            font-size: clamp(2.2rem, 3.5vw, 3rem);
+            font-weight: 900;
+            color: var(--navy);
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+        .spotlight-currency-badge {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            text-align: right;
+        }
+
+        /* 2-Column Responsive Layout */
+        .dossier-workspace-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 0.9fr;
+            gap: 40px;
+            margin-top: 48px;
+            margin-bottom: 80px;
+        }
+
+        /* Content Dossier Cards */
+        .dossier-section-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .intel-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .intel-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        .intel-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+        .intel-number-tag {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-md);
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            font-size: 0.85rem;
+            font-weight: 850;
+            display: grid;
+            place-items: center;
+            font-family: var(--font-mono);
+            flex-shrink: 0;
+        }
+        .intel-card-header h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .data-subblock {
+            margin-top: 20px;
+        }
+        .data-subblock h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--navy);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .data-subblock p {
+            color: #334155;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Data Tables */
+        .table-responsive-box {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-top: 14px;
+        }
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            text-align: left;
+        }
+        .modern-table th {
+            background: #F8FAFC;
+            color: var(--navy);
+            font-weight: 750;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .modern-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+        }
+        .modern-table tr:last-child td {
+            border-bottom: none;
+        }
+        .modern-table tr:hover td {
+            background: #FAFAFA;
+        }
+
+        /* Unit Economics Progress & Tiles */
+        .economics-tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .tile-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
+        }
+        .tile-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+        }
+        .tile-metric {
+            font-size: 1.5rem;
+            font-weight: 850;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        /* Risk & Mitigation Pill System */
+        .risk-scores-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        .risk-gauge-chip {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 650;
+            color: var(--text-main);
             display: inline-flex;
             align-items: center;
             gap: 6px;
+        }
+        .risk-gauge-chip strong {
+            color: var(--navy);
+        }
+        .failure-mode-item {
+            background: var(--bg-light);
+            border-left: 4px solid var(--danger);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            margin-bottom: 14px;
+        }
+        .failure-mode-item strong {
+            color: var(--danger);
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .failure-mode-item p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Validation Experiment Card */
+        .experiment-card-box {
             background: var(--bg-light);
             border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 99px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            border-left: 4px solid var(--teal-dark);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        @media print {
-            .site-header, .site-footer, .announcement-bar, .report-actions-bar, .paid-blueprint-cta-box { display: none !important; }
-            body { background: #fff !important; color: #000 !important; }
-            .report-section-card { box-shadow: none !important; border: 1px solid #ddd !important; }
+        .experiment-title {
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+        .experiment-criteria-badge {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            font-size: 0.9rem;
+        }
+
+        /* Sidebar Execution Panel */
+        .sidebar-execution-container {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .commercial-package-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-top: 6px solid var(--navy);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: var(--shadow-xl);
+        }
+        .package-price-val {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+        .package-checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #334155;
+            margin: 22px 0 26px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        .package-checklist li::before {
+            content: "✓";
+            color: var(--teal-dark);
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 992px) {
+            .dossier-workspace-grid { grid-template-columns: 1fr; }
+            .sidebar-execution-container { position: static; }
+            .economics-tiles-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Announcement Bar -->
+    <!-- 1. Top Real-Time Announcement -->
     <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
         <div class="container announcement-content">
-            <span class="announcement-badge">Update</span>
-            <span id="announcement-text">Loading latest market intelligence...</span>
+            <span class="announcement-badge">Live Intelligence</span>
+            <span id="announcement-text">Synchronizing empirical records...</span>
             <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
         </div>
     </aside>
 
-    <!-- Global Responsive Header -->
+    <!-- 2. Sticky Glassmorphism Header -->
     <header class="site-header" id="site-header">
         <div class="container header-container">
-            <a href="../../index.html" class="brand-logo" aria-label="Business Scope in Your City Homepage">
-                <img src="../../assets/images/logo.svg" alt="Business Scope Logo" width="34" height="34">
+            <a href="../../index.html" class="brand-logo" aria-label="Business Scope Platform Homepage">
+                <img src="../../assets/images/logo.svg" alt="Business Scope Emblem" width="34" height="34" class="brand-logo-img">
                 <span class="brand-text">Business Scope <small>in Your City</small></span>
             </a>
 
@@ -87,264 +464,357 @@
                 <a href="../custom-research/index.html" class="btn btn-primary btn-sm">Custom Research</a>
             </div>
 
-            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation">
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle Navigation">
                 <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
             </button>
         </div>
 
-        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Drawer Navigation" hidden>
             <a href="../opportunities/index.html" class="active">Explore Opportunities</a>
             <a href="../cities/index.html">Cities Directory</a>
             <a href="../blueprints/index.html">Business Blueprints</a>
             <a href="../launch-plans/index.html">90-Day Launch Plans</a>
             <a href="../custom-research/index.html">Commission Custom Research</a>
             <a href="../insights/index.html">Market Insights</a>
+            <a href="../methodology/index.html">Research Methodology</a>
+            <a href="../about/index.html">About Us</a>
             <a href="../faq/index.html">Frequently Asked Questions</a>
+            <a href="../account/index.html" class="mobile-nav-highlight">Access Purchased Reports</a>
         </nav>
     </header>
 
-    <!-- Main Content Container -->
-    <main id="opportunity-main-view" class="opportunity-report-container">
-        <!-- Breadcrumbs & Report Utilities Bar -->
-        <section class="report-top-bar bg-light" style="border-bottom: 1px solid var(--border); padding: 10px 0;">
-            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem;">
-                        <li><a href="../../index.html" style="color: var(--navy); font-weight: 600;">Home</a> &gt;</li>
-                        <li><a href="../opportunities/index.html" style="color: var(--navy); font-weight: 600;">Opportunities</a> &gt;</li>
-                        <li id="breadcrumb-opp-title" aria-current="page" style="color: var(--text-muted);">Loading Opportunity...</li>
+    <main id="opportunity-main-view">
+        <!-- Subnavigation & Breadcrumb Toolbar -->
+        <section class="report-subnav">
+            <div class="container report-subnav-flex">
+                <nav aria-label="Breadcrumb">
+                    <ol class="breadcrumbs-list">
+                        <li><a href="../../index.html">Home</a> &gt;</li>
+                        <li><a href="../opportunities/index.html">Opportunities</a> &gt;</li>
+                        <li id="breadcrumb-opp-title" aria-current="page" style="color: var(--text-muted); font-weight: 500;">Intelligence Dossier</li>
                     </ol>
                 </nav>
 
-                <div class="report-actions-bar" style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px;">
                     <button type="button" class="btn btn-outline btn-sm" id="btn-copy-link">
-                        <span id="copy-btn-text">Copy Link</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        <span id="copy-btn-text">Share Dossier</span>
                     </button>
                     <button type="button" class="btn btn-outline btn-sm" onclick="window.print()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         <span>Print / Save PDF</span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Opportunity Header -->
-        <header class="report-hero bg-light" style="padding: 36px 0; border-bottom: 1px solid var(--border);">
+        <!-- Executive Intelligence Header -->
+        <header class="hero-intelligence">
             <div class="container">
-                <div class="report-header-meta" style="display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
-                    <span class="badge badge-teal" id="opp-category">Sector</span>
-                    <span class="evidence-tag evidence-tag-verified" id="opp-research-status">Research Status</span>
-                    <span class="badge" id="opp-confidence-level" style="background: #E0E7FF; color: #3730A3; font-weight: 700;">Confidence</span>
+                <div class="badge-pill-cluster">
+                    <span class="pill-tag pill-sector" id="opp-category">Sector</span>
+                    <span class="pill-tag pill-status" id="opp-research-status">Research Status</span>
+                    <span class="pill-tag pill-confidence" id="opp-confidence-level">Confidence Rating</span>
                 </div>
 
-                <h1 class="report-headline" id="opp-title" style="font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--navy); margin-bottom: 12px; font-weight: 850; line-height: 1.15;">Loading Opportunity...</h1>
+                <h1 class="dossier-headline" id="opp-title">Loading Verified Intelligence...</h1>
 
-                <div class="report-sub-meta" style="font-size: 0.95rem; color: var(--text-muted);">
-                    <p class="report-location">
-                        📍 Target Market: <strong id="opp-city-state" style="color: var(--text-main);">—</strong> &bull; 
-                        Business Model: <strong id="opp-model" style="color: var(--text-main);">—</strong>
-                    </p>
+                <div class="dossier-meta-grid">
+                    <div class="meta-stat-item">📍 Target Territory: <strong id="opp-city-state">—</strong></div>
+                    <div class="meta-stat-item">⚙️ Business Model: <strong id="opp-model">—</strong></div>
+                    <div class="meta-stat-item">📅 Audit Date: <strong id="opp-reviewed-date">—</strong></div>
                 </div>
 
-                <div class="report-capex-banner card" style="margin-top: 24px; background: var(--white); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-left: 4px solid var(--teal-dark);">
+                <!-- Capex Spotlight Card -->
+                <div class="capex-spotlight-card">
                     <div>
-                        <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; display: block;">Estimated Initial Capital Requirement (Capex + Working Capital)</span>
-                        <strong id="opp-capex-range" style="font-size: 1.6rem; color: var(--navy); display: block; margin-top: 4px;">₹0 – ₹0</strong>
+                        <span class="spotlight-metric-label">Estimated Initial Capital Requirement (Capex + Working Capital Buffer)</span>
+                        <div class="spotlight-amount-display" id="opp-capex-range">₹0 – ₹0</div>
                     </div>
-                    <div>
-                        <span>Currency: <strong id="opp-currency">INR (₹)</strong></span>
+                    <div class="spotlight-currency-badge">
+                        <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; display: block;">Base Currency</span>
+                        <strong id="opp-currency" style="color: var(--navy); font-size: 1.15rem;">INR (₹)</strong>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Report Content Grid -->
-        <div class="container report-layout-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 40px; margin-bottom: 60px;">
-            <article class="report-body" style="display: flex; flex-direction: column; gap: 24px;">
+        <!-- Main Dossier Workspace Layout -->
+        <div class="container dossier-workspace-grid">
+            <article class="dossier-section-stack">
                 <!-- 01. Executive Summary -->
-                <section class="report-section-card">
-                    <h3>01. Executive Summary</h3>
-                    <p id="opp-summary">Loading summary...</p>
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">01</span>
+                        <h2>Executive Summary</h2>
+                    </div>
+                    <p id="opp-summary" style="font-size: 1.05rem; color: #1E293B; line-height: 1.75;">Synchronizing opportunity records...</p>
                 </section>
 
-                <!-- 02. Customer Problem & Target Customers -->
-                <section class="report-section-card">
-                    <h3>02. Customer Problem &amp; Target Customers</h3>
-                    <div style="margin-bottom: 16px;">
-                        <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Unmet Local Problem:</strong>
-                        <p id="opp-problem">Loading problem analysis...</p>
+                <!-- 02. Problem & Market Segmentation -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">02</span>
+                        <h2>Customer Problem &amp; Market Segmentation</h2>
                     </div>
-                    <div>
-                        <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Target Customer Segments:</strong>
-                        <p id="opp-target-customers">Loading target customers...</p>
+                    <div class="data-subblock">
+                        <h4>Unmet Local Problem</h4>
+                        <p id="opp-problem">Loading problem description...</p>
+                    </div>
+                    <div class="data-subblock">
+                        <h4>Target Customer Segmentation</h4>
+                        <p id="opp-target-customers">Loading target customer segments...</p>
                     </div>
                 </section>
 
-                <!-- 03. Rationale & Solution -->
-                <section class="report-section-card">
-                    <h3>03. Opportunity Rationale &amp; Proposed Offering</h3>
-                    <div style="margin-bottom: 16px;">
-                        <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Why This Opportunity Exists Now:</strong>
-                        <p id="opp-rationale">Loading rationale...</p>
+                <!-- 03. Offering & Rationale -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">03</span>
+                        <h2>Opportunity Rationale &amp; Proposed Offering</h2>
                     </div>
-                    <div>
-                        <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Proposed Solution &amp; Differentiation:</strong>
-                        <p id="opp-solution">Loading solution details...</p>
+                    <div class="data-subblock">
+                        <h4>Why This Opportunity Exists Now</h4>
+                        <p id="opp-rationale">Loading strategic rationale...</p>
+                    </div>
+                    <div class="data-subblock">
+                        <h4>Proposed Offering &amp; Differentiation</h4>
+                        <p id="opp-solution">Loading differentiation framework...</p>
                     </div>
                 </section>
 
                 <!-- 04. Market Evidence & Sources -->
-                <section class="report-section-card">
-                    <h3>04. Market Evidence &amp; Sources</h3>
-                    <p id="opp-evidence-summary" style="margin-bottom: 16px; white-space: pre-line;">Loading evidence summary...</p>
-                    <div style="border-top: 1px solid var(--border); padding-top: 14px;">
-                        <strong style="display: block; color: var(--navy); margin-bottom: 8px;">Documented Sources:</strong>
-                        <ul id="opp-sources-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px;"></ul>
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">04</span>
+                        <h2>Empirical Evidence &amp; Public Registries</h2>
+                    </div>
+                    <p id="opp-evidence-summary" style="color: var(--text-muted); font-size: 0.98rem; margin-bottom: 20px; white-space: pre-line;">Loading research findings...</p>
+                    <div class="data-subblock">
+                        <h4>Verified Source References</h4>
+                        <ul id="opp-sources-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;"></ul>
                     </div>
                 </section>
 
-                <!-- 05. Competitors & Substitutes -->
-                <section class="report-section-card">
-                    <h3>05. Competitive Landscape</h3>
-                    <p id="opp-competitors" style="margin-bottom: 14px;">Loading competitor summary...</p>
-                    <div style="background: #FFFBEB; border-left: 3px solid #D97706; padding: 12px; font-size: 0.88rem; color: #92400E; border-radius: var(--radius-sm);">
-                        <strong>Empirical Principle:</strong> A lack of visible direct competitors does not prove that viable market demand exists. Consider consumer habits, informal alternatives, and existing manual workarounds.
+                <!-- 05. Competitive Landscape -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">05</span>
+                        <h2>Competitive Landscape &amp; Inertial Substitutes</h2>
+                    </div>
+                    <p id="opp-competitors" style="color: #334155; font-size: 0.98rem; line-height: 1.7; margin-bottom: 16px;">Loading competitor analysis...</p>
+                    <div style="background: var(--warning-bg); border-left: 4px solid var(--warning); padding: 16px 20px; border-radius: var(--radius-md); font-size: 0.88rem; color: #92400E; line-height: 1.6;">
+                        <strong>Empirical Principle:</strong> A lack of visible direct competitors does not prove that viable market demand exists. Operators must account for informal substitutes, customer apathy, and entrenched manual habits.
                     </div>
                 </section>
 
-                <!-- 06. Startup Capex & Opex -->
-                <section class="report-section-card">
-                    <h3>06. Financial Modeling: Startup Capex &amp; Opex</h3>
-                    <div style="margin-bottom: 20px;">
-                        <strong style="display: block; color: var(--navy); margin-bottom: 10px;">Startup Cost Analysis:</strong>
+                <!-- 06. Startup Capex & Opex Analysis -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">06</span>
+                        <h2>Financial Modeling: Startup Capex &amp; Opex</h2>
+                    </div>
+                    <div class="data-subblock">
+                        <h4>Itemized Initial Capital Expenditures (Capex)</h4>
                         <div id="opp-capex-container">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;" id="opp-capex-table">
-                                <thead>
-                                    <tr style="background: var(--bg-light); text-align: left;"><th style="padding: 10px; border-bottom: 2px solid var(--border);">Setup Component</th><th style="padding: 10px; border-bottom: 2px solid var(--border);">Estimated Cost</th></tr>
-                                </thead>
-                                <tbody id="opp-capex-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div>
-                        <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Monthly Operating Expenses (Opex):</strong>
-                        <p id="opp-operating-cost">Loading opex estimates...</p>
-                    </div>
-                </section>
-
-                <!-- 07. Unit Economics -->
-                <section class="report-section-card">
-                    <h3>07. Revenue Architecture &amp; Unit Economics</h3>
-                    <div style="margin-bottom: 16px;">
-                        <strong style="display: block; color: var(--navy); margin-bottom: 4px;">Revenue Model:</strong>
-                        <p id="opp-revenue-model">Loading revenue model...</p>
-                    </div>
-                    <div>
-                        <strong style="display: block; color: var(--navy); margin-bottom: 10px;">Unit Economics Benchmarks:</strong>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-                            <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); text-align: center;">
-                                <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase; font-weight: 700;">Price / Ticket</span>
-                                <strong id="econ-ticket" style="font-size: 1.2rem; color: var(--navy); margin-top: 4px; display: block;">—</strong>
-                            </div>
-                            <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); text-align: center;">
-                                <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase; font-weight: 700;">Contribution Margin</span>
-                                <strong id="econ-margin" style="font-size: 1.2rem; color: var(--navy); margin-top: 4px; display: block;">—</strong>
-                            </div>
-                            <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); text-align: center;">
-                                <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase; font-weight: 700;">Break-Even Target</span>
-                                <strong id="econ-volume" style="font-size: 1.2rem; color: var(--navy); margin-top: 4px; display: block;">—</strong>
+                            <div class="table-responsive-box">
+                                <table class="modern-table" id="opp-capex-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Setup Component / Machine Asset</th>
+                                            <th>Estimated Allocation (INR)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="opp-capex-tbody"></tbody>
+                                </table>
                             </div>
                         </div>
-                        <div id="econ-extra-details" style="margin-top: 14px; font-size: 0.88rem; color: var(--text-muted);"></div>
+                    </div>
+                    <div class="data-subblock">
+                        <h4>Monthly Operating Expenses (Opex Estimate)</h4>
+                        <p id="opp-operating-cost">Loading recurring expenditure benchmarks...</p>
                     </div>
                 </section>
 
-                <!-- 08. Skills, Tools & Workflow -->
-                <section class="report-section-card">
-                    <h3>08. Operational Workflow &amp; Prerequisites</h3>
-                    <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px;">
-                        <div>
-                            <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Required Skills:</strong>
-                            <ul id="opp-skills-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px;"></ul>
+                <!-- 07. Unit Economics Dashboard -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">07</span>
+                        <h2>Revenue Architecture &amp; Unit Economics</h2>
+                    </div>
+                    <div class="data-subblock">
+                        <h4>Monetization Architecture</h4>
+                        <p id="opp-revenue-model">Loading revenue channels...</p>
+                    </div>
+                    <div class="data-subblock">
+                        <h4>Unit Economics Benchmarks</h4>
+                        <div class="economics-tiles-grid">
+                            <div class="tile-card">
+                                <span class="tile-label">Price / Ticket Size</span>
+                                <div class="tile-metric" id="econ-ticket">—</div>
+                            </div>
+                            <div class="tile-card">
+                                <span class="tile-label">Contribution Margin</span>
+                                <div class="tile-metric" id="econ-margin" style="color: var(--teal-dark);">—</div>
+                            </div>
+                            <div class="tile-card">
+                                <span class="tile-label">Monthly Break-Even Volume</span>
+                                <div class="tile-metric" id="econ-volume">—</div>
+                            </div>
                         </div>
-                        <div>
-                            <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Required Tools &amp; Permits:</strong>
-                            <ul id="opp-resources-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px;"></ul>
+                        <div id="econ-extra-details" style="margin-top: 16px;"></div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 14px; font-style: italic;">
+                            Unit economics figures are mathematical planning benchmarks derived from prevailing industrial data, not guarantees of financial return.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 08. Prerequisites & Supply Chain -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">08</span>
+                        <h2>Operational Prerequisites &amp; Supply Chain</h2>
+                    </div>
+                    <div class="grid-2">
+                        <div class="data-subblock">
+                            <h4>Required Core Skills</h4>
+                            <ul id="opp-skills-list" style="padding-left: 20px; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px;"></ul>
+                        </div>
+                        <div class="data-subblock">
+                            <h4>Required Tools &amp; Resources</h4>
+                            <ul id="opp-resources-list" style="padding-left: 20px; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px;"></ul>
                         </div>
                     </div>
-                    <div style="margin-bottom: 14px;">
-                        <strong style="display: block; color: var(--navy); margin-bottom: 4px;">Sales &amp; Distribution Channels:</strong>
-                        <ul id="opp-channels-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px;"></ul>
+                    <div class="data-subblock">
+                        <h4>Sales &amp; Distribution Channels</h4>
+                        <ul id="opp-channels-list" style="padding-left: 20px; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px;"></ul>
                     </div>
-                    <div>
-                        <strong style="display: block; color: var(--navy); margin-bottom: 4px;">Daily Operational Workflow:</strong>
-                        <p id="opp-workflow">Loading workflow...</p>
+                    <div class="data-subblock">
+                        <h4>Daily Operational Cadence</h4>
+                        <p id="opp-workflow">Loading daily operational workflows...</p>
                     </div>
                 </section>
 
-                <!-- 09. Risk Assessment & Mitigations -->
-                <section class="report-section-card">
-                    <h3>09. Risk Scores &amp; Failure Mode Mitigations</h3>
-                    <div id="opp-risk-scores" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;"></div>
-                    <strong style="display: block; color: var(--navy); margin-bottom: 8px;">Top Identified Failure Modes:</strong>
-                    <div id="opp-risks-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                <!-- 09. Risk Scores & Failure Modes -->
+                <section class="intel-card">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag">09</span>
+                        <h2>Risk Scores &amp; Failure Mode Mitigations</h2>
+                    </div>
+                    <div id="opp-risk-scores" class="risk-scores-container"></div>
+                    <div class="data-subblock">
+                        <h4>Top Identified Failure Modes</h4>
+                        <div id="opp-risks-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;"></div>
+                    </div>
                 </section>
 
-                <!-- 10. Validation Plan & Milestones -->
-                <section class="report-section-card" style="border-left: 4px solid var(--teal-dark);">
-                    <h3>10. Demand Validation Plan &amp; Kill Criteria</h3>
-                    <div id="opp-validation-container" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                <!-- 10. Demand Validation Plan -->
+                <section class="intel-card" style="border-left: 5px solid var(--teal-dark);">
+                    <div class="intel-card-header">
+                        <span class="intel-number-tag" style="background: var(--navy); color: var(--teal);">10</span>
+                        <h2>Demand Validation Plan &amp; Kill Criteria</h2>
+                    </div>
+                    <div id="opp-validation-container" style="margin-top: 14px;"></div>
                 </section>
+
+                <!-- 11. Statutory Disclaimer -->
+                <div class="card" style="background: var(--bg-light); border-left: 5px solid var(--warning); padding: 24px; border-radius: var(--radius-lg);">
+                    <h4 style="color: var(--navy); margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 850;">Statutory Research Disclaimer</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.65;">
+                        All information, financial modeling, startup capex allocations, and operational roadmaps published in this report are for research and educational purposes only. Business Scope in Your City explicitly does not guarantee commercial profits, sales, or business success. Founders are strictly advised to independently verify all municipal bylaws, industrial zoning, electrical sanctions, and tax liabilities with relevant authorities prior to allocating capital.
+                    </p>
+                </div>
             </article>
 
-            <!-- Sidebar -->
-            <aside style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="card" style="position: sticky; top: 90px; border-top: 4px solid var(--navy); padding: 24px;">
-                    <span class="badge badge-teal">Turnkey Execution Package</span>
-                    <h3 id="sidebar-product-title" style="color: var(--navy); margin: 10px 0 6px; font-size: 1.15rem;">Detailed Business Blueprint</h3>
-                    <p id="sidebar-product-desc" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Get complete operational manuals, vendor directories, and editable Excel models.</p>
-                    <div style="margin-bottom: 16px;">
-                        <strong id="sidebar-product-price" style="font-size: 1.8rem; color: var(--navy);">₹2,999</strong>
-                        <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">One-time purchase &bull; Instant delivery</span>
+            <!-- Right Sticky Commercial Execution Sidebar -->
+            <aside>
+                <div class="sidebar-execution-container">
+                    <div class="commercial-package-card">
+                        <span class="pill-tag pill-sector" style="margin-bottom: 12px; display: inline-block;">Turnkey Execution Package</span>
+                        <h3 style="color: var(--navy); font-size: 1.35rem; font-weight: 850; margin-bottom: 8px;">Detailed Business Blueprint</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+                            Access the complete operational package including unredacted supplier directories, verified machine procurement quotes, customizable Excel models, and statutory filing roadmaps.
+                        </p>
+                        <div style="margin-bottom: 24px;">
+                            <div class="package-price-val">₹2,999</div>
+                            <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; display: block;">One-time purchase &bull; Instant digital delivery</span>
+                        </div>
+                        <a href="../blueprints/index.html" class="btn btn-primary btn-full btn-lg" style="padding: 16px;">View Blueprint Package</a>
+                        <ul class="package-checklist">
+                            <li>50+ Page Operational SOP Manual (PDF)</li>
+                            <li>Dynamic 3-Year Financial Model (.xlsx)</li>
+                            <li>Verified Machinery Tooling Contacts</li>
+                            <li>Statutory Licensing Application Scripts</li>
+                        </ul>
                     </div>
-                    <a href="../blueprints/index.html" class="btn btn-primary btn-full" id="sidebar-buy-btn">Browse Blueprint Catalogue</a>
-                </div>
 
-                <div class="card" style="padding: 24px;">
-                    <h4 style="color: var(--navy); margin-bottom: 10px; font-size: 1rem;">Directory Exploration</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Compare with other models across Indian cities.</p>
-                    <a href="../opportunities/index.html" class="link-arrow">Back to All Opportunities &rarr;</a>
+                    <div class="card" style="padding: 24px; border-radius: var(--radius-lg);">
+                        <h4 style="color: var(--navy); font-size: 1rem; margin-bottom: 10px; font-weight: 800;">Directory Exploration</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Evaluate adjacent business models across Indian cities.</p>
+                        <a href="../opportunities/index.html" class="btn btn-outline btn-full btn-sm">Explore All Opportunities &rarr;</a>
+                    </div>
                 </div>
             </aside>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
+    <!-- Global 5-Column Responsive Footer -->
+    <footer class="site-footer" role="contentinfo">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
-                <div class="brand-logo footer-logo" style="color: white; margin-bottom: 12px;">Business Scope</div>
-                <p style="color: #94A3B8; font-size: 0.85rem;">Discover Local Gaps. Build Real Businesses.</p>
+                <div class="brand-logo footer-logo" style="color: white; margin-bottom: 16px;">
+                    <img src="../../assets/images/logo.svg" alt="Business Scope Emblem" width="28" height="28">
+                    <span>Business Scope</span>
+                </div>
+                <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
             </div>
+
             <div class="footer-col">
-                <h4>Explore</h4>
-                <a href="../opportunities/index.html">Opportunities</a>
-                <a href="../cities/index.html">City Directory</a>
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../opportunities/index.html">All Opportunities</a></li>
+                    <li><a href="../cities/index.html">City Directory</a></li>
+                    <li><a href="../blueprints/index.html">Business Blueprints</a></li>
+                </ul>
             </div>
+
             <div class="footer-col">
-                <h4>Products</h4>
-                <a href="../blueprints/index.html">Blueprints</a>
-                <a href="../launch-plans/index.html">Launch Plans</a>
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../blueprints/index.html">Business Blueprints</a></li>
+                    <li><a href="../launch-plans/index.html">90-Day Launch Plans</a></li>
+                    <li><a href="../custom-research/index.html">Custom City Research</a></li>
+                    <li><a href="../account/index.html">Access Purchases</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Order Support</a></li>
+                </ul>
             </div>
+
             <div class="footer-col">
-                <h4>Resources</h4>
-                <a href="../how-it-works/index.html">How It Works</a>
-                <a href="../methodology/index.html">Methodology</a>
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../how-it-works/index.html">How It Works</a></li>
+                    <li><a href="../methodology/index.html">Research Methodology</a></li>
+                    <li><a href="../insights/index.html">Insights &amp; Case Studies</a></li>
+                    <li><a href="../faq/index.html">Frequently Asked Questions</a></li>
+                    <li><a href="../contact/index.html">Contact Our Analysts</a></li>
+                </ul>
             </div>
+
             <div class="footer-col">
-                <h4>Policies</h4>
-                <a href="../legal/index.html?policy=privacy">Privacy Policy</a>
-                <a href="../legal/index.html?policy=terms">Terms of Service</a>
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../legal/index.html?policy=privacy">Privacy Policy</a></li>
+                    <li><a href="../legal/index.html?policy=terms">Terms of Service</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Refund Policy</a></li>
+                    <li><a href="../legal/index.html?policy=disclaimer">Risk Disclaimer</a></li>
+                    <li><a href="../legal/index.html?policy=research-policy">Research Policy</a></li>
+                </ul>
             </div>
+        </div>
+
+        <div class="container footer-bottom" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px; font-size: 0.85rem; color: #94A3B8; text-align: center;">
+            <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved. Research data is for informational purposes only and does not constitute financial, investment, or legal advice.</p>
         </div>
     </footer>
 
@@ -382,15 +852,16 @@
                         const matchedCity = cities.find(c => c.city_id === oppsRes.city_id);
                         const cleanCityName = matchedCity ? matchedCity.city_name : (oppsRes.city_id || 'India');
                         oppsRes.resolved_location = `${cleanCityName}, ${oppsRes.state || 'India'}`;
-                        renderSmart(oppsRes);
+                        renderDossier(oppsRes);
                     }
                 } catch (e) {
                     console.error('API Error:', e);
                 }
             }
 
-            function renderSmart(o) {
-                document.title = `${o.title} — Business Scope`;
+            function renderDossier(o) {
+                // Header Metas
+                document.title = `${o.title} — Opportunity Intelligence Dossier`;
                 document.getElementById('page-title').textContent = `${o.title} — Business Scope`;
                 document.getElementById('breadcrumb-opp-title').textContent = o.title;
                 document.getElementById('opp-title').textContent = o.title;
@@ -400,8 +871,10 @@
 
                 document.getElementById('opp-city-state').textContent = o.resolved_location;
                 document.getElementById('opp-model').textContent = o.business_model;
+                document.getElementById('opp-reviewed-date').textContent = formatDate(o.last_researched_at || o.published_at);
                 document.getElementById('opp-capex-range').textContent = `₹${Number(o.budget_min).toLocaleString('en-IN')} – ₹${Number(o.budget_max).toLocaleString('en-IN')}`;
 
+                // Core Sections
                 document.getElementById('opp-summary').textContent = o.short_summary;
                 document.getElementById('opp-problem').textContent = o.customer_problem;
                 document.getElementById('opp-target-customers').textContent = o.target_customers;
@@ -413,60 +886,55 @@
                 document.getElementById('opp-revenue-model').textContent = o.revenue_model || '';
                 document.getElementById('opp-workflow').textContent = o.operating_workflow || '';
 
-                // SMART CAPEX PARSER
+                // Universal Capex Table & Assumptions Parser
                 const capexBox = document.getElementById('opp-capex-container');
                 const capexTbody = document.getElementById('opp-capex-tbody');
                 const capexRaw = parseSafe(o.startup_cost_breakdown_json);
 
-                if (Array.isArray(capexRaw)) {
+                if (Array.isArray(capexRaw) && capexRaw.length > 0) {
                     capexTbody.innerHTML = capexRaw.map(item => {
                         if (typeof item === 'string') {
                             const p = item.split(':');
-                            return `<tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px;">${escapeHtml(p[0])}</td><td style="padding: 10px;"><strong>${escapeHtml(p[1] || 'Included')}</strong></td></tr>`;
+                            return `<tr><td>${escapeHtml(p[0])}</td><td><strong>${escapeHtml(p[1] || 'Included')}</strong></td></tr>`;
                         }
-                        return `<tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px;">${escapeHtml(item.item || item.name)}</td><td style="padding: 10px;"><strong>₹${Number(item.cost || 0).toLocaleString('en-IN')}</strong></td></tr>`;
+                        return `<tr><td>${escapeHtml(item.item || item.name)}</td><td><strong>₹${Number(item.cost || 0).toLocaleString('en-IN')}</strong></td></tr>`;
                     }).join('');
                 } else if (typeof capexRaw === 'object' && capexRaw !== null) {
-                    // Object structure like ComplyGrid
-                    let html = `<div style="background: var(--bg-light); padding: 16px; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 8px;">`;
-                    if (capexRaw.minimum_viable_launch) html += `<div><strong>Minimum Viable Launch:</strong> <p style="margin: 2px 0;">${escapeHtml(capexRaw.minimum_viable_launch)}</p></div>`;
-                    if (capexRaw.working_capital) html += `<div><strong>Working Capital:</strong> <p style="margin: 2px 0;">${escapeHtml(capexRaw.working_capital)}</p></div>`;
-                    if (capexRaw.note) html += `<div style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: 4px;">Note: ${escapeHtml(capexRaw.note)}</div>`;
+                    let html = `<div style="background: var(--bg-light); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 12px;">`;
+                    if (capexRaw.minimum_viable_launch) html += `<div><strong style="color: var(--navy); font-size: 0.9rem;">Minimum Viable Launch:</strong> <p style="margin: 3px 0 0; color: #334155;">${escapeHtml(capexRaw.minimum_viable_launch)}</p></div>`;
+                    if (capexRaw.working_capital) html += `<div><strong style="color: var(--navy); font-size: 0.9rem;">Working Capital Buffer:</strong> <p style="margin: 3px 0 0; color: #334155;">${escapeHtml(capexRaw.working_capital)}</p></div>`;
+                    if (capexRaw.note) html += `<div style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 10px;">Note: ${escapeHtml(capexRaw.note)}</div>`;
                     html += `</div>`;
                     capexBox.innerHTML = html;
                 }
 
-                // SMART UNIT ECONOMICS PARSER
+                // Universal Unit Economics Dashboard
                 const econ = parseSafe(o.unit_economics_json);
                 if (econ && typeof econ === 'object') {
-                    // Ticket / Price
                     const price = econ.price_inr || econ.average_ticket || econ.price;
                     if (price) document.getElementById('econ-ticket').textContent = `₹${Number(price).toLocaleString('en-IN')}`;
 
-                    // Margin
                     const margin = econ.contribution_margin_pct || econ.gross_margin_pct || econ.margin;
                     if (margin) document.getElementById('econ-margin').textContent = `${margin}%`;
 
-                    // Break-even
                     const be = econ.breakeven_units_per_month || econ.monthly_breakdown_orders || (econ.monthly_volume && econ.monthly_volume.base);
                     if (be) document.getElementById('econ-volume').textContent = `${be} Units/Mo`;
 
-                    // Extra Details (Payback, CAC, Time to Revenue)
                     let extras = [];
-                    if (econ.payback) extras.push(`<strong>Payback Period:</strong> ${escapeHtml(econ.payback)}`);
+                    if (econ.payback) extras.push(`<strong>Payback Horizon:</strong> ${escapeHtml(econ.payback)}`);
                     if (econ.time_to_first_revenue) extras.push(`<strong>Time to First Revenue:</strong> ${escapeHtml(econ.time_to_first_revenue)}`);
                     if (econ.customer_acquisition) extras.push(`<strong>Customer Acquisition (CAC):</strong> ${escapeHtml(econ.customer_acquisition)}`);
                     if (extras.length) {
-                        document.getElementById('econ-extra-details').innerHTML = `<ul style="padding-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">${extras.map(e => `<li>${e}</li>`).join('')}</ul>`;
+                        document.getElementById('econ-extra-details').innerHTML = `<ul style="padding-left: 20px; font-size: 0.9rem; color: #334155; display: flex; flex-direction: column; gap: 6px;">${extras.map(e => `<li>${e}</li>`).join('')}</ul>`;
                     }
                 }
 
-                // SMART SKILLS & RESOURCES PARSER
+                // Skills, Tools & Channels
                 renderSmartList('opp-skills-list', o.required_skills_json, i => typeof i === 'object' ? `${i.skill} (${i.how_obtained || ''})` : i);
                 renderSmartList('opp-resources-list', o.required_resources_json, i => i);
                 renderSmartList('opp-channels-list', o.sales_channels_json, i => i);
 
-                // SMART RISKS PARSER (top_failure_modes & risk scores)
+                // Risk Dashboard & Failure Modes
                 const risksRaw = parseSafe(o.risks_json);
                 const riskBox = document.getElementById('opp-risks-container');
                 const riskScoreBox = document.getElementById('opp-risk-scores');
@@ -475,55 +943,64 @@
                     if (risksRaw.scores_1_to_10_higher_is_riskier) {
                         const scores = risksRaw.scores_1_to_10_higher_is_riskier;
                         riskScoreBox.innerHTML = Object.keys(scores).map(k => `
-                            <span class="risk-score-pill">${escapeHtml(k)}: <strong>${scores[k]}/10</strong></span>
+                            <span class="risk-gauge-chip">${escapeHtml(k)}: <strong>${scores[k]}/10</strong></span>
                         `).join('');
                     }
 
                     const failureModes = risksRaw.top_failure_modes || (Array.isArray(risksRaw) ? risksRaw : []);
                     if (Array.isArray(failureModes) && failureModes.length > 0) {
                         riskBox.innerHTML = failureModes.map(r => `
-                            <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; font-size: 0.9rem;">
-                                <strong>⚠️ Risk: ${escapeHtml(r.risk || r)}</strong>
-                                <p style="color: var(--text-muted); margin-top: 4px;">Mitigation: ${escapeHtml(r.mitigation || 'Validate on ground.')}</p>
+                            <div class="failure-mode-item">
+                                <strong>⚠️ ${escapeHtml(r.risk || r)}</strong>
+                                <p><strong>Mitigation:</strong> ${escapeHtml(r.mitigation || 'Conduct structured field verification.')}</p>
                             </div>
                         `).join('');
                     }
                 }
 
-                // SMART VALIDATION PARSER
+                // Validation Plan & Kill Criteria
                 const valRaw = parseSafe(o.validation_plan_json);
                 const valBox = document.getElementById('opp-validation-container');
                 if (valRaw && typeof valRaw === 'object') {
                     if (valRaw.experiment) {
                         valBox.innerHTML = `
-                            <div style="background: var(--bg-light); padding: 16px; border-radius: var(--radius-md); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px;">
-                                <div><strong>Core Experiment:</strong> <p style="margin: 2px 0;">${escapeHtml(valRaw.experiment)}</p></div>
-                                <div><strong>Success Criteria:</strong> <p style="color: var(--teal-dark); font-weight: 600; margin: 2px 0;">${escapeHtml(valRaw.success_criteria || '')}</p></div>
-                                <div><strong>Kill Criteria (Stop Gate):</strong> <p style="color: var(--danger); font-weight: 600; margin: 2px 0;">${escapeHtml(valRaw.kill_criteria || '')}</p></div>
-                                <div><strong>30-Day Milestone:</strong> <p style="margin: 2px 0;">${escapeHtml(valRaw.day_30 || '')}</p></div>
-                                <div><strong>90-Day Milestone:</strong> <p style="margin: 2px 0;">${escapeHtml(valRaw.day_90 || '')}</p></div>
+                            <div class="experiment-card-box">
+                                <div class="experiment-title">Validation Experiment Blueprint</div>
+                                <p style="color: #334155; font-size: 0.95rem; margin: 0;">${escapeHtml(valRaw.experiment)}</p>
+                                <div class="experiment-criteria-badge" style="border-left: 3px solid var(--teal-dark);">
+                                    <strong style="color: var(--teal-dark);">Pass Criteria:</strong> ${escapeHtml(valRaw.success_criteria || '')}
+                                </div>
+                                <div class="experiment-criteria-badge" style="border-left: 3px solid var(--danger);">
+                                    <strong style="color: var(--danger);">Kill Gate (Stop Deployment):</strong> ${escapeHtml(valRaw.kill_criteria || '')}
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px;">
+                                    <div style="background: var(--white); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                                        <strong style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); display: block;">30-Day Checkpoint</strong>
+                                        <span style="font-size: 0.88rem; color: var(--navy); font-weight: 700;">${escapeHtml(valRaw.day_30 || '')}</span>
+                                    </div>
+                                    <div style="background: var(--white); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                                        <strong style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); display: block;">90-Day Conversion</strong>
+                                        <span style="font-size: 0.88rem; color: var(--navy); font-weight: 700;">${escapeHtml(valRaw.day_90 || '')}</span>
+                                    </div>
+                                </div>
                             </div>
                         `;
-                    } else if (Array.isArray(valRaw)) {
-                        valBox.innerHTML = valRaw.map((v, i) => `
-                            <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; font-size: 0.9rem;">
-                                <strong>Step ${i+1}: ${escapeHtml(v.step || v)}</strong>
-                                <p>${v.success_metric ? 'Target: ' + escapeHtml(v.success_metric) : ''}</p>
-                            </div>
-                        `).join('');
                     }
                 }
 
-                // SMART SOURCES PARSER (checks both source_references_json and o.sources)
+                // Sources & Registries List
                 const sourcesList = document.getElementById('opp-sources-list');
                 const sourcesDirect = parseSafe(o.source_references_json);
                 const finalSources = (Array.isArray(sourcesDirect) && sourcesDirect.length > 0) ? sourcesDirect : (o.sources || []);
 
                 if (Array.isArray(finalSources) && finalSources.length > 0) {
                     sourcesList.innerHTML = finalSources.map(s => `
-                        <li style="background: var(--bg-light); padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; border: 1px solid var(--border);">
-                            <strong>${escapeHtml(s.title || s.source_title)}</strong> (${escapeHtml(s.publisher || '')}) &bull; 
-                            <a href="${escapeHtml(s.url || s.source_url || '#')}" target="_blank" rel="noopener noreferrer" style="color: var(--teal-dark); font-weight: 700;">Verify Source &nearr;</a>
+                        <li style="background: var(--bg-light); border: 1px solid var(--border); padding: 14px 18px; border-radius: var(--radius-md); font-size: 0.92rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <div>
+                                <strong style="color: var(--navy); font-size: 0.95rem;">${escapeHtml(s.title || s.source_title)}</strong>
+                                <span style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">Publisher: ${escapeHtml(s.publisher || 'Government Record')}</span>
+                            </div>
+                            <a href="${escapeHtml(s.url || s.source_url || '#')}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Verify Registry &nearr;</a>
                         </li>
                     `).join('');
                 }
@@ -552,9 +1029,16 @@
                     try {
                         await navigator.clipboard.writeText(window.location.href);
                         text.textContent = 'Copied!';
-                        setTimeout(() => text.textContent = 'Copy Link', 2500);
+                        setTimeout(() => { text.textContent = 'Share Dossier'; }, 2500);
                     } catch (e) { text.textContent = 'Link Ready'; }
                 });
+            }
+
+            function formatDate(iso) {
+                if (!iso) return 'October 2026';
+                try {
+                    return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+                } catch (e) { return 'October 2026'; }
             }
 
             function escapeHtml(str) {

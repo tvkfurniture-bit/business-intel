@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BUSINESS SCOPE IN YOUR CITY — MASTER DESIGN SYSTEM & STYLESHEET
+   BUSINESS SCOPE IN YOUR CITY — MASTER DESIGN SYSTEM & MOBILE RESPONSIVE STYLESHEET
    Brand Palette: Deep Navy (#12304A), Teal (#56D6B0), Slate, Crisp White
    ========================================================================== */
 
@@ -53,6 +53,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -61,6 +62,7 @@ body {
   background-color: var(--white);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 a {
@@ -72,6 +74,7 @@ a {
 img, svg {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 input, select, textarea, button {
@@ -104,6 +107,12 @@ input, select, textarea, button {
   padding: 0 24px;
 }
 
+@media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
 /* ==========================================================================
    TOP ANNOUNCEMENT BAR
    ========================================================================== */
@@ -122,6 +131,8 @@ input, select, textarea, button {
   justify-content: center;
   gap: 12px;
   position: relative;
+  text-align: center;
+  padding: 0 24px;
 }
 
 .announcement-badge {
@@ -132,6 +143,7 @@ input, select, textarea, button {
   padding: 2px 8px;
   border-radius: var(--radius-full);
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .announcement-close {
@@ -143,6 +155,7 @@ input, select, textarea, button {
   position: absolute;
   right: 0;
   line-height: 1;
+  padding: 4px;
 }
 
 .announcement-close:hover {
@@ -157,7 +170,7 @@ input, select, textarea, button {
   top: 0;
   background-color: var(--white);
   border-bottom: 1px solid var(--border);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .header-container {
@@ -170,10 +183,10 @@ input, select, textarea, button {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: var(--navy);
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   letter-spacing: -0.02em;
 }
 
@@ -186,15 +199,16 @@ input, select, textarea, button {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .nav-link {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-muted);
   padding: 8px 0;
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -214,7 +228,7 @@ input, select, textarea, button {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .btn-search-trigger {
@@ -243,10 +257,11 @@ input, select, textarea, button {
 
 .hamburger-bar {
   display: block;
-  width: 22px;
+  width: 24px;
   height: 2px;
   background-color: var(--navy);
-  margin: 4px 0;
+  margin: 5px 0;
+  transition: var(--transition);
 }
 
 /* Mobile Drawer */
@@ -254,19 +269,51 @@ input, select, textarea, button {
   display: none;
   flex-direction: column;
   background: var(--white);
-  padding: 20px 24px;
+  padding: 16px 24px 24px;
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  max-height: calc(100vh - 74px);
+  overflow-y: auto;
 }
 
-.mobile-nav-drawer.is-open {
-  display: flex;
+.mobile-nav-drawer[hidden] {
+  display: none !important;
+}
+
+.mobile-nav-drawer:not([hidden]) {
+  display: flex !important;
 }
 
 .mobile-nav-drawer a {
   padding: 12px 0;
   font-weight: 600;
+  font-size: 1rem;
   color: var(--navy);
   border-bottom: 1px solid var(--bg-light);
+}
+
+.mobile-nav-highlight {
+  color: var(--teal-dark) !important;
+  font-weight: 700 !important;
+}
+
+.mobile-drawer-footer {
+  margin-top: 16px;
+}
+
+@media (min-width: 993px) {
+  .mobile-menu-toggle, .mobile-nav-drawer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .desktop-nav, .header-actions .btn-outline {
+    display: none !important;
+  }
+  .mobile-menu-toggle {
+    display: block !important;
+  }
 }
 
 /* ==========================================================================
@@ -285,6 +332,8 @@ input, select, textarea, button {
   border: 1px solid transparent;
   transition: var(--transition);
   text-align: center;
+  white-space: nowrap;
+  min-height: 42px;
 }
 
 .btn:active {
@@ -303,6 +352,7 @@ input, select, textarea, button {
 .btn-teal {
   background-color: var(--teal);
   color: var(--navy-dark);
+  font-weight: 800;
 }
 
 .btn-teal:hover {
@@ -323,6 +373,7 @@ input, select, textarea, button {
 .btn-sm {
   padding: 6px 14px;
   font-size: 0.85rem;
+  min-height: 36px;
 }
 
 .btn-lg {
@@ -382,7 +433,7 @@ input, select, textarea, button {
 }
 
 /* ==========================================================================
-   CARDS & GRIDS
+   CARDS & GRIDS (MOBILE-FIRST RESPONSIVE)
    ========================================================================== */
 .card {
   background-color: var(--white);
@@ -391,6 +442,12 @@ input, select, textarea, button {
   padding: 24px;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 18px;
+  }
 }
 
 .card:hover {
@@ -405,24 +462,42 @@ input, select, textarea, button {
 
 .grid-3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
 .grid-4 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
 .grid-5 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-5 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .section {
   padding: 64px 0;
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 40px 0;
+  }
 }
 
 .bg-light {
@@ -434,6 +509,16 @@ input, select, textarea, button {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
 }
 
 .section-header h2 {
@@ -441,6 +526,12 @@ input, select, textarea, button {
   font-weight: 800;
   color: var(--navy);
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 600px) {
+  .section-header h2 {
+    font-size: 1.7rem;
+  }
 }
 
 .section-subtext {
@@ -460,7 +551,7 @@ input, select, textarea, button {
 }
 
 /* ==========================================================================
-   HOMEPAGE HERO & WIDGET
+   HOMEPAGE HERO & WIDGET (MOBILE STACKED)
    ========================================================================== */
 .hero-section {
   padding: 80px 0 60px;
@@ -468,12 +559,18 @@ input, select, textarea, button {
   text-align: center;
 }
 
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 40px 0;
+  }
+}
+
 .hero-container {
   max-width: 860px;
 }
 
 .hero-section h1 {
-  font-size: 3.1rem;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--navy);
   line-height: 1.15;
@@ -481,10 +578,23 @@ input, select, textarea, button {
   margin: 16px 0 20px;
 }
 
+@media (max-width: 600px) {
+  .hero-section h1 {
+    font-size: 2.1rem;
+  }
+}
+
 .hero-description {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--text-muted);
   margin-bottom: 40px;
+}
+
+@media (max-width: 600px) {
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
 }
 
 .search-widget {
@@ -497,6 +607,15 @@ input, select, textarea, button {
   gap: 16px;
   align-items: end;
   text-align: left;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .search-widget {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
 }
 
 .search-field label {
@@ -515,6 +634,7 @@ input, select, textarea, button {
   border-radius: var(--radius-md);
   color: var(--text-main);
   background-color: var(--white);
+  min-height: 44px;
 }
 
 .hero-secondary-cta {
@@ -535,6 +655,15 @@ input, select, textarea, button {
   display: flex;
   align-items: stretch;
   gap: 12px;
+}
+
+@media (max-width: 992px) {
+  .framework-progression-timeline {
+    flex-direction: column;
+  }
+  .framework-arrow {
+    display: none;
+  }
 }
 
 .framework-step-card {
@@ -573,10 +702,11 @@ input, select, textarea, button {
   align-items: center;
   font-size: 1.5rem;
   color: var(--text-light);
+  justify-content: center;
 }
 
 /* ==========================================================================
-   CATALOGUE EXPLORER & SIDEBAR FILTERS
+   CATALOGUE EXPLORER & SIDEBAR FILTERS (MOBILE DRAWER)
    ========================================================================== */
 .catalogue-layout {
   display: grid;
@@ -585,12 +715,75 @@ input, select, textarea, button {
   margin-top: 32px;
 }
 
+@media (max-width: 992px) {
+  .catalogue-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .catalogue-sidebar {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px;
   height: fit-content;
+}
+
+@media (max-width: 992px) {
+  .catalogue-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100vh;
+    z-index: 2000;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    border-radius: 0;
+  }
+  .catalogue-sidebar.drawer-open {
+    left: 0;
+  }
+}
+
+.sidebar-header-mobile {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 992px) {
+  .sidebar-header-mobile {
+    display: flex;
+  }
+}
+
+.btn-close-drawer {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--navy);
+}
+
+.filter-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+}
+
+.btn-filter-drawer-open {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .btn-filter-drawer-open {
+    display: inline-flex;
+  }
 }
 
 .filter-group {
@@ -675,6 +868,41 @@ input, select, textarea, button {
   align-items: center;
   padding: 16px 20px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .results-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.results-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sort-control-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.sort-control-wrap select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.layout-toggle {
+  display: flex;
+  gap: 4px;
 }
 
 .active-filter-chips {
@@ -709,6 +937,9 @@ input, select, textarea, button {
   padding: 6px 10px;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-layout.active {
@@ -733,7 +964,7 @@ input, select, textarea, button {
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--navy);
   margin-bottom: 8px;
@@ -760,6 +991,9 @@ input, select, textarea, button {
   border-radius: var(--radius-md);
   padding: 12px;
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .budget-label {
@@ -825,7 +1059,7 @@ input, select, textarea, button {
 }
 
 /* ==========================================================================
-   FOOTER (5 COLUMNS)
+   FOOTER (5 COLUMNS RESPONSIVE)
    ========================================================================== */
 .site-footer {
   background-color: var(--navy);
@@ -838,6 +1072,22 @@ input, select, textarea, button {
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: 32px;
   margin-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .footer-grid > .footer-col.brand-col {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .footer-logo {
@@ -896,25 +1146,13 @@ input, select, textarea, button {
   justify-content: space-between;
   font-size: 0.85rem;
   color: #64748B;
-}
-
-/* ==========================================================================
-   RESPONSIVE DESIGN (MOBILE & TABLET)
-   ========================================================================== */
-@media (max-width: 992px) {
-  .desktop-nav { display: none; }
-  .mobile-menu-toggle { display: block; }
-  .search-widget { grid-template-columns: 1fr 1fr; }
-  .catalogue-layout { grid-template-columns: 1fr; }
-  .catalogue-sidebar { display: none; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .framework-progression-timeline { flex-direction: column; }
-  .framework-arrow { display: none; }
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 @media (max-width: 600px) {
-  .search-widget { grid-template-columns: 1fr; }
-  .hero-section h1 { font-size: 2.1rem; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom-flex { flex-direction: column; gap: 8px; }
+  .footer-bottom-flex {
+    flex-direction: column;
+    text-align: center;
+  }
 }

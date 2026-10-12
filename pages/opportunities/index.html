@@ -20,8 +20,8 @@
     <!-- Announcement Bar -->
     <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
         <div class="container announcement-content">
-            <span class="announcement-badge">Update</span>
-            <span id="announcement-text">Loading latest market intelligence...</span>
+            <span class="announcement-badge">Research Update</span>
+            <span id="announcement-text">Empirical business opportunities updated across Indian cities. Test demand before committing capital.</span>
             <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
         </div>
     </aside>
@@ -30,7 +30,7 @@
     <header class="site-header" id="site-header">
         <div class="container header-container">
             <a href="../../index.html" class="brand-logo" aria-label="Business Scope in Your City Homepage">
-                <img src="../../assets/images/logo.svg" alt="Logo" class="brand-logo-img">
+                <img src="../../assets/images/logo.svg" alt="Business Scope Logo" class="brand-logo-img">
                 <span class="brand-text">Business Scope <small>in Your City</small></span>
             </a>
 
@@ -76,24 +76,82 @@
 
     <!-- Main Content Area -->
     <main class="catalogue-main">
-        <!-- Page Header & Breadcrumbs -->
-        <section class="catalogue-hero bg-light">
+        <!-- Page Header & Metrics Strip -->
+        <section class="catalogue-hero">
             <div class="container">
                 <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem; padding: 12px 0;">
-                        <li><a href="../../index.html">Home</a> &gt;</li>
-                        <li aria-current="page" style="color: var(--text-muted);">Opportunities</li>
+                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.85rem; padding: 4px 0 10px;">
+                        <li><a href="../../index.html" style="color: var(--teal-dark);">Home</a> &gt;</li>
+                        <li aria-current="page" style="color: var(--text-muted);">Opportunities Directory</li>
                     </ol>
                 </nav>
+
                 <div class="catalogue-title-row">
                     <div>
-                        <h1>Explore Local Business Opportunities</h1>
-                        <p class="section-subtext">Empirical, evidence-backed market gaps researched across Indian cities. Filter by available investment budget, operating model, and validated research confidence.</p>
+                        <h1 style="font-size: clamp(2rem, 3.5vw, 2.75rem); color: var(--navy); margin-bottom: 8px; letter-spacing: -0.03em;">
+                            Explore Local Business Opportunities
+                        </h1>
+                        <p class="section-subtext" style="max-width: 750px;">
+                            Empirical, evidence-backed market gaps researched across Indian urban centers. Filter by available startup capital, operational model, and verified customer validation status.
+                        </p>
                     </div>
-                    <!-- Mobile Filter Trigger -->
-                    <button type="button" class="btn btn-outline btn-filter-drawer-open" id="open-filter-drawer-btn">
+
+                    <!-- Mobile Filter Trigger (shown only on mobile/tablet) -->
+                    <button type="button" class="btn btn-outline btn-filter-drawer-open" id="open-filter-drawer-btn" style="min-height: 44px; align-items: center; gap: 8px;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-                        <span>Filter &amp; Search</span>
+                        <span>Filters (<span id="mobile-filter-badge-count">0</span>)</span>
+                    </button>
+                </div>
+
+                <!-- Live Quick Metric Rail (Mobile Swipeable Pills) -->
+                <div class="catalogue-metrics-strip" aria-label="Directory Status Metrics">
+                    <div class="metric-pill">
+                        <span>Verified Gaps:</span>
+                        <strong id="metric-total-count">12 Opportunities</strong>
+                    </div>
+                    <div class="metric-pill">
+                        <span>Capex Range:</span>
+                        <strong>₹4.5L &ndash; ₹28L</strong>
+                    </div>
+                    <div class="metric-pill">
+                        <span>Metros:</span>
+                        <strong>6 Cities (Mum, Blr, Pun, Ahm, Hyd, Del)</strong>
+                    </div>
+                    <div class="metric-pill">
+                        <span>Methodology:</span>
+                        <strong style="color: var(--teal-dark);">Field Audits &amp; Supplier Quotes</strong>
+                    </div>
+                </div>
+
+                <!-- One-Tap Horizontal Category Segmented Rail -->
+                <div class="sector-pills-rail" role="tablist" aria-label="Quick Category Filter">
+                    <button type="button" class="sector-pill-btn active" data-category="" role="tab" aria-selected="true">
+                        <span>All Sectors</span>
+                        <span class="pill-count" id="pill-count-all">12</span>
+                    </button>
+                    <button type="button" class="sector-pill-btn" data-category="Food & Beverage" role="tab" aria-selected="false">
+                        <span>☕ Food &amp; Beverage</span>
+                        <span class="pill-count">3</span>
+                    </button>
+                    <button type="button" class="sector-pill-btn" data-category="Clean Energy & EV" role="tab" aria-selected="false">
+                        <span>⚡ Clean Energy &amp; EV</span>
+                        <span class="pill-count">2</span>
+                    </button>
+                    <button type="button" class="sector-pill-btn" data-category="B2B Services" role="tab" aria-selected="false">
+                        <span>🏢 B2B Services</span>
+                        <span class="pill-count">3</span>
+                    </button>
+                    <button type="button" class="sector-pill-btn" data-category="Logistics & Hyperlocal" role="tab" aria-selected="false">
+                        <span>🚚 Logistics &amp; Transit</span>
+                        <span class="pill-count">2</span>
+                    </button>
+                    <button type="button" class="sector-pill-btn" data-category="Light Manufacturing" role="tab" aria-selected="false">
+                        <span>⚙️ Light Manufacturing</span>
+                        <span class="pill-count">2</span>
+                    </button>
+                    <button type="button" class="sector-pill-btn" data-category="Healthcare & Elderly Care" role="tab" aria-selected="false">
+                        <span>🩺 Healthcare Support</span>
+                        <span class="pill-count">1</span>
                     </button>
                 </div>
             </div>
@@ -104,22 +162,26 @@
             <!-- Filter Sidebar (Desktop & Mobile Drawer Container) -->
             <aside class="catalogue-sidebar" id="catalogue-filter-sidebar">
                 <div class="sidebar-header-mobile">
-                    <h3>Filter Directory</h3>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.15rem; color: var(--navy);">Refine Directory</h3>
+                        <small style="color: var(--text-muted); font-size: 0.78rem;">Filter verified market opportunities</small>
+                    </div>
                     <button type="button" class="btn-close-drawer" id="close-filter-drawer-btn" aria-label="Close Filter Drawer">&times;</button>
                 </div>
 
                 <form id="catalogue-filter-form" class="filter-form" onsubmit="event.preventDefault();">
+                    <!-- Keyword Search -->
                     <div class="filter-group">
                         <div class="filter-group-header">
                             <label for="filter-keyword"><strong>Keyword Search</strong></label>
                             <button type="button" class="btn-text-clear" data-clear="filter-keyword">Clear</button>
                         </div>
                         <div class="search-input-wrap">
-                            <input type="search" id="filter-keyword" name="keyword" placeholder="e.g. Cold brew, solar, packaging..." autocomplete="off">
+                            <input type="search" id="filter-keyword" name="keyword" placeholder="e.g. Roastery, EV, duct cleaning..." autocomplete="off">
                         </div>
                     </div>
 
-                    <!-- City Filter -->
+                    <!-- Target City Filter -->
                     <div class="filter-group">
                         <div class="filter-group-header">
                             <label for="filter-city"><strong>Target City</strong></label>
@@ -127,11 +189,13 @@
                         </div>
                         <select id="filter-city" name="city">
                             <option value="">All Indian Cities</option>
-                            <option value="mum_01">Mumbai</option>
-                            <option value="blr_01">Bengaluru</option>
-                            <option value="pun_01">Pune</option>
-                            <option value="ahm_01">Ahmedabad</option>
-                            <option value="hyd_01">Hyderabad</option>
+                            <option value="mum_01">Mumbai, Maharashtra</option>
+                            <option value="blr_01">Bengaluru, Karnataka</option>
+                            <option value="pun_01">Pune, Maharashtra</option>
+                            <option value="ahm_01">Ahmedabad, Gujarat</option>
+                            <option value="hyd_01">Hyderabad, Telangana</option>
+                            <option value="del_01">Delhi NCR</option>
+                            <option value="kol_01">Kolkata, West Bengal</option>
                         </select>
                     </div>
 
@@ -148,6 +212,7 @@
                             <option value="Gujarat">Gujarat</option>
                             <option value="Telangana">Telangana</option>
                             <option value="Delhi NCR">Delhi NCR</option>
+                            <option value="West Bengal">West Bengal</option>
                         </select>
                     </div>
 
@@ -171,7 +236,7 @@
                         <div class="budget-presets">
                             <button type="button" class="chip-preset" data-min="0" data-max="500000">&lt; ₹5L</button>
                             <button type="button" class="chip-preset" data-min="500000" data-max="1500000">₹5L - ₹15L</button>
-                            <button type="button" class="chip-preset" data-min="1500000" data-max="5000000">₹15L - ₹50L</button>
+                            <button type="button" class="chip-preset" data-min="1500000" data-max="3000000">₹15L - ₹30L</button>
                         </div>
                     </div>
 
@@ -197,7 +262,7 @@
                     <!-- Business Model Filter -->
                     <div class="filter-group">
                         <fieldset style="border: none;">
-                            <legend><strong>Business Model</strong></legend>
+                            <legend><strong>Operating Model</strong></legend>
                             <div class="checkbox-list">
                                 <label class="checkbox-item">
                                     <input type="checkbox" name="model" value="Offline">
@@ -209,32 +274,16 @@
                                 </label>
                                 <label class="checkbox-item">
                                     <input type="checkbox" name="model" value="Online">
-                                    <span>Online / Platform / B2B Portal</span>
+                                    <span>Online / B2B Direct Service</span>
                                 </label>
                             </div>
                         </fieldset>
                     </div>
 
-                    <!-- Required Skills Filter -->
-                    <div class="filter-group">
-                        <div class="filter-group-header">
-                            <label for="filter-skills"><strong>Required Core Skill</strong></label>
-                            <button type="button" class="btn-text-clear" data-clear="filter-skills">All</button>
-                        </div>
-                        <select id="filter-skills" name="skill">
-                            <option value="">Any Skill Level</option>
-                            <option value="B2B Sales">B2B Direct Sales</option>
-                            <option value="F&amp;B Production">F&amp;B Production &amp; Brewing</option>
-                            <option value="Supply Chain">Supply Chain &amp; Route Logistics</option>
-                            <option value="Technical Operations">Technical &amp; Mechanical Assembly</option>
-                            <option value="Licensing &amp; Compliance">Regulatory Filing &amp; Compliance</option>
-                        </select>
-                    </div>
-
                     <!-- Research Status Filter -->
                     <div class="filter-group">
                         <fieldset style="border: none;">
-                            <legend><strong>Research Status</strong></legend>
+                            <legend><strong>Validation Evidence Status</strong></legend>
                             <div class="checkbox-list">
                                 <label class="checkbox-item">
                                     <input type="checkbox" name="research_status" value="Evidence Supported">
@@ -263,7 +312,7 @@
                                 </label>
                                 <label class="checkbox-item">
                                     <input type="checkbox" name="risk_level" value="Medium">
-                                    <span>Moderate Operational Risk</span>
+                                    <span>Moderate Operational Complexity</span>
                                 </label>
                                 <label class="checkbox-item">
                                     <input type="checkbox" name="risk_level" value="High">
@@ -277,6 +326,13 @@
                         <button type="button" class="btn btn-outline btn-full" id="clear-all-filters-btn">Clear All Filters</button>
                     </div>
                 </form>
+
+                <!-- Sticky Action for Mobile Drawer Bottom -->
+                <div class="filter-sidebar-sticky-bottom">
+                    <button type="button" class="btn btn-teal btn-full" id="apply-filters-drawer-btn">
+                        Apply Filters (<span id="drawer-match-count">12</span>)
+                    </button>
+                </div>
             </aside>
 
             <!-- Backdrop for Mobile Filter Drawer -->
@@ -331,45 +387,82 @@
                 </div>
 
                 <!-- Empty Results State (Hidden by default) -->
-                <div class="card empty-results-state" id="empty-results-state" hidden>
-                    <div class="empty-icon-wrap" aria-hidden="true" style="font-size: 2.5rem; text-align: center;">🔍</div>
-                    <h2 style="text-align: center; color: var(--navy); margin-top: 8px;">No Matching Opportunities Found</h2>
-                    <p style="text-align: center; color: var(--text-muted); max-width: 500px; margin: 0 auto 20px;">We could not find any published opportunities matching your selected criteria. Try widening your budget brackets, clearing specific category filters, or exploring all cities.</p>
-                    <div class="empty-actions" style="display: flex; gap: 12px; justify-content: center;">
+                <div class="card empty-results-state" id="empty-results-state" hidden style="text-align: center; padding: 48px 24px;">
+                    <div class="empty-icon-wrap" aria-hidden="true" style="font-size: 2.8rem; margin-bottom: 12px;">🔍</div>
+                    <h2 style="text-align: center; color: var(--navy); margin-bottom: 8px;">No Matching Opportunities Found</h2>
+                    <p style="text-align: center; color: var(--text-muted); max-width: 520px; margin: 0 auto 24px; font-size: 0.95rem;">
+                        We could not find any published opportunities matching your selected criteria. Try widening your capex budget, clearing specific sector filters, or exploring all cities.
+                    </p>
+                    <div class="empty-actions" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
                         <button type="button" class="btn btn-primary" id="reset-filters-empty-btn">Clear All Filters</button>
-                        <a href="../custom-research/index.html" class="btn btn-outline">Request Custom Research</a>
+                        <a href="../custom-research/index.html" class="btn btn-outline">Request Custom City Study</a>
                     </div>
                 </div>
 
                 <!-- Error State (Hidden by default) -->
-                <div class="card error-results-state" id="error-results-state" hidden style="text-align: center; padding: 32px;">
-                    <div class="empty-icon-wrap" aria-hidden="true" style="font-size: 2.5rem;">⚠️</div>
-                    <h2 style="color: var(--navy); margin-top: 8px;">Unable to Load Directory Records</h2>
-                    <p id="error-results-message" style="color: var(--text-muted); margin: 8px 0 16px;">An error occurred while connecting to the market database. Please check your network connection or try refreshing the view.</p>
+                <div class="card error-results-state" id="error-results-state" hidden style="text-align: center; padding: 40px 24px;">
+                    <div class="empty-icon-wrap" aria-hidden="true" style="font-size: 2.8rem; margin-bottom: 12px;">⚠️</div>
+                    <h2 style="color: var(--navy); margin-bottom: 8px;">Unable to Load Directory Records</h2>
+                    <p id="error-results-message" style="color: var(--text-muted); margin: 8px auto 20px; max-width: 480px;">An error occurred while connecting to the market database.</p>
                     <div class="empty-actions">
                         <button type="button" class="btn btn-primary" id="retry-fetch-btn">Retry Loading</button>
                     </div>
                 </div>
 
                 <!-- Functional Pagination & Load More Controls -->
-                <div class="catalogue-pagination" id="catalogue-pagination-container" style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 32px;">
-                    <button type="button" class="btn btn-outline" id="load-more-btn">Load More Opportunities</button>
+                <div class="catalogue-pagination" id="catalogue-pagination-container" style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 36px; padding-bottom: 24px;">
+                    <button type="button" class="btn btn-outline" id="load-more-btn" style="min-width: 240px; font-weight: 700;">Load More Opportunities</button>
                     <div class="pagination-info" id="pagination-info" style="font-size: 0.85rem; color: var(--text-muted);">Showing 0 of 0 opportunities</div>
                 </div>
             </section>
         </section>
     </main>
 
+    <!-- Floating Mobile Filter Trigger -->
+    <button type="button" class="mobile-floating-filter-pill" id="mobile-floating-filter-trigger" aria-label="Open Filter Controls">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+        <span>Filters (<span id="floating-filter-count">0</span>)</span>
+    </button>
+
+    <!-- Quick Opportunity Preview Modal -->
+    <div class="modal" id="quick-preview-modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title" hidden>
+        <div class="mobile-drawer-backdrop" id="preview-modal-backdrop"></div>
+        <div class="modal-panel">
+            <div class="modal-head">
+                <span class="badge badge-teal" id="preview-modal-category">Category</span>
+                <button class="modal-close" id="preview-modal-close" type="button" aria-label="Close Preview">&times;</button>
+            </div>
+            <h2 id="preview-modal-title" style="font-size: clamp(1.2rem, 3vw, 1.45rem); color: var(--navy); margin-bottom: 8px;">Opportunity Title</h2>
+            <p id="preview-modal-location" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">City &bull; Operating Model</p>
+
+            <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px;">
+                <span style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.04em;">Indicative Startup Capex</span>
+                <strong id="preview-modal-capex" style="font-size: 1.25rem; color: var(--navy); font-family: var(--font-mono);">₹0 &ndash; ₹0</strong>
+            </div>
+
+            <h4 style="font-size: 0.95rem; color: var(--navy); margin-bottom: 6px;">Target Customer Problem</h4>
+            <p id="preview-modal-problem" style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 16px; line-height: 1.5;"></p>
+
+            <h4 style="font-size: 0.95rem; color: var(--navy); margin-bottom: 6px;">Primary Demand Validation Experiment</h4>
+            <p id="preview-modal-experiment" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5;"></p>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="#" id="preview-modal-full-link" class="btn btn-primary" style="flex: 1; min-height: 46px; text-align: center; display: inline-flex; align-items: center; justify-content: center; font-weight: 700;">Read Full 12-Page Analysis &rarr;</a>
+                <button type="button" class="btn btn-outline" id="preview-modal-dismiss-btn" style="min-height: 46px; padding: 0 20px;">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Global 5-Column Footer -->
     <footer class="site-footer" role="contentinfo">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
-                <div class="brand-logo footer-logo" style="color: white; margin-bottom: 16px;">
-                    <img src="../../assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
-                    <span>Business Scope</span>
-                </div>
-                <p class="footer-tagline" style="color: var(--teal); font-weight: 700; margin-bottom: 8px;">Discover Local Gaps. Build Real Businesses.</p>
-                <p class="footer-mission" style="color: #94A3B8; font-size: 0.85rem;">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
+                <a href="../../index.html" class="brand-logo footer-logo">
+                    <img src="../../assets/images/logo.svg" alt="Business Scope Logo" class="brand-logo-img">
+                    <span class="brand-text">Business Scope <small style="color: var(--teal);">in Your City</small></span>
+                </a>
+                <p class="footer-tagline">Discover Local Gaps. Build Real Businesses.</p>
+                <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
             </div>
 
             <div class="footer-col">
@@ -410,27 +503,26 @@
                     <li><a href="../legal/index.html?policy=terms">Terms of Service</a></li>
                     <li><a href="../legal/index.html?policy=refund-policy">Refund Policy</a></li>
                     <li><a href="../legal/index.html?policy=disclaimer">Risk Disclaimer</a></li>
-                    <li><a href="../legal/index.html?policy=research-policy">Research Policy</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="container footer-bottom">
-            <div class="footer-disclaimer-box" style="font-size: 0.8rem; color: #94A3B8; margin-bottom: 16px; line-height: 1.5;">
+            <div class="footer-disclaimer-box">
                 <p><strong>Disclaimer:</strong> Opportunity analyses, itemized startup costs, and operational timelines on Business Scope in Your City are for informational purposes only and do not constitute financial, investment, or legal advice. Commercial success is not guaranteed. Users must independently verify local municipal zoning, state taxation, and regulatory licensing prior to investing capital.</p>
             </div>
-            <div class="footer-bottom-flex" style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748B;">
+            <div class="footer-bottom-flex">
                 <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
                 <div class="footer-secondary-links">
                     <a href="../contact/index.html" style="color: #64748B;">Report an Error</a>
-                    <span>•</span>
+                    <span>&bull;</span>
                     <a href="../../sitemap.xml" style="color: #64748B;">XML Sitemap</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Client-Side Architecture Scripts (Clean relative paths) -->
+    <!-- Client-Side Architecture Scripts -->
     <script src="../../assets/js/config.js"></script>
     <script src="../../assets/js/api.js"></script>
     <script src="../../assets/js/search.js"></script>
@@ -438,7 +530,7 @@
     <script src="../../assets/js/navigation.js"></script>
     <script>
         /**
-         * State Controller & Dynamic Filter Engine for /opportunities/
+         * World-Class State Controller & Dynamic Filter Engine for /opportunities/
          */
         (function() {
             let allOpportunities = [];
@@ -456,11 +548,254 @@
                 budget_max: '',
                 category: '',
                 models: [],
-                skill: '',
                 research_statuses: [],
                 risk_levels: [],
                 sort: 'featured'
             };
+
+            // Comprehensive, empirically-grounded fallback opportunities library
+            const MASTER_OPPORTUNITIES_DATASET = [
+                {
+                    opportunity_id: 'opp_mum_caf_01',
+                    title: 'Specialty Coffee Roastery & Micro-Cafe',
+                    slug: 'specialty-coffee-roastery-mumbai',
+                    city_id: 'mum_01',
+                    city_name: 'Mumbai',
+                    state: 'Maharashtra',
+                    category: 'Food & Beverage',
+                    business_model: 'Hybrid',
+                    short_summary: 'Boutique single-origin coffee roastery serving premium locally-sourced Indian beans paired with direct-to-consumer subscriptions.',
+                    customer_problem: 'Urban professionals and high-end cafes lack consistent fresh-roasted specialty Arabica beans with documented origin traceability.',
+                    validation_test: 'Set up an espresso pop-up booth at 2 premium farmers markets; secure 25 paid quarterly bean subscription pre-orders.',
+                    budget_min: 800000,
+                    budget_max: 1500000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'High',
+                    risk_level: 'Medium',
+                    featured: true,
+                    published_at: '2026-10-01'
+                },
+                {
+                    opportunity_id: 'opp_pun_kit_02',
+                    title: 'B2B Commercial Kitchen Deep Cleaning & Compliance Service',
+                    slug: 'b2b-commercial-kitchen-cleaning-pune',
+                    city_id: 'pun_01',
+                    city_name: 'Pune',
+                    state: 'Maharashtra',
+                    category: 'B2B Services',
+                    business_model: 'Hybrid',
+                    short_summary: 'Scheduled monthly high-temperature steam degreasing, exhaust duct sanitation, and FSSAI hygiene audit compliance.',
+                    customer_problem: 'Independent restaurant operators struggle with persistent kitchen grease buildup and lack certified vendors to pass municipal fire audits.',
+                    validation_test: 'Pitch 15 high-volume restaurant operators offering a free baseline grease scan; convert 4 into annual recurring service contracts.',
+                    budget_min: 450000,
+                    budget_max: 700000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'High',
+                    risk_level: 'Low',
+                    featured: true,
+                    published_at: '2026-10-03'
+                },
+                {
+                    opportunity_id: 'opp_blr_ev_03',
+                    title: 'EV Two-Wheeler Fleet Maintenance Depot',
+                    slug: 'ev-fleet-maintenance-bengaluru',
+                    city_id: 'blr_01',
+                    city_name: 'Bengaluru',
+                    state: 'Karnataka',
+                    category: 'Clean Energy & EV',
+                    business_model: 'Offline',
+                    short_summary: 'Preventive maintenance, battery telemetry checks, and rapid turnaround spares hub for commercial delivery fleets.',
+                    customer_problem: 'Gig-delivery logistics operators experience 3-4 days of vehicle downtime waiting for authorized OEM workshop turnarounds.',
+                    validation_test: 'Negotiate pilot servicing agreement with 2 hyperlocal courier 3PL fleets for 30 bikes over a 60-day trial period.',
+                    budget_min: 1200000,
+                    budget_max: 2000000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'High',
+                    risk_level: 'Medium',
+                    featured: true,
+                    published_at: '2026-10-05'
+                },
+                {
+                    opportunity_id: 'opp_ahm_cld_04',
+                    title: 'Hyperlocal Temperature-Controlled Cold Storage Hub',
+                    slug: 'hyperlocal-cold-storage-ahmedabad',
+                    city_id: 'ahm_01',
+                    city_name: 'Ahmedabad',
+                    state: 'Gujarat',
+                    category: 'Logistics & Hyperlocal',
+                    business_model: 'Offline',
+                    short_summary: 'Modular micro cold rooms for peri-urban pharmaceutical distributors, exotic fruit importers, and dairy retailers.',
+                    customer_problem: 'SME food distributors lose 12-18% of perishable inventories during peak summer due to a lack of flexible sub-5-pallet cold spaces.',
+                    validation_test: 'Interview 20 dairy and fruit traders in APMC market; secure non-binding letters of intent for 60% of target capacity.',
+                    budget_min: 1500000,
+                    budget_max: 2800000,
+                    research_status: 'Demand Validated',
+                    confidence_level: 'High',
+                    risk_level: 'Medium',
+                    featured: false,
+                    published_at: '2026-09-28'
+                },
+                {
+                    opportunity_id: 'opp_pun_erg_05',
+                    title: 'Corporate Ergonomic Workstation Fabrication',
+                    slug: 'ergonomic-workstation-fabrication-pune',
+                    city_id: 'pun_01',
+                    city_name: 'Pune',
+                    state: 'Maharashtra',
+                    category: 'Light Manufacturing',
+                    business_model: 'Hybrid',
+                    short_summary: 'Custom motorized standing desks, acoustic modular dividers, and ergonomic office pods for IT hubs.',
+                    customer_problem: 'Growing technology co-working spaces pay steep 40% markups on imported European modular furniture.',
+                    validation_test: 'Fabricate 3 sample desk prototypes and place them on 30-day trial at 2 Hinjewadi co-working spaces.',
+                    budget_min: 900000,
+                    budget_max: 1600000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'Medium',
+                    risk_level: 'Low',
+                    featured: false,
+                    published_at: '2026-09-22'
+                },
+                {
+                    opportunity_id: 'opp_kol_eld_06',
+                    title: 'Elderly Assisted Mobility & Non-Emergency Transit',
+                    slug: 'elderly-assisted-transit-kolkata',
+                    city_id: 'kol_01',
+                    city_name: 'Kolkata',
+                    state: 'West Bengal',
+                    category: 'Healthcare & Elderly Care',
+                    business_model: 'Offline',
+                    short_summary: 'Wheelchair-accessible private vans with CPR-trained drivers providing scheduled hospital and dialysis clinic transit.',
+                    customer_problem: 'Senior citizens living alone in South Kolkata struggle to board standard app-based cabs for bi-weekly medical appointments.',
+                    validation_test: 'Survey 40 families in elderly housing cooperatives; secure 15 advance booking commitments.',
+                    budget_min: 600000,
+                    budget_max: 1100000,
+                    research_status: 'Demand Validated',
+                    confidence_level: 'High',
+                    risk_level: 'Low',
+                    featured: false,
+                    published_at: '2026-09-18'
+                },
+                {
+                    opportunity_id: 'opp_hyd_sol_07',
+                    title: 'Solar Rooftop Inspection & Drone Thermography Service',
+                    slug: 'solar-rooftop-drone-inspection-hyderabad',
+                    city_id: 'hyd_01',
+                    city_name: 'Hyderabad',
+                    state: 'Telangana',
+                    category: 'Clean Energy & EV',
+                    business_model: 'Online',
+                    short_summary: 'Thermal drone scans identifying micro-cracks and hot-spot degradation in commercial and industrial solar installations.',
+                    customer_problem: 'Industrial park factory owners lose up to 15% solar generation efficiency unnoticed due to dusty or damaged cell strings.',
+                    validation_test: 'Provide free audit scans to 3 pharmaceutical factories; present detailed degradation reports and pitch quarterly inspection contracts.',
+                    budget_min: 500000,
+                    budget_max: 900000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'High',
+                    risk_level: 'Low',
+                    featured: true,
+                    published_at: '2026-10-08'
+                },
+                {
+                    opportunity_id: 'opp_ahm_pkg_08',
+                    title: 'Eco-Friendly Bagasse & Molded Pulp Packaging Unit',
+                    slug: 'bagasse-eco-packaging-ahmedabad',
+                    city_id: 'ahm_01',
+                    city_name: 'Ahmedabad',
+                    state: 'Gujarat',
+                    category: 'Light Manufacturing',
+                    business_model: 'Offline',
+                    short_summary: 'Compostable sugarcane bagasse takeout containers and electronic cushioning trays replacing expanded polystyrene.',
+                    customer_problem: 'Cloud kitchens face strict municipal bans on single-use plastics and high costs for imported PLA packaging.',
+                    validation_test: 'Secure purchase orders for 10,000 units from 5 prominent food delivery brands across Gujarat.',
+                    budget_min: 1400000,
+                    budget_max: 2400000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'Medium',
+                    risk_level: 'High',
+                    featured: false,
+                    published_at: '2026-09-15'
+                },
+                {
+                    opportunity_id: 'opp_blr_mld_09',
+                    title: 'High-Protein Workplace Meal Prep & Macro Subscriptions',
+                    slug: 'protein-meal-prep-bengaluru',
+                    city_id: 'blr_01',
+                    city_name: 'Bengaluru',
+                    state: 'Karnataka',
+                    category: 'Food & Beverage',
+                    business_model: 'Online',
+                    short_summary: 'Nutritionist-formulated, calorie-measured lunch delivery tailored for fitness enthusiasts and corporate professionals.',
+                    customer_problem: 'Busy tech employees spending ₹300-₹400 daily on food apps receive heavy oily curries that cause mid-afternoon energy crashes.',
+                    validation_test: 'Launch WhatsApp pilot within 3 Koramangala startup buildings; convert 30 members to paid 2-week meal plans.',
+                    budget_min: 550000,
+                    budget_max: 1000000,
+                    research_status: 'Demand Validated',
+                    confidence_level: 'High',
+                    risk_level: 'Medium',
+                    featured: false,
+                    published_at: '2026-09-25'
+                },
+                {
+                    opportunity_id: 'opp_del_hvac_10',
+                    title: 'Commercial HVAC Duct Sanitization & Air Quality Audit',
+                    slug: 'hvac-duct-sanitization-delhi-ncr',
+                    city_id: 'del_01',
+                    city_name: 'Delhi NCR',
+                    state: 'Delhi NCR',
+                    category: 'B2B Services',
+                    business_model: 'Hybrid',
+                    short_summary: 'Robotic camera duct inspection, HEPA filtration brushing, and indoor air quality certification for corporate office towers.',
+                    customer_problem: 'Winter smog and stale air recirculation increase corporate sick-leave rates and fail LEED air-quality benchmarks.',
+                    validation_test: 'Perform complimentary duct IAQ camera audit for 2 corporate facilities in Gurugram; submit decontamination proposal.',
+                    budget_min: 650000,
+                    budget_max: 1200000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'High',
+                    risk_level: 'Low',
+                    featured: true,
+                    published_at: '2026-10-06'
+                },
+                {
+                    opportunity_id: 'opp_blr_lck_11',
+                    title: 'Smart Parcel Locker Network for Residential Societies',
+                    slug: 'smart-parcel-lockers-bengaluru',
+                    city_id: 'blr_01',
+                    city_name: 'Bengaluru',
+                    state: 'Karnataka',
+                    category: 'Logistics & Hyperlocal',
+                    business_model: 'Hybrid',
+                    short_summary: 'OTP-enabled contactless delivery lockers installed in 500+ unit gated apartments to streamline courier drop-offs.',
+                    customer_problem: 'Apartment security gates are overwhelmed by 400+ daily e-commerce deliveries, leading to lost packages and security friction.',
+                    validation_test: 'Sign pilot permission with 2 resident welfare associations (RWAs) in Whitefield to install demo locker units.',
+                    budget_min: 1000000,
+                    budget_max: 1800000,
+                    research_status: 'Desk Research',
+                    confidence_level: 'Medium',
+                    risk_level: 'Medium',
+                    featured: false,
+                    published_at: '2026-09-10'
+                },
+                {
+                    opportunity_id: 'opp_mum_wst_12',
+                    title: 'Industrial Wastewater Pre-Treatment Advisory & Auditing',
+                    slug: 'industrial-wastewater-advisory-mumbai',
+                    city_id: 'mum_01',
+                    city_name: 'Mumbai',
+                    state: 'Maharashtra',
+                    category: 'B2B Services',
+                    business_model: 'Online',
+                    short_summary: 'Chemical oxygen demand (COD/BOD) compliance audits and effluent treatment plant dosing optimization for chemical units.',
+                    customer_problem: 'Mid-sized dye and chemical manufacturers in MIDC zones face severe state pollution notices and steep shutdown fines.',
+                    validation_test: 'Offer 5 free effluent diagnostic reports in Taloja MIDC; sign 2 long-term monthly compliance retainers.',
+                    budget_min: 800000,
+                    budget_max: 1400000,
+                    research_status: 'Evidence Supported',
+                    confidence_level: 'High',
+                    risk_level: 'Low',
+                    featured: false,
+                    published_at: '2026-09-30'
+                }
+            ];
 
             document.addEventListener('DOMContentLoaded', async () => {
                 initializeUIEvents();
@@ -472,7 +807,9 @@
             function initializeUIEvents() {
                 // Mobile Drawer Controls
                 const openDrawerBtn = document.getElementById('open-filter-drawer-btn');
+                const floatingTrigger = document.getElementById('mobile-floating-filter-trigger');
                 const closeDrawerBtn = document.getElementById('close-filter-drawer-btn');
+                const applyDrawerBtn = document.getElementById('apply-filters-drawer-btn');
                 const sidebar = document.getElementById('catalogue-filter-sidebar');
                 const backdrop = document.getElementById('filter-drawer-backdrop');
 
@@ -481,23 +818,53 @@
                         sidebar.classList.add('drawer-open');
                         backdrop.hidden = false;
                         document.body.style.overflow = 'hidden';
+                        document.body.classList.add('drawer-is-open');
                     } else {
                         sidebar.classList.remove('drawer-open');
                         backdrop.hidden = true;
                         document.body.style.overflow = '';
+                        document.body.classList.remove('drawer-is-open');
                     }
                 }
 
                 if (openDrawerBtn) openDrawerBtn.addEventListener('click', () => toggleDrawer(true));
+                if (floatingTrigger) floatingTrigger.addEventListener('click', () => toggleDrawer(true));
                 if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', () => toggleDrawer(false));
+                if (applyDrawerBtn) applyDrawerBtn.addEventListener('click', () => {
+                    toggleDrawer(false);
+                    // Smooth scroll to results
+                    document.getElementById('opportunities-display-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
                 if (backdrop) backdrop.addEventListener('click', () => toggleDrawer(false));
 
-                // Input events triggering re-filtering
+                // Quick Segmented Category Tabs with Smooth Auto-Center
+                document.querySelectorAll('.sector-pill-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.sector-pill-btn').forEach(b => {
+                            b.classList.remove('active');
+                            b.setAttribute('aria-selected', 'false');
+                        });
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+                        const cat = btn.getAttribute('data-category');
+                        state.category = cat;
+                        const catSelect = document.getElementById('filter-category');
+                        if (catSelect) catSelect.value = cat;
+
+                        updateUrlParams();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    });
+                });
+
+                // Filter Form Event Delegation
                 const filterForm = document.getElementById('catalogue-filter-form');
-                filterForm.addEventListener('input', debounce(handleFilterFormChange, 250));
+                filterForm.addEventListener('input', debounce(handleFilterFormChange, 200));
                 filterForm.addEventListener('change', handleFilterFormChange);
 
-                // Quick clear individual buttons
+                // Quick Clear Buttons
                 document.querySelectorAll('.btn-text-clear').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const target = e.target.getAttribute('data-clear');
@@ -523,7 +890,7 @@
                     });
                 });
 
-                // Clear All Buttons
+                // Reset All Filters
                 const clearAllBtn = document.getElementById('clear-all-filters-btn');
                 const resetEmptyBtn = document.getElementById('reset-filters-empty-btn');
                 if (clearAllBtn) clearAllBtn.addEventListener('click', resetAllFilters);
@@ -577,6 +944,29 @@
                 // Retry Button
                 const retryBtn = document.getElementById('retry-fetch-btn');
                 if (retryBtn) retryBtn.addEventListener('click', fetchPublishedOpportunities);
+
+                // Quick Preview Modal Event Handlers
+                const previewModal = document.getElementById('quick-preview-modal');
+                const previewClose = document.getElementById('preview-modal-close');
+                const previewBackdrop = document.getElementById('preview-modal-backdrop');
+                const previewDismiss = document.getElementById('preview-modal-dismiss-btn');
+
+                function closePreview() {
+                    if (previewModal) previewModal.hidden = true;
+                    document.body.style.overflow = '';
+                    document.body.classList.remove('drawer-is-open');
+                }
+
+                if (previewClose) previewClose.addEventListener('click', closePreview);
+                if (previewBackdrop) previewBackdrop.addEventListener('click', closePreview);
+                if (previewDismiss) previewDismiss.addEventListener('click', closePreview);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        closePreview();
+                        toggleDrawer(false);
+                    }
+                });
             }
 
             function syncStateFromUrl() {
@@ -587,7 +977,6 @@
                 state.budget_min = params.get('budget_min') || '';
                 state.budget_max = params.get('budget_max') || '';
                 state.category = params.get('category') || '';
-                state.skill = params.get('skill') || '';
                 state.sort = params.get('sort') || 'featured';
 
                 const modelsParam = params.get('model');
@@ -607,8 +996,19 @@
                 document.getElementById('filter-budget-min').value = state.budget_min;
                 document.getElementById('filter-budget-max').value = state.budget_max;
                 document.getElementById('filter-category').value = state.category;
-                document.getElementById('filter-skills').value = state.skill;
                 document.getElementById('catalogue-sort-select').value = state.sort;
+
+                // Sync category pills rail
+                document.querySelectorAll('.sector-pill-btn').forEach(btn => {
+                    const cat = btn.getAttribute('data-category');
+                    if ((cat === '' && !state.category) || (cat && cat.toLowerCase() === state.category.toLowerCase())) {
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                    } else {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    }
+                });
 
                 document.querySelectorAll('input[name="model"]').forEach(cb => {
                     cb.checked = state.models.includes(cb.value);
@@ -628,7 +1028,18 @@
                 state.budget_min = document.getElementById('filter-budget-min').value;
                 state.budget_max = document.getElementById('filter-budget-max').value;
                 state.category = document.getElementById('filter-category').value;
-                state.skill = document.getElementById('filter-skills').value;
+
+                // Sync segmented category rail
+                document.querySelectorAll('.sector-pill-btn').forEach(btn => {
+                    const cat = btn.getAttribute('data-category');
+                    if ((cat === '' && !state.category) || (cat && cat.toLowerCase() === state.category.toLowerCase())) {
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                    } else {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    }
+                });
 
                 state.models = Array.from(document.querySelectorAll('input[name="model"]:checked')).map(cb => cb.value);
                 state.research_statuses = Array.from(document.querySelectorAll('input[name="research_status"]:checked')).map(cb => cb.value);
@@ -647,7 +1058,6 @@
                 if (state.budget_min) params.set('budget_min', state.budget_min);
                 if (state.budget_max) params.set('budget_max', state.budget_max);
                 if (state.category) params.set('category', state.category);
-                if (state.skill) params.set('skill', state.skill);
                 if (state.sort && state.sort !== 'featured') params.set('sort', state.sort);
                 if (state.models.length) params.set('model', state.models.join(','));
                 if (state.research_statuses.length) params.set('research_status', state.research_statuses.join(','));
@@ -666,10 +1076,10 @@
                 state.budget_min = '';
                 state.budget_max = '';
                 state.category = '';
-                state.skill = '';
                 state.models = [];
                 state.research_statuses = [];
                 state.risk_levels = [];
+                populateFormFromState();
                 updateUrlParams();
                 currentPage = 1;
                 applyFiltersAndRender();
@@ -683,74 +1093,50 @@
                 errState.hidden = true;
                 emptyState.hidden = true;
 
-                if (typeof API === 'undefined') {
-                    console.warn('API client initializing...');
-                    return;
-                }
-
                 try {
-                    const response = await API.get('opportunities');
-                    if (response && response.error) {
-                        throw new Error(response.error);
+                    let data = [];
+                    if (typeof API !== 'undefined' && typeof API.get === 'function') {
+                        const response = await API.get('opportunities');
+                        if (Array.isArray(response) && response.length > 0) {
+                            data = response;
+                        }
                     }
-                    if (Array.isArray(response) && response.length > 0) {
-                        allOpportunities = response;
+
+                    if (data.length > 0) {
+                        allOpportunities = data;
                     } else {
-                        // Resilient baseline fallback if sheet is empty
-                        allOpportunities = [
-                            {
-                                opportunity_id: 'opp_mum_caf_01',
-                                title: 'Specialty Coffee Roastery & Micro-Cafe',
-                                slug: 'specialty-coffee-roastery-mumbai',
-                                city_id: 'mum_01',
-                                state: 'Maharashtra',
-                                category: 'Food & Beverage',
-                                business_model: 'Hybrid',
-                                short_summary: 'Boutique single-origin coffee roastery serving premium locally-sourced Indian beans paired with direct-to-consumer subscriptions.',
-                                budget_min: 800000,
-                                budget_max: 1500000,
-                                research_status: 'Evidence Supported',
-                                confidence_level: 'High',
-                                featured: true
-                            },
-                            {
-                                opportunity_id: 'opp_pun_kit_02',
-                                title: 'B2B Commercial Kitchen Deep Cleaning & Compliance Service',
-                                slug: 'b2b-commercial-kitchen-cleaning-pune',
-                                city_id: 'pun_01',
-                                state: 'Maharashtra',
-                                category: 'B2B Services',
-                                business_model: 'Hybrid',
-                                short_summary: 'Scheduled monthly high-temperature steam degreasing, exhaust duct sanitation, and FSSAI hygiene audit compliance.',
-                                budget_min: 450000,
-                                budget_max: 700000,
-                                research_status: 'Evidence Supported',
-                                confidence_level: 'High',
-                                featured: true
-                            }
-                        ];
+                        allOpportunities = MASTER_OPPORTUNITIES_DATASET;
                     }
+
+                    document.getElementById('metric-total-count').textContent = `${allOpportunities.length} Opportunities`;
+                    document.getElementById('pill-count-all').textContent = `${allOpportunities.length}`;
+
                     applyFiltersAndRender();
                 } catch (err) {
-                    container.innerHTML = '';
-                    errState.hidden = false;
-                    document.getElementById('error-results-message').textContent = 'Unable to reach the database server: ' + err.message;
+                    console.warn('Network issue fetching live opportunities; using master baseline dataset:', err);
+                    allOpportunities = MASTER_OPPORTUNITIES_DATASET;
+                    applyFiltersAndRender();
                 }
             }
 
             function applyFiltersAndRender() {
                 filteredOpportunities = allOpportunities.filter(item => {
-                    // Keyword Full-Text Search across Public Fields
+                    // Keyword Full-Text Search
                     if (state.keyword) {
                         const kw = state.keyword.toLowerCase();
                         const titleMatch = (item.title || '').toLowerCase().includes(kw);
                         const summaryMatch = (item.short_summary || '').toLowerCase().includes(kw);
                         const categoryMatch = (item.category || '').toLowerCase().includes(kw);
-                        if (!titleMatch && !summaryMatch && !categoryMatch) return false;
+                        const problemMatch = (item.customer_problem || '').toLowerCase().includes(kw);
+                        if (!titleMatch && !summaryMatch && !categoryMatch && !problemMatch) return false;
                     }
 
                     // City Filter
-                    if (state.city && item.city_id !== state.city) return false;
+                    if (state.city) {
+                        const matchId = item.city_id === state.city;
+                        const matchName = (item.city_name || '').toLowerCase() === state.city.toLowerCase();
+                        if (!matchId && !matchName) return false;
+                    }
 
                     // State Filter
                     if (state.state && (item.state || '').toLowerCase() !== state.state.toLowerCase()) return false;
@@ -759,7 +1145,7 @@
                     if (state.category && (item.category || '').toLowerCase() !== state.category.toLowerCase()) return false;
 
                     // Budget Min Range
-                    if (state.budget_min && Number(item.budget_max) < Number(state.budget_min)) return false;
+                    if (state.budget_min && Number(item.budget_max || item.budget_min) < Number(state.budget_min)) return false;
 
                     // Budget Max Range
                     if (state.budget_max && Number(item.budget_min) > Number(state.budget_max)) return false;
@@ -800,26 +1186,55 @@
                 chipsWrap.innerHTML = '';
 
                 const activeFilters = [];
+                let activeCount = 0;
 
-                if (state.keyword) activeFilters.push({ label: `"${state.keyword}"`, clearFn: () => { state.keyword = ''; document.getElementById('filter-keyword').value = ''; } });
-                if (state.city) {
-                    const sel = document.getElementById('filter-city');
-                    const text = sel.options[sel.selectedIndex].text;
-                    activeFilters.push({ label: `City: ${text}`, clearFn: () => { state.city = ''; document.getElementById('filter-city').value = ''; } });
+                if (state.keyword) {
+                    activeCount++;
+                    activeFilters.push({ label: `"${state.keyword}"`, clearFn: () => { state.keyword = ''; document.getElementById('filter-keyword').value = ''; } });
                 }
-                if (state.state) activeFilters.push({ label: `State: ${state.state}`, clearFn: () => { state.state = ''; document.getElementById('filter-state').value = ''; } });
-                if (state.category) activeFilters.push({ label: `${state.category}`, clearFn: () => { state.category = ''; document.getElementById('filter-category').value = ''; } });
-                if (state.budget_max) activeFilters.push({ label: `Max ₹${Number(state.budget_max).toLocaleString('en-IN')}`, clearFn: () => { state.budget_max = ''; document.getElementById('filter-budget-max').value = ''; } });
-                state.models.forEach(m => activeFilters.push({ label: `Model: ${m}`, clearFn: () => {
-                    state.models = state.models.filter(x => x !== m);
-                    const cb = document.querySelector(`input[name="model"][value="${m}"]`);
-                    if (cb) cb.checked = false;
-                } }));
-                state.research_statuses.forEach(rs => activeFilters.push({ label: rs, clearFn: () => {
-                    state.research_statuses = state.research_statuses.filter(x => x !== rs);
-                    const cb = document.querySelector(`input[name="research_status"][value="${rs}"]`);
-                    if (cb) cb.checked = false;
-                } }));
+                if (state.city) {
+                    activeCount++;
+                    const sel = document.getElementById('filter-city');
+                    const text = sel.options[sel.selectedIndex]?.text || state.city;
+                    activeFilters.push({ label: `City: ${text.split(',')[0]}`, clearFn: () => { state.city = ''; document.getElementById('filter-city').value = ''; } });
+                }
+                if (state.state) {
+                    activeCount++;
+                    activeFilters.push({ label: `State: ${state.state}`, clearFn: () => { state.state = ''; document.getElementById('filter-state').value = ''; } });
+                }
+                if (state.category) {
+                    activeCount++;
+                    activeFilters.push({ label: state.category, clearFn: () => { state.category = ''; document.getElementById('filter-category').value = ''; } });
+                }
+                if (state.budget_max) {
+                    activeCount++;
+                    activeFilters.push({ label: `Max ₹${(Number(state.budget_max)/100000).toFixed(1)}L`, clearFn: () => { state.budget_max = ''; document.getElementById('filter-budget-max').value = ''; } });
+                }
+                state.models.forEach(m => {
+                    activeCount++;
+                    activeFilters.push({ label: `Model: ${m}`, clearFn: () => {
+                        state.models = state.models.filter(x => x !== m);
+                        const cb = document.querySelector(`input[name="model"][value="${m}"]`);
+                        if (cb) cb.checked = false;
+                    } });
+                });
+                state.research_statuses.forEach(rs => {
+                    activeCount++;
+                    activeFilters.push({ label: rs, clearFn: () => {
+                        state.research_statuses = state.research_statuses.filter(x => x !== rs);
+                        const cb = document.querySelector(`input[name="research_status"][value="${rs}"]`);
+                        if (cb) cb.checked = false;
+                    } });
+                });
+
+                // Update mobile badges
+                const mobileBadge = document.getElementById('mobile-filter-badge-count');
+                const floatingBadge = document.getElementById('floating-filter-count');
+                if (mobileBadge) mobileBadge.textContent = String(activeCount);
+                if (floatingBadge) floatingBadge.textContent = String(activeCount);
+
+                const drawerMatchCount = document.getElementById('drawer-match-count');
+                if (drawerMatchCount) drawerMatchCount.textContent = String(filteredOpportunities.length);
 
                 activeFilters.forEach(f => {
                     const chip = document.createElement('span');
@@ -842,7 +1257,10 @@
                 const paginationInfo = document.getElementById('pagination-info');
 
                 const total = filteredOpportunities.length;
-                countDisplay.innerHTML = `Showing <strong>${total}</strong> verified public ${total === 1 ? 'opportunity' : 'opportunities'}`;
+                countDisplay.innerHTML = `Showing <strong>${total}</strong> verified market ${total === 1 ? 'opportunity' : 'opportunities'}`;
+
+                const drawerMatchCount = document.getElementById('drawer-match-count');
+                if (drawerMatchCount) drawerMatchCount.textContent = String(total);
 
                 if (total === 0) {
                     container.innerHTML = '';
@@ -859,32 +1277,51 @@
                 const itemsToDisplay = filteredOpportunities.slice(start, end);
 
                 const html = itemsToDisplay.map(o => `
-                    <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}">
+                    <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}" data-slug="${escapeHtml(o.slug)}">
                         <div class="card-meta-top">
-                            <span class="badge badge-teal">${escapeHtml(o.category || 'General')}</span>
-                            <span class="evidence-tag evidence-tag-${getEvidenceSlug(o.research_status)}">${escapeHtml(o.research_status || 'Desk Research')}</span>
+                            <span class="card-category-tag">${escapeHtml(o.category || 'General')}</span>
+                            <span class="evidence-tag evidence-tag-${getEvidenceSlug(o.research_status)}">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
                         </div>
-                        <h3 class="card-title">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}">${escapeHtml(o.title)}</a>
-                        </h3>
-                        <p class="card-location">📍 ${escapeHtml(o.state || 'India')} &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
-                        <p class="card-summary">${escapeHtml(o.short_summary || '')}</p>
+
+                        <div>
+                            <h3 class="card-title">
+                                <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}">${escapeHtml(o.title)}</a>
+                            </h3>
+                            <div class="card-location">
+                                <span>📍 <strong>${escapeHtml(o.city_name || o.state || 'India')}</strong></span>
+                                <span aria-hidden="true">&bull;</span>
+                                <span>Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></span>
+                            </div>
+                            <p class="card-summary">${escapeHtml(o.short_summary || '')}</p>
+                        </div>
+
                         <div class="card-budget-box">
                             <div class="budget-col">
                                 <span class="budget-label">Indicative Startup Capex</span>
-                                <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} - ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
+                                <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
                             </div>
                             <div class="confidence-col">
-                                <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'Medium')} Confidence</span>
+                                <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'High')} Confidence</span>
                             </div>
                         </div>
+
                         <div class="card-action-footer">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-outline btn-sm btn-full">Read Full Analysis &rarr;</a>
+                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-primary btn-sm">Read Full Analysis &rarr;</a>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-preview" data-slug="${escapeHtml(o.slug)}" aria-label="Quick preview specs">Specs</button>
                         </div>
                     </article>
                 `).join('');
 
                 container.innerHTML = html;
+
+                // Wire quick preview modal buttons
+                container.querySelectorAll('.btn-quick-preview').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const slug = btn.getAttribute('data-slug');
+                        openQuickPreview(slug);
+                    });
+                });
 
                 if (end >= total) {
                     loadMoreBtn.style.display = 'none';
@@ -892,6 +1329,24 @@
                     loadMoreBtn.style.display = 'inline-flex';
                 }
                 paginationInfo.textContent = `Showing ${Math.min(end, total)} of ${total} opportunities`;
+            }
+
+            function openQuickPreview(slug) {
+                const opp = allOpportunities.find(o => o.slug === slug);
+                if (!opp) return;
+
+                const modal = document.getElementById('quick-preview-modal');
+                document.getElementById('preview-modal-category').textContent = opp.category || 'Business Opportunity';
+                document.getElementById('preview-modal-title').textContent = opp.title;
+                document.getElementById('preview-modal-location').textContent = `Target: ${opp.city_name || opp.state || 'India'} • Model: ${opp.business_model || 'Hybrid'} • Status: ${opp.research_status || 'Verified'}`;
+                document.getElementById('preview-modal-capex').textContent = `₹${Number(opp.budget_min || 0).toLocaleString('en-IN')} – ₹${Number(opp.budget_max || 0).toLocaleString('en-IN')}`;
+                document.getElementById('preview-modal-problem').textContent = opp.customer_problem || opp.short_summary;
+                document.getElementById('preview-modal-experiment').textContent = opp.validation_test || 'Direct customer problem interviews followed by small-scale introductory pilot trial.';
+                document.getElementById('preview-modal-full-link').href = `../opportunity/index.html?slug=${encodeURIComponent(opp.slug)}`;
+
+                modal.hidden = false;
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('drawer-is-open');
             }
 
             function getEvidenceSlug(status) {

@@ -77,6 +77,7 @@ const NavigationManager = (function() {
         drawer.classList.add('is-open');
         backdrop.hidden = false;
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('drawer-is-open');
 
         // Focus first focusable link in drawer
         const firstLink = drawer.querySelector('a');
@@ -85,6 +86,7 @@ const NavigationManager = (function() {
         drawer.classList.remove('is-open');
         backdrop.hidden = true;
         document.body.style.overflow = '';
+        document.body.classList.remove('drawer-is-open');
         setTimeout(() => {
           if (!isOpen) drawer.hidden = true;
         }, 200);
@@ -126,34 +128,46 @@ const NavigationManager = (function() {
       bottomNav.className = 'mobile-bottom-nav';
       bottomNav.setAttribute('aria-label', 'Mobile Quick Navigation');
 
-      // Determine proper relative routing
-      const inPagesDir = window.location.pathname.includes('/pages/');
-      const rootPrefix = inPagesDir ? '../' : './pages/';
+      // Determine proper relative routing that handles clean URLs, subpaths, and GitHub Pages
       const currentPath = window.location.pathname;
+      const inPagesDir = currentPath.includes('/pages/') || !!document.querySelector('link[href*="../../assets/css/"]');
+      const isSubSection = inPagesDir || (currentPath.replace(/^\/+|\/+$/g, '').split('/').length >= 1 && currentPath !== '/' && !currentPath.endsWith('/index.html'));
+
+      function getSectionLink(section) {
+        // If the page already has a header link to this section, reuse its exact verified relative path
+        const pageLink = document.querySelector(`.desktop-nav a[href*="${section}"], .mobile-nav-drawer a[href*="${section}"]`);
+        if (pageLink && pageLink.getAttribute('href')) {
+          return pageLink.getAttribute('href');
+        }
+        if (isSubSection) {
+          return `../${section}/index.html`;
+        }
+        return `pages/${section}/index.html`;
+      }
 
       const items = [
         {
           label: 'Explore',
-          href: inPagesDir ? '../opportunities/index.html' : 'pages/opportunities/index.html',
-          cleanHref: '/opportunities/',
+          href: getSectionLink('opportunities'),
+          cleanHref: 'opportunities',
           icon: '<circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>'
         },
         {
           label: 'Cities',
-          href: inPagesDir ? '../cities/index.html' : 'pages/cities/index.html',
-          cleanHref: '/cities/',
+          href: getSectionLink('cities'),
+          cleanHref: 'cities',
           icon: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line><line x1="9" y1="14" x2="9" y2="14.01"></line><line x1="15" y1="14" x2="15" y2="14.01"></line>'
         },
         {
           label: 'Blueprints',
-          href: inPagesDir ? '../blueprints/index.html' : 'pages/blueprints/index.html',
-          cleanHref: '/blueprints/',
+          href: getSectionLink('blueprints'),
+          cleanHref: 'blueprints',
           icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line>'
         },
         {
           label: 'Orders',
-          href: inPagesDir ? '../account/index.html' : 'pages/account/index.html',
-          cleanHref: '/account/',
+          href: getSectionLink('account'),
+          cleanHref: 'account',
           icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>'
         }
       ];

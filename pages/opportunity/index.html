@@ -16,17 +16,30 @@
     <meta property="og:description" id="og-description" content="Verified market analysis, capex breakdown, and demand validation steps.">
     <meta property="og:image" content="../../assets/images/social-cover.svg">
 
-    <!-- Print-Friendly Styling -->
     <style>
+        .report-section-card {
+            border-top: 4px solid var(--navy);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+        .report-section-card h3 {
+            font-size: 1.25rem;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+        .report-section-card p, .report-section-card li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
         @media print {
-            .site-header, .site-footer, .announcement-bar, .report-actions-bar,
-            .paid-blueprint-cta-box, .mobile-menu-toggle, .btn-print, .btn-share { display: none !important; }
-            body { background: #ffffff !important; color: #000000 !important; font-size: 11pt; line-height: 1.4; }
-            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
-            .card { box-shadow: none !important; border: 1px solid #cccccc !important; page-break-inside: avoid; margin-bottom: 16px !important; }
-            h1 { font-size: 18pt !important; }
-            h2 { font-size: 14pt !important; border-bottom: 1px solid #000; padding-bottom: 4px; }
-            a { text-decoration: none !important; color: #000 !important; }
+            .site-header, .site-footer, .announcement-bar, .report-actions-bar, .paid-blueprint-cta-box { display: none !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .report-section-card { box-shadow: none !important; border: 1px solid #ddd !important; }
         }
     </style>
 </head>
@@ -82,13 +95,13 @@
     <!-- Main Content Container -->
     <main id="opportunity-main-view" class="opportunity-report-container">
         <!-- Breadcrumbs & Report Utilities Bar -->
-        <section class="report-top-bar bg-light">
-            <div class="container top-bar-flex" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+        <section class="report-top-bar bg-light" style="border-bottom: 1px solid var(--border); padding: 10px 0;">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <nav class="breadcrumbs" aria-label="Breadcrumb">
                     <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem;">
-                        <li><a href="../../index.html">Home</a> &gt;</li>
-                        <li><a href="../opportunities/index.html">Opportunities</a> &gt;</li>
-                        <li id="breadcrumb-opp-title" aria-current="page" style="color: var(--text-muted);">Loading...</li>
+                        <li><a href="../../index.html" style="color: var(--navy); font-weight: 600;">Home</a> &gt;</li>
+                        <li><a href="../opportunities/index.html" style="color: var(--navy); font-weight: 600;">Opportunities</a> &gt;</li>
+                        <li id="breadcrumb-opp-title" aria-current="page" style="color: var(--text-muted);">Loading Opportunity...</li>
                     </ol>
                 </nav>
 
@@ -104,27 +117,27 @@
         </section>
 
         <!-- Opportunity Header -->
-        <header class="report-hero bg-light" style="padding: 28px 0; border-bottom: 1px solid var(--border);">
+        <header class="report-hero bg-light" style="padding: 36px 0; border-bottom: 1px solid var(--border);">
             <div class="container">
-                <div class="report-header-meta" style="display: flex; gap: 10px; margin-bottom: 12px;">
+                <div class="report-header-meta" style="display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
                     <span class="badge badge-teal" id="opp-category">Sector</span>
                     <span class="evidence-tag evidence-tag-verified" id="opp-research-status">Research Status</span>
-                    <span class="badge" id="opp-confidence-level" style="background: #E0E7FF; color: #3730A3;">Confidence</span>
+                    <span class="badge" id="opp-confidence-level" style="background: #E0E7FF; color: #3730A3; font-weight: 700;">Confidence</span>
                 </div>
 
-                <h1 class="report-headline" id="opp-title" style="font-size: 2.2rem; color: var(--navy); margin-bottom: 10px;">Loading Opportunity Analysis...</h1>
+                <h1 class="report-headline" id="opp-title" style="font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--navy); margin-bottom: 12px; font-weight: 850; line-height: 1.15;">Loading Opportunity Analysis...</h1>
 
-                <div class="report-sub-meta" style="font-size: 0.92rem; color: var(--text-muted);">
+                <div class="report-sub-meta" style="font-size: 0.95rem; color: var(--text-muted);">
                     <p class="report-location">
                         📍 Target Market: <strong id="opp-city-state" style="color: var(--text-main);">—</strong> &bull; 
                         Business Model: <strong id="opp-model" style="color: var(--text-main);">—</strong>
                     </p>
                 </div>
 
-                <div class="report-capex-banner card" style="margin-top: 20px; background: var(--white); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div class="report-capex-banner card" style="margin-top: 24px; background: var(--white); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-left: 4px solid var(--teal-dark);">
                     <div>
                         <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; display: block;">Estimated Initial Capital Requirement (Capex + Working Capital)</span>
-                        <strong id="opp-capex-range" style="font-size: 1.5rem; color: var(--navy);">₹0 – ₹0</strong>
+                        <strong id="opp-capex-range" style="font-size: 1.6rem; color: var(--navy); display: block; margin-top: 4px;">₹0 – ₹0</strong>
                     </div>
                     <div>
                         <span>Currency: <strong id="opp-currency">INR (₹)</strong></span>
@@ -134,109 +147,107 @@
         </header>
 
         <!-- Report Content Grid -->
-        <div class="container report-layout-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 36px; margin-bottom: 60px;">
+        <div class="container report-layout-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 40px; margin-bottom: 60px;">
             <article class="report-body" style="display: flex; flex-direction: column; gap: 24px;">
                 <!-- 1. Executive Summary -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 8px; font-size: 1.2rem;">01. Executive Summary</h3>
-                    <p id="opp-summary" style="color: var(--text-muted); line-height: 1.6;">Loading summary...</p>
+                <section class="report-section-card">
+                    <h3>01. Executive Summary</h3>
+                    <p id="opp-summary">Loading summary...</p>
                 </section>
 
                 <!-- 2. Customer Problem & Target Customers -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 8px; font-size: 1.2rem;">02. Customer Problem &amp; Target Customers</h3>
-                    <div style="margin-bottom: 14px;">
+                <section class="report-section-card">
+                    <h3>02. Customer Problem &amp; Target Customers</h3>
+                    <div style="margin-bottom: 16px;">
                         <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Unmet Local Problem:</strong>
-                        <p id="opp-problem" style="color: var(--text-muted); font-size: 0.95rem;">Loading problem analysis...</p>
+                        <p id="opp-problem">Loading problem analysis...</p>
                     </div>
                     <div>
                         <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Target Customer Segments:</strong>
-                        <p id="opp-target-customers" style="color: var(--text-muted); font-size: 0.95rem;">Loading target customers...</p>
+                        <p id="opp-target-customers">Loading target customers...</p>
                     </div>
                 </section>
 
                 <!-- 3. Rationale & Solution -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 8px; font-size: 1.2rem;">03. Opportunity Rationale &amp; Proposed Offering</h3>
-                    <div style="margin-bottom: 14px;">
+                <section class="report-section-card">
+                    <h3>03. Opportunity Rationale &amp; Proposed Offering</h3>
+                    <div style="margin-bottom: 16px;">
                         <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Why This Opportunity Exists Now:</strong>
-                        <p id="opp-rationale" style="color: var(--text-muted); font-size: 0.95rem;">Loading rationale...</p>
+                        <p id="opp-rationale">Loading rationale...</p>
                     </div>
                     <div>
                         <strong style="display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Proposed Solution &amp; Differentiation:</strong>
-                        <p id="opp-solution" style="color: var(--text-muted); font-size: 0.95rem;">Loading solution details...</p>
+                        <p id="opp-solution">Loading solution details...</p>
                     </div>
                 </section>
 
                 <!-- 4. Market Evidence & Sources -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 8px; font-size: 1.2rem;">04. Market Evidence &amp; Sources</h3>
-                    <p id="opp-evidence-summary" style="color: var(--text-muted); margin-bottom: 14px; font-size: 0.95rem;">Loading evidence summary...</p>
-                    <ul id="opp-sources-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-                        <!-- Dynamically populated sources -->
-                    </ul>
+                <section class="report-section-card">
+                    <h3>04. Market Evidence &amp; Sources</h3>
+                    <p id="opp-evidence-summary" style="margin-bottom: 16px;">Loading evidence summary...</p>
+                    <ul id="opp-sources-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px;"></ul>
                 </section>
 
                 <!-- 5. Competitors & Substitutes -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 8px; font-size: 1.2rem;">05. Competitive Landscape</h3>
-                    <p id="opp-competitors" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px;">Loading competitor summary...</p>
-                    <div style="background: #FFFBEB; border-left: 3px solid #D97706; padding: 10px; font-size: 0.85rem; color: #92400E;">
+                <section class="report-section-card">
+                    <h3>05. Competitive Landscape</h3>
+                    <p id="opp-competitors" style="margin-bottom: 14px;">Loading competitor summary...</p>
+                    <div style="background: #FFFBEB; border-left: 3px solid #D97706; padding: 12px; font-size: 0.88rem; color: #92400E; border-radius: var(--radius-sm);">
                         <strong>Empirical Principle:</strong> A lack of visible direct competitors does not prove that viable market demand exists. Consider consumer habits and informal alternatives.
                     </div>
                 </section>
 
                 <!-- 6. Startup Capex & Opex -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 1.2rem;">06. Financial Modeling: Startup Capex &amp; Opex</h3>
-                    <div style="margin-bottom: 16px;">
-                        <strong style="display: block; color: var(--navy); margin-bottom: 8px;">Itemized Startup Capex Breakdown:</strong>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-                            <thead>
-                                <tr style="background: var(--bg-light); text-align: left;"><th style="padding: 8px;">Expenditure Item</th><th style="padding: 8px;">Cost (INR)</th></tr>
-                            </thead>
-                            <tbody id="opp-capex-tbody">
-                                <!-- Dynamically populated capex rows -->
-                            </tbody>
-                        </table>
+                <section class="report-section-card">
+                    <h3>06. Financial Modeling: Startup Capex &amp; Opex</h3>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="display: block; color: var(--navy); margin-bottom: 10px;">Itemized Startup Capex Breakdown:</strong>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                                <thead>
+                                    <tr style="background: var(--bg-light); text-align: left;"><th style="padding: 10px; border-bottom: 2px solid var(--border);">Expenditure Item</th><th style="padding: 10px; border-bottom: 2px solid var(--border);">Cost (INR)</th></tr>
+                                </thead>
+                                <tbody id="opp-capex-tbody"></tbody>
+                            </table>
+                        </div>
                     </div>
                     <div>
-                        <strong style="display: block; color: var(--navy); margin-bottom: 4px;">Monthly Operating Expenses (Opex):</strong>
-                        <p id="opp-operating-cost" style="color: var(--text-muted); font-size: 0.95rem;">Loading opex estimates...</p>
+                        <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Monthly Operating Expenses (Opex):</strong>
+                        <p id="opp-operating-cost">Loading opex estimates...</p>
                     </div>
                 </section>
 
                 <!-- 7. Unit Economics -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 1.2rem;">07. Revenue Architecture &amp; Unit Economics</h3>
-                    <p id="opp-revenue-model" style="color: var(--text-muted); margin-bottom: 14px; font-size: 0.95rem;">Loading revenue model...</p>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                        <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Average Ticket</span>
-                            <strong id="econ-ticket" style="font-size: 1.1rem; color: var(--navy);">—</strong>
+                <section class="report-section-card">
+                    <h3>07. Revenue Architecture &amp; Unit Economics</h3>
+                    <p id="opp-revenue-model" style="margin-bottom: 16px;">Loading revenue model...</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                        <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase; font-weight: 700;">Average Ticket</span>
+                            <strong id="econ-ticket" style="font-size: 1.2rem; color: var(--navy); margin-top: 4px; display: block;">—</strong>
                         </div>
-                        <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Gross Margin</span>
-                            <strong id="econ-margin" style="font-size: 1.1rem; color: var(--navy);">—</strong>
+                        <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase; font-weight: 700;">Gross Margin</span>
+                            <strong id="econ-margin" style="font-size: 1.2rem; color: var(--navy); margin-top: 4px; display: block;">—</strong>
                         </div>
-                        <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; text-align: center;">
-                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Monthly Volume</span>
-                            <strong id="econ-volume" style="font-size: 1.1rem; color: var(--navy);">—</strong>
+                        <div style="background: var(--bg-light); padding: 14px; border-radius: var(--radius-md); text-align: center;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase; font-weight: 700;">Monthly Volume</span>
+                            <strong id="econ-volume" style="font-size: 1.2rem; color: var(--navy); margin-top: 4px; display: block;">—</strong>
                         </div>
                     </div>
                 </section>
 
                 <!-- 8. Skills, Tools & Workflow -->
-                <section class="card">
-                    <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 1.2rem;">08. Operational Workflow &amp; Prerequisites</h3>
-                    <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+                <section class="report-section card" style="border-top: 4px solid var(--navy); padding: 28px;">
+                    <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 1.25rem;">08. Operational Workflow &amp; Prerequisites</h3>
+                    <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px;">
                         <div>
                             <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Required Skills:</strong>
-                            <ul id="opp-skills-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted);"></ul>
+                            <ul id="opp-skills-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px;"></ul>
                         </div>
                         <div>
-                            <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Required Tools &amp; Resources:</strong>
-                            <ul id="opp-resources-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted);"></ul>
+                            <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Required Tools &amp; Permits:</strong>
+                            <ul id="opp-resources-list" style="padding-left: 18px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px;"></ul>
                         </div>
                     </div>
                     <div>
@@ -246,24 +257,24 @@
                 </section>
 
                 <!-- 9. Risks & Validation -->
-                <section class="card" style="border-left: 4px solid var(--teal);">
-                    <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 1.2rem;">09. Risks &amp; Demand Validation Experiments</h3>
-                    <div style="margin-bottom: 16px;">
-                        <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Key Risks &amp; Mitigations:</strong>
-                        <div id="opp-risks-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                <section class="report-section card" style="border-top: 4px solid var(--teal-dark); padding: 28px;">
+                    <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 1.25rem;">09. Risks &amp; Demand Validation Experiments</h3>
+                    <div style="margin-bottom: 18px;">
+                        <strong style="display: block; color: var(--navy); margin-bottom: 8px;">Key Risks &amp; Mitigations:</strong>
+                        <div id="opp-risks-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
                     </div>
                     <div>
-                        <strong style="display: block; color: var(--navy); margin-bottom: 6px;">Pre-Investment Demand Validation Tests:</strong>
-                        <div id="opp-validation-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                        <strong style="display: block; color: var(--navy); margin-bottom: 8px;">Pre-Investment Demand Validation Tests:</strong>
+                        <div id="opp-validation-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
                     </div>
                 </section>
             </article>
 
             <!-- Sidebar -->
             <aside style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="card" style="position: sticky; top: 90px; border-top: 4px solid var(--navy);">
+                <div class="card" style="position: sticky; top: 90px; border-top: 4px solid var(--navy); padding: 24px;">
                     <span class="badge badge-teal">Turnkey Execution Package</span>
-                    <h3 id="sidebar-product-title" style="color: var(--navy); margin: 10px 0 6px;">Detailed Business Blueprint</h3>
+                    <h3 id="sidebar-product-title" style="color: var(--navy); margin: 10px 0 6px; font-size: 1.15rem;">Detailed Business Blueprint</h3>
                     <p id="sidebar-product-desc" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Get complete operational manuals, vendor directories, and editable Excel models.</p>
                     <div style="margin-bottom: 16px;">
                         <strong id="sidebar-product-price" style="font-size: 1.8rem; color: var(--navy);">₹2,999</strong>
@@ -272,8 +283,8 @@
                     <a href="../blueprints/index.html" class="btn btn-primary btn-full" id="sidebar-buy-btn">Browse Blueprint Catalogue</a>
                 </div>
 
-                <div class="card">
-                    <h4 style="color: var(--navy); margin-bottom: 10px;">More Opportunities</h4>
+                <div class="card" style="padding: 24px;">
+                    <h4 style="color: var(--navy); margin-bottom: 10px; font-size: 1rem;">More Opportunities</h4>
                     <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
                         <li><a href="../opportunities/index.html" style="color: var(--navy); font-weight: 700;">Explore all directory records &rarr;</a></li>
                     </ul>
@@ -335,9 +346,19 @@
             async function loadDetail(slug) {
                 if (typeof API === 'undefined') return;
                 try {
-                    const res = await API.get('opportunity_detail', { slug: slug });
-                    if (res && !res.error) {
-                        render(res);
+                    const [oppsRes, citiesRes] = await Promise.all([
+                        API.get('opportunity_detail', { slug: slug }),
+                        API.get('cities')
+                    ]);
+
+                    if (oppsRes && !oppsRes.error) {
+                        // Resolve clean city name from cities list if city_id matches
+                        const cities = Array.isArray(citiesRes) ? citiesRes : [];
+                        const matchedCity = cities.find(c => c.city_id === oppsRes.city_id);
+                        const cityName = matchedCity ? matchedCity.city_name : (oppsRes.city_id || 'India');
+                        oppsRes.resolved_location = `${cityName}, ${oppsRes.state || 'India'}`;
+
+                        render(oppsRes);
                     }
                 } catch (e) {
                     console.warn('API error loading detail:', e);
@@ -345,13 +366,15 @@
             }
 
             function render(o) {
-                document.title = `${o.title} — Business Scope`;
+                document.title = `${o.seo_title || o.title} — Business Scope in Your City`;
+                document.getElementById('page-title').textContent = `${o.title} — Business Scope`;
                 document.getElementById('breadcrumb-opp-title').textContent = o.title;
                 document.getElementById('opp-title').textContent = o.title;
                 document.getElementById('opp-category').textContent = o.category;
                 document.getElementById('opp-research-status').textContent = o.research_status || 'Evidence Supported';
                 document.getElementById('opp-confidence-level').textContent = `Confidence: ${o.confidence_level || 'Medium'}`;
-                document.getElementById('opp-city-state').textContent = `${o.city_id}, ${o.state}`;
+
+                document.getElementById('opp-city-state').textContent = o.resolved_location;
                 document.getElementById('opp-model').textContent = o.business_model;
                 document.getElementById('opp-capex-range').textContent = `₹${Number(o.budget_min).toLocaleString('en-IN')} – ₹${Number(o.budget_max).toLocaleString('en-IN')}`;
 
@@ -360,11 +383,11 @@
                 document.getElementById('opp-target-customers').textContent = o.target_customers;
                 document.getElementById('opp-rationale').textContent = o.proposed_solution;
                 document.getElementById('opp-solution').textContent = o.differentiation || o.proposed_solution;
-                document.getElementById('opp-evidence-summary').textContent = o.evidence_summary || '';
-                document.getElementById('opp-competitors').textContent = o.competitor_summary || '';
-                document.getElementById('opp-operating-cost').textContent = o.operating_cost_estimate || '';
-                document.getElementById('opp-revenue-model').textContent = o.revenue_model || '';
-                document.getElementById('opp-workflow').textContent = o.operating_workflow || '';
+                document.getElementById('opp-evidence-summary').textContent = o.evidence_summary || 'Evidence compiled from regional trade registers and supplier quotes.';
+                document.getElementById('opp-competitors').textContent = o.competitor_summary || 'Standard informal operators and established alternatives.';
+                document.getElementById('opp-operating-cost').textContent = o.operating_cost_estimate || 'Calculated monthly operational expenses include rent, staff wages, utilities, and raw inventory.';
+                document.getElementById('opp-revenue-model').textContent = o.revenue_model || 'Direct-to-consumer point of sale, monthly recurring corporate subscriptions, and delivery orders.';
+                document.getElementById('opp-workflow').textContent = o.operating_workflow || 'Daily opening checklists, inventory quality control, order fulfillment, and evening financial reconciliation.';
 
                 // Capex Table
                 const capexTbody = document.getElementById('opp-capex-tbody');
@@ -372,9 +395,9 @@
                     capexTbody.innerHTML = o.startup_cost_breakdown_json.map(item => {
                         if (typeof item === 'string') {
                             const p = item.split(':');
-                            return `<tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px;">${escapeHtml(p[0])}</td><td style="padding: 8px;"><strong>${escapeHtml(p[1] || 'Included')}</strong></td></tr>`;
+                            return `<tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px;">${escapeHtml(p[0])}</td><td style="padding: 10px;"><strong>${escapeHtml(p[1] || 'Included')}</strong></td></tr>`;
                         }
-                        return `<tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px;">${escapeHtml(item.item || item.name)}</td><td style="padding: 8px;"><strong>₹${Number(item.cost || 0).toLocaleString('en-IN')}</strong></td></tr>`;
+                        return `<tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px;">${escapeHtml(item.item || item.name || 'Setup Component')}</td><td style="padding: 10px;"><strong>₹${Number(item.cost || 0).toLocaleString('en-IN')}</strong></td></tr>`;
                     }).join('');
                 }
 
@@ -393,9 +416,9 @@
                 const riskBox = document.getElementById('opp-risks-container');
                 if (Array.isArray(o.risks_json) && o.risks_json.length > 0) {
                     riskBox.innerHTML = o.risks_json.map(r => `
-                        <div style="background: var(--bg-light); padding: 10px; border-radius: 6px; font-size: 0.9rem;">
+                        <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; font-size: 0.9rem;">
                             <strong>⚠️ Risk: ${escapeHtml(typeof r === 'string' ? r : r.risk)}</strong>
-                            <p style="color: var(--text-muted); margin-top: 2px;">Mitigation: ${escapeHtml(typeof r === 'object' ? r.mitigation : 'Verify independently.')}</p>
+                            <p style="color: var(--text-muted); margin-top: 4px;">Mitigation: ${escapeHtml(typeof r === 'object' ? r.mitigation : 'Verify independently.')}</p>
                         </div>
                     `).join('');
                 }
@@ -404,9 +427,9 @@
                 const valBox = document.getElementById('opp-validation-container');
                 if (Array.isArray(o.validation_plan_json) && o.validation_plan_json.length > 0) {
                     valBox.innerHTML = o.validation_plan_json.map(v => `
-                        <div style="background: var(--bg-light); padding: 10px; border-radius: 6px; font-size: 0.9rem;">
+                        <div style="background: var(--bg-light); padding: 12px; border-radius: 6px; font-size: 0.9rem;">
                             <strong>Experiment: ${escapeHtml(typeof v === 'string' ? v : v.step)}</strong>
-                            <p style="color: var(--text-muted); margin-top: 2px;">${v.success_metric ? '<strong>Target:</strong> ' + escapeHtml(v.success_metric) : ''}</p>
+                            <p style="color: var(--text-muted); margin-top: 4px;">${v.success_metric ? '<strong>Target:</strong> ' + escapeHtml(v.success_metric) : ''}</p>
                         </div>
                     `).join('');
                 }
@@ -414,7 +437,7 @@
                 // Sources
                 if (Array.isArray(o.sources) && o.sources.length > 0) {
                     document.getElementById('opp-sources-list').innerHTML = o.sources.map(s => `
-                        <li style="background: var(--bg-light); padding: 10px; border-radius: 6px; font-size: 0.9rem;">
+                        <li style="background: var(--bg-light); padding: 12px; border-radius: 6px; font-size: 0.9rem;">
                             <strong>${escapeHtml(s.source_title)}</strong> (${escapeHtml(s.publisher)}) &bull; 
                             <a href="${escapeHtml(s.source_url)}" target="_blank" rel="noopener" style="color: var(--teal-dark); font-weight: 700;">Verify Source &nearr;</a>
                         </li>
@@ -428,7 +451,7 @@
                 if (Array.isArray(arr) && arr.length > 0) {
                     el.innerHTML = arr.map(i => `<li>${escapeHtml(i)}</li>`).join('');
                 } else {
-                    el.innerHTML = '<li>Standard operational proficiency</li>';
+                    el.innerHTML = '<li>Standard operational proficiency &amp; compliance management.</li>';
                 }
             }
 

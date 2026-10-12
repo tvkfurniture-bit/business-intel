@@ -115,7 +115,7 @@
         <section class="report-top-bar bg-light">
             <div class="container top-bar-flex">
                 <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem; padding: 12px 0;">
+                    <ol style="display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; font-size: 0.88rem; padding: 10px 0; word-break: break-word;">
                         <li><a href="../../index.html">Home</a> &gt;</li>
                         <li><a href="../opportunities/index.html">Opportunities</a> &gt;</li>
                         <li id="breadcrumb-opp-title" aria-current="page" style="color: var(--text-muted);">Specialty Coffee Roastery &amp; Micro-Cafe</li>
@@ -123,7 +123,7 @@
                 </nav>
 
                 <!-- 33. Share and Copy-Link Controls & 34. Print-Friendly Trigger -->
-                <div class="report-actions-bar" style="display: flex; gap: 10px;">
+                <div class="report-actions-bar">
                     <button type="button" class="btn btn-outline btn-sm btn-share" id="btn-copy-link" aria-label="Copy Report Link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                         <span id="copy-btn-text">Copy Link</span>
@@ -137,16 +137,16 @@
         </section>
 
         <!-- 1, 2, 3, 4, 5, 6. OPPORTUNITY HEADER & CLASSIFICATION -->
-        <header class="report-hero bg-light" style="padding: 30px 0; border-bottom: 1px solid var(--border);">
+        <header class="report-hero bg-light" style="padding: 24px 0; border-bottom: 1px solid var(--border);">
             <div class="container">
-                <div class="report-header-meta" style="display: flex; gap: 10px; margin-bottom: 12px;">
+                <div class="report-header-meta" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
                     <span class="badge badge-teal" id="opp-category">Food &amp; Beverage</span>
                     <span class="evidence-tag evidence-tag-verified" id="opp-research-status">Evidence Supported</span>
                     <span class="confidence-badge confidence-high" id="opp-confidence-level">Confidence: High</span>
                 </div>
 
                 <!-- 1. Title -->
-                <h1 class="report-headline" id="opp-title" style="font-size: 2.3rem; color: var(--navy); line-height: 1.2;">Specialty Coffee Roastery &amp; Micro-Cafe</h1>
+                <h1 class="report-headline" id="opp-title" style="font-size: clamp(1.5rem, 4.5vw, 2.3rem); color: var(--navy); line-height: 1.25; word-break: break-word;">Specialty Coffee Roastery &amp; Micro-Cafe</h1>
 
                 <div class="report-sub-meta" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-muted);">
                     <!-- 2. City and State -->
@@ -163,12 +163,12 @@
                 </div>
 
                 <!-- 15. Estimated Startup Budget Banner -->
-                <div class="report-capex-banner card" style="margin-top: 24px; background: var(--white); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div class="report-capex-banner card">
                     <div class="capex-col">
                         <span class="capex-label" style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Estimated Initial Capital Requirement (Capex + Working Capital)</span>
                         <strong class="capex-val" id="opp-capex-range" style="font-size: 1.6rem; color: var(--navy); display: block; margin-top: 4px;">₹8,00,000 – ₹15,00,000</strong>
                     </div>
-                    <div class="capex-currency-col" style="text-align: right;">
+                    <div class="capex-currency-col">
                         <span>Currency: <strong id="opp-currency">INR (₹)</strong></span>
                         <small style="display: block; color: var(--text-muted); font-size: 0.75rem;">Based on current supplier quotes and commercial rental benchmarks</small>
                     </div>
@@ -177,9 +177,9 @@
         </header>
 
         <!-- REPORT SECTIONS ACCORDION & GRID -->
-        <div class="container report-layout-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 40px; margin-bottom: 60px;">
+        <div class="container report-layout-grid">
             <!-- Left Primary Research Body -->
-            <article class="report-body" style="display: flex; flex-direction: column; gap: 24px;">
+            <article class="report-body">
                 <!-- 7. Executive Summary -->
                 <section class="report-section card">
                     <div class="section-title-wrap" style="margin-bottom: 12px;">
@@ -300,7 +300,7 @@
                     </div>
                     <div class="content-block">
                         <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 8px;">Illustrative Unit Economics &amp; Break-Even Metrics</h3>
-                        <div class="economics-grid" id="opp-economics-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                        <div class="economics-grid" id="opp-economics-grid">
                             <div class="metric-card" style="background: var(--bg-light); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
                                 <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Average Ticket</span>
                                 <strong id="econ-ticket" style="font-size: 1.2rem; color: var(--navy);">₹350</strong>
@@ -427,7 +427,7 @@
             </article>
 
             <!-- Right Sidebar: Product CTAs & Related Navigation -->
-            <aside class="report-sidebar" style="display: flex; flex-direction: column; gap: 20px;">
+            <aside class="report-sidebar">
                 <!-- 32. Paid Report / Blueprint CTA Box -->
                 <div class="card paid-blueprint-cta-box" id="blueprint-cta-box" style="position: sticky; top: 90px; border-top: 4px solid var(--navy);">
                     <span class="badge badge-teal">Turnkey Execution Package</span>

@@ -36,7 +36,7 @@ legalAliases.forEach(alias => {
 // Dynamic routing for pages directory
 // Matches e.g. /opportunities, /opportunities/, /city/mumbai, /opportunity/specialty-coffee-roastery-mumbai
 app.use((req, res, next) => {
-  if (req.method !== 'GET') return next();
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
 
   // Strip leading and trailing slashes and split path
   const cleanPath = req.path.replace(/^\/+|\/+$/g, '');
@@ -48,6 +48,11 @@ app.use((req, res, next) => {
   // 1. Direct page folder match: /<section> or /<section>/...
   const targetIndexPath = path.join(__dirname, 'pages', topSection, 'index.html');
   if (fs.existsSync(targetIndexPath)) {
+    // If accessed as /<section> without trailing slash, redirect to canonical /<section>/
+    if (segments.length === 1 && !req.path.endsWith('/')) {
+      const queryString = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+      return res.redirect(301, `/${topSection}/${queryString}`);
+    }
     return res.sendFile(targetIndexPath);
   }
 

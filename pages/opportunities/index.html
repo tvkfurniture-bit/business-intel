@@ -88,18 +88,41 @@
 
                 <div class="catalogue-title-row">
                     <div>
-                        <h1 style="font-size: clamp(2rem, 3.5vw, 2.75rem); color: var(--navy); margin-bottom: 8px; letter-spacing: -0.03em;">
+                        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(39, 198, 162, 0.12); color: var(--teal-dark); padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em;">
+                            <span>●</span> Verified Market Directory &bull; 2026
+                        </div>
+                        <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.75rem); color: var(--navy); margin-bottom: 8px; letter-spacing: -0.03em; line-height: 1.2;">
                             Explore Local Business Opportunities
                         </h1>
-                        <p class="section-subtext" style="max-width: 750px;">
+                        <p class="section-subtext" style="max-width: 750px; margin-bottom: 0;">
                             Empirical, evidence-backed market gaps researched across Indian urban centers. Filter by available startup capital, operational model, and verified customer validation status.
                         </p>
                     </div>
+                </div>
 
-                    <!-- Mobile Filter Trigger (shown only on mobile/tablet) -->
-                    <button type="button" class="btn btn-outline btn-filter-drawer-open" id="open-filter-drawer-btn" style="min-height: 44px; align-items: center; gap: 8px;">
+                <!-- Prominent Quick Search & City Filter Bar (Desktop & Mobile First) -->
+                <div class="catalogue-search-bar-wrap" role="search" aria-label="Quick Search Business Opportunities">
+                    <div class="hero-search-input-box">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="search" id="hero-quick-search" placeholder="Search 12 verified gaps (e.g. coffee, EV, cleaning, solar...)" aria-label="Search opportunities by keyword" autocomplete="off">
+                        <button type="button" class="search-clear-btn" id="hero-search-clear-btn" aria-label="Clear keyword search" hidden>&times;</button>
+                    </div>
+                    <div class="hero-search-city-box">
+                        <svg class="pin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <select id="hero-city-select" aria-label="Filter by target city">
+                            <option value="">All Indian Cities</option>
+                            <option value="mum_01">Mumbai</option>
+                            <option value="blr_01">Bengaluru</option>
+                            <option value="pun_01">Pune</option>
+                            <option value="ahm_01">Ahmedabad</option>
+                            <option value="hyd_01">Hyderabad</option>
+                            <option value="del_01">Delhi NCR</option>
+                            <option value="kol_01">Kolkata</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary hero-filter-btn" id="hero-open-drawer-btn" aria-label="Open detailed filters drawer">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-                        <span>Filters (<span id="mobile-filter-badge-count">0</span>)</span>
+                        <span>Filters (<span class="hero-filter-count-badge">0</span>)</span>
                     </button>
                 </div>
 
@@ -329,14 +352,16 @@
 
                 <!-- Sticky Action for Mobile Drawer Bottom -->
                 <div class="filter-sidebar-sticky-bottom">
-                    <button type="button" class="btn btn-teal btn-full" id="apply-filters-drawer-btn">
-                        Apply Filters (<span id="drawer-match-count">12</span>)
-                    </button>
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <button type="button" class="btn btn-outline" id="clear-filters-drawer-btn" style="flex: 0 0 auto; min-width: 90px; padding: 0 14px;">
+                            Reset
+                        </button>
+                        <button type="button" class="btn btn-teal" id="apply-filters-drawer-btn" style="flex: 1 1 auto;">
+                            Show <span id="drawer-match-count">12</span> Opportunities
+                        </button>
+                    </div>
                 </div>
             </aside>
-
-            <!-- Backdrop for Mobile Filter Drawer -->
-            <div class="filter-drawer-backdrop" id="filter-drawer-backdrop" hidden></div>
 
             <!-- Main Results Area -->
             <section class="catalogue-results-area" aria-label="Opportunities Search Results">
@@ -352,9 +377,15 @@
                     </div>
 
                     <div class="results-meta-right">
+                        <!-- Direct Mobile Filter Drawer Trigger -->
+                        <button type="button" class="btn btn-outline btn-filter-drawer-open" id="open-filter-drawer-btn" aria-label="Open Filter Drawer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                            <span>Filters (<span class="results-filter-count-badge">0</span>)</span>
+                        </button>
+
                         <!-- Sort Control -->
                         <div class="sort-control-wrap">
-                            <label for="catalogue-sort-select">Sort By:</label>
+                            <label for="catalogue-sort-select" class="sort-label">Sort By:</label>
                             <select id="catalogue-sort-select" aria-label="Sort opportunities">
                                 <option value="featured">Featured First</option>
                                 <option value="newest">Newest Published</option>
@@ -418,16 +449,19 @@
         </section>
     </main>
 
+    <!-- Backdrop for Mobile Filter Drawer -->
+    <div class="filter-drawer-backdrop" id="filter-drawer-backdrop" hidden></div>
+
     <!-- Floating Mobile Filter Trigger -->
     <button type="button" class="mobile-floating-filter-pill" id="mobile-floating-filter-trigger" aria-label="Open Filter Controls">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
         <span>Filters (<span id="floating-filter-count">0</span>)</span>
     </button>
 
-    <!-- Quick Opportunity Preview Modal -->
+    <!-- Quick Opportunity Preview Modal (Mobile Bottom Sheet / Desktop Centered) -->
     <div class="modal" id="quick-preview-modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title" hidden>
-        <div class="mobile-drawer-backdrop" id="preview-modal-backdrop"></div>
         <div class="modal-panel">
+            <div class="modal-sheet-handle" aria-hidden="true"></div>
             <div class="modal-head">
                 <span class="badge badge-teal" id="preview-modal-category">Category</span>
                 <button class="modal-close" id="preview-modal-close" type="button" aria-label="Close Preview">&times;</button>
@@ -807,6 +841,7 @@
             function initializeUIEvents() {
                 // Mobile Drawer Controls
                 const openDrawerBtn = document.getElementById('open-filter-drawer-btn');
+                const heroOpenDrawerBtn = document.getElementById('hero-open-drawer-btn');
                 const floatingTrigger = document.getElementById('mobile-floating-filter-trigger');
                 const closeDrawerBtn = document.getElementById('close-filter-drawer-btn');
                 const applyDrawerBtn = document.getElementById('apply-filters-drawer-btn');
@@ -828,6 +863,7 @@
                 }
 
                 if (openDrawerBtn) openDrawerBtn.addEventListener('click', () => toggleDrawer(true));
+                if (heroOpenDrawerBtn) heroOpenDrawerBtn.addEventListener('click', () => toggleDrawer(true));
                 if (floatingTrigger) floatingTrigger.addEventListener('click', () => toggleDrawer(true));
                 if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', () => toggleDrawer(false));
                 if (applyDrawerBtn) applyDrawerBtn.addEventListener('click', () => {
@@ -835,7 +871,56 @@
                     // Smooth scroll to results
                     document.getElementById('opportunities-display-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
+                const drawerClearBtn = document.getElementById('clear-filters-drawer-btn');
+                if (drawerClearBtn) {
+                    drawerClearBtn.addEventListener('click', () => {
+                        const clearAllBtn = document.getElementById('clear-all-filters-btn');
+                        if (clearAllBtn) clearAllBtn.click();
+                    });
+                }
                 if (backdrop) backdrop.addEventListener('click', () => toggleDrawer(false));
+
+                // Hero Quick Search & Clear Button
+                const heroQuickSearch = document.getElementById('hero-quick-search');
+                const heroSearchClearBtn = document.getElementById('hero-search-clear-btn');
+                const heroCitySelect = document.getElementById('hero-city-select');
+
+                if (heroQuickSearch) {
+                    heroQuickSearch.addEventListener('input', debounce((e) => {
+                        const val = e.target.value.trim();
+                        state.keyword = val;
+                        const filterKeywordInput = document.getElementById('filter-keyword');
+                        if (filterKeywordInput) filterKeywordInput.value = val;
+                        if (heroSearchClearBtn) heroSearchClearBtn.hidden = !val;
+                        updateUrlParams();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    }, 200));
+                }
+
+                if (heroSearchClearBtn) {
+                    heroSearchClearBtn.addEventListener('click', () => {
+                        if (heroQuickSearch) heroQuickSearch.value = '';
+                        const filterKeywordInput = document.getElementById('filter-keyword');
+                        if (filterKeywordInput) filterKeywordInput.value = '';
+                        state.keyword = '';
+                        heroSearchClearBtn.hidden = true;
+                        updateUrlParams();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    });
+                }
+
+                if (heroCitySelect) {
+                    heroCitySelect.addEventListener('change', (e) => {
+                        state.city = e.target.value;
+                        const filterCityInput = document.getElementById('filter-city');
+                        if (filterCityInput) filterCityInput.value = e.target.value;
+                        updateUrlParams();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    });
+                }
 
                 // Quick Segmented Category Tabs with Smooth Auto-Center
                 document.querySelectorAll('.sector-pill-btn').forEach(btn => {
@@ -871,6 +956,7 @@
                         if (target === 'budget') {
                             document.getElementById('filter-budget-min').value = '';
                             document.getElementById('filter-budget-max').value = '';
+                            document.querySelectorAll('.chip-preset').forEach(b => b.classList.remove('active'));
                         } else {
                             const field = document.getElementById(target);
                             if (field) field.value = '';
@@ -879,13 +965,23 @@
                     });
                 });
 
-                // Budget Preset Buttons
+                // Interactive Budget Preset Buttons (Toggleable)
                 document.querySelectorAll('.chip-preset').forEach(btn => {
                     btn.addEventListener('click', (e) => {
-                        const min = e.target.getAttribute('data-min');
-                        const max = e.target.getAttribute('data-max');
-                        document.getElementById('filter-budget-min').value = min;
-                        document.getElementById('filter-budget-max').value = max;
+                        const min = e.currentTarget.getAttribute('data-min');
+                        const max = e.currentTarget.getAttribute('data-max');
+                        const isCurrent = state.budget_min === min && state.budget_max === max;
+
+                        if (isCurrent) {
+                            document.getElementById('filter-budget-min').value = '';
+                            document.getElementById('filter-budget-max').value = '';
+                            document.querySelectorAll('.chip-preset').forEach(b => b.classList.remove('active'));
+                        } else {
+                            document.getElementById('filter-budget-min').value = min;
+                            document.getElementById('filter-budget-max').value = max;
+                            document.querySelectorAll('.chip-preset').forEach(b => b.classList.remove('active'));
+                            e.currentTarget.classList.add('active');
+                        }
                         handleFilterFormChange();
                     });
                 });
@@ -948,7 +1044,6 @@
                 // Quick Preview Modal Event Handlers
                 const previewModal = document.getElementById('quick-preview-modal');
                 const previewClose = document.getElementById('preview-modal-close');
-                const previewBackdrop = document.getElementById('preview-modal-backdrop');
                 const previewDismiss = document.getElementById('preview-modal-dismiss-btn');
 
                 function closePreview() {
@@ -958,8 +1053,14 @@
                 }
 
                 if (previewClose) previewClose.addEventListener('click', closePreview);
-                if (previewBackdrop) previewBackdrop.addEventListener('click', closePreview);
                 if (previewDismiss) previewDismiss.addEventListener('click', closePreview);
+                if (previewModal) {
+                    previewModal.addEventListener('click', (e) => {
+                        if (e.target === previewModal) {
+                            closePreview();
+                        }
+                    });
+                }
 
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
@@ -990,13 +1091,35 @@
             }
 
             function populateFormFromState() {
-                document.getElementById('filter-keyword').value = state.keyword;
+                const filterKeyword = document.getElementById('filter-keyword');
+                const heroQuickSearch = document.getElementById('hero-quick-search');
+                const heroSearchClearBtn = document.getElementById('hero-search-clear-btn');
+                const heroCitySelect = document.getElementById('hero-city-select');
+
+                if (filterKeyword) filterKeyword.value = state.keyword;
+                if (heroQuickSearch) {
+                    heroQuickSearch.value = state.keyword;
+                    if (heroSearchClearBtn) heroSearchClearBtn.hidden = !state.keyword;
+                }
+                if (heroCitySelect) heroCitySelect.value = state.city;
+
                 document.getElementById('filter-city').value = state.city;
                 document.getElementById('filter-state').value = state.state;
                 document.getElementById('filter-budget-min').value = state.budget_min;
                 document.getElementById('filter-budget-max').value = state.budget_max;
                 document.getElementById('filter-category').value = state.category;
                 document.getElementById('catalogue-sort-select').value = state.sort;
+
+                // Sync budget preset active class
+                document.querySelectorAll('.chip-preset').forEach(btn => {
+                    const min = btn.getAttribute('data-min');
+                    const max = btn.getAttribute('data-max');
+                    if (state.budget_min === min && state.budget_max === max) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
 
                 // Sync category pills rail
                 document.querySelectorAll('.sector-pill-btn').forEach(btn => {
@@ -1028,6 +1151,31 @@
                 state.budget_min = document.getElementById('filter-budget-min').value;
                 state.budget_max = document.getElementById('filter-budget-max').value;
                 state.category = document.getElementById('filter-category').value;
+
+                // Sync hero toolbar
+                const heroQuickSearch = document.getElementById('hero-quick-search');
+                const heroSearchClearBtn = document.getElementById('hero-search-clear-btn');
+                const heroCitySelect = document.getElementById('hero-city-select');
+                if (heroQuickSearch && heroQuickSearch.value !== state.keyword) {
+                    heroQuickSearch.value = state.keyword;
+                }
+                if (heroSearchClearBtn) {
+                    heroSearchClearBtn.hidden = !state.keyword;
+                }
+                if (heroCitySelect && heroCitySelect.value !== state.city) {
+                    heroCitySelect.value = state.city;
+                }
+
+                // Sync budget preset buttons
+                document.querySelectorAll('.chip-preset').forEach(btn => {
+                    const min = btn.getAttribute('data-min');
+                    const max = btn.getAttribute('data-max');
+                    if (state.budget_min === min && state.budget_max === max) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
 
                 // Sync segmented category rail
                 document.querySelectorAll('.sector-pill-btn').forEach(btn => {
@@ -1079,6 +1227,16 @@
                 state.models = [];
                 state.research_statuses = [];
                 state.risk_levels = [];
+
+                const heroQuickSearch = document.getElementById('hero-quick-search');
+                const heroSearchClearBtn = document.getElementById('hero-search-clear-btn');
+                const heroCitySelect = document.getElementById('hero-city-select');
+                if (heroQuickSearch) heroQuickSearch.value = '';
+                if (heroSearchClearBtn) heroSearchClearBtn.hidden = true;
+                if (heroCitySelect) heroCitySelect.value = '';
+
+                document.querySelectorAll('.chip-preset').forEach(b => b.classList.remove('active'));
+
                 populateFormFromState();
                 updateUrlParams();
                 currentPage = 1;
@@ -1190,13 +1348,25 @@
 
                 if (state.keyword) {
                     activeCount++;
-                    activeFilters.push({ label: `"${state.keyword}"`, clearFn: () => { state.keyword = ''; document.getElementById('filter-keyword').value = ''; } });
+                    activeFilters.push({ label: `"${state.keyword}"`, clearFn: () => {
+                        state.keyword = '';
+                        document.getElementById('filter-keyword').value = '';
+                        const hq = document.getElementById('hero-quick-search');
+                        if (hq) hq.value = '';
+                        const hqc = document.getElementById('hero-search-clear-btn');
+                        if (hqc) hqc.hidden = true;
+                    } });
                 }
                 if (state.city) {
                     activeCount++;
                     const sel = document.getElementById('filter-city');
                     const text = sel.options[sel.selectedIndex]?.text || state.city;
-                    activeFilters.push({ label: `City: ${text.split(',')[0]}`, clearFn: () => { state.city = ''; document.getElementById('filter-city').value = ''; } });
+                    activeFilters.push({ label: `City: ${text.split(',')[0]}`, clearFn: () => {
+                        state.city = '';
+                        document.getElementById('filter-city').value = '';
+                        const hc = document.getElementById('hero-city-select');
+                        if (hc) hc.value = '';
+                    } });
                 }
                 if (state.state) {
                     activeCount++;
@@ -1208,7 +1378,11 @@
                 }
                 if (state.budget_max) {
                     activeCount++;
-                    activeFilters.push({ label: `Max ₹${(Number(state.budget_max)/100000).toFixed(1)}L`, clearFn: () => { state.budget_max = ''; document.getElementById('filter-budget-max').value = ''; } });
+                    activeFilters.push({ label: `Max ₹${(Number(state.budget_max)/100000).toFixed(1)}L`, clearFn: () => {
+                        state.budget_max = '';
+                        document.getElementById('filter-budget-max').value = '';
+                        document.querySelectorAll('.chip-preset').forEach(b => b.classList.remove('active'));
+                    } });
                 }
                 state.models.forEach(m => {
                     activeCount++;
@@ -1232,6 +1406,25 @@
                 const floatingBadge = document.getElementById('floating-filter-count');
                 if (mobileBadge) mobileBadge.textContent = String(activeCount);
                 if (floatingBadge) floatingBadge.textContent = String(activeCount);
+                document.querySelectorAll('.hero-filter-count-badge').forEach(b => b.textContent = String(activeCount));
+                document.querySelectorAll('.results-filter-count-badge').forEach(b => b.textContent = String(activeCount));
+
+                // Toggle active filter visual style on filter buttons
+                const floatingTriggerBtn = document.getElementById('mobile-floating-filter-trigger');
+                if (floatingTriggerBtn) {
+                    if (activeCount > 0) floatingTriggerBtn.classList.add('has-active-filters');
+                    else floatingTriggerBtn.classList.remove('has-active-filters');
+                }
+                const resFilterBtn = document.getElementById('open-filter-drawer-btn');
+                if (resFilterBtn) {
+                    if (activeCount > 0) resFilterBtn.classList.add('has-active-filters');
+                    else resFilterBtn.classList.remove('has-active-filters');
+                }
+                const heroFilterBtn = document.getElementById('hero-open-drawer-btn');
+                if (heroFilterBtn) {
+                    if (activeCount > 0) heroFilterBtn.classList.add('has-active-filters');
+                    else heroFilterBtn.classList.remove('has-active-filters');
+                }
 
                 const drawerMatchCount = document.getElementById('drawer-match-count');
                 if (drawerMatchCount) drawerMatchCount.textContent = String(filteredOpportunities.length);
@@ -1247,6 +1440,12 @@
                     });
                     chipsWrap.appendChild(chip);
                 });
+            }
+
+            function formatLakhs(amount) {
+                if (!amount) return '0';
+                const l = Number(amount) / 100000;
+                return Number.isInteger(l) ? String(l) : l.toFixed(1);
             }
 
             function renderOpportunityCards(append) {
@@ -1277,7 +1476,7 @@
                 const itemsToDisplay = filteredOpportunities.slice(start, end);
 
                 const html = itemsToDisplay.map(o => `
-                    <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}" data-slug="${escapeHtml(o.slug)}">
+                    <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}" data-slug="${escapeHtml(o.slug)}" style="cursor: pointer;">
                         <div class="card-meta-top">
                             <span class="card-category-tag">${escapeHtml(o.category || 'General')}</span>
                             <span class="evidence-tag evidence-tag-${getEvidenceSlug(o.research_status)}">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
@@ -1298,7 +1497,8 @@
                         <div class="card-budget-box">
                             <div class="budget-col">
                                 <span class="budget-label">Indicative Startup Capex</span>
-                                <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
+                                <strong class="budget-amount">₹${formatLakhs(o.budget_min)}L &ndash; ₹${formatLakhs(o.budget_max)}L</strong>
+                                <small style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-sans); margin-top: 2px;">(₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')})</small>
                             </div>
                             <div class="confidence-col">
                                 <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'High')} Confidence</span>
@@ -1306,13 +1506,26 @@
                         </div>
 
                         <div class="card-action-footer">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-primary btn-sm">Read Full Analysis &rarr;</a>
-                            <button type="button" class="btn btn-outline btn-sm btn-quick-preview" data-slug="${escapeHtml(o.slug)}" aria-label="Quick preview specs">Specs</button>
+                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-primary btn-sm btn-card-main">View Analysis &rarr;</a>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-preview" data-slug="${escapeHtml(o.slug)}" aria-label="Quick preview specs">Quick Specs</button>
                         </div>
                     </article>
                 `).join('');
 
                 container.innerHTML = html;
+
+                // Wire whole-card touch navigation on mobile and desktop
+                container.querySelectorAll('.opportunity-catalogue-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        // If not clicking Specs button or link directly
+                        if (!e.target.closest('.btn-quick-preview') && !e.target.closest('a')) {
+                            const slug = card.getAttribute('data-slug');
+                            if (slug) {
+                                window.location.href = `../opportunity/index.html?slug=${encodeURIComponent(slug)}`;
+                            }
+                        }
+                    });
+                });
 
                 // Wire quick preview modal buttons
                 container.querySelectorAll('.btn-quick-preview').forEach(btn => {
@@ -1339,7 +1552,7 @@
                 document.getElementById('preview-modal-category').textContent = opp.category || 'Business Opportunity';
                 document.getElementById('preview-modal-title').textContent = opp.title;
                 document.getElementById('preview-modal-location').textContent = `Target: ${opp.city_name || opp.state || 'India'} • Model: ${opp.business_model || 'Hybrid'} • Status: ${opp.research_status || 'Verified'}`;
-                document.getElementById('preview-modal-capex').textContent = `₹${Number(opp.budget_min || 0).toLocaleString('en-IN')} – ₹${Number(opp.budget_max || 0).toLocaleString('en-IN')}`;
+                document.getElementById('preview-modal-capex').textContent = `₹${formatLakhs(opp.budget_min)}L – ₹${formatLakhs(opp.budget_max)}L (₹${Number(opp.budget_min || 0).toLocaleString('en-IN')} – ₹${Number(opp.budget_max || 0).toLocaleString('en-IN')})`;
                 document.getElementById('preview-modal-problem').textContent = opp.customer_problem || opp.short_summary;
                 document.getElementById('preview-modal-experiment').textContent = opp.validation_test || 'Direct customer problem interviews followed by small-scale introductory pilot trial.';
                 document.getElementById('preview-modal-full-link').href = `../opportunity/index.html?slug=${encodeURIComponent(opp.slug)}`;

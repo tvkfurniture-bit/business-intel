@@ -80,9 +80,9 @@
         <section class="city-hero bg-light">
             <div class="container">
                 <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <ol>
-                        <li><a href="../../index.html">Home</a></li>
-                        <li><a href="../cities/index.html">Cities</a></li>
+                    <ol style="display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; font-size: 0.85rem; padding: 6px 0; margin: 0;">
+                        <li><a href="../../index.html">Home</a> &gt;</li>
+                        <li><a href="../cities/index.html">Cities</a> &gt;</li>
                         <li id="breadcrumb-city-name" aria-current="page">Loading City...</li>
                     </ol>
                 </nav>
@@ -351,10 +351,10 @@
     <footer class="site-footer" role="contentinfo">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
-                <div class="brand-logo footer-logo">
-                    <img src="../../assets/images/logo.svg" alt="Business Scope Logo" width="28" height="28">
-                    <span>Business Scope</span>
-                </div>
+                <a href="../../index.html" class="brand-logo footer-logo" style="color: white; margin-bottom: 16px; text-decoration: none;">
+                    <img src="../../assets/images/logo.svg" alt="Business Scope Logo" class="brand-logo-img" width="28" height="28">
+                    <span class="brand-text">Business Scope <small style="color: var(--teal);">in Your City</small></span>
+                </a>
                 <p class="footer-tagline"><strong>Discover Local Gaps. Build Real Businesses.</strong></p>
                 <p class="footer-mission">Empirical market intelligence platform helping aspiring founders, professionals, and small investors identify and validate viable business opportunities across Indian cities.</p>
             </div>

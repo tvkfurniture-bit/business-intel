@@ -1212,6 +1212,9 @@
                 if (state.models.length) params.set('model', state.models.join(','));
                 if (state.research_statuses.length) params.set('research_status', state.research_statuses.join(','));
                 if (state.risk_levels.length) params.set('risk_level', state.risk_levels.join(','));
+                if (window.I18N && window.I18N.getCurrentLanguage() !== 'en') {
+                    params.set('lang', window.I18N.getCurrentLanguage());
+                }
 
                 const query = params.toString();
                 const newUrl = window.location.pathname + (query ? '?' + query : '');
@@ -1523,7 +1526,9 @@
                         if (!e.target.closest('.btn-quick-preview') && !e.target.closest('a')) {
                             const slug = card.getAttribute('data-slug');
                             if (slug) {
-                                window.location.href = `../opportunity/index.html?slug=${encodeURIComponent(slug)}`;
+                                const dest = `../opportunity/index.html?slug=${encodeURIComponent(slug)}`;
+                                if (typeof window.navigateTo === 'function') window.navigateTo(dest);
+                                else window.location.href = dest;
                             }
                         }
                     });
@@ -1544,6 +1549,11 @@
                     loadMoreBtn.style.display = 'inline-flex';
                 }
                 paginationInfo.textContent = `Showing ${Math.min(end, total)} of ${total} opportunities`;
+
+                if (window.I18N && typeof window.I18N.translatePage === 'function') {
+                    window.I18N.translatePage();
+                    window.I18N.propagateLinks();
+                }
             }
 
             function openQuickPreview(slug) {

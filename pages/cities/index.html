@@ -201,7 +201,7 @@
 
                 <!-- Comprehensive Multi-Parameter Search & Filter Bar -->
                 <div class="card city-search-bar-wrap" style="padding: 20px; border-radius: var(--radius-lg); margin-top: 14px; box-shadow: var(--shadow-sm);">
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 12px; align-items: end;">
+                    <div class="city-filters-grid">
                         <div>
                             <label for="city-search-input" style="display: block; font-size: 0.76rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.04em;">Search Cities</label>
                             <input type="search" id="city-search-input" placeholder="Type city, state, or industry (e.g. Pune, Gujarat, Ceramics, Tea)..." autocomplete="off" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); box-sizing: border-box; font-size: 0.95rem;">
@@ -869,6 +869,12 @@
 
                 // Render pagination controls
                 renderPagination(total, startIndex, endIndex);
+
+                // Auto-translate rendered cards & propagate chosen language
+                if (window.I18N && typeof window.I18N.translatePage === 'function') {
+                    window.I18N.translatePage();
+                    window.I18N.propagateLinks();
+                }
             }
 
             function renderPagination(total, startIndex, endIndex) {

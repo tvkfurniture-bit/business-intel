@@ -113,6 +113,9 @@ const API = (function() {
    */
   async function get(endpoint, params = {}, useCache = true) {
     if (!CONFIG.APPS_SCRIPT_WEB_APP_URL || CONFIG.APPS_SCRIPT_WEB_APP_URL.includes('SAMPLE_DEPLOYMENT_ID')) {
+      if (endpoint === 'cities') {
+        return normalizeCitiesResponse_([]);
+      }
       console.warn('Backend API URL is unconfigured. Returning empty dataset.');
       return [];
     }

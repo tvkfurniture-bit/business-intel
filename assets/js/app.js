@@ -85,7 +85,12 @@ const App = (function() {
         row.addEventListener('click', () => {
           const slug = row.getAttribute('data-slug');
           if (slug) {
-            window.location.href = `pages/city/index.html?slug=${encodeURIComponent(slug)}`;
+            const dest = `pages/city/index.html?slug=${encodeURIComponent(slug)}`;
+            if (typeof window.navigateTo === 'function') {
+              window.navigateTo(dest);
+            } else {
+              window.location.href = dest;
+            }
           }
         });
       });
@@ -143,13 +148,18 @@ const App = (function() {
     }
 
     window.navigateToSelectedCity = function() {
+      const go = (url) => {
+        if (typeof window.navigateTo === 'function') window.navigateTo(url);
+        else window.location.href = url;
+      };
+
       if (selectedIndex >= 0 && currentMatches[selectedIndex]) {
-        window.location.href = `pages/city/index.html?slug=${encodeURIComponent(currentMatches[selectedIndex].slug)}`;
+        go(`pages/city/index.html?slug=${encodeURIComponent(currentMatches[selectedIndex].slug)}`);
         return;
       }
       const q = input.value.trim().toLowerCase();
       if (!q) {
-        window.location.href = 'pages/cities/index.html';
+        go('pages/cities/index.html');
         return;
       }
       const cities = getCities();
@@ -160,9 +170,9 @@ const App = (function() {
       }) || currentMatches[0];
 
       if (match) {
-        window.location.href = `pages/city/index.html?slug=${encodeURIComponent(match.slug)}`;
+        go(`pages/city/index.html?slug=${encodeURIComponent(match.slug)}`);
       } else {
-        window.location.href = `pages/cities/index.html?search=${encodeURIComponent(q)}`;
+        go(`pages/cities/index.html?search=${encodeURIComponent(q)}`);
       }
     };
 

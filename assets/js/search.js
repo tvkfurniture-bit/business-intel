@@ -215,6 +215,9 @@ const SearchEngine = (function() {
     if (Array.isArray(state.risk_levels) && state.risk_levels.length > 0) {
       params.set('risk_level', state.risk_levels.join(','));
     }
+    if (window.I18N && window.I18N.getCurrentLanguage() !== 'en') {
+      params.set('lang', window.I18N.getCurrentLanguage());
+    }
 
     const query = params.toString();
     const newUrl = window.location.pathname + (query ? '?' + query : '');

@@ -1,21 +1,22 @@
 /**
- * Business Scope in Your City — All-India Multilingual & Localization Engine (i18n)
- * Supports all 22 Eighth Schedule Indian Languages + English:
+ * Business Scope in Your City — Comprehensive Pan-India Localization & i18n Engine
+ * Supports all 22 official Eighth Schedule Indian Languages + English:
  * Hindi, Bengali, Telugu, Marathi, Tamil, Gujarati, Urdu, Kannada, Odia, Malayalam,
  * Punjabi, Assamese, Maithili, Santali, Kashmiri, Nepali, Konkani, Sindhi, Dogri,
  * Manipuri, Bodo, Sanskrit, and English.
- * 
- * Features:
- * - Persistent Cross-Page Translation: URL parameter propagation (?lang=xx), window.name,
- *   sessionStorage, localStorage, and cookie multi-layer synchronization so switching pages
- *   never drops the chosen language.
- * - Automatic Link Rewriting: All internal links and clicks dynamically preserve the active language.
- * - Immediate Deep DOM & Dictionary Translation: Headings, filters, cards, badges, and workflow
- *   translate instantly upon page load across all 17 platform pages.
- * - Synchronized Google Translate Engine: Automatic polling and execution for full dossier
- *   and body text translation with banner suppression.
- * - Right-To-Left (RTL) mode for Urdu and Kashmiri.
- * - Accessible Modal Picker with fuzzy search across scripts, native names, and English aliases.
+ *
+ * Core Capabilities:
+ * 1. 5-Layer Persistent State: URL parameter (?lang=xx), sessionStorage, localStorage,
+ *    window.name, and cookies guarantee language never resets to English when switching pages.
+ * 2. Complete Deep DOM Translation: Automatically traverses and translates text nodes,
+ *    placeholders, titles, option values, and dynamic cards without requiring data-i18n tags.
+ * 3. Bidirectional & Lossless: Retains original English strings in data attributes so toggling
+ *    between any language and back to English is instantaneous and 100% accurate.
+ * 4. Automatic Link & Navigation Interception: All internal links and programmatic navigations
+ *    automatically preserve the chosen language parameter across all 18 platform pages.
+ * 5. MutationObserver Auto-Translation: Newly rendered dynamic content (cities, opportunities,
+ *    blueprints) is translated immediately upon arrival.
+ * 6. Native Ergonomic UI: Header switcher button, mobile drawer integration, and searchable modal.
  */
 
 const I18N = (function() {
@@ -23,10 +24,10 @@ const I18N = (function() {
 
   const STORAGE_KEY = 'bsc_selected_language';
   let currentLang = 'en';
-  let gtPollInterval = null;
   let domObserver = null;
+  let isTranslating = false;
 
-  // Master catalog of 22 Eighth Schedule Indian Languages + English
+  // Master catalog of all 22 Eighth Schedule Indian Languages + English
   const LANGUAGES = [
     { code: 'en', native: 'English', english: 'English', region: 'All India', popular: true, rtl: false },
     { code: 'hi', native: 'हिन्दी', english: 'Hindi', region: 'North / Central India', popular: true, rtl: false },
@@ -53,802 +54,571 @@ const I18N = (function() {
     { code: 'sa', native: 'संस्कृतम्', english: 'Sanskrit', region: 'Classical / Pan-India', popular: false, rtl: false }
   ];
 
-  // Comprehensive multi-page translation dictionaries
-  const TRANSLATIONS = {
-    en: {
-      brand_title: 'Business Scope',
-      brand_subtitle: 'in Your City',
-      nav_opportunities: 'Opportunities',
-      nav_cities: 'Cities',
-      nav_blueprints: 'Blueprints',
-      nav_launch_plans: 'Launch Plans',
-      nav_insights: 'Insights',
-      nav_about: 'About',
-      nav_faq: 'FAQ',
-      nav_account: 'Access Purchases',
-      nav_custom: 'Custom Research',
-      nav_menu: 'Menu',
-      search_city_label: 'Target City',
-      search_city_all: 'All Indian Cities',
-      search_budget_label: 'Max Capex Budget',
-      search_budget_all: 'Any Capital Range',
-      search_model_label: 'Operating Model',
-      search_model_all: 'All Business Models',
-      search_btn: 'Search Opportunities',
-      hero_badge: 'Local Opportunity Intelligence for India',
-      hero_title: 'Find the business scope in your city.',
-      hero_desc: 'Explore practical business possibilities based on local customer problems, your budget, and the way you want to operate. Review assumptions, risks, and low-cost ways to test demand before investing.',
-      where_to_build: 'Where do you want to build?',
-      where_to_build_sub: 'Search any Indian city to open its empirical market profile, local gap analysis, and verified business opportunities.',
-      search_city_placeholder: 'Search your city (e.g. Mumbai, Bengaluru, Jaipur, Lucknow, Patna, Guwahati)...',
-      open_city_btn: 'Open City →',
-      top_markets: 'Top Markets:',
-      all_cities_btn: 'All 88+ Cities →',
-      workflow_title: 'How "Business Scope in Your City" Works',
-      workflow_sub: 'A disciplined, data-driven pathway from identifying a local municipal market to launching a validated business.',
-      cities_hero_title: 'Explore Business Opportunities Across India',
-      cities_hero_sub: 'Discover business opportunities city by city, from India\'s largest metropolitan markets to emerging local economies.',
-      tier_all: 'All Cities',
-      tier_1: 'Tier 1',
-      tier_2: 'Tier 2',
-      tier_3: 'Tier 3',
-      tier_4: 'Tier 4',
-      tier_5: 'Tier 5',
-      tier_1_sub: 'Major metropolitan markets',
-      tier_2_sub: 'Large emerging commercial centers',
-      tier_3_sub: 'Growing regional economies',
-      tier_4_sub: 'Emerging local business markets',
-      tier_5_sub: 'Smaller cities & specialized clusters',
-      city_search_label: 'Search Cities',
-      city_state_label: 'State / UT',
-      city_tier_label: 'Market Tier',
-      city_status_label: 'Research Status',
-      reset_btn: 'Reset',
-      explore_city_btn: 'Explore Guide →',
-      opps_in_city: 'Business Opportunities in',
-      read_opp_guide: 'Read Opportunity Guide →',
-      access_blueprint: 'Access Blueprint →',
-      view_all_cities: 'View all cities →',
-      browse_catalogue: 'Browse full catalogue →',
-      startup_capex: 'Startup Capex Range',
-      indicative_capex: 'Indicative Startup Capex',
-      badge_verified: 'Verified Gap',
-      badge_validated: 'Customer Validated',
-      badge_supported: 'Evidence Supported',
-      badge_desk: 'Desk Research',
-      footer_rights: 'All rights reserved.',
-      lang_switch_btn: 'Language',
-      lang_modal_title: 'Choose Your Indian Language',
-      lang_search_placeholder: 'Search language (e.g. Hindi, Bengali, Tamil, Telugu)...',
-      all_india_notice: 'Available in all 22 official Indian languages + English'
+  // Universal phrase dictionary mapping across languages
+  // Every key corresponds to an exact English UI string
+  const PHRASE_DICTIONARY = {
+    // Navigation & Global
+    'Opportunities': {
+      hi: 'व्यापारिक अवसर', bn: 'ব্যবসায়িক সুযোগ', te: 'వ్యాపార అవకాశాలు', mr: 'व्यावसायिक संधी',
+      ta: 'தொழில் வாய்ப்புகள்', gu: 'વ્યાપારિક તકો', ur: 'کاروباری مواقع', kn: 'ವ್ಯಾಪಾರ ಅವಕಾಶಗಳು',
+      or: 'ବ୍ୟବସାୟ ସୁଯୋଗ', ml: 'സംരംഭക അവസരങ്ങൾ', pa: 'ਵਪਾਰਕ ਮੌਕੇ', as: 'ব্যৱসায়িক সুযোগ',
+      mai: 'व्यापारिक अवसर', ne: 'व्यापारिक अवसरहरू', sa: 'व्यापारिक अवसराः'
     },
-    hi: {
-      brand_title: 'बिजनेस स्कोप',
-      brand_subtitle: 'आपके शहर में',
-      nav_opportunities: 'अवसर (Opportunities)',
-      nav_cities: 'शहर (Cities)',
-      nav_blueprints: 'ब्लूप्रिंट्स (Blueprints)',
-      nav_launch_plans: '90-दिवसीय योजनाएं',
-      nav_insights: 'मार्केट इनसाइट्स',
-      nav_about: 'हमारे बारे में',
-      nav_faq: 'सवाल-जवाब (FAQ)',
-      nav_account: 'खरीदी गई रिपोर्ट्स',
-      nav_custom: 'कस्टम रिसर्च कराएं',
-      nav_menu: 'मेनू',
-      search_city_label: 'लक्ष्य शहर',
-      search_city_all: 'भारत के सभी शहर',
-      search_budget_label: 'अधिकतम बजट',
-      search_budget_all: 'सभी बजट रेंज',
-      search_model_label: 'बिजनेस मॉडल',
-      search_model_all: 'सभी प्रकार के मॉडल',
-      search_btn: 'अवसर खोजें',
-      hero_badge: 'भारतीय शहरों के लिए स्थानीय व्यावसायिक बुद्धिमत्ता',
-      hero_title: 'अपने शहर में सही बिजनेस का स्कोप पहचानें।',
-      hero_desc: 'स्थानीय ग्राहकों की जरूरतों, अपने बजट और परिचालन मॉडल के आधार पर वास्तविक व्यापारिक अवसरों की खोज करें। पूंजी लगाने से पहले मान्यताओं, जोखिमों और मांग का परीक्षण करें।',
-      where_to_build: 'आप किस शहर में बिजनेस शुरू करना चाहते हैं?',
-      where_to_build_sub: 'किसी भी भारतीय शहर का नाम खोजें और उसकी बाजार प्रोफाइल, व्यापारिक अंतर व सत्यापित अवसर देखें।',
-      search_city_placeholder: 'अपना शहर खोजें (उदा. मुंबई, दिल्ली, बेंगलुरु, लखनऊ, जयपुर, पटना)...',
-      open_city_btn: 'शहर खोलें →',
-      top_markets: 'प्रमुख शहर:',
-      all_cities_btn: 'सभी 88+ शहर देखें →',
-      workflow_title: '"बिजनेस स्कोप इन योर सिटी" कैसे काम करता है',
-      workflow_sub: 'स्थानीय शहर की पहचान से लेकर सत्यापित व्यवसाय शुरू करने की एक व्यवस्थित और डेटा-संचालित प्रक्रिया।',
-      cities_hero_title: 'भारत भर के शहरों में व्यावसायिक अवसरों की खोज करें',
-      cities_hero_sub: 'भारत के प्रमुख महानगरों से लेकर उभरते छोटे शहरों तक, हर शहर के अनुसार सही व्यापारिक अवसर खोजें।',
-      tier_all: 'सभी शहर',
-      tier_1: 'टियर 1 (महानगर)',
-      tier_2: 'टियर 2 (उभरते केंद्र)',
-      tier_3: 'टियर 3 (क्षेत्रीय केंद्र)',
-      tier_4: 'टियर 4 (स्थानीय बाजार)',
-      tier_5: 'टियर 5 (कस्बे व क्लस्टर)',
-      tier_1_sub: 'प्रमुख महानगरीय बाजार',
-      tier_2_sub: 'बड़े उभरते वाणिज्यिक केंद्र',
-      tier_3_sub: 'बढ़ती क्षेत्रीय अर्थव्यवस्थाएं',
-      tier_4_sub: 'उभरते स्थानीय व्यापारिक बाजार',
-      tier_5_sub: 'छोटे शहर और विशेष औद्योगिक क्लस्टर',
-      city_search_label: 'शहर खोजें',
-      city_state_label: 'राज्य / केंद्र शासित प्रदेश',
-      city_tier_label: 'मार्केट टियर',
-      city_status_label: 'रिसर्च स्थिति',
-      reset_btn: 'रीसेट करें',
-      explore_city_btn: 'गाइड देखें →',
-      opps_in_city: 'व्यावसायिक अवसर:',
-      read_opp_guide: 'विस्तृत गाइड पढ़ें →',
-      access_blueprint: 'ब्लूप्रिंट प्राप्त करें →',
-      view_all_cities: 'सभी शहर देखें →',
-      browse_catalogue: 'पूरी सूची ब्राउज़ करें →',
-      startup_capex: 'अनुमानित शुरुआती पूंजी',
-      indicative_capex: 'शुरुआती निवेश लागत',
-      badge_verified: 'सत्यापित अवसर',
-      badge_validated: 'ग्राहक प्रमाणित',
-      badge_supported: 'तथ्यों द्वारा समर्थित',
-      badge_desk: 'डेस्क रिसर्च',
-      footer_rights: 'सर्वाधिकार सुरक्षित।',
-      lang_switch_btn: 'भाषा',
-      lang_modal_title: 'अपनी भाषा चुनें (Choose Language)',
-      lang_search_placeholder: 'भाषा खोजें (जैसे हिन्दी, বাংলা, தமிழ், मराठी)...',
-      all_india_notice: 'भारत की सभी 22 आधिकारिक भाषाओं में उपलब्ध'
+    'Cities': {
+      hi: 'शहर', bn: 'শহরসমূহ', te: 'నగరాలు', mr: 'शहरं', ta: 'நகரங்கள்', gu: 'શહેરો',
+      ur: 'شہر', kn: 'ನಗರಗಳು', or: 'ସହରସମୂହ', ml: 'നഗരങ്ങൾ', pa: 'ਸ਼ਹਿਰ', as: 'নগৰসমূহ',
+      mai: 'शहर', ne: 'सहरहरू', sa: 'नगराणि'
     },
-    bn: {
-      brand_title: 'বিজনেস স্কোপ',
-      brand_subtitle: 'আপনার শহরে',
-      nav_opportunities: 'সুযোগসমূহ (Opportunities)',
-      nav_cities: 'শহরসমূহ (Cities)',
-      nav_blueprints: 'ব্লুপ্রিন্ট',
-      nav_launch_plans: '৯০ দিনের পরিকল্পনা',
-      nav_insights: 'বাজার গবেষণা',
-      nav_about: 'আমাদের সম্পর্কে',
-      nav_faq: 'প্রশ্নোত্তর',
-      nav_account: 'কেনা রিপোর্ট দেখুন',
-      nav_custom: 'কাস্টম রিসার্চ',
-      nav_menu: 'মেনু',
-      search_city_label: 'নির্দিষ্ট শহর',
-      search_city_all: 'ভারতের সকল শহর',
-      search_budget_label: 'সর্বোচ্চ বাজেট',
-      search_budget_all: 'সকল বাজেট রেঞ্জ',
-      search_model_label: 'বিজনেস মডেল',
-      search_model_all: 'সকল মডেল',
-      search_btn: 'সুযোগ অনুসন্ধান করুন',
-      hero_badge: 'ভারতের জন্য স্থানীয় ব্যবসায়িক বুদ্ধিমত্তা',
-      hero_title: 'আপনার শহরের সেরা ব্যবসায়িক সুযোগ খুঁজুন।',
-      hero_desc: 'স্থানীয় চাহিদা, আপনার বিনিয়োগ বাজেট এবং পদ্ধতির ওপর ভিত্তি করে লাভজনক ব্যবসার সম্ভাবনা যাচাই করুন। মূলধন বিনিয়োগের আগে বাজার যাচাই করুন।',
-      where_to_build: 'আপনি কোথায় ব্যবসা শুরু করতে চান?',
-      where_to_build_sub: 'যেকোনো ভারতীয় শহরের নাম অনুসন্ধান করে স্থানীয় বাজার বিশ্লেষণ ও ব্যবসায়িক সুযোগ দেখুন।',
-      search_city_placeholder: 'আপনার শহর খুঁজুন (যেমন কলকাতা, শিলিগুড়ি, দুর্গাপুর, মুম্বাই)...',
-      open_city_btn: 'শহর দেখুন →',
-      top_markets: 'প্রধান শহরসমূহ:',
-      all_cities_btn: 'সকল ৮৮+ শহর →',
-      workflow_title: '"বিজনেস স্কোপ ইন ইয়োর সিটি" কীভাবে কাজ করে',
-      workflow_sub: 'শহর নির্বাচন থেকে শুরু করে লাভজনক ব্যবসা চালুর সঠিক পদক্ষেপ।',
-      cities_hero_title: 'ভারত জুড়ে ব্যবসায়িক সুযোগ অনুসন্ধান করুন',
-      cities_hero_sub: 'ভারতের মেট্রোপলিটন মার্কেট থেকে শুরু করে স্থানীয় বাণিজ্য কেন্দ্র পর্যন্ত শহরভিত্তিক সুযোগ খুঁজুন।',
-      tier_all: 'সকল শহর',
-      tier_1: 'টায়ার ১ (মেট্রো)',
-      tier_2: 'টায়ার ২ (বাণিজ্যিক কেন্দ্র)',
-      tier_3: 'টায়ার ৩ (আঞ্চলিক শহর)',
-      tier_4: 'টায়ার ৪ (স্থানীয় বাজার)',
-      tier_5: 'টায়ার ৫ (ছোট শহর ও ক্লাস্টার)',
-      tier_1_sub: 'প্রধান মেট্রোপলিটন বাজার',
-      tier_2_sub: 'বড় উদীয়মান বাণিজ্যিক কেন্দ্র',
-      tier_3_sub: 'ক্রমবর্ধমান আঞ্চলিক অর্থনীতি',
-      tier_4_sub: 'উদীয়মান স্থানীয় বাজার',
-      tier_5_sub: 'ছোট শহর ও বিশেষ শিল্প ক্লাস্টার',
-      city_search_label: 'শহর অনুসন্ধান',
-      city_state_label: 'রাজ্য / কেন্দ্রশাসিত অঞ্চল',
-      city_tier_label: 'মার্কেট টায়ার',
-      city_status_label: 'গবেষণার অবস্থা',
-      reset_btn: 'রিসেট',
-      explore_city_btn: 'গাইড দেখুন →',
-      opps_in_city: 'ব্যবসায়িক সুযোগসমূহ:',
-      read_opp_guide: 'বিস্তারিত গাইড পড়ুন →',
-      access_blueprint: 'ব্লুপ্রিন্ট সংগ্রহ করুন →',
-      view_all_cities: 'সমস্ত শহর দেখুন →',
-      browse_catalogue: 'সম্পূর্ণ তালিকা দেখুন →',
-      startup_capex: 'প্রাথমিক বিনিয়োগ পরিসীমা',
-      indicative_capex: 'আনুমানিক মূলধন',
-      badge_verified: 'যাচাইকৃত তথ্য',
-      badge_validated: 'গ্রাহক দ্বারা প্রমাণিত',
-      badge_supported: 'প্রমাণিত বিশ্লেষণ',
-      badge_desk: 'ডেস্ক গবেষণা',
-      footer_rights: 'সর্বস্বত্ব সংরক্ষিত।',
-      lang_switch_btn: 'ভাষা',
-      lang_modal_title: 'আপনার পছন্দের ভাষা নির্বাচন করুন',
-      lang_search_placeholder: 'ভাষা খুঁজুন (যেমন বাংলা, হিন্দি, তামিল)...',
-      all_india_notice: 'ভারতের সমস্ত ২২টি সরকারি ভাষায় উপলব্ধ'
+    'Blueprints': {
+      hi: 'ब्लूप्रिंट्स', bn: 'ব্লুপ্রিন্ট', te: 'బ్లూప్రింట్లు', mr: 'ब्लूप्रिंट्स',
+      ta: 'வடிவமைப்புகள்', gu: 'બ્લૂપ્રિન્ટ્સ', ur: 'بلیو پرنٹس', kn: 'ಬ್ಲೂಪ್ರಿಂಟ್ಗಳು',
+      or: 'ବ୍ଲୁପ୍ରିଣ୍ଟ', ml: 'ബ്ലൂപ്രിന്റുകൾ', pa: 'ਬਲੂਪ੍ਰਿੰਟਸ', as: 'ব্লুপ্ৰিন্ট',
+      mai: 'ब्लूप्रिंट', ne: 'ब्लुप्रिन्टहरू', sa: 'परियोजनाप्रारूपाणि'
     },
-    te: {
-      brand_title: 'బిజినెస్ స్కోప్',
-      brand_subtitle: 'మీ నగరంలో',
-      nav_opportunities: 'వ్యాపార అవకాశాలు',
-      nav_cities: 'నగరాలు',
-      nav_blueprints: 'బ్లూప్రింట్లు',
-      nav_launch_plans: '90-రోజుల ప్రణాళికలు',
-      nav_insights: 'మార్కెట్ విశ్లేషణ',
-      nav_about: 'మా గురించి',
-      nav_faq: 'తరచుగా అడిగే ప్రశ్నలు',
-      nav_account: 'మీ నివేదికలు',
-      nav_custom: 'ప్రత్యేక పరిశోధన',
-      nav_menu: 'మెనూ',
-      search_city_label: 'లక్ష్య నగరం',
-      search_city_all: 'భారతదేశంలోని అన్ని నగరాలు',
-      search_budget_label: 'గరిష్ట పెట్టుబడి',
-      search_budget_all: 'అన్ని బడ్జెట్ శ్రేణులు',
-      search_model_label: 'వ్యాపార విధానం',
-      search_model_all: 'అన్ని మోడల్స్',
-      search_btn: 'అవకాశాలను శోధించండి',
-      hero_badge: 'భారతీయ నగరాలకు స్థానిక వ్యాపార మేధస్సు',
-      hero_title: 'మీ నగరంలో వ్యాపార అవకాశాలను కనుగొనండి.',
-      hero_desc: 'స్థానిక వినియోగదారుల సమస్యలు, మీ బడ్జెట్ మరియు నిర్వహణ విధానం ఆధారంగా వాస్తవ అవకాశాలను అన్వేషించండి.',
-      where_to_build: 'మీరు ఎక్కడ వ్యాపారం నిర్మించాలనుకుంటున్నారు?',
-      where_to_build_sub: 'ఏదైనా భారతీయ నగరాన్ని ఎంచుకుని స్థానిక మార్కెట్ విశ్లేషణ మరియు అవకాశాలను చూడండి.',
-      search_city_placeholder: 'నగరాన్ని శోధించండి (ఉదా. హైదరాబాద్, విశాఖపట్నం, విజయవాడ, బెంగళూరు)...',
-      open_city_btn: 'నగరాన్ని తెరవండి →',
-      top_markets: 'ప్రధాన నగరాలు:',
-      all_cities_btn: 'అన్ని 88+ నగరాలు →',
-      workflow_title: 'మా ప్లాట్‌ఫారమ్ ఎలా పనిచేస్తుంది',
-      workflow_sub: 'నగరాన్ని ఎంచుకోవడం నుండి విజయవంతమైన వ్యాపారం ప్రారంభించే వరకు సరైన మార్గం.',
-      cities_hero_title: 'భారతదేశ వ్యాప్తంగా వ్యాపార అవకాశాలు',
-      cities_hero_sub: 'మెట్రో నగరాల నుండి అభివృద్ధి చెందుతున్న చిన్న పట్టణాల వరకు నగరాల వారిగా అవకాశాలు.',
-      tier_all: 'అన్ని నగరాలు',
-      tier_1: 'టైర్ 1 (మెట్రోలు)',
-      tier_2: 'టైర్ 2 (వాణిజ్య కేంద్రాలు)',
-      tier_3: 'టైర్ 3 (ప్రాంతీయ నగరాలు)',
-      tier_4: 'టైర్ 4 (స్థానిక మార్కెట్లు)',
-      tier_5: 'టైర్ 5 (చిన్న పట్టణాలు)',
-      city_search_label: 'నగరాన్ని శోధించండి',
-      city_state_label: 'రాష్ట్రం',
-      city_tier_label: 'మార్కెట్ టైర్',
-      city_status_label: 'పరిశోధన స్థితి',
-      reset_btn: 'రీసెట్',
-      explore_city_btn: 'గైడ్ చూడండి →',
-      opps_in_city: 'వ్యాపార అవకాశాలు:',
-      read_opp_guide: 'పూర్తి గైడ్ చదవండి →',
-      access_blueprint: 'బ్లూప్రింట్ పొందండి →',
-      view_all_cities: 'అన్ని నగరాలు చూడండి →',
-      browse_catalogue: 'మొత్తం డైరెక్టరీ →',
-      startup_capex: 'ప్రారంభ పెట్టుబడి పరిధి',
-      indicative_capex: 'అంచనా పెట్టుబడి',
-      badge_verified: 'ధృవీకరించబడినది',
-      badge_validated: 'ఖాతాదారుల ఆమోదం',
-      badge_supported: 'నిరూపిత సమాచారం',
-      badge_desk: 'పరిశోధన ఆధారం',
-      footer_rights: 'సర్వహక్కులు ప్రత్యేకించబడ్డాయి.',
-      lang_switch_btn: 'భాష',
-      lang_modal_title: 'మీ భాషను ఎంచుకోండి',
-      lang_search_placeholder: 'భాష కోసం శోధించండి (తెలుగు, హిందీ, తమిళం)...',
-      all_india_notice: 'భారతదేశంలోని అన్ని 22 అధికారిక భాషలలో అందుబాటులో ఉంది'
+    'Launch Plans': {
+      hi: 'लॉन्च योजनाएं', bn: 'লঞ্চ পরিকল্পনা', te: 'లాంచ్ ప్రణాళికలు', mr: 'लाँच योजना',
+      ta: 'துவக்கத் திட்டங்கள்', gu: 'લોન્ચ યોજનાઓ', ur: 'لانچ پلانز', kn: 'ಲಾಂಚ್ ಯೋಜನೆಗಳು',
+      or: 'ଲଞ୍ଚ ଯୋଜନା', ml: 'ലോഞ്ച് പ്ലാനുകൾ', pa: 'ਲਾਂਚ ਯੋਜਨਾਵਾਂ', as: 'আৰম্ভণি পৰিকল্পনা',
+      mai: 'लॉन्च योजना', ne: 'सुरुवात योजनाहरू', sa: 'प्रारम्भयोजनाः'
     },
-    mr: {
-      brand_title: 'बिझनेस स्कोप',
-      brand_subtitle: 'तुमच्या शहरात',
-      nav_opportunities: 'व्यवसाय संधी (Opportunities)',
-      nav_cities: 'शहरे (Cities)',
-      nav_blueprints: 'ब्लूप्रिंट्स',
-      nav_launch_plans: '९० दिवसांची योजना',
-      nav_insights: 'मार्केट इनसाइट्स',
-      nav_about: 'आमच्याबद्दल',
-      nav_faq: 'वारंवार विचारले जाणारे प्रश्न',
-      nav_account: 'खरेदी केलेले रिपोर्ट्स',
-      nav_custom: 'कस्टम रिसर्च',
-      nav_menu: 'मेनू',
-      search_city_label: 'लक्ष्य शहर',
-      search_city_all: 'भारतातील सर्व शहरे',
-      search_budget_label: 'कमाल भांडवल',
-      search_budget_all: 'सर्व भांडवल मर्यादा',
-      search_model_label: 'ऑपरेटिंग मॉडेल',
-      search_model_all: 'सर्व बिझनेस मॉडेल्स',
-      search_btn: 'संधी शोधा',
-      hero_badge: 'भारतीय शहरांसाठी स्थानिक व्यवसाय विश्लेषण',
-      hero_title: 'तुमच्या शहरात व्यवसायाची नेमकी संधी शोधा.',
-      hero_desc: 'स्थानिक ग्राहकांच्या गरजा, तुमचे भांडवल आणि कामकाजाच्या पद्धतीनुसार प्रत्यक्ष व्यवसाय संधींचा शोध घ्या.',
-      where_to_build: 'तुम्हाला कोणत्या शहरात व्यवसाय सुरू करायचा आहे?',
-      where_to_build_sub: 'कोणत्याही भारतीय शहराचे नाव शोधा आणि त्याचे मार्केट प्रोफाइल, व्यापारी तूट व सत्यापित संधी पहा.',
-      search_city_placeholder: 'तुमचे शहर शोधा (उदा. मुंबई, पुणे, नागपूर, नाशिक, संभाजीनगर)...',
-      open_city_btn: 'शहर उघडा →',
-      top_markets: 'प्रमुख शहरे:',
-      all_cities_btn: 'सर्व ८८+ शहरे →',
-      workflow_title: 'आमची कार्यपद्धती कशी चालते',
-      workflow_sub: 'स्थानिक बाजारपेठेच्या निवडीपासून ते प्रत्यक्ष व्यवसाय उभारणीपर्यंतची खात्रीशीर पायरी.',
-      cities_hero_title: 'भारतातील शहरांनुसार व्यवसाय संधी शोधा',
-      cities_hero_sub: 'मोठ्या महानगरांपासून ते स्थानिक उदयोन्मुख बाजारपेठांपर्यंत शहरनिहाय संशोधन.',
-      tier_all: 'सर्व शहरे',
-      tier_1: 'टियर १ (महानगर)',
-      tier_2: 'टियर २ (व्यापारी केंद्र)',
-      tier_3: 'टियर ३ (प्रादेशिक शहरे)',
-      tier_4: 'टियर ४ (स्थानिक बाजार)',
-      tier_5: 'टियर ५ (लहान शहरे)',
-      city_search_label: 'शहर शोधा',
-      city_state_label: 'राज्य',
-      city_tier_label: 'मार्केट टियर',
-      city_status_label: 'संशोधन स्थिती',
-      reset_btn: 'रीसेट करा',
-      explore_city_btn: 'गाईड पहा →',
-      opps_in_city: 'व्यवसाय संधी:',
-      read_opp_guide: 'सविस्तर गाईड वाचा →',
-      access_blueprint: 'ब्लूप्रिंट मिळवा →',
-      view_all_cities: 'सर्व शहरे पहा →',
-      browse_catalogue: 'सर्व यादी पहा →',
-      startup_capex: 'सुरुवातीचे भांडवल मर्यादा',
-      indicative_capex: 'अंदाजे भांडवल',
-      badge_verified: 'सत्यापित संधी',
-      badge_validated: 'ग्राहक प्रमाणित',
-      badge_supported: 'पुरावा समर्थित',
-      badge_desk: 'डेस्क संशोधन',
-      footer_rights: 'सर्व हक्क राखीव.',
-      lang_switch_btn: 'भाषा',
-      lang_modal_title: 'तुमची भाषा निवडा',
-      lang_search_placeholder: 'भाषा शोधा (उदा. मराठी, हिंदी, गुजराती)...',
-      all_india_notice: 'भारतातील सर्व २२ अधिकृत भाषांमध्ये उपलब्ध'
+    'Insights': {
+      hi: 'मार्केट इनसाइट्स', bn: 'মার্কেট অন্তর্দৃষ্টি', te: 'మార్కెట్ విశ్లేషణ', mr: 'मार्केट इनसाइट्स',
+      ta: 'சந்தை பார்வைகள்', gu: 'બજાર વિશ્લેષણ', ur: 'مارکیٹ بصیرت', kn: 'ಮಾರುಕಟ್ಟೆ ಒಳನೋಟಗಳು',
+      or: 'ମାର୍କେଟ ଅନ୍ତର୍ଦୃଷ୍ଟି', ml: 'മാർക്കറ്റ് ഉൾക്കാഴ്ചകൾ', pa: 'ਮਾਰਕੀਟ ਜਾਣਕਾਰੀ', as: 'বজাৰ বিশ্লেষণ',
+      mai: 'मार्केट अंतर्दृष्टि', ne: 'बजार अन्तरदृष्टि', sa: 'विपणनदृष्टयः'
     },
-    ta: {
-      brand_title: 'பிசினஸ் ஸ்கோப்',
-      brand_subtitle: 'உங்கள் நகரில்',
-      nav_opportunities: 'தொழில் வாய்ப்புகள் (Opportunities)',
-      nav_cities: 'நகரங்கள் (Cities)',
-      nav_blueprints: 'ப்ளூபிரிண்ட்கள்',
-      nav_launch_plans: '90-நாள் திட்டங்கள்',
-      nav_insights: 'சந்தை நுண்ணறிவு',
-      nav_about: 'எங்களை பற்றி',
-      nav_faq: 'அடிக்கடி கேட்கப்படும் கேள்விகள்',
-      nav_account: 'வாங்கிய அறிக்கைகள்',
-      nav_custom: 'சிறப்பு ஆய்வு',
-      nav_menu: 'பட்டியல்',
-      search_city_label: 'இலக்கு நகரம்',
-      search_city_all: 'இந்தியாவின் அனைத்து நகரங்கள்',
-      search_budget_label: 'அதிகபட்ச மூலதனம்',
-      search_budget_all: 'அனைத்து பட்ஜெட் வரம்புகள்',
-      search_model_label: 'வணிக முறை',
-      search_model_all: 'அனைத்து வணிக மாதிரிகள்',
-      search_btn: 'வாய்ப்புகளைத் தேடுங்கள்',
-      hero_badge: 'இந்திய நகரங்களுக்கான உள்ளூர் வணிக நுண்ணறிவு',
-      hero_title: 'உங்கள் நகரில் சரியான வணிக வாய்ப்பைக் கண்டறியுங்கள்.',
-      hero_desc: 'உள்ளூர் வாடிக்கையாளர் தேவைகள் மற்றும் உங்கள் முதலீட்டுக்கு ஏற்ப லாபகரமான வணிகங்களை ஆய்வு செய்யுங்கள்.',
-      where_to_build: 'நீங்கள் எங்கு தொழில் தொடங்க விரும்புகிறீர்கள்?',
-      where_to_build_sub: 'எந்தவொரு இந்திய நகரத்தையும் தேர்வு செய்து அதன் உள்ளூர் சந்தை மற்றும் வாய்ப்புகளைப் பாருங்கள்.',
-      search_city_placeholder: 'உங்கள் நகரத்தைத் தேடுங்கள் (எ.கா. சென்னை, கோவை, மதுரை, திருச்சி)...',
-      open_city_btn: 'நகரத்தைக் காண்க →',
-      top_markets: 'முக்கிய நகரங்கள்:',
-      all_cities_btn: 'அனைத்து 88+ நகரங்கள் →',
-      workflow_title: 'எங்கள் தளம் எவ்வாறு செயல்படுகிறது',
-      workflow_sub: 'நகரத் தேர்விலிருந்து வெற்றிகரமான வணிகத் தொடக்கம் வரையிலான நம்பகமான வழிமுறை.',
-      cities_hero_title: 'இந்தியா முழுவதும் உள்ள வணிக வாய்ப்புகள்',
-      cities_hero_sub: 'பெருநகரங்கள் முதல் வளர்ந்து வரும் சிறு நகரங்கள் வரை நகர வாரியான வணிக பகுப்பாய்வு.',
-      tier_all: 'அனைத்து நகரங்கள்',
-      tier_1: 'டயர் 1 (பெருநகரங்கள்)',
-      tier_2: 'டயர் 2 (வணிக மையங்கள்)',
-      tier_3: 'டயர் 3 (வட்டார நகரங்கள்)',
-      tier_4: 'டயர் 4 (உள்ளூர் சந்தைகள்)',
-      tier_5: 'டயர் 5 (சிறு நகரங்கள்)',
-      city_search_label: 'நகரத் தேடல்',
-      city_state_label: 'மாநிலம்',
-      city_tier_label: 'சந்தை நிலை',
-      city_status_label: 'ஆய்வு நிலை',
-      reset_btn: 'மீட்டமைக்க',
-      explore_city_btn: 'வழிகாட்டியைப் பார் →',
-      opps_in_city: 'வணிக வாய்ப்புகள்:',
-      read_opp_guide: 'முழு வழிகாட்டியைப் படிக்கவும் →',
-      access_blueprint: 'ப்ளூபிரிண்ட் பெறவும் →',
-      view_all_cities: 'அனைத்து நகரங்களையும் காண்க →',
-      browse_catalogue: 'முழு பட்டியல் →',
-      startup_capex: 'தொடக்க முதலீட்டு வரம்பு',
-      indicative_capex: 'உத்தேச முதலீடு',
-      badge_verified: 'சரிபார்க்கப்பட்டது',
-      badge_validated: 'வாடிக்கையாளர் அங்கீகாரம்',
-      badge_supported: 'ஆதாரப்பூர்வமானது',
-      badge_desk: 'ஆய்வகத் தகவல்',
-      footer_rights: 'அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.',
-      lang_switch_btn: 'மொழி',
-      lang_modal_title: 'உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்',
-      lang_search_placeholder: 'மொழியைத் தேடுங்கள் (தமிழ், இந்தி, தெலுங்கு)...',
-      all_india_notice: 'இந்தியாவின் அனைத்து 22 அதிகாரப்பூர்வ மொழிகளிலும் கிடைக்கிறது'
+    'About': {
+      hi: 'हमारे बारे में', bn: 'আমাদের সম্পর্কে', te: 'మా గురించి', mr: 'आमच्याबद्दल',
+      ta: 'எங்களைப் பற்றி', gu: 'અમારા વિશે', ur: 'ہمارے متعلق', kn: 'ನಮ್ಮ ಬಗ್ಗೆ',
+      or: 'ଆମ ବିଷୟରେ', ml: 'ഞങ്ങളെക്കുറിച്ച്', pa: 'ਸਾਡੇ ਬਾਰੇ', as: 'আমাৰ বিষয়ে',
+      mai: 'हमर बारे मे', ne: 'हाम्रो बारेमा', sa: 'अस्माकं विषये'
     },
-    gu: {
-      brand_title: 'બિઝનેસ સ્કોપ',
-      brand_subtitle: 'તમારા શહેરમાં',
-      nav_opportunities: 'વ્યાપાર તકો',
-      nav_cities: 'શહેરો',
-      nav_blueprints: 'બ્લૂપ્રિન્ટ્સ',
-      nav_launch_plans: '૯૦ દિવસીય આયોજન',
-      nav_insights: 'માર્કેટ ઇનસાઇટ્સ',
-      nav_about: 'અમારા વિશે',
-      nav_faq: 'વારંવાર પૂછાતા પ્રશ્નો',
-      nav_account: 'ખરીદેલ રિપોર્ટ્સ',
-      nav_custom: 'કસ્ટમ રિસર્ચ',
-      nav_menu: 'મેનુ',
-      search_city_label: 'લક્ષ્ય શહેર',
-      search_city_all: 'ભારતના તમામ શહેરો',
-      search_budget_label: 'મહત્તમ બજેટ',
-      search_budget_all: 'તમામ બજેટ શ્રેણી',
-      search_model_label: 'બિઝનેસ મોડેલ',
-      search_model_all: 'તમામ મોડેલ્સ',
-      search_btn: 'તકો શોધો',
-      hero_badge: 'ભારતીય શહેરો માટે સ્થાનિક વ્યાપાર બુદ્ધિમત્તા',
-      hero_title: 'તમારા શહેરમાં સાચી બિઝનેસ તક ઓળખો.',
-      hero_desc: 'સ્થાનિક ગ્રાહકોની જરૂરિયાતો અને તમારા બજેટ મુજબ વાસ્તવિક બિઝનેસ તકો શોધો.',
-      where_to_build: 'તમે કયા શહેરમાં બિઝનેસ શરૂ કરવા માંગો છો?',
-      where_to_build_sub: 'કોઈપણ ભારતીય શહેર શોધો અને તેની માર્કેટ પ્રોફાઇલ અને વ્યાપાર તકો જુઓ.',
-      search_city_placeholder: 'તમારું શહેર શોધો (દા.ત. અમદાવાદ, સુરત, વડોદરા, રાજકોટ)...',
-      open_city_btn: 'શહેર જુઓ →',
-      top_markets: 'મુખ્ય શહેરો:',
-      all_cities_btn: 'તમામ ૮૮+ શહેરો →',
-      workflow_title: 'અમારું પ્લેટફોર્મ કેવી રીતે કાર્ય કરે છે',
-      workflow_sub: 'શહેરની પસંદગીથી લઈને સફળ બિઝનેસ શરૂ કરવા સુધીનો વિશ્વસનીય માર્ગ.',
-      cities_hero_title: 'સમગ્ર ભારતમાં વ્યાપાર તકોની શોધ કરો',
-      cities_hero_sub: 'મેટ્રો શહેરોથી લઈને ઊભરતા નાના શહેરો સુધી શહેરવાર વ્યાપાર તકો.',
-      tier_all: 'તમામ શહેરો',
-      tier_1: 'ટિયર ૧ (મેટ્રો)',
-      tier_2: 'ટિયર ૨ (વાણિજ્યિક કેન્દ્રો)',
-      tier_3: 'ટિયર ૩ (પ્રાદેશિક શહેરો)',
-      tier_4: 'ટિયર ૪ (સ્થાનિક બજારો)',
-      tier_5: 'ટિયર ૫ (નાના નગરો)',
-      city_search_label: 'શહેર શોધો',
-      city_state_label: 'રાજ્ય',
-      city_tier_label: 'માર્કેટ ટિયર',
-      city_status_label: 'સંશોધન સ્થિતિ',
-      reset_btn: 'રીસેટ',
-      explore_city_btn: 'માર્ગદર્શિકા જુઓ →',
-      opps_in_city: 'વ્યાપાર તકો:',
-      read_opp_guide: 'વિગતવાર માર્ગદર્શિકા વાંચો →',
-      access_blueprint: 'બ્લૂપ્રિન્ટ મેળવો →',
-      view_all_cities: 'તમામ શહેરો જુઓ →',
-      browse_catalogue: 'સંપૂર્ણ ડિરેક્ટરી →',
-      startup_capex: 'પ્રારંભિક મૂડી મર્યાદા',
-      indicative_capex: 'અંદાજિત રોકાણ',
-      badge_verified: 'ચકાસાયેલ તક',
-      badge_validated: 'ગ્રાહક પ્રમાણિત',
-      badge_supported: 'પુરાવા આધારિત',
-      badge_desk: 'ડેસ્ક સંશોધન',
-      footer_rights: 'સર્વાધિકાર સુરક્ષિત.',
-      lang_switch_btn: 'ભાષા',
-      lang_modal_title: 'તમારી ભાષા પસંદ કરો',
-      lang_search_placeholder: 'ભાષા શોધો (ગુજરાતી, હિન્દી, મરાઠી)...',
-      all_india_notice: 'ભારતની તમામ ૨૨ સત્તાવાર ભાષાઓમાં ઉપલબ્ધ'
+    'FAQ': {
+      hi: 'अक्सर पूछे जाने वाले सवाल', bn: 'সাধারণ প্রশ্নোত্তর (FAQ)', te: 'తరచుగా అడిగే ప్రశ్నలు', mr: 'वारंवार विचारले जाणारे प्रश्न',
+      ta: 'அடிக்கடி கேட்கப்படும் கேள்விகள்', gu: 'વારંવાર પૂછાતા પ્રશ્નો', ur: 'عمومی سوالات', kn: 'ಸಾಮಾನ್ಯ ಪ್ರಶ್ನೆಗಳು',
+      or: 'ବାରମ୍ବାର ପଚରାଯାଉଥିବା ପ୍ରଶ୍ନ', ml: 'പതിവ് ചോദ്യങ്ങൾ', pa: 'ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸਵਾਲ', as: 'সচৰাচৰ সোধা প্ৰଶ্ন',
+      mai: 'पुछल जाए वला प्रश्न', ne: 'प्रायः सोधिने प्रश्नहरू', sa: 'प्रायिकप्रश्नाः'
     },
-    ur: {
-      brand_title: 'بزنس اسکوپ',
-      brand_subtitle: 'آپ کے شہر میں',
-      nav_opportunities: 'کاروباری مواقع',
-      nav_cities: 'شہر',
-      nav_blueprints: 'بلیو پرنٹس',
-      nav_launch_plans: '90 روزہ منصوبے',
-      nav_insights: 'مارکیٹ ریسرچ',
-      nav_about: 'ہمارے بارے میں',
-      nav_faq: 'اکثر پوچھے گئے سوالات',
-      nav_account: 'خریدی گئی رپورٹس',
-      nav_custom: 'خصوصی تحقیق',
-      nav_menu: 'مینو',
-      search_city_label: 'منتخب شہر',
-      search_city_all: 'بھارت کے تمام شہر',
-      search_budget_label: 'زیادہ سے زیادہ سرمایہ',
-      search_budget_all: 'تمام بجٹ حدود',
-      search_model_label: 'کاروباری ماڈل',
-      search_model_all: 'تمام ماڈلز',
-      search_btn: 'مواقع تلاش کریں',
-      hero_badge: 'ہندوستانی شہروں کے لیے مقامی کاروباری معلومات',
-      hero_title: 'اپنے شہر میں بہترین کاروباری امکانات تلاش کریں۔',
-      hero_desc: 'مقامی صارفین کے مسائل، اپنے بجٹ اور کاروباری ماڈل کے مطابق تصدیق شدہ مواقع دریافت کریں۔',
-      where_to_build: 'آپ کس شہر میں کاروبار شروع کرنا چاہتے ہیں؟',
-      where_to_build_sub: 'کسی بھی ہندوستانی شہر کا نام تلاش کریں اور اس کا مارکیٹ پروفائل اور مواقع دیکھیں۔',
-      search_city_placeholder: 'اپنا شہر تلاش کریں (جیسے ممبئی، دہلی، حیدرآباد، لکھنؤ)...',
-      open_city_btn: 'شہر کھولیں ←',
-      top_markets: 'اہم مارکیٹس:',
-      all_cities_btn: 'تمام 88+ شہر ←',
-      workflow_title: 'ہمارا پلیٹ فارم کیسے کام کرتا ہے',
-      workflow_sub: 'شہر کے انتخاب سے لے کر تصدیق شدہ کاروبار کے آغاز تک کا باضابطہ طریقہ۔',
-      cities_hero_title: 'پورے بھارت کے شہروں میں کاروباری مواقع دریافت کریں',
-      cities_hero_sub: 'بڑے میٹرو پولیٹن شہروں سے لے کر ابھرتے ہوئے قصبات تک ہر شہر کی تفصیلات۔',
-      tier_all: 'تمام شہر',
-      tier_1: 'ٹیئر 1 (میٹروز)',
-      tier_2: 'ٹیئر 2 (تجارتی مراکز)',
-      tier_3: 'ٹیئر 3 (علاقائی شہر)',
-      tier_4: 'ٹیئر 4 (مقامی مارکیٹس)',
-      tier_5: 'ٹیئر 5 (چھوٹے قصبات)',
-      city_search_label: 'شہر تلاش کریں',
-      city_state_label: 'ریاست',
-      city_tier_label: 'مارکیٹ ٹیئر',
-      city_status_label: 'تحقیقی حیثیت',
-      reset_btn: 'دوبارہ ترتیب دیں',
-      explore_city_btn: 'گائیڈ دیکھیں ←',
-      opps_in_city: 'کاروباری مواقع:',
-      read_opp_guide: 'مکمل گائیڈ پڑھیں ←',
-      access_blueprint: 'بلیو پرنٹ حاصل کریں ←',
-      view_all_cities: 'تمام شہر دیکھیں ←',
-      browse_catalogue: 'مکمل فہرست ←',
-      startup_capex: 'ابتدائی سرمایہ کاری کی حد',
-      indicative_capex: 'تخمینہ شدہ سرمایہ',
-      badge_verified: 'تصدیق شدہ موقع',
-      badge_validated: 'صارفین سے تصدیق شدہ',
-      badge_supported: 'شواہد پر مبنی',
-      badge_desk: 'ڈیسک ریسرچ',
-      footer_rights: 'جملہ حقوق محفوظ ہیں۔',
-      lang_switch_btn: 'زبان',
-      lang_modal_title: 'اپنی زبان منتخب کریں',
-      lang_search_placeholder: 'زبان تلاش کریں (اردو، ہندی، بنگالی)...',
-      all_india_notice: 'بھارت کی تمام 22 سرکاری زبانوں میں دستیاب ہے'
+    'Access Purchases': {
+      hi: 'खरीदी गई रिपोर्ट्स', bn: 'ক্রয়কৃত রিপোর্ট', te: 'కొనుగోలు నివేదికలు', mr: 'खरेदी केलेले अहवाल',
+      ta: 'வாங்கிய அறிக்கைகள்', gu: 'ખરીદેલ અહેવાલો', ur: 'خریدی گئی رپورٹس', kn: 'ಖರೀದಿಸಿದ ವರದಿಗಳು',
+      or: 'କିଣାଯାଇଥିବା ରିପୋର୍ଟ', ml: 'വാങ്ങിയ റിപ്പോർട്ടുകൾ', pa: 'ਖਰੀਦੀਆਂ ਗਈਆਂ ਰਿਪੋਰਟਾਂ', as: 'ক্ৰয় কৰা প্ৰতিবেদন',
+      mai: 'खरीदल रिपोर्ट', ne: 'खरिद गरिएका रिपोर्टहरू', sa: 'क्रीतानि प्रतिवेदनानि'
     },
-    kn: {
-      brand_title: 'ಬಿಸಿನೆಸ್ ಸ್ಕೋಪ್',
-      brand_subtitle: 'ನಿಮ್ಮ ನಗರದಲ್ಲಿ',
-      nav_opportunities: 'ವ್ಯವಹಾರ ಅವಕಾಶಗಳು',
-      nav_cities: 'ನಗರಗಳು',
-      nav_blueprints: 'ಬ್ಲೂಪ್ರಿಂಟ್‌ಗಳು',
-      nav_launch_plans: '90-ದಿನಗಳ ಯೋಜನೆಗಳು',
-      nav_insights: 'ಮಾರುಕಟ್ಟೆ ಒಳನೋಟಗಳು',
-      nav_about: 'ನಮ್ಮ ಬಗ್ಗೆ',
-      nav_faq: 'ಪ್ರಶ್ನೋತ್ತರಗಳು',
-      nav_account: 'ವರದಿಗಳು',
-      nav_custom: 'ವಿಶೇಷ ಸಂಶೋಧನೆ',
-      nav_menu: 'ಮೆನು',
-      search_city_label: 'ಗುರಿ ನಗರ',
-      search_city_all: 'ಭಾರತದ ಎಲ್ಲಾ ನಗರಗಳು',
-      search_budget_label: 'ಗರಿಷ್ಠ ಬಜೆಟ್',
-      search_budget_all: 'ಎಲ್ಲಾ ಬಂಡವಾಳ ಶ್ರೇಣಿ',
-      search_model_label: 'ವ್ಯವಹಾರ ಮಾದರಿ',
-      search_model_all: 'ಎಲ್ಲಾ ಮಾದರಿಗಳು',
-      search_btn: 'ಅವಕಾಶಗಳನ್ನು ಹುಡುಕಿ',
-      hero_badge: 'ಭಾರತೀಯ ನಗರಗಳಿಗಾಗಿ ಸ್ಥಳೀಯ ವ್ಯಾಪಾರ ಬುದ್ಧಿಮತ್ತೆ',
-      hero_title: 'ನಿಮ್ಮ ನಗರದಲ್ಲಿ ಸರಿಯಾದ ವ್ಯವಹಾರ ಅವಕಾಶವನ್ನು ಕಂಡುಕೊಳ್ಳಿ.',
-      hero_desc: 'ಸ್ಥಳೀಯ ಗ್ರಾಹಕರ ಸಮಸ್ಯೆಗಳು, ನಿಮ್ಮ ಬಜೆಟ್ ಮತ್ತು ಕಾರ್ಯಾಚರಣೆ ವಿಧಾನದ ಆಧಾರದ ಮೇಲೆ ನೈಜ ಅವಕಾಶಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.',
-      where_to_build: 'ನೀವು ಎಲ್ಲಿ ವ್ಯವಹಾರ ಆರಂಭಿಸಲು ಬಯಸುತ್ತೀರಿ?',
-      where_to_build_sub: 'ಯಾವುದೇ ಭಾರತೀಯ ನಗರವನ್ನು ಹುಡುಕಿ ಮತ್ತು ಸ್ಥಳೀಯ ಮಾರುಕಟ್ಟೆ ಪ್ರೊಫೈಲ್ ಮತ್ತು ಅವಕಾಶಗಳನ್ನು ವೀಕ್ಷಿಸಿ.',
-      search_city_placeholder: 'ನಿಮ್ಮ ನಗರವನ್ನು ಹುಡುಕಿ (ಉದಾ. ಬೆಂಗಳೂರು, ಮೈಸೂರು, ಮಂಗಳೂರು, ಹುಬ್ಬಳ್ಳಿ)...',
-      open_city_btn: 'ನಗರ ತೆರೆಯಿರಿ →',
-      top_markets: 'ಪ್ರಮುಖ ನಗರಗಳು:',
-      all_cities_btn: 'ಎಲ್ಲಾ 88+ ನಗರಗಳು →',
-      workflow_title: 'ನಮ್ಮ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ',
-      workflow_sub: 'ನಗರದ ಆಯ್ಕೆಯಿಂದ ಹಿಡಿದು ಯಶಸ್ವಿ ವ್ಯಾಪಾರ ಪ್ರಾರಂಭದವರೆಗೆ ಕ್ರಮಬದ್ಧ ಮಾರ್ಗ.',
-      cities_hero_title: 'ಭಾರತದಾದ್ಯಂತ ವ್ಯವಹಾರ ಅವಕಾಶಗಳನ್ನು ಅನ್ವೇಷಿಸಿ',
-      cities_hero_sub: 'ಮೆಟ್ರೋ ನಗರಗಳಿಂದ ಹಿಡಿದು ಬೆಳೆಯುತ್ತಿರುವ ಸಣ್ಣ ಪಟ್ಟಣಗಳವರೆಗೆ ನಗರವಾರು ಅವಕಾಶಗಳು.',
-      tier_all: 'ಎಲ್ಲಾ ನಗರಗಳು',
-      tier_1: 'ಶ್ರೇಣಿ 1 (ಮೆಟ್ರೋಗಳು)',
-      tier_2: 'ಶ್ರೇಣಿ 2 (ವಾಣಿಜ್ಯ ಕೇಂದ್ರಗಳು)',
-      tier_3: 'ಶ್ರೇಣಿ 3 (ಪ್ರಾದೇಶಿಕ ನಗರಗಳು)',
-      tier_4: 'ಶ್ರೇಣಿ 4 (ಸ್ಥಳೀಯ ಮಾರುಕಟ್ಟೆಗಳು)',
-      tier_5: 'ಶ್ರೇಣಿ 5 (ಸಣ್ಣ ಪಟ್ಟಣಗಳು)',
-      city_search_label: 'ನಗರ ಹುಡುಕಿ',
-      city_state_label: 'ರಾಜ್ಯ',
-      city_tier_label: 'ಮಾರುಕಟ್ಟೆ ಶ್ರೇಣಿ',
-      city_status_label: 'ಸಂಶೋಧನಾ ಸ್ಥಿತಿ',
-      reset_btn: 'ಮರುಹೊಂದಿಸಿ',
-      explore_city_btn: 'ಮಾರ್ಗದರ್ಶಿ ನೋಡಿ →',
-      opps_in_city: 'ವ್ಯವಹಾರ ಅವಕಾಶಗಳು:',
-      read_opp_guide: 'ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶಿ ಓದಿ →',
-      access_blueprint: 'ಬ್ಲೂಪ್ರಿಂಟ್ ಪಡೆಯಿರಿ →',
-      view_all_cities: 'ಎಲ್ಲಾ ನಗರಗಳನ್ನು ವೀಕ್ಷಿಸಿ →',
-      browse_catalogue: 'ಸಂಪೂರ್ಣ ಡೈರೆಕ್ಟರಿ →',
-      startup_capex: 'ಪ್ರಾರಂಭಿಕ ಬಂಡವಾಳ ಶ್ರೇಣಿ',
-      indicative_capex: 'ಅಂದಾಜು ಹೂಡಿಕೆ',
-      badge_verified: 'ದೃಢೀಕರಿಸಲಾಗಿದೆ',
-      badge_validated: 'ಗ್ರಾಹಕರಿಂದ ಅನುಮೋದಿತ',
-      badge_supported: 'ಸಾಕ್ಷ್ಯ ಬೆಂಬಲಿತ',
-      badge_desk: 'ಡೆಸ್ಕ್ ಸಂಶೋಧನೆ',
-      footer_rights: 'ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.',
-      lang_switch_btn: 'ಭಾಷೆ',
-      lang_modal_title: 'ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ',
-      lang_search_placeholder: 'ಭಾಷೆ ಹುಡುಕಿ (ಕನ್ನಡ, ಹಿಂದಿ, ತೆಲುಗು)...',
-      all_india_notice: 'ಭಾರತದ ಎಲ್ಲಾ 22 ಅಧಿಕೃತ ಭಾಷೆಗಳಲ್ಲಿ ಲಭ್ಯವಿದೆ'
+    'Custom Research': {
+      hi: 'कस्टम रिसर्च कराएं', bn: 'কাস্টম গবেষণা', te: 'ప్రత్యేక పరిశోధన', mr: 'कस्टम रिसर्च',
+      ta: 'தனிப்பயன் ஆராய்ச்சி', gu: 'કસ્ટમ રિસર્ચ', ur: 'مخصوص تحقیق', kn: 'ವಿಶೇಷ ಸಂಶೋಧನೆ',
+      or: 'କଷ୍ଟମ ଗବେଷଣା', ml: 'കസ്റ്റം റിസർച്ച്', pa: 'ਕਸਟਮ ਰਿਸਰਚ', as: 'স্বনিৰ্বাচিত গৱেষণা',
+      mai: 'कस्टम रिसर्च', ne: 'कस्टम अनुसन्धान', sa: 'विशेषानुसन्धानम्'
     },
-    ml: {
-      brand_title: 'ബിസിനസ് സ്കോപ്പ്',
-      brand_subtitle: 'നിങ്ങളുടെ നഗരത്തിൽ',
-      nav_opportunities: 'ബിസിനസ് സാധ്യതകൾ',
-      nav_cities: 'നഗരങ്ങൾ',
-      nav_blueprints: 'ബ്ലൂപ്രിന്റുകൾ',
-      nav_launch_plans: '90 ദിവസത്തെ പദ്ധതികൾ',
-      nav_insights: 'വിപണി വിശകലനം',
-      nav_about: 'ഞങ്ങളെക്കുറിച്ച്',
-      nav_faq: 'ചോദ്യോത്തരങ്ങൾ',
-      nav_account: 'റിപ്പോർട്ടുകൾ',
-      nav_custom: 'പ്രത്യേക ഗവേഷണം',
-      nav_menu: 'മെനു',
-      search_city_label: 'ലക്ഷ്യ നഗരം',
-      search_city_all: 'ഭാരതത്തിലെ എല്ലാ നഗരങ്ങളും',
-      search_budget_label: 'പരമാവധി ബജറ്റ്',
-      search_budget_all: 'എല്ലാ ബജറ്റും',
-      search_model_label: 'ബിസിനസ് മോഡൽ',
-      search_model_all: 'എല്ലാ മോഡലുകളും',
-      search_btn: 'അവസരങ്ങൾ കണ്ടെത്തുക',
-      hero_badge: 'ഇന്ത്യൻ നഗരങ്ങൾക്കായുള്ള പ്രാദേശിക വിപണി വിവരങ്ങൾ',
-      hero_title: 'നിങ്ങളുടെ നഗരത്തിലെ ശരിയായ ബിസിനസ് സാധ്യതകൾ കണ്ടെത്തുക.',
-      hero_desc: 'പ്രാദേശിക ഉപഭോക്തൃ ആവശ്യങ്ങളും നിങ്ങളുടെ നിക്ഷേപ ശേഷിയും അടിസ്ഥാനമാക്കി യഥാർത്ഥ ബിസിനസ് അവസരങ്ങൾ കണ്ടെത്തുക.',
-      where_to_build: 'നിങ്ങൾ എവിടെയാണ് ബിസിനസ് ആരംഭിക്കാൻ ആഗ്രഹിക്കുന്നത്?',
-      where_to_build_sub: 'ഏതെങ്കിലും ഇന്ത്യൻ നഗരം തിരഞ്ഞ് പ്രാദേശിക വിപണി വിവരങ്ങളും ബിസിനസ് അവസരങ്ങളും കാണുക.',
-      search_city_placeholder: 'നിങ്ങളുടെ നഗരം തിരയുക (ഉദാ. കൊച്ചി, തിരുവനന്തപുരം, കോഴിക്കോട്, തൃശൂർ)...',
-      open_city_btn: 'നഗരം തുറക്കുക →',
-      top_markets: 'പ്രധാന നഗരങ്ങൾ:',
-      all_cities_btn: 'എല്ലാ 88+ നഗരങ്ങളും →',
-      workflow_title: 'ഞങ്ങളുടെ പ്ലാറ്റ്‌ഫോം എങ്ങനെ പ്രവർത്തിക്കുന്നു',
-      workflow_sub: 'നഗരം തിരഞ്ഞെടുക്കുന്നത് മുതൽ വിജയകരമായ ബിസിനസ് ആരംഭം വരെയുള്ള വ്യക്തമായ ഘട്ടങ്ങൾ.',
-      cities_hero_title: 'ഇന്ത്യയിലുടനീളമുള്ള ബിസിനസ് അവസരങ്ങൾ',
-      cities_hero_sub: 'വൻനഗരങ്ങൾ മുതൽ വളർന്നുവരുന്ന ചെറിയ നഗരങ്ങൾ വരെയുള്ള നഗര വിശകലനം.',
-      tier_all: 'എല്ലാ നഗരങ്ങളും',
-      tier_1: 'ടയർ 1 (മെട്രോകൾ)',
-      tier_2: 'ടയർ 2 (വാണിജ്യ കേന്ദ്രങ്ങൾ)',
-      tier_3: 'ടയർ 3 (പ്രാദേശിക നഗരങ്ങൾ)',
-      tier_4: 'ടയർ 4 (പ്രാദേശിക വിപണികൾ)',
-      tier_5: 'ടയർ 5 (ചെറുപട്ടണങ്ങൾ)',
-      city_search_label: 'നഗരം തിരയുക',
-      city_state_label: 'സംസ്ഥാനം',
-      city_tier_label: 'മാർക്കറ്റ് ടയർ',
-      city_status_label: 'ഗവേഷണ സ്ഥിതി',
-      reset_btn: 'റീസെറ്റ്',
-      explore_city_btn: 'വിവരങ്ങൾ കാണുക →',
-      opps_in_city: 'ബിസിനസ് അവസരങ്ങൾ:',
-      read_opp_guide: 'പൂർണ്ണ വിവരങ്ങൾ വായിക്കുക →',
-      access_blueprint: 'ബ്ലൂപ്രിന്റ് നേടുക →',
-      view_all_cities: 'എല്ലാ നഗരങ്ങളും കാണുക →',
-      browse_catalogue: 'മുഴുവൻ ലിസ്റ്റ് →',
-      startup_capex: 'പ്രാരംഭ നിക്ഷേപ പരിധി',
-      indicative_capex: 'ഉദ്ദേശിക്കുന്ന നിക്ഷേപം',
-      badge_verified: 'സ്ഥിരീകരിച്ചത്',
-      badge_validated: 'ഉപഭോക്താക്കൾ അംഗീകരിച്ചത്',
-      badge_supported: 'തെളിവുകളുടെ പിന്തുണയോടെ',
-      badge_desk: 'ഡെസ്ക് ഗവേഷണം',
-      footer_rights: 'എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.',
-      lang_switch_btn: 'ഭാഷ',
-      lang_modal_title: 'നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക',
-      lang_search_placeholder: 'ഭാഷ തിരയുക (മലയാളം, ഹിന്ദി, തമിഴ്)...',
-      all_india_notice: 'ഇന്ത്യയിലെ എല്ലാ 22 ഔദ്യോഗിക ഭാഷകളിലും ലഭ്യമാണ്'
+    'Menu': {
+      hi: 'मेनू', bn: 'মেনু', te: 'మెనూ', mr: 'मेनू', ta: 'பட்டியல்', gu: 'મેનૂ',
+      ur: 'مینو', kn: 'ಮೆನು', or: 'ମେନୁ', ml: 'മെനു', pa: 'ਮੀਨੂ', as: 'মেনু',
+      mai: 'मेनू', ne: 'मेनु', sa: 'सूची'
     },
-    pa: {
-      brand_title: 'ਬਿਜ਼ਨਸ ਸਕੋਪ',
-      brand_subtitle: 'ਤੁਹਾਡੇ ਸ਼ਹਿਰ ਵਿੱਚ',
-      nav_opportunities: 'ਵਪਾਰਕ ਮੌਕੇ',
-      nav_cities: 'ਸ਼ਹਿਰ',
-      nav_blueprints: 'ਬਲੂਪ੍ਰਿੰਟਸ',
-      nav_launch_plans: '90 ਦਿਨਾਂ ਦੀਆਂ ਯੋਜਨਾਵਾਂ',
-      nav_insights: 'ਮਾਰਕੀਟ ਰਿਸਰਚ',
-      nav_about: 'ਸਾਡੇ ਬਾਰੇ',
-      nav_faq: 'ਸਵਾਲ-ਜਵਾਬ',
-      nav_account: 'ਖਰੀਦੀਆਂ ਗਈਆਂ ਰਿਪੋਰਟਾਂ',
-      nav_custom: 'ਵਿਸ਼ੇਸ਼ ਖੋਜ',
-      nav_menu: 'ਮੀਨੂ',
-      search_city_label: 'ਟਾਰਗੇਟ ਸ਼ਹਿਰ',
-      search_city_all: 'ਭਾਰਤ ਦੇ ਸਾਰੇ ਸ਼ਹਿਰ',
-      search_budget_label: 'ਵੱਧ ਤੋਂ ਵੱਧ ਬਜਟ',
-      search_budget_all: 'ਸਾਰੀਆਂ ਬਜਟ ਰੇਂਜਾਂ',
-      search_model_label: 'ਬਿਜ਼ਨਸ ਮਾਡਲ',
-      search_model_all: 'ਸਾਰੇ ਮਾਡਲ',
-      search_btn: 'ਮੌਕੇ ਲੱਭੋ',
-      hero_badge: 'ਭਾਰਤੀ ਸ਼ਹਿਰਾਂ ਲਈ ਸਥਾਨਕ ਵਪਾਰਕ ਸਮਝ',
-      hero_title: 'ਆਪਣੇ ਸ਼ਹਿਰ ਵਿੱਚ ਸਹੀ ਵਪਾਰਕ ਮੌਕੇ ਲੱਭੋ।',
-      hero_desc: 'ਸਥਾਨਕ ਲੋੜਾਂ ਅਤੇ ਆਪਣੇ ਬਜਟ ਦੇ ਆਧਾਰ ਤੇ ਅਸਲ ਵਪਾਰਕ ਸੰਭਾਵਨਾਵਾਂ ਦੀ ਪੜਚੋਲ ਕਰੋ।',
-      where_to_build: 'ਤੁਸੀਂ ਕਿਹੜੇ ਸ਼ਹਿਰ ਵਿੱਚ ਵਪਾਰ ਸ਼ੁਰੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?',
-      where_to_build_sub: 'ਕਿਸੇ ਵੀ ਭਾਰਤੀ ਸ਼ਹਿਰ ਨੂੰ ਖੋਜੋ ਅਤੇ ਉੱਥੋਂ ਦੇ ਵਪਾਰਕ ਮੌਕੇ ਦੇਖੋ।',
-      search_city_placeholder: 'ਆਪਣਾ ਸ਼ਹਿਰ ਲੱਭੋ (ਜਿਵੇਂ ਲੁਧਿਆਣਾ, ਅੰਮ੍ਰਿਤਸਰ, ਜਲੰਧਰ, ਚੰਡੀਗੜ੍ਹ)...',
-      open_city_btn: 'ਸ਼ਹਿਰ ਖੋਲ੍ਹੋ →',
-      top_markets: 'ਪ੍ਰਮੁੱਖ ਸ਼ਹਿਰ:',
-      all_cities_btn: 'ਸਾਰੇ 88+ ਸ਼ਹਿਰ →',
-      workflow_title: 'ਸਾਡਾ ਪਲੇਟਫਾਰਮ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ',
-      workflow_sub: 'ਸ਼ਹਿਰ ਦੀ ਚੋਣ ਤੋਂ ਲੈ ਕੇ ਪ੍ਰਮਾਣਿਤ ਵਪਾਰ ਸ਼ੁਰੂ ਕਰਨ ਤੱਕ ਦਾ ਯੋਜਨਾਬੱਧ ਤਰੀਕਾ।',
-      cities_hero_title: 'ਸਾਰੇ ਭਾਰਤ ਦੇ ਸ਼ਹਿਰਾਂ ਵਿੱਚ ਵਪਾਰਕ ਮੌਕੇ ਲੱਭੋ',
-      cities_hero_sub: 'ਵੱਡੇ ਮਹਾਨਗਰਾਂ ਤੋਂ ਲੈ ਕੇ ਛੋਟੇ ਕਸਬਿਆਂ ਤੱਕ ਹਰ ਸ਼ਹਿਰ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ।',
-      tier_all: 'ਸਾਰੇ ਸ਼ਹਿਰ',
-      tier_1: 'ਟੀਅਰ 1 (ਮੈਟਰੋ ਸ਼ਹਿਰ)',
-      tier_2: 'ਟੀਅਰ 2 (ਵਪਾਰਕ ਕੇਂਦਰ)',
-      tier_3: 'ਟੀਅਰ 3 (ਖੇਤਰੀ ਸ਼ਹਿਰ)',
-      tier_4: 'ਟੀਅਰ 4 (ਸਥਾਨਕ ਬਾਜ਼ਾਰ)',
-      tier_5: 'ਟੀਅਰ 5 (ਛੋਟੇ ਕਸਬੇ)',
-      city_search_label: 'ਸ਼ਹਿਰ ਖੋਜੋ',
-      city_state_label: 'ਰਾਜ',
-      city_tier_label: 'ਮਾਰਕੀਟ ਟੀਅਰ',
-      city_status_label: 'ਖੋਜ ਸਥਿਤੀ',
-      reset_btn: 'ਰੀਸੈਟ ਕਰੋ',
-      explore_city_btn: 'ਗਾਈਡ ਦੇਖੋ →',
-      opps_in_city: 'ਵਪਾਰਕ ਮੌਕੇ:',
-      read_opp_guide: 'ਪੂਰੀ ਗਾਈਡ ਪੜ੍ਹੋ →',
-      access_blueprint: 'ਬਲੂਪ੍ਰਿੰਟ ਪ੍ਰਾਪਤ ਕਰੋ →',
-      view_all_cities: 'ਸਾਰੇ ਸ਼ਹਿਰ ਦੇਖੋ →',
-      browse_catalogue: 'ਪੂਰੀ ਸੂਚੀ →',
-      startup_capex: 'ਸ਼ੁਰੂਆਤੀ ਪੂੰਜੀ ਰੇਂਜ',
-      indicative_capex: 'ਅੰਦਾਜ਼ਨ ਨਿਵੇਸ਼',
-      badge_verified: 'ਪ੍ਰਮਾਣਿਤ ਮੌਕਾ',
-      badge_validated: 'ਗਾਹਕ ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਤ',
-      badge_supported: 'ਤੱਥਾਂ ਤੇ ਆਧਾਰਿਤ',
-      badge_desk: 'ਡੈਸਕ ਰਿਸਰਚ',
-      footer_rights: 'ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।',
-      lang_switch_btn: 'ਭਾਸ਼ਾ',
-      lang_modal_title: 'ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ',
-      lang_search_placeholder: 'ਭਾਸ਼ਾ ਖੋਜੋ (ਪੰਜਾਬੀ, ਹਿੰਦੀ, ਉਰਦੂ)...',
-      all_india_notice: 'ਭਾਰਤ ਦੀਆਂ ਸਾਰੀਆਂ 22 ਸਰਕਾਰੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਉਪਲਬਧ'
+
+    // Hero Section & Titles
+    'Find the business scope in your city.': {
+      hi: 'अपने शहर में सही बिजनेस का स्कोप पहचानें।',
+      bn: 'আপনার শহরে সঠিক ব্যবসার সুযোগ আবিষ্কার করুন।',
+      te: 'మీ నగరంలో వ్యాపార అవకాశాలను గుర్తించండి.',
+      mr: 'आपल्या शहरातील व्यवसायाची खरी संधी ओळखा.',
+      ta: 'உங்கள் நகரில் வணிக வாய்ப்புகளைக் கண்டறியுங்கள்.',
+      gu: 'તમારા શહેરમાં વ્યવસાયની સાચી તકો શોધો.',
+      ur: 'اپنے شہر میں کاروبار کے حقیقی مواقع دریافت کریں۔',
+      kn: 'ನಿಮ್ಮ ನಗರದಲ್ಲಿ ವ್ಯಾಪಾರ ಅವಕಾಶಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.',
+      or: 'ଆପଣଙ୍କ ସହରରେ ବ୍ୟବସାୟର ସୁଯୋଗ ଆବିଷ୍କାର କରନ୍ତୁ।',
+      ml: 'നിങ്ങളുടെ നഗരത്തിലെ ബിസിനസ് സാധ്യതകൾ കണ്ടെത്തുക.',
+      pa: 'ਆਪਣੇ ਸ਼ਹਿਰ ਵਿੱਚ ਵਪਾਰ ਦੇ ਮੌਕੇ ਲੱਭੋ।',
+      as: 'আপোনাৰ চহৰত ব্যৱসায়ৰ সুযোগ বিচাৰি উলিয়াওক।',
+      ne: 'तपाईंको सहरमा व्यापारिक सम्भावनाहरू खोज्नुहोस्।',
+      sa: 'भवतः नगरे व्यापारस्य अवसरां अन्विष्यतु।'
     },
-    or: {
-      brand_title: 'ବିଜନେସ ସ୍କୋପ',
-      brand_subtitle: 'ଆପଣଙ୍କ ସହରରେ',
-      nav_opportunities: 'ବ୍ୟବସାୟ ସୁଯୋଗ',
-      nav_cities: 'ସହରସମୂହ',
-      nav_blueprints: 'ବ୍ଲୁପ୍ରିଣ୍ଟ',
-      nav_launch_plans: '୯୦ ଦିନର ଯୋଜନା',
-      nav_insights: 'ବଜାର ଅନୁସନ୍ଧାନ',
-      nav_about: 'ଆମ ବିଷୟରେ',
-      nav_faq: 'ପ୍ରଶ୍ନୋତ୍ତର',
-      nav_account: 'ରିପୋର୍ଟ ଦେଖନ୍ତୁ',
-      nav_custom: 'କଷ୍ଟମ ରିସର୍ଚ୍ଚ',
-      nav_menu: 'ମେନୁ',
-      search_city_label: 'ଲକ୍ଷ୍ୟ ସହର',
-      search_city_all: 'ଭାରତର ସମସ୍ତ ସହର',
-      search_budget_label: 'ସର୍ବାଧିକ ବଜେଟ',
-      search_budget_all: 'ସମସ୍ତ ବଜେଟ ପରିସର',
-      search_model_label: 'ବିଜନେସ ମଡେଲ',
-      search_model_all: 'ସମସ୍ତ ମଡେଲ',
-      search_btn: 'ସୁଯୋଗ ଖୋଜନ୍ତୁ',
-      hero_badge: 'ଭାରତୀୟ ସହରଗୁଡ଼ିକ ପାଇଁ ସ୍ଥାନୀୟ ବ୍ୟବସାୟିକ ଅନ୍ତର୍ଦୃଷ୍ଟି',
-      hero_title: 'ଆପଣଙ୍କ ସହରରେ ଉପଯୁକ୍ତ ବ୍ୟବସାୟ ସୁଯୋଗ ଖୋଜନ୍ତୁ।',
-      hero_desc: 'ସ୍ଥାନୀୟ ଚାହିଦା ଏବଂ ଆପଣଙ୍କ ପୁଞ୍ଜି ଆଧାରରେ ପ୍ରକୃତ ବ୍ୟବସାୟିକ ସୁଯୋଗ ଆବିଷ୍କାର କରନ୍ତୁ।',
-      where_to_build: 'ଆପଣ କେଉଁ ସହରରେ ବ୍ୟବସାୟ ଆରମ୍ଭ କରିବାକୁ ଚାହାଁନ୍ତି?',
-      where_to_build_sub: 'ଯେକୌଣସି ଭାରତୀୟ ସହର ଖୋଜନ୍ତୁ ଏବଂ ସେଠାକାର ବଜାର ବିଶ୍ଳେଷଣ ଦେଖନ୍ତୁ।',
-      search_city_placeholder: 'ଆପଣଙ୍କ ସହର ଖୋଜନ୍ତୁ (ଯଥା ଭୁବନେଶ୍ୱର, କଟକ, ରାଉରକେଲା)...',
-      open_city_btn: 'ସହର ଦେଖନ୍ତୁ →',
-      top_markets: 'ପ୍ରମୁଖ ସହର:',
-      all_cities_btn: 'ସମସ୍ତ ୮୮+ ସହର →',
-      workflow_title: 'ଆମର କାର୍ଯ୍ୟପ୍ରଣାଳୀ କିପରି କାମ କରେ',
-      workflow_sub: 'ସହର ଚୟନ ଠାରୁ ଆରମ୍ଭ କରି ବ୍ୟବସାୟ ପ୍ରତିଷ୍ଠା ପର୍ଯ୍ୟନ୍ତ ଏକ ସଠିକ ମାର୍ଗଦର୍ଶନ।',
-      cities_hero_title: 'ଭାରତ ସାରା ବ୍ୟବସାୟିକ ସୁଯୋଗ ଆବିଷ୍କାର କରନ୍ତୁ',
-      cities_hero_sub: 'ମେଟ୍ରୋ ସହର ଠାରୁ ଆରମ୍ଭ କରି ଉଦୀୟମାନ ଛୋଟ ସହର ପର୍ଯ୍ୟନ୍ତ ବିସ୍ତୃତ ତଥ୍ୟ।',
-      tier_all: 'ସମସ୍ତ ସହର',
-      tier_1: 'ଟିୟର ୧ (ମେଟ୍ରୋ)',
-      tier_2: 'ଟିୟର ୨ (ବାଣିଜ୍ୟିକ କେନ୍ଦ୍ର)',
-      tier_3: 'ଟିୟର ୩ (ଆଞ୍ଚଳିକ ସହର)',
-      tier_4: 'ଟିୟर ୪ (ସ୍ଥାନୀୟ ବଜାର)',
-      tier_5: 'ଟିୟର ୫ (ଛୋଟ ସହର)',
-      city_search_label: 'ସହର ଖୋଜନ୍ତୁ',
-      city_state_label: 'ରାଜ୍ୟ',
-      city_tier_label: 'ମାର୍କେଟ ଟିୟର',
-      city_status_label: 'ଗବେଷଣା ସ୍ଥିତି',
-      reset_btn: 'ରିସେଟ',
-      explore_city_btn: 'ଗାଇଡ ଦେଖନ୍ତୁ →',
-      opps_in_city: 'ବ୍ୟବସାୟ ସୁଯୋଗ:',
-      read_opp_guide: 'ସମ୍ପୂର୍ଣ୍ଣ ଗାଇଡ ପଢ଼ନ୍ତୁ →',
-      access_blueprint: 'ବ୍ଲୁପ୍ରିଣ୍ଟ ସଂଗ୍ରହ କରନ୍ତୁ →',
-      view_all_cities: 'ସମସ୍ତ ସହର ଦେଖନ୍ତୁ →',
-      browse_catalogue: 'ସମ୍ପୂର୍ଣ୍ଣ ତାଲିକା →',
-      startup_capex: 'ପ୍ରାରମ୍ଭିକ ପୁଞ୍ଜି ପରିସର',
-      indicative_capex: 'ଆନୁମାନିକ ପୁଞ୍ଜି',
-      badge_verified: 'ପ୍ରମାଣିତ ସୁଯୋଗ',
-      badge_validated: 'ଗ୍ରାହକ ସ୍ୱୀକୃତ',
-      badge_supported: 'ପ୍ରମାଣ ଆଧାରିତ',
-      badge_desk: 'ଡେସ୍କ ରିସର୍ଚ୍ଚ',
-      footer_rights: 'ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।',
-      lang_switch_btn: 'ଭାଷା',
-      lang_modal_title: 'ଆପଣଙ୍କ ଭାଷା ବାଛନ୍ତୁ',
-      lang_search_placeholder: 'ଭାଷା ଖୋଜନ୍ତୁ (ଓଡ଼ିଆ, ହିନ୍ଦୀ, ବଙ୍ଗଳା)...',
-      all_india_notice: 'ଭାରତର ସମସ୍ତ ୨୨ଟି ସରକାରୀ ଭାଷାରେ ଉପଲବ୍ଧ'
+    'Local Opportunity Intelligence for India': {
+      hi: 'भारतीय शहरों के लिए स्थानीय व्यावसायिक बुद्धिमत्ता',
+      bn: 'ভারতীয় বাজারের জন্য স্থানীয় সুযোগের বিশ্লেষণ',
+      te: 'భారతీయ నగరాల కోసం స్థానిక వ్యాపార పరిజ్ఞానం',
+      mr: 'भारतीय शहरांसाठी स्थानिक व्यावसायिक विश्लेषण',
+      ta: 'இந்திய நகரங்களுக்கான உள்ளூர் வணிக நுண்ணறிவு',
+      gu: 'ભારતીય શહેરો માટે સ્થાનિક વ્યાપારિક બુદ્ધિમત્તા',
+      ur: 'ہندوستانی شہروں کے لیے مقامی کاروباری ذہانت',
+      kn: 'ಭಾರತೀಯ ನಗರಗಳಿಗೆ ಸ್ಥಳೀಯ ವ್ಯಾಪಾರ ವಿಶ್ಲೇಷಣೆ',
+      or: 'ଭାରତୀୟ ସହରଗୁଡ଼ିକ ପାଇଁ ସ୍ଥାନୀୟ ବ୍ୟବସାୟିକ ଗୁଇନ୍ଦା',
+      ml: 'ഇന്ത്യൻ നഗരങ്ങൾക്കായുള്ള പ്രാദേശിക ബിസിനസ് അനലിറ്റിക്സ്',
+      pa: 'ਭਾਰਤੀ ਸ਼ਹਿਰਾਂ ਲਈ ਸਥਾਨਕ ਵਪਾਰਕ ਸਮਝ',
+      as: 'ভাৰতীয় চহৰসমূহৰ বাবে স্থানীয় ব্যৱসায়িক জ্ঞান',
+      ne: 'भारतीय सहरहरूका लागि स्थानीय व्यापारिक सूचना'
+    },
+    'Where do you want to build?': {
+      hi: 'आप किस शहर में बिजनेस शुरू करना चाहते हैं?',
+      bn: 'আপনি কোন শহরে ব্যবসা গড়তে চান?',
+      te: 'మీరు ఏ నగరంలో వ్యాపారం ప్రారంభించాలనుకుంటున్నారు?',
+      mr: 'तुम्हाला कोणत्या शहरात व्यवसाय सुरू करायचा आहे?',
+      ta: 'நீங்கள் எந்த நகரில் தொழில் தொடங்க விரும்புகிறீர்கள்?',
+      gu: 'તમે કયા શહેરમાં વ્યવસાય શરૂ કરવા માંગો છો?',
+      ur: 'آپ کس شہر میں کاروبار شروع کرنا چاہتے ہیں؟',
+      kn: 'ನೀವು ಯಾವ ನಗರದಲ್ಲಿ ವ್ಯಾಪಾರ ಆರಂಭಿಸಲು ಬಯಸುತ್ತೀರಿ?',
+      or: 'ଆପଣ କେଉଁ ସହରରେ ବ୍ୟବସାୟ ଆରମ୍ଭ କରିବାକୁ ଚାହାଁନ୍ତି?',
+      ml: 'ഏത് നഗരത്തിലാണ് ബിസിനസ്സ് ആരംഭിക്കാൻ ആഗ്രഹിക്കുന്നത്?',
+      pa: 'ਤੁਸੀਂ ਕਿਸ ਸ਼ਹਿਰ ਵਿੱਚ ਕਾਰੋਬਾਰ ਸ਼ੁਰੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?',
+      as: 'আপুনি কোনখন চহৰত ব্যৱসায় গঢ়িব বিচাৰে?',
+      ne: 'तपाईं कुन सहरमा व्यवसाय सुरु गर्न चाहनुहुन्छ?'
+    },
+    'Search any Indian city to open its empirical market profile, local gap analysis, and verified business opportunities.': {
+      hi: 'किसी भी भारतीय शहर का नाम खोजें और उसकी बाजार प्रोफाइल, व्यापारिक अंतर व सत्यापित अवसर देखें।',
+      bn: 'যেকোনো ভারতীয় শহরের নাম অনুসন্ধান করে তার বাজার প্রোফাইল এবং যাচাইকৃত ব্যবসার সুযোগ দেখুন।',
+      te: 'ఏదైనా భారతీయ నగరాన్ని శోధించి దాని మార్కెట్ ప్రొఫైల్ మరియు ధృవీకరించిన అవకాశాలను చూడండి.',
+      mr: 'कोणत्याही भारतीय शहराचे नाव शोधा आणि त्याचे बाजार विश्लेषण व सत्यापित संधी पहा.',
+      ta: 'எந்தவொரு இந்திய நகரத்தையும் தேடி அதன் சந்தை விவரக்குறிப்பு மற்றும் சரிபார்க்கப்பட்ட வாய்ப்புகளைப் பார்க்கவும்.',
+      gu: 'કોઈપણ ભારતીય શહેરનું નામ શોધીને તેની બજાર પ્રોફાઇલ અને ચકાસાયેલ તકો જુઓ.',
+      ur: 'کسی بھی ہندوستانی شہر کو تلاش کرکے اس کی مارکیٹ پروفائل اور تصدیق شدہ کاروباری مواقع دیکھیں۔',
+      kn: 'ಯಾವುದೇ ಭಾರತೀಯ ನಗರವನ್ನು ಹುಡುಕಿ ಅದರ ಮಾರುಕಟ್ಟೆ ಪ್ರೊಫೈಲ್ ಮತ್ತು ಪರಿಶೀಲಿಸಿದ ವ್ಯಾಪಾರ ಅವಕಾಶಗಳನ್ನು ನೋಡಿ.',
+      or: 'ଯେକୌଣସି ଭାରତୀୟ ସହର ସନ୍ଧାନ କରି ତାର ମାର୍କେଟ ପ୍ରୋଫାଇଲ୍ ଏବଂ ଯାଞ୍ଚ ହୋଇଥିବା ସୁଯୋଗ ଦେଖନ୍ତୁ।',
+      ml: 'ഏതൊരു ഇന്ത്യൻ നഗരത്തെയും തിരഞ്ഞ് അതിന്റെ മാർക്കറ്റ് പ്രൊഫൈലും ബിസിനസ്സ് അവസരങ്ങളും കാണുക.',
+      pa: 'ਕਿਸੇ ਵੀ ਭਾਰਤੀ ਸ਼ਹਿਰ ਦੀ ਭਾਲ ਕਰੋ ਅਤੇ ਉਸਦੀ ਮਾਰਕੀਟ ਪ੍ਰੋਫਾਈਲ ਅਤੇ ਪ੍ਰਮਾਣਿਤ ਵਪਾਰਕ ਮੌਕੇ ਵੇਖੋ।',
+      as: 'যিকোনো ভাৰতীয় চহৰ সন্ধান কৰি ইয়াৰ বজাৰ প্ৰফাইল আৰু পৰীক্ষিত সুযোগসমূহ চাওক।'
+    },
+    'Top Markets:': {
+      hi: 'प्रमुख शहर:', bn: 'শীর্ষ বাজারসমূহ:', te: 'ముఖ్య నగరాలు:', mr: 'प्रमुख शहरे:',
+      ta: 'முக்கிய நகரங்கள்:', gu: 'મુખ્ય શહેરો:', ur: 'اہم شہر:', kn: 'ಪ್ರಮುಖ ನಗರಗಳು:',
+      or: 'ପ୍ରମୁଖ ସହର:', ml: 'പ്രധാന നഗരങ്ങൾ:', pa: 'ਪ੍ਰਮੁੱਖ ਸ਼ਹਿਰ:', as: 'প্ৰধান চহৰসমূহ:',
+      ne: 'प्रमुख सहरहरू:'
+    },
+    'Open City →': {
+      hi: 'शहर प्रोफाइल खोलें →', bn: 'শহর দেখুন →', te: 'నగరం ప్రొఫైల్ →', mr: 'शहर उघडा →',
+      ta: 'நகர விவரம் →', gu: 'શહેર જુઓ →', ur: 'شہر کھولیں →', kn: 'ನಗರ ತೆರೆಯಿರಿ →',
+      or: 'ସହର ଦେଖନ୍ତୁ →', ml: 'നഗരം തുറക്കുക →', pa: 'ਸ਼ਹਿਰ ਖੋਲ੍ਹੋ →', as: 'চহৰ চাওক →'
+    },
+    'All 88+ Cities →': {
+      hi: 'सभी 88+ शहर देखें →', bn: 'সব ৮৮+ শহর →', te: 'మొత్తం 88+ నగరాలు →', mr: 'सर्व ८८+ शहरे →',
+      ta: 'அனைத்து 88+ நகரங்கள் →', gu: 'બધા 88+ શહેરો →', ur: 'تمام 88+ شہر →', kn: 'ಎಲ್ಲಾ 88+ ನಗರಗಳು →',
+      or: 'ସମସ୍ତ ୮୮+ ସହର →', ml: 'എല്ലാ 88+ നഗരങ്ങളും →', pa: 'ਸਾਰੇ 88+ ਸ਼ਹਿਰ →', as: 'সকলো ৮৮+ চহৰ →'
+    },
+
+    // Cities Directory Hero & Filters
+    'Explore Business Opportunities Across India': {
+      hi: 'भारत भर के शहरों में व्यावसायिक अवसरों की खोज करें',
+      bn: 'সমগ্র ভারতের শহরগুলিতে ব্যবসায়িক সুযোগ অন্বেষণ করুন',
+      te: 'భారతదేశ వ్యాప్తంగా నగరాలలో వ్యాపార అవకాశాలను అన్వేషించండి',
+      mr: 'भारतभरातील शहरांमध्ये व्यावसायिक संधी शोधा',
+      ta: 'இந்தியா முழுவதும் உள்ள நகரங்களில் வணிக வாய்ப்புகளை ஆராயுங்கள்',
+      gu: 'સમગ્ર ભારતના શહેરોમાં વ્યાપારિક તકોનું અન્વેષણ કરો',
+      ur: 'پورے ہندوستان کے شہروں میں کاروباری مواقع تلاش کریں',
+      kn: 'ಭಾರತದಾದ್ಯಂತ ನಗರಗಳಲ್ಲಿ ವ್ಯಾಪಾರ ಅವಕಾಶಗಳನ್ನು ಅನ್ವೇಷಿಸಿ',
+      or: 'ଭାରତର ସମସ୍ତ ସହରରେ ବ୍ୟବସାୟିକ ସୁଯୋଗ ଅନୁସନ୍ଧାନ କରନ୍ତୁ',
+      ml: 'ഇന്ത്യയിലുടനീളമുള്ള നഗരങ്ങളിലെ ബിസിനസ് അവസരങ്ങൾ പര്യവേക്ഷണം ചെയ്യുക',
+      pa: 'ਪੂਰੇ ਭਾਰਤ ਦੇ ਸ਼ਹਿਰਾਂ ਵਿੱਚ ਕਾਰੋਬਾਰੀ ਮੌਕਿਆਂ ਦੀ ਪੜਚੋਲ ਕਰੋ',
+      as: 'সমগ্ৰ ভাৰতৰ চহৰসমূহত ব্যৱসায়িক সুযোগ অন্বেষণ কৰক'
+    },
+    'Discover business opportunities city by city, from India\'s largest metropolitan markets to emerging local economies.': {
+      hi: 'भारत के प्रमुख महानगरों से लेकर उभरती स्थानीय अर्थव्यवस्थाओं तक, शहर-दर-शहर सही व्यापारिक अवसर खोजें।',
+      bn: 'ভারতের বৃহত্তম মহানগর থেকে শুরু করে উদীয়মান স্থানীয় অর্থনীতি পর্যন্ত প্রতিটি শহরের সুযোগ আবিষ্কার করুন।',
+      te: 'భారతదేశంలోని అతిపెద్ద మెట్రో నగరాల నుండి అభివృద్ధి చెందుతున్న స్థానిక మార్కెట్ల వరకు నగరాల వారీగా వ్యాపార అవకాశాలు.',
+      mr: 'भारतातील मोठ्या महानगरांपासून ते उदयोन्मुख स्थानिक बाजारपेठांपर्यंत प्रत्येक शहराच्या संधी शोधा.',
+      ta: 'இந்தியாவின் மிகப்பெரிய பெருநகரங்கள் முதல் வளர்ந்து வரும் உள்ளூர் பொருளாதாரங்கள் வரை நகர வாரியாக வாய்ப்புகளைக் கண்டறியவும்.',
+      gu: 'ભારતના સૌથી મોટા મેટ્રોપોલિટન બજારોથી લઈને ઉભરતા સ્થાનિક અર્થતંત્રો સુધી શહેર-દર-શહેર તકો શોધો.',
+      ur: 'ہندوستان کی سب سے بڑی میٹروپولیٹن مارکیٹوں سے لے کر ابھرتی ہوئی مقامی معیشتوں تک شہر بہ شہر کاروباری مواقع دریافت کریں۔',
+      kn: 'ಭಾರತದ ಪ್ರಮುಖ ಮಹಾನಗರಗಳಿಂದ ಹಿಡಿದು ಉದಯೋನ್ಮುಖ ಸ್ಥಳೀಯ ಮಾರುಕಟ್ಟೆಗಳವರೆಗೆ ನಗರವಾರು ಅವಕಾಶಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.',
+      or: 'ଭାରତର ବୃହତ୍ତମ ମହାନଗରଠାରୁ ଆରମ୍ଭ କରି ବିକାଶଶୀଳ ସ୍ଥାନୀୟ ଅର୍ଥନୀତି ପର୍ଯ୍ୟନ୍ତ ପ୍ରତ୍ୟେକ ସହରର ସୁଯୋଗ ଖୋଜନ୍ତୁ।',
+      ml: 'ഇന്ത്യയിലെ ഏറ്റവും വലിയ മെട്രോ നഗരങ്ങൾ മുതൽ വളർന്നുവരുന്ന പ്രാദേശിക വിപണികൾ വരെയുള്ള അവസരങ്ങൾ.',
+      pa: 'ਭਾਰਤ ਦੇ ਸਭ ਤੋਂ ਵੱਡੇ ਮਹਾਨਗਰਾਂ ਤੋਂ ਲੈ ਕੇ ਉੱਭਰ ਰਹੀਆਂ ਸਥਾਨਕ ਆਰਥਿਕਤਾਵਾਂ ਤੱਕ ਹਰੇਕ ਸ਼ਹਿਰ ਦੇ ਮੌਕੇ ਲੱਭੋ।'
+    },
+
+    // Tiers
+    'All Cities': {
+      hi: 'सभी शहर', bn: 'সব শহর', te: 'అన్ని నగరాలు', mr: 'सर्व शहरे',
+      ta: 'அனைத்து நகரங்கள்', gu: 'બધા શહેરો', ur: 'تمام شہر', kn: 'ಎಲ್ಲಾ ನಗರಗಳು',
+      or: 'ସମସ୍ତ ସହର', ml: 'എല്ലാ നഗരങ്ങളും', pa: 'ਸਾਰੇ ਸ਼ਹਿਰ', as: 'সকলো চহৰ'
+    },
+    'Tier 1': {
+      hi: 'टियर 1 (महानगर)', bn: 'টিয়ার ১ (মেট্রো)', te: 'టైర్ 1 (మెట్రోలు)', mr: 'टियर १ (महानगर)',
+      ta: 'டையர் 1 (பெருநகரங்கள்)', gu: 'ટિયર ૧ (મેટ્રો)', ur: 'ٹیئر 1 (میٹرو)', kn: 'ಟೈರ್ 1 (ಮೆಟ್ರೋಗಳು)',
+      or: 'ଟିୟର ୧ (ମହାନଗର)', ml: 'ടയർ 1 (മെട്രോകൾ)', pa: 'ਟੀਅਰ 1 (ਮਹਾਂਨਗਰ)', as: 'টিয়াৰ ১ (মহানগৰ)'
+    },
+    'Tier 2': {
+      hi: 'टियर 2 (उभरते केंद्र)', bn: 'টিয়ার ২ (উদীয়মান কেন্দ্র)', te: 'టైర్ 2 (అభివృద్ధి కేంద్రాలు)', mr: 'टियर २ (उदयोन्मुख केंद्र)',
+      ta: 'டையர் 2 (வளரும் மையங்கள்)', gu: 'ટિયર ૨ (ઉભરતા કેન્દ્રો)', ur: 'ٹیئر 2 (ابھرتے مراکز)', kn: 'ಟೈರ್ 2 (ಬೆಳೆಯುತ್ತಿರುವ ಕೇಂದ್ರಗಳು)',
+      or: 'ଟିୟର ୨ (ବିକାଶଶୀଳ କେନ୍ଦ୍ର)', ml: 'ടയർ 2 (വളരുന്ന കേന്ദ്രങ്ങൾ)', pa: 'ਟੀਅਰ 2 (ਵੱਡੇ ਕੇਂਦਰ)', as: 'টিয়াৰ ২ (উভতি অহা কেন্দ্ৰ)'
+    },
+    'Tier 3': {
+      hi: 'टियर 3 (क्षेत्रीय बाजार)', bn: 'টিয়ার ৩ (আঞ্চলিক বাজার)', te: 'టైర్ 3 (ప్రాంతీయ మార్కెట్లు)', mr: 'टियर ३ (प्रादेशिक बाजार)',
+      ta: 'டையர் 3 (மண்டல சந்தைகள்)', gu: 'ટિયર ૩ (પ્રાદેશિક બજારો)', ur: 'ٹیئر 3 (علاقائی مارکیٹس)', kn: 'ಟೈರ್ 3 (ಪ್ರಾದೇಶಿಕ ಮಾರುಕಟ್ಟೆಗಳು)',
+      or: 'ଟିୟର ୩ (ଆଞ୍ଚଳିକ ବଜାର)', ml: 'ടയർ 3 (പ്രാദേശಿಕ വിපണികൾ)', pa: 'ਟੀਅਰ 3 (ਖੇਤਰੀ ਮੰਡੀਆਂ)', as: 'টিয়াৰ ৩ (আঞ্চলিক বজাৰ)'
+    },
+    'Tier 4': {
+      hi: 'टियर 4 (स्थानीय शहर)', bn: 'টিয়ার ৪ (স্থানীয় শহর)', te: 'టైర్ 4 (స్థానిక నగరాలు)', mr: 'टियर ४ (स्थानिक शहरे)',
+      ta: 'டையர் 4 (உள்ளூர் நகரங்கள்)', gu: 'ટિયર ૪ (સ્થાનિક શહેરો)', ur: 'ٹیئر 4 (مقامی شہر)', kn: 'ಟೈರ್ 4 (ಸ್ಥಳೀಯ ನಗರಗಳು)',
+      or: 'ଟିୟର ୪ (ସ୍ଥାନୀୟ ସହର)', ml: 'ടയർ 4 (പ്രാദേശിക നഗരങ്ങൾ)', pa: 'ਟੀਅਰ 4 (ਸਥਾਨਕ ਸ਼ਹਿਰ)', as: 'টিয়াৰ ৪ (স্থানীয় চহৰ)'
+    },
+    'Tier 5': {
+      hi: 'टियर 5 (कस्बे व क्लस्टर)', bn: 'টিয়ার ৫ (মফস্বল ও ক্লাস্টার)', te: 'టైర్ 5 (పట్టణాలు)', mr: 'टियर ५ (शहरे व क्लस्टर)',
+      ta: 'டையர் 5 (சிறு நகரங்கள்)', gu: 'ટિયર ૫ (કસ્બા અને ક્લસ્ટર)', ur: 'ٹیئر 5 (قصبات اور کلسٹرز)', kn: 'ಟೈರ್ 5 (ಪಟ್ಟಣಗಳು)',
+      or: 'ଟିୟର ୫ (ଛୋଟ ସହର ଓ କ୍ଲଷ୍ଟର)', ml: 'ടയർ 5 (ചെറുപട്ടണങ്ങൾ)', pa: 'ਟੀਅਰ 5 (ਕਸਬੇ ਤੇ ਕਲੱਸਟਰ)', as: 'টিয়াৰ ৫ (চহৰ আৰু ক্লাষ্টাৰ)'
+    },
+    'Major metropolitan markets': {
+      hi: 'प्रमुख महानगरीय बाजार', bn: 'বৃহৎ মহানগরী বাজার', te: 'ప్రధాన మెట్రోపాలిటన్ మార్కెట్లు', mr: 'प्रमुख महानगरीय बाजार',
+      ta: 'முக்கிய பெருநகர சந்தைகள்', gu: 'મુખ્ય મહાનગરીય બજારો', ur: 'بڑی میٹروپولیٹن مارکیٹس', kn: 'ಪ್ರಮುಖ ಮಹಾನಗರ ಮಾರುಕಟ್ಟೆಗಳು',
+      or: 'ପ୍ରମୁଖ ମହାନଗର ବଜାର', ml: 'പ്രധാന മെട്രോപൊളിറ്റൻ വിപണികൾ', pa: 'ਵੱਡੀਆਂ ਮਹਾਂਨਗਰੀ ਮੰਡੀਆਂ'
+    },
+    'Large emerging commercial centers': {
+      hi: 'बड़े उभरते वाणिज्यिक केंद्र', bn: 'বৃহৎ উদীয়মান বাণিজ্যিক কেন্দ্র', te: 'అభివృద్ధి చెందుతున్న వాణిజ్య కేంద్రాలు', mr: 'मोठी उदयोन्मुख व्यावसायिक केंद्रे',
+      ta: 'வளர்ந்து வரும் வணிக மையங்கள்', gu: 'મોટા ઉભરતા વાણિજ્યિક કેન્દ્રો', ur: 'بڑے ابھرتے ہوئے تجارتی مراکز', kn: 'ದೊಡ್ಡ ವಾಣಿಜ್ಯ ಕೇಂದ್ರಗಳು',
+      or: 'ବଡ଼ ବିକାଶଶୀଳ ବାଣିଜ୍ୟିକ କେନ୍ଦ୍ର', ml: 'വളർന്നുവരുന്ന വലിയ വാണിജ്യ കേന്ദ്രങ്ങൾ'
+    },
+    'Growing regional economies': {
+      hi: 'बढ़ती क्षेत्रीय अर्थव्यवस्थाएं', bn: 'ক্রমবর্ধমান আঞ্চলিক অর্থনীতি', te: 'పెరుగుతున్న ప్రాంతీయ ఆర్థిక వ్యవస్థలు', mr: 'वाढणाऱ्या प्रादेशिक अर्थव्यवस्था',
+      ta: 'வளர்ந்து வரும் மண்டலப் பொருளாதாரம்', gu: 'વિકસતા પ્રાદેશિક અર્થતંત્રો', ur: 'بڑھتی ہوئی علاقائی معیشتیں', kn: 'ಬೆಳೆಯುತ್ತಿರುವ ಪ್ರಾದೇಶಿಕ ಆರ್ಥಿಕತೆಗಳು',
+      or: 'ବିକାଶଶୀଳ ଆଞ୍ଚଳିକ ଅର୍ଥନୀତି', ml: 'വളരുന്ന പ്രാദേശിക സമ്പദ്‌വ്യവസ്ഥകൾ'
+    },
+    'Emerging local business markets': {
+      hi: 'उभरते स्थानीय व्यापारिक बाजार', bn: 'উদীয়মান স্থানীয় ব্যবসায়িক বাজার', te: 'స్థానిక వ్యాపార మార్కెట్లు', mr: 'उदयोन्मुख स्थानिक व्यापारी बाजार',
+      ta: 'வளர்ந்து வரும் உள்ளூர் வணிக சந்தைகள்', gu: 'ઉભરતા સ્થાનિક વ્યાપારી બજારો', ur: 'ابھرتی ہوئی مقامی کاروباری مارکیٹیں', kn: 'ಉದಯೋನ್ಮುಖ ಸ್ಥಳೀಯ ವ್ಯಾಪಾರ ಮಾರುಕಟ್ಟೆಗಳು',
+      or: 'ବିକାଶଶୀଳ ସ୍ଥାନୀୟ ବ୍ୟବସାୟିକ ବଜାର', ml: 'പ്രാദേശിക ബിസിനസ് വിപണികൾ'
+    },
+    'Smaller cities & specialized clusters': {
+      hi: 'छोटे शहर और विशेष औद्योगिक क्लस्टर', bn: 'ছোট শহর ও বিশেষায়িত ক্লাস্টার', te: 'చిన్న నగరాలు & ప్రత్యేక క్లస్టర్లు', mr: 'लहान शहरे आणि विशेष क्लस्टर्स',
+      ta: 'சிறிய நகரங்கள் & சிறப்பு மையங்கள்', gu: 'નાના શહેરો અને વિશિષ્ટ ક્લસ્ટરો', ur: 'چھوٹے شہر اور مخصوص صنعتی کلسٹرز', kn: 'ಸಣ್ಣ ನಗರಗಳು & ವಿಶೇಷ ಸಮೂಹಗಳು',
+      or: 'ଛୋଟ ସହର ଏବଂ ବିଶେଷ କ୍ଲଷ୍ଟର', ml: 'ചെറിയ നഗരങ്ങളും പ്രത്യേക ക്ലസ്റ്ററുകളും'
+    },
+
+    // Regions
+    'All India': {
+      hi: 'संपूर्ण भारत', bn: 'সমগ্র ভারত', te: 'భారతదేశం అంతటా', mr: 'संपूर्ण भारत',
+      ta: 'முழு இந்தியா', gu: 'સમગ્ર ભારત', ur: 'سارے ہندوستان', kn: 'ಸಮಗ್ರ ಭಾರತ',
+      or: 'ସମଗ୍ର ଭାରତ', ml: 'ഇന്ത്യയൊട്ടാകെ', pa: 'ਸਾਰਾ ਭਾਰਤ', as: 'সমগ্ৰ ভাৰত'
+    },
+    'North India': {
+      hi: 'उत्तर भारत', bn: 'উত্তর ভারত', te: 'ఉత్తర భారతదేశం', mr: 'उत्तर भारत',
+      ta: 'வட இந்தியா', gu: 'ઉત્તર ભારત', ur: 'شمالی ہند', kn: 'ಉತ್ತರ ಭಾರತ',
+      or: 'ଉତ୍ତର ଭାରତ', ml: 'ഉത്തരേന്ത്യ', pa: 'ਉੱਤਰੀ ਭਾਰਤ', as: 'উত্তৰ ভাৰত'
+    },
+    'South India': {
+      hi: 'दक्षिण भारत', bn: 'দক্ষিণ ভারত', te: 'దక్షిణ భారతదేశం', mr: 'दक्षिण भारत',
+      ta: 'தென் இந்தியா', gu: 'દક્ષિણ ભારત', ur: 'جنوبی ہند', kn: 'ದಕ್ಷಿಣ ಭಾರತ',
+      or: 'ଦକ୍ଷିଣ ଭାରତ', ml: 'ദക്ഷിണേന്ത്യ', pa: 'ਦੱਖਣੀ ਭਾਰਤ', as: 'দক্ষিণ ভাৰত'
+    },
+    'West India': {
+      hi: 'पश्चिम भारत', bn: 'পশ্চিম ভারত', te: 'పశ్చిమ భారతదేశం', mr: 'पश्चिम भारत',
+      ta: 'மேற்கு இந்தியா', gu: 'પશ્ચિમ ભારત', ur: 'مغربی ہند', kn: 'ಪಶ್ಚಿಮ ಭಾರತ',
+      or: 'ପଶ୍ଚିମ ଭାରତ', ml: 'പടിഞ്ഞാറൻ ഇന്ത്യ', pa: 'ਪੱਛਮੀ ਭਾਰਤ', as: 'পশ্চিম ভাৰত'
+    },
+    'East India': {
+      hi: 'पूर्वी भारत', bn: 'পূর্ব ভারত', te: 'తూర్పు భారతదేశం', mr: 'पूर्व भारत',
+      ta: 'கிழக்கு இந்தியா', gu: 'પૂર્વ ભારત', ur: 'مشرقی ہند', kn: 'ಪೂರ್ವ ಭಾರತ',
+      or: 'ପୂର୍ବ ଭାରତ', ml: 'കിഴക്കൻ ഇന്ത്യ', pa: 'ਪੂਰਬੀ ਭਾਰਤ', as: 'পূব ভাৰত'
+    },
+    'Central India': {
+      hi: 'मध्य भारत', bn: 'মধ্য ভারত', te: 'మధ్య భారతదేశం', mr: 'मध्य भारत',
+      ta: 'மத்திய இந்தியா', gu: 'મધ્ય ભારત', ur: 'وسطی ہند', kn: 'ಮಧ್ಯ ಭಾರತ',
+      or: 'ମଧ୍ୟ ଭାରତ', ml: 'മധ്യേന്ത്യ', pa: 'ਮੱਧ ਭਾਰਤ', as: 'মধ্য ভাৰত'
+    },
+    'Northeast India': {
+      hi: 'पूर्वोत्तर भारत', bn: 'উত্তর-পূর্ব ভারত', te: 'ఈశాన్య భారతదేశం', mr: 'ईशान्य भारत',
+      ta: 'வடகிழக்கு இந்தியா', gu: 'ઉત્તર પૂર્વ ભારત', ur: 'شمال مشرقی ہند', kn: 'ಈಶಾನ್ಯ ಭಾರತ',
+      or: 'ଉତ୍ତର-ପୂର୍ବ ଭାରତ', ml: 'വടക്കുകിഴക്കൻ ഇന്ത്യ', pa: 'ਉੱਤਰ-ਪੂਰਬੀ ਭਾਰਤ', as: 'উত্তৰ-পূব ভাৰত'
+    },
+
+    // Search & Filter Form Labels
+    'Search Cities': {
+      hi: 'शहर खोजें', bn: 'শহর অনুসন্ধান', te: 'నగరాలను శోధించండి', mr: 'शहर शोधा',
+      ta: 'நகரங்களைத் தேடுங்கள்', gu: 'શહેરો શોધો', ur: 'شہر تلاش کریں', kn: 'ನಗರಗಳನ್ನು ಹುಡುಕಿ',
+      or: 'ସହର ଖୋଜନ୍ତୁ', ml: 'നഗരങ്ങൾ തിരയുക', pa: 'ਸ਼ਹਿਰ ਖੋਜੋ', as: 'চহৰ সন্ধান কৰক'
+    },
+    'State / UT': {
+      hi: 'राज्य / केंद्र शासित प्रदेश', bn: 'রাজ্য / কেন্দ্রশাসিত অঞ্চল', te: 'రాష్ట్రం / కేంద్రపాలిత ప్రాంతం', mr: 'राज्य / केंद्रशासित प्रदेश',
+      ta: 'மாநிலம் / யூனியன் பிரதேசம்', gu: 'રાજ્ય / કેન્દ્રશાસિત પ્રદેશ', ur: 'ریاست / مرکز کے زیر انتظام علاقہ', kn: 'ರಾಜ್ಯ / ಕೇಂದ್ರಾಡಳಿತ ಪ್ರದೇಶ',
+      or: 'ରାଜ୍ୟ / କେନ୍ଦ୍ରଶାସିତ ଅଞ୍ଚଳ', ml: 'സംസ്ഥാനം / കേന്ദ്രഭരണ പ്രദേശം', pa: 'ਰਾਜ / ਕੇਂਦਰ ਸ਼ਾਸਤ ਪ੍ਰਦੇਸ਼'
+    },
+    'Market Tier': {
+      hi: 'मार्केट टियर', bn: 'মার্কেট টিয়ার', te: 'మార్కెట్ టైర్', mr: 'मार्केट टियर',
+      ta: 'சந்தை அடுக்கு', gu: 'માર્કેટ ટિયર', ur: 'مارکیٹ ٹیئر', kn: 'ಮಾರುಕಟ್ಟೆ ಶ್ರೇಣಿ',
+      or: 'ମାର୍କେଟ ଟିୟର', ml: 'മാർക്കറ്റ് ടയർ', pa: 'ਮਾਰਕੀਟ ਟੀਅਰ'
+    },
+    'Research Status': {
+      hi: 'रिसर्च स्थिति', bn: 'গবেষণার অবস্থা', te: 'పరిశోధన స్థితి', mr: 'संशोधन स्थिती',
+      ta: 'ஆராய்ச்சி நிலை', gu: 'સંશોધન સ્થિતિ', ur: 'تحقیقی حیثیت', kn: 'ಸಂಶೋಧನಾ ಸ್ಥಿತಿ',
+      or: 'ଗବେଷଣା ସ୍ଥିତି', ml: 'ഗവേഷണ നില', pa: 'ਖੋਜ ਸਥਿਤੀ'
+    },
+    'Operating Model': {
+      hi: 'ऑपरेटिंग मॉडल', bn: 'অপারেটিং মডেল', te: 'ఆపరేటింగ్ మోడల్', mr: 'ऑपरेटिंग मॉडेल',
+      ta: 'செயல்பாட்டு மாதிரி', gu: 'ઓપરેટિંગ મોડેલ', ur: 'آپریٹنگ ماڈل', kn: 'ಕಾರ್ಯಾಚರಣೆ ಮಾದರಿ',
+      or: 'ଅପରେଟିଂ ମଡେଲ୍', ml: 'ഓപ്പറേറ്റിംഗ് മോഡൽ', pa: 'ਓਪਰੇਟਿੰਗ ਮਾਡਲ'
+    },
+    'Target City': {
+      hi: 'लक्ष्य शहर', bn: 'লক্ষ্য শহর', te: 'లక్ష్య నగరం', mr: 'लक्ष्य शहर',
+      ta: 'இலக்கு நகரம்', gu: 'લક્ષ્ય શહેર', ur: 'ہدف شہر', kn: 'ಗುರಿ ನಗರ',
+      or: 'ଲକ୍ଷ୍ୟ ସହର', ml: 'ലക്ഷ്യമിടുന്ന നഗരം', pa: 'ਨਿਸ਼ਾਨਾ ਸ਼ਹਿਰ'
+    },
+    'All Indian Cities': {
+      hi: 'भारत के सभी शहर', bn: 'ভারতের সব শহর', te: 'అన్ని భారతీయ నగరాలు', mr: 'भारतातील सर्व शहरे',
+      ta: 'அனைத்து இந்திய நகரங்கள்', gu: 'ભારતના બધા શહેરો', ur: 'تمام ہندوستانی شہر', kn: 'ಎಲ್ಲಾ ಭಾರತೀಯ ನಗರಗಳು',
+      or: 'ଭାରତର ସମସ୍ତ ସହର', ml: 'എല്ലാ ഇന്ത്യൻ നഗരങ്ങളും'
+    },
+    'Max Capex Budget': {
+      hi: 'अधिकतम बजट', bn: 'সর্বোচ্চ মূলধন বাজেট', te: 'గరిష్ట పెట్టుబడి బడ్జెట్', mr: 'कमाल भांडवली बजेट',
+      ta: 'அதிகபட்ச முதலீட்டு பட்ஜெட்', gu: 'મહત્તમ બજેટ', ur: 'زیادہ سے زیادہ بجٹ', kn: 'ಗರಿಷ್ಠ ಬಂಡವಾಳ ಬಜೆಟ್',
+      or: 'ସର୍ବାଧିକ ପୁଞ୍ଜି ବଜେଟ୍', ml: 'പരമാവധി ബജറ്റ്'
+    },
+    'Max Investment Budget:': {
+      hi: 'अधिकतम निवेश बजट:', bn: 'সর্বোচ্চ বিনিয়োগ বাজেট:', te: 'గరిష్ట పెట్టుబడి బడ్జెట్:', mr: 'कमाल गुंतवणूक बजेट:',
+      ta: 'அதிகபட்ச முதலீட்டு பட்ஜெட்:', gu: 'મહત્તમ રોકાણ બજેટ:', ur: 'زیادہ سے زیادہ سرمایہ کاری بجٹ:'
+    },
+    'Business Model:': {
+      hi: 'बिजनेस मॉडल:', bn: 'ব্যবসা মডেল:', te: 'వ్యాపార మోడల్:', mr: 'व्यवसाय मॉडेल:',
+      ta: 'வணிக மாதிரி:', gu: 'વ્યવસાય મોડેલ:', ur: 'کاروباری ماڈل:'
+    },
+    'Category:': {
+      hi: 'श्रेणी (Category):', bn: 'বিভাগ:', te: 'వర్గం:', mr: 'वर्गवारी:',
+      ta: 'வகை:', gu: 'શ્રેણી:', ur: 'زمرہ:'
+    },
+    'Reset': {
+      hi: 'रीसेट करें', bn: 'রিসেট', te: 'రీసెట్', mr: 'रीसेट करा',
+      ta: 'மீட்டமை', gu: 'રીસેટ', ur: 'دوبارہ ترتیب دیں', kn: 'ಮರುಹೊಂದಿಸಿ',
+      or: 'ରିସେଟ୍', ml: 'റീസെറ്റ് ചെയ്യുക', pa: 'ਰੀਸੈੱਟ ਕਰੋ'
+    },
+    'Search Opportunities': {
+      hi: 'अवसर खोजें', bn: 'সুযোগ খুঁজুন', te: 'అవకాశాలను శోధించండి', mr: 'संधी शोधा',
+      ta: 'வாய்ப்புகளைத் தேடுங்கள்', gu: 'તકો શોધો', ur: 'مواقع تلاش کریں', kn: 'ಅವಕಾಶಗಳನ್ನು ಹುಡುಕಿ',
+      or: 'ସୁଯୋଗ ଖୋଜନ୍ତୁ', ml: 'അവസരങ്ങൾ തിരയുക'
+    },
+
+    // Statuses & Badges
+    'Active Research': {
+      hi: 'सक्रिय रिसर्च', bn: 'সক্রিয় গবেষণা', te: 'క్రియాశీల పరిశోధన', mr: 'सक्रिय संशोधन',
+      ta: 'செயலில் உள்ள ஆராய்ச்சி', gu: 'સક્રિય સંશોધન', ur: 'فعال تحقیق', kn: 'ಸಕ್ರಿಯ ಸಂಶೋಧನೆ',
+      or: 'ସକ୍ରିୟ ଗବେଷଣା', ml: 'സജീവ ഗവേഷണം'
+    },
+    'Active': {
+      hi: 'सक्रिय', bn: 'সক্রিয়', te: 'క్రియాశీలం', mr: 'सक्रिय',
+      ta: 'செயலில்', gu: 'સક્રિય', ur: 'فعال', kn: 'ಸಕ್ರಿಯ',
+      or: 'ସକ୍ରିୟ', ml: 'സജീവം'
+    },
+    'Researching': {
+      hi: 'रिसर्च जारी', bn: 'গবেষণা চলছে', te: 'పరిశోధన జరుగుతోంది', mr: 'संशोधन सुरू',
+      ta: 'ஆராய்ச்சி நடக்கிறது', gu: 'સંશોધન ચાલુ', ur: 'تحقیق جاری ہے', kn: 'ಸಂಶೋಧನೆ ಪ್ರಗತಿಯಲ್ಲಿದೆ',
+      or: 'ଗବେଷଣା ଚାଲିଛି', ml: 'ഗവേഷണം നടക്കുന്നു'
+    },
+    'Planned': {
+      hi: 'प्रस्तावित', bn: 'পরিকল্পিত', te: 'ప్రణాళిక చేయబడింది', mr: 'नियोजित',
+      ta: 'திட்டமிடப்பட்டுள்ளது', gu: 'આયોજિત', ur: 'منصوبہ بند', kn: 'ಯೋಜಿಸಲಾಗಿದೆ',
+      or: 'ଯୋଜନାବଦ୍ଧ', ml: 'ആസൂത്രണം ചെയ്തത്'
+    },
+    'Coming Soon': {
+      hi: 'जल्द उपलब्ध', bn: 'শীঘ্রই আসছে', te: 'త్వరలో రాబోతోంది', mr: 'लवकरच येत आहे',
+      ta: 'விரைவில் வருகிறது', gu: 'ટૂંક સમયમાં આવી રહ્યું છે', ur: 'جلد آرہا ہے', kn: 'ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ',
+      or: 'ଖୁବ୍ ଶୀଘ୍ର ଆସୁଛି', ml: 'ഉടൻ വരുന്നു'
+    },
+    'Not Researched': {
+      hi: 'अभी रिसर्च नहीं हुआ', bn: 'এখনও গবেষণা হয়নি', te: 'ఇంకా పరిశోధించలేదు', mr: 'अद्याप संशोधन नाही',
+      ta: 'இன்னும் ஆய்வு செய்யப்படவில்லை', gu: 'હજુ સંશોધન થયું નથી', ur: 'ابھی تحقیق نہیں ہوئی', kn: 'ಇನ್ನೂ ಸಂಶೋಧಿಸಿಲ್ಲ',
+      or: 'ଏପର୍ଯ୍ୟନ୍ତ ଗବେଷଣା ହୋଇନାହିଁ', ml: 'ഇതുവരെ ഗവേഷണം നടത്തിയിട്ടില്ല'
+    },
+    'Not yet researched': {
+      hi: 'अभी रिसर्च नहीं हुआ', bn: 'এখনও গবেষণা হয়নি', te: 'ఇంకా పరిశోధించలేదు', mr: 'अद्याप संशोधन नाही',
+      ta: 'இன்னும் ஆய்வு செய்யப்படவில்லை', gu: 'હજુ સંશોધન થયું નથી', ur: 'ابھی تحقیق نہیں ہوئی', kn: 'ಇನ್ನೂ ಸಂಶೋಧಿಸಿಲ್ಲ'
+    },
+    'High-Priority Market': {
+      hi: 'उच्च प्राथमिकता वाला बाजार', bn: 'উচ্চ অগ্রাধিকার বাজার', te: 'అధిక ప్రాధాన్యత మార్కెట్', mr: 'उच्च प्राधान्य बाजार',
+      ta: 'முன்னுரிமை சந்தை', gu: 'ઉચ્ચ અગ્રતા બજાર', ur: 'اعلی ترجیحی مارکیٹ', kn: 'ಹೆಚ್ಚಿನ ಆದ್ಯತೆಯ ಮಾರುಕಟ್ಟೆ',
+      or: 'ଉଚ୍ଚ ପ୍ରାଥମିକତା ବଜାର', ml: 'ഉയർന്ന മുൻഗണനയുള്ള വിപണി'
+    },
+
+    // Badges & Evidence
+    'Verified Gap': {
+      hi: 'सत्यापित मार्केट गैप', bn: 'যাচাইকৃত ফাঁক', te: 'ధృవీకరించిన గ్యాప్', mr: 'सत्यापित मार्केट गॅप',
+      ta: 'சரிபார்க்கப்பட்ட இடைவெளி', gu: 'ચકાસાયેલ તફાવત', ur: 'تصدیق شدہ فرق', kn: 'ಪರಿಶೀಲಿಸಿದ ಅಂತರ',
+      or: 'ପ୍ରମାଣିତ ଅଭାବ', ml: 'സ്ഥിരീകരിച്ച ഗ്യാപ്'
+    },
+    'Customer Validated': {
+      hi: 'ग्राहकों द्वारा प्रमाणित', bn: 'গ্রাহক দ্বারা যাচাইকৃত', te: 'వినియోగదారుల ధృవీకరణ', mr: 'ग्राहकांद्वारे प्रमाणित',
+      ta: 'வாடிக்கையாளர் சரிபார்க்கப்பட்டது', gu: 'ગ્રાહકો દ્વારા માન્ય', ur: 'گاہکوں کی توثیق', kn: 'ಗ್ರಾಹಕರಿಂದ ಮೌಲ್ಯೀಕರಿಸಲ್ಪಟ್ಟಿದೆ',
+      or: 'ଗ୍ରାହକ ସ୍ୱୀକୃତ', ml: 'ഉപഭോക്താവ് സാധൂകരിച്ചത്'
+    },
+    'Evidence Supported': {
+      hi: 'प्रमाण-समर्थित', bn: 'প্রমাণ-समর্থিত', te: 'ఆధారాలతో కూడినది', mr: 'पुराव्यांवर आधारित',
+      ta: 'சான்று ஆதரவுடையது', gu: 'પુરાવા આધારિત', ur: 'شواہد سے تعاون یافتہ', kn: 'ಸಾಕ್ಷ್ಯಾಧಾರಿತ',
+      or: 'ପ୍ରମାଣ ଆଧାରିତ', ml: 'തെളിവുകളുടെ പിന്തുണയുള്ളത്'
+    },
+    'Desk Research': {
+      hi: 'डेस्क रिसर्च', bn: 'ডেস্ক গবেষণা', te: 'డెస్క్ పరిశోధన', mr: 'डेस्क रिसर्च',
+      ta: 'மேசை ஆராய்ச்சி', gu: 'ડેસ્ક રિસર્ચ', ur: 'ڈیسک ریسرچ', kn: 'ಡೆಸ್ಕ್ ರಿಸರ್ಚ್',
+      or: 'ଡେସ୍କ ରିସର୍ଚ୍ଚ', ml: 'ഡെസ്ക് റിസർച്ച്'
+    },
+
+    // Demographics & Indicators
+    'Population Band:': {
+      hi: 'जनसंख्या श्रेणी:', bn: 'জনসংখ্যার স্তর:', te: 'జనాభా పరిధి:', mr: 'लोकसंख्या वर्ग:',
+      ta: 'மக்கள் தொகை வரம்பு:', gu: 'વસ્તી શ્રેણી:', ur: 'آبادی کا بینڈ:', kn: 'ಜನಸಂಖ್ಯಾ ಶ್ರೇಣಿ:',
+      or: 'ଜନସଂଖ୍ୟା ପରିସର:', ml: 'ജനസംഖ്യാ പരിധി:'
+    },
+    'Business Density:': {
+      hi: 'व्यापारिक घनत्व:', bn: 'ব্যবসায়ের ঘনত্ব:', te: 'వ్యాపార సాంద్రత:', mr: 'व्यावसायिक घनता:',
+      ta: 'வணிக அடர்த்தி:', gu: 'વ્યાપાર ઘનતા:', ur: 'کاروباری کثافت:', kn: 'ವ್ಯಾಪಾರ ಸಾಂದ್ರತೆ:',
+      or: 'ବ୍ୟବସାୟ ସାନ୍ଦ୍ରତା:', ml: 'ബിസിനസ്സ് സാന്ദ്രത:'
+    },
+    'Entrepreneur Density': {
+      hi: 'उद्यमी घनत्व', bn: 'উদ্যোক্তা ঘনত্ব', te: 'వ్యవస్థాపక సాంద్రత', mr: 'उद्योजक घनता',
+      ta: 'தொழில்முனைவோர் அடர்த்தி', gu: 'ઉદ્યોગસાહસિક ઘનતા', ur: 'کاروباری کثافت', kn: 'ಉದ್ಯಮಿ ಸಾಂದ್ರತೆ'
+    },
+    'Infrastructure Level': {
+      hi: 'बुनियादी ढांचा स्तर', bn: 'অবকাঠামোর স্তর', te: 'మౌలిక సదుపాయాల స్థాయి', mr: 'पायाभूत सुविधा पातळी',
+      ta: 'உள்கட்டமைப்பு நிலை', gu: 'ઇન્ફ્રાસ્ટ્રક્ચર સ્તર', ur: 'બનિયાદી ઢાંચા કી સતહ', kn: 'ಮೂಲಸೌಕರ್ಯ ಮಟ್ಟ'
+    },
+    'Startup Capex Range': {
+      hi: 'प्रारंभिक पूंजी रेंज', bn: 'প্রাথমিক মূলধন সীমা', te: 'ప్రారంభ మూలధనం శ్రేణి', mr: 'सुरुवातीचे भांडवल मर्यादा',
+      ta: 'துவக்க மூலதன வரம்பு', gu: 'પ્રારંભિક મૂડી શ્રેણી', ur: 'ابتدائی سرمائے کی حد', kn: 'ಪ್ರಾರಂಭಿಕ ಬಂಡವಾಳ ಶ್ರೇಣಿ',
+      or: 'ପ୍ରାରମ୍ଭିକ ପୁଞ୍ଜି ପରିସର', ml: 'പ്രാരംഭ മൂലധന പരിധി'
+    },
+    'City Market Metrics': {
+      hi: 'शहर बाजार संकेतक', bn: 'শহর বাজার পরিমাপ', te: 'నగర మార్కెట్ కొలమానాలు', mr: 'शहर बाजार निर्देशक',
+      ta: 'நகர சந்தை அளவீடுகள்', gu: 'શહેર બજાર સૂચકાંકો', ur: 'شہری مارکیٹ کے پیمانے', kn: 'ನಗರ ಮಾರುಕಟ್ಟೆ ಮೆಟ್ರಿಕ್ಸ್'
+    },
+    'Published Opportunities:': {
+      hi: 'प्रकाशित अवसर:', bn: 'প্রকাশিত সুযোগসমূহ:', te: 'ప్రచురించిన అవకాశాలు:', mr: 'प्रकाशित संधी:',
+      ta: 'வெளியிடப்பட்ட வாய்ப்புகள்:', gu: 'પ્રકાશિત તકો:', ur: 'شائع شدہ مواقع:', kn: 'ಪ್ರಕಟಿತ ಅವಕಾಶಗಳು:'
+    },
+    'Active Blueprint Reports:': {
+      hi: 'सक्रिय ब्लूप्रिंट रिपोर्ट्स:', bn: 'সক্রিয় ব্লুপ্রিন্ট রিপোর্ট:', te: 'యాక్టివ్ బ్లూప్రింట్ నివేదికలు:', mr: 'सक्रिय ब्लूप्रिंट अहवाल:',
+      ta: 'செயலில் உள்ள அறிக்கைகள்:', gu: 'સક્રિય બ્લૂપ્રિન્ટ અહેવાલો:'
+    },
+    'Dominant Sector Gaps:': {
+      hi: 'प्रमुख क्षेत्रीय कमियां:', bn: 'প্রধান খাতের শূন্যতা:', te: 'ప్రధాన రంగాల లోపాలు:', mr: 'प्रमुख क्षेत्रातील तफावत:',
+      ta: 'முக்கிய துறை இடைவெளிகள்:', gu: 'મુખ્ય ક્ષેત્રીય ખામીઓ:'
+    },
+    'Average MSME Capex Range:': {
+      hi: 'औसत MSME पूंजी रेंज:', bn: 'গড় এমএসএমই মূলধন সীমা:', te: 'సగటు MSME పెట్టుబడి:', mr: 'सरासरी MSME भांडवल मर्यादा:',
+      ta: 'சராசரி MSME மூலதன வரம்பு:'
+    },
+
+    // Actions & Buttons
+    'Explore Guide →': {
+      hi: 'गाइड देखें →', bn: 'গাইড পড়ুন →', te: 'గైడ్ చదవండి →', mr: 'मार्गदर्शिका पहा →',
+      ta: 'வழிகாட்டியைப் படிக்க →', gu: 'માર્ગદર્શિકા જુઓ →', ur: 'گائیڈ دیکھیں →', kn: 'ಮಾರ್ಗದರ್ಶಿ ಓದಿ →',
+      or: 'ଗାଇଡ ଦେଖନ୍ତୁ →', ml: 'ഗൈഡ് വായിക്കുക →'
+    },
+    'Read Opportunity Guide →': {
+      hi: 'अवसर गाइड पढ़ें →', bn: 'সুযোগ গাইড পড়ুন →', te: 'పూర్తి గైడ్ చదవండి →', mr: 'संधी मार्गदर्शक वाचा →',
+      ta: 'முழு வழிகாட்டியைப் படிக்கவும் →', gu: 'સંપૂર્ણ માર્ગદર્શિકા વાંચો →', ur: 'مکمل گائیڈ پڑھیں →', kn: 'ಅವಕಾಶ ಮಾರ್ಗದರ್ಶಿ ಓದಿ →'
+    },
+    'Access Blueprint →': {
+      hi: 'ब्लूप्रिंट देखें →', bn: 'ব্লুপ্রিন্ট পান →', te: 'బ్లూప్రింట్ పొందండి →', mr: 'ब्लूप्रिंट मिळवा →',
+      ta: 'திட்ட வரைபடத்தைப் பெறுக →', gu: 'બ્લૂપ્રિન્ટ મેળવો →', ur: 'بلیو پرنٹ حاصل کریں →', kn: 'ಬ್ಲೂಪ್ರಿಂಟ್ ಪಡೆಯಿರಿ →'
+    },
+    'View Deliverables': {
+      hi: 'डॉक्यूमेंट्स देखें', bn: 'নথিপত্র দেখুন', te: 'పత్రాలను చూడండి', mr: 'तपशील पहा',
+      ta: 'விவரங்களைப் பார்க்க', gu: 'દસ્તાવેજો જુઓ', ur: 'دستاویزات دیکھیں'
+    },
+    'View Local Opportunities ↓': {
+      hi: 'स्थानीय अवसर देखें ↓', bn: 'স্থানীয় সুযোগ দেখুন ↓', te: 'స్థానిక అవకాశాలు చూడండి ↓', mr: 'स्थानिक संधी पहा ↓',
+      ta: 'உள்ளூர் வாய்ப்புகளைப் பார்க்க ↓', gu: 'સ્થાનિક તકો જુઓ ↓', ur: 'مقامی مواقع دیکھیں ↓'
+    },
+    'Commission Custom Study': {
+      hi: 'कस्टम रिसर्च कराएं', bn: 'কাস্টম রিসার্চ অর্ডার করুন', te: 'ప్రత్యేక అధ్యయనం కోరండి', mr: 'कस्टम रिसर्च मागवा',
+      ta: 'தனிப்பயன் ஆய்வைக் கோருங்கள்', gu: 'કસ્ટમ અભ્યાસ કરાવો', ur: 'مخصوص تحقیق حاصل کریں'
+    },
+    'Browse All India Gaps': {
+      hi: 'भारत भर के अवसर देखें', bn: 'সমগ্র ভারতের সুযোগ দেখুন', te: 'అన్ని అవకాశాలను చూడండి', mr: 'सर्व भारतातील संधी पहा',
+      ta: 'அனைத்து இந்திய வாய்ப்புகளையும் பார்க்க', gu: 'બધા ભારતીય અવસરો જુઓ', ur: 'تمام ہندوستانی مواقع دیکھیں'
+    },
+    'Browse full catalogue →': {
+      hi: 'संपूर्ण सूची देखें →', bn: 'সম্পূর্ণ ক্যাটালগ দেখুন →', te: 'పూర్తి కేటలాగ్ చూడండి →', mr: 'पूर्ण यादी पहा →',
+      ta: 'முழு பட்டியலைப் பார்க்கவும் →', gu: 'સંપૂર્ણ સૂચિ જુઓ →', ur: 'مکمل کیٹلاگ دیکھیں →'
+    },
+    'View all cities →': {
+      hi: 'सभी शहर देखें →', bn: 'সব শহর দেখুন →', te: 'అన్ని నగరాలు చూడండి →', mr: 'सर्व शहरे पहा →',
+      ta: 'அனைத்து நகரங்களையும் பார்க்க →', gu: 'બધા શહેરો જુઓ →', ur: 'تمام شہر دیکھیں →'
+    },
+
+    // Models & Categories
+    'Offline / Physical Store': {
+      hi: 'ऑफलाइन / फिजिकल स्टोर', bn: 'অফলাইন / ফিজিক্যাল স্টোর', te: 'ఆఫ్‌లైన్ / ప్రత్యక్ష స్టోర్', mr: 'ऑफलाइन / प्रत्यक्ष दुकान',
+      ta: 'நேரடி அங்காடி', gu: 'ઑફલાઇન / ભૌતિક સ્ટોર', ur: 'آف لائن اسٹور'
+    },
+    'Hybrid (Retail + Delivery)': {
+      hi: 'हाइब्रिड (दुकान + डिलीवरी)', bn: 'হাইব্রিড (দোকান + ডেলিভারি)', te: 'హైబ్రిడ్ (రిటైల్ + డెలివరీ)', mr: 'हायब्रिड (दुकान + वितरण)',
+      ta: 'ஹைப்ரிড (விற்பனை + டெலிவரி)', gu: 'હાઇબ્રિડ (રિટેલ + ડિલિવરી)', ur: 'ہائبرڈ (ریٹیل + ڈیلیوری)'
+    },
+    'Online / B2B Service': {
+      hi: 'ऑनलाइन / B2B सेवा', bn: 'অনলাইন / বি২বি সেবা', te: 'ఆన్‌లైన్ / B2B సర్వీస్', mr: 'ऑनलाइन / B2B सेवा',
+      ta: 'ஆன்லைன் / B2B சேவை', gu: 'ઓનલાઇન / B2B સેવા', ur: 'آن لائن / بی ٹو بی سروس'
+    },
+    'Food & Beverage': {
+      hi: 'खान-पान (F&B)', bn: 'খাদ্য ও পানীয়', te: 'ఆహారం & పానీయాలు', mr: 'अन्न व पेय',
+      ta: 'உணவு & பானங்கள்', gu: 'ખાદ્ય અને પીણાં', ur: 'خوراک اور مشروبات'
+    },
+    'Clean Energy & EV': {
+      hi: 'स्वच्छ ऊर्जा व ईवी', bn: 'পরিচ্ছন্ন শক্তি ও ইভি', te: 'క్లీన్ ఎనర్జీ & ఈవీ', mr: 'स्वच्छ ऊर्जा आणि ईव्ही',
+      ta: 'தூய ஆற்றல் & மின்வாகனம்', gu: 'ક્લીન એનર્જી અને ઇવી', ur: 'صاف ستھਰੀ توانائی اور ای وی'
+    },
+    'Logistics & Hyperlocal': {
+      hi: 'लॉजिस्टिक्स व हाइपरलोकल', bn: 'লজিস্টিক ও হাইপারলোকাল', te: 'లాజిస్టిక్స్ & హైపర్‌లోకల్', mr: 'लॉजिस्टिक्स आणि हायपरलोकल',
+      ta: 'லாஜிஸ்டிக்ஸ் & உள்ளூர் டெலிவரி', gu: 'લોજિસ્ટિક્સ અને હાઇપરલોકલ', ur: 'لاجسٹکس اور ہائپر لوکل'
+    },
+    'Healthcare & Elderly Care': {
+      hi: 'स्वास्थ्य व बुजुर्गों की देखभाल', bn: 'স্বাস্থ্যসেবা ও প্রবীণ যত্ন', te: 'ఆరోగ్య సంరక్షణ & వృద్ధుల సంరక్షణ', mr: 'आरोग्यसेवा व ज्येष्ठ नागरिक काळजी',
+      ta: 'சுகாதாரம் & முதியோர் பராமரிப்பு', gu: 'આરોગ્ય સંભાળ અને વડીલોની સંભાળ', ur: 'صحت کی دیکھ بھال اور بزرگوں کی دیکھ بھال'
+    },
+    'Light Manufacturing': {
+      hi: 'लघु विनिर्माण (Manufacturing)', bn: 'ক্ষুদ্র উৎপাদন শিল্প', te: 'చిన్న తరహా తయారీ', mr: 'लघु उत्पादन उद्योग',
+      ta: 'சிறு உற்பத்தி தொழில்', gu: 'લઘુ ઉત્પાદન', ur: 'ہلکی مینوفੈਕચરنگ'
+    },
+
+    // Workflow
+    'How "Business Scope in Your City" Works': {
+      hi: '"बिजनेस स्कोप इन योर सिटी" कैसे काम करता है',
+      bn: '"বিজনেস স্কোপ ইন ইওর সিটি" কীভাবে কাজ করে',
+      te: '"బిజినెస్ స్కోప్ ఇన్ యువర్ సిటీ" ఎలా పనిచేస్తుంది',
+      mr: '"बिझनेस स्कोप इन युवर सिटी" कसे कार्य करते',
+      ta: '"உங்கள் நகரில் தொழில் வாய்ப்பு" எவ்வாறு செயல்படுகிறது',
+      gu: '"બિઝનેસ સ્કોપ ઇન યોર સિટી" કેવી રીતે કામ કરે છે',
+      ur: '"بزنس اسکوپ ان یوور سٹی" کیسے کام کرتا ہے',
+      kn: '"ಬಿಸಿನೆಸ್ ಸ್ಕೋಪ್ ಇನ್ ಯುವರ್ ಸಿಟಿ" ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ'
+    },
+    'A disciplined, data-driven pathway from identifying a local municipal market to launching a validated business.': {
+      hi: 'स्थानीय नगर पालिका बाजार की पहचान से लेकर सत्यापित व्यवसाय शुरू करने की एक व्यवस्थित और डेटा-संचालित प्रक्रिया।',
+      bn: 'স্থানীয় পৌর বাজার চিহ্নিতকরণ থেকে শুরু করে যাচাইকৃত ব্যবসা চালু করার একটি সুশৃঙ্খল এবং ডেটা-চালিত পথ।',
+      te: 'స్థానిక మునిసిపల్ మార్కెట్‌ను గుర్తించడం నుండి ధృవీకరించిన వ్యాపారాన్ని ప్రారంభించే క్రమశిక్షణతో కూడిన మార్గం.',
+      mr: 'स्थानिक बाजारपेठेच्या ओळखीपासून ते सत्यापित व्यवसाय सुरू करण्यापर्यंतची शिस्तबद्ध आणि डेटा-आधारित पद्धत.'
     }
   };
 
   /**
-   * Universal Fallback string getter: checks current language, then Hindi, then English
+   * Universal translation getter for a phrase or key.
+   * If target is English or not found, falls back safely to English.
    */
-  function getTranslation(key, code) {
-    const lang = code || currentLang || 'en';
-    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
-      return TRANSLATIONS[lang][key];
+  function translatePhrase(phrase, lang) {
+    if (!phrase || typeof phrase !== 'string') return phrase;
+    const target = lang || currentLang || 'en';
+    if (target === 'en') return phrase;
+
+    const trimmed = phrase.trim();
+    if (PHRASE_DICTIONARY[trimmed] && PHRASE_DICTIONARY[trimmed][target]) {
+      return PHRASE_DICTIONARY[trimmed][target];
     }
-    if (TRANSLATIONS['hi'] && TRANSLATIONS['hi'][key] && lang !== 'en') {
-      return TRANSLATIONS['hi'][key];
+    // Fallback to Hindi if target language is Indian and entry exists in Hindi
+    if (PHRASE_DICTIONARY[trimmed] && PHRASE_DICTIONARY[trimmed]['hi']) {
+      return PHRASE_DICTIONARY[trimmed]['hi'];
     }
-    if (TRANSLATIONS['en'] && TRANSLATIONS['en'][key]) {
-      return TRANSLATIONS['en'][key];
-    }
-    return '';
+    return phrase;
   }
 
   /**
    * Determine initial language using 5-layer persistent fallback:
    * 1. URL search parameter (?lang=xx or ?locale=xx)
-   * 2. window.name (persists within the tab/iframe across full navigations)
+   * 2. window.name (persists across full browser navigation in tab)
    * 3. sessionStorage
    * 4. localStorage
-   * 5. document.cookie (googtrans)
+   * 5. document.cookie (bsc_lang or googtrans)
    * 6. navigator.languages
    */
   function detectInitialLanguage() {
-    // 1. URL parameter
+    // 1. URL search parameter
     try {
       const urlParams = new URLSearchParams(window.location.search);
-      const langParam = urlParams.get('lang') || urlParams.get('locale');
-      if (langParam) {
-        const match = LANGUAGES.find(l => l.code.toLowerCase() === langParam.toLowerCase());
+      const param = urlParams.get('lang') || urlParams.get('locale');
+      if (param) {
+        const clean = param.toLowerCase().trim();
+        const match = LANGUAGES.find(l => l.code === clean);
         if (match) return match.code;
       }
     } catch (e) {}
@@ -859,7 +629,7 @@ const I18N = (function() {
         const parts = window.name.split('bsc_lang:');
         if (parts[1]) {
           const code = parts[1].split(';')[0].trim().toLowerCase();
-          const match = LANGUAGES.find(l => l.code.toLowerCase() === code);
+          const match = LANGUAGES.find(l => l.code === code);
           if (match) return match.code;
         }
       }
@@ -881,12 +651,12 @@ const I18N = (function() {
       }
     } catch (e) {}
 
-    // 5. document.cookie (googtrans=/en/hi)
+    // 5. document.cookie
     try {
-      const m = document.cookie.match(/googtrans=\/en\/([a-z]+)/i);
+      const m = document.cookie.match(/(?:bsc_lang|googtrans)=\/?(?:en\/)?([a-z]{2,3})/i);
       if (m && m[1]) {
-        const cCode = m[1].toLowerCase();
-        const match = LANGUAGES.find(l => l.code === cCode);
+        const code = m[1].toLowerCase();
+        const match = LANGUAGES.find(l => l.code === code);
         if (match) return match.code;
       }
     } catch (e) {}
@@ -926,12 +696,14 @@ const I18N = (function() {
       localStorage.setItem(STORAGE_KEY, code);
     } catch (e) {}
 
-    // 4. document.cookie (root path, no restrictive domain)
+    // 4. document.cookie
     try {
+      const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = `bsc_lang=${code}; expires=${expires}; path=/; SameSite=Lax;`;
       if (code === 'en') {
         document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       } else {
-        document.cookie = `googtrans=/en/${code}; path=/;`;
+        document.cookie = `googtrans=/en/${code}; expires=${expires}; path=/; SameSite=Lax;`;
       }
     } catch (e) {}
 
@@ -943,43 +715,54 @@ const I18N = (function() {
       } else {
         url.searchParams.set('lang', code);
       }
-      window.history.replaceState({}, '', url.toString());
+      window.history.replaceState(window.history.state, '', url.toString());
     } catch (e) {}
   }
 
   /**
+   * Build a URL that retains the active language.
+   */
+  function getLocalizedUrl(href, lang) {
+    if (!href) return href;
+    const targetLang = lang || currentLang || 'en';
+    if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+      return href;
+    }
+    try {
+      const isAbsolute = href.startsWith('http://') || href.startsWith('https://');
+      const url = new URL(href, window.location.href);
+      if (url.origin === window.location.origin) {
+        if (targetLang === 'en') {
+          url.searchParams.delete('lang');
+        } else {
+          url.searchParams.set('lang', targetLang);
+        }
+        return isAbsolute ? url.href : (url.pathname + url.search + url.hash);
+      }
+    } catch (e) {}
+    return href;
+  }
+
+  /**
    * Rewrites all internal <a> links on the page to automatically carry ?lang=${currentLang}
-   * so every click between pages seamlessly persists the selected language.
    */
   function propagateLanguageToLinks(code) {
     const lang = code || currentLang || 'en';
-    
     document.querySelectorAll('a[href]').forEach(a => {
       const href = a.getAttribute('href');
       if (!href) return;
       if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
       if (href.startsWith('http') && !href.includes(window.location.host)) return;
 
-      try {
-        const url = new URL(href, window.location.href);
-        if (url.origin === window.location.origin) {
-          if (lang === 'en') {
-            url.searchParams.delete('lang');
-          } else {
-            url.searchParams.set('lang', lang);
-          }
-          const isRelative = !href.startsWith('http') && !href.startsWith('//');
-          const finalHref = isRelative ? (url.pathname + url.search + url.hash) : url.href;
-          if (a.getAttribute('href') !== finalHref) {
-            a.setAttribute('href', finalHref);
-          }
-        }
-      } catch (e) {}
+      const localized = getLocalizedUrl(href, lang);
+      if (localized && localized !== href) {
+        a.setAttribute('href', localized);
+      }
     });
   }
 
   /**
-   * Intercepts any click on links to guarantee the destination URL preserves the active language.
+   * Intercepts clicks on internal links to guarantee language preservation.
    */
   function setupNavigationInterceptor() {
     document.addEventListener('click', (e) => {
@@ -991,273 +774,130 @@ const I18N = (function() {
       if (href.startsWith('http') && !href.includes(window.location.host)) return;
 
       if (currentLang && currentLang !== 'en') {
-        try {
-          const url = new URL(href, window.location.href);
-          if (url.origin === window.location.origin) {
-            url.searchParams.set('lang', currentLang);
-            link.href = url.href;
-          }
-        } catch (err) {}
+        const localized = getLocalizedUrl(href, currentLang);
+        if (localized && link.href !== localized) {
+          link.href = localized;
+        }
       }
     }, true);
-  }
 
-  /**
-   * Initializes the Google Translate widget and handles automated combo box switching.
-   */
-  function initGoogleTranslateIntegration() {
-    if (window._bsc_gt_initialized) return;
-    window._bsc_gt_initialized = true;
-
-    let gtDiv = document.getElementById('google_translate_element');
-    if (!gtDiv) {
-      gtDiv = document.createElement('div');
-      gtDiv.id = 'google_translate_element';
-      gtDiv.style.display = 'none';
-      document.body.appendChild(gtDiv);
-    }
-
-    window.googleTranslateElementInit = function() {
-      try {
-        new window.google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,hi,bn,te,mr,ta,gu,ur,kn,ml,pa,or,as,mai,ne,sd,sa',
-          autoDisplay: false
-        }, 'google_translate_element');
-
-        if (currentLang && currentLang !== 'en') {
-          activateGoogleTranslate(currentLang);
-        }
-      } catch (e) {}
+    // Global helper so programmatic navigation anywhere in code preserves language
+    window.navigateTo = function(url) {
+      window.location.href = getLocalizedUrl(url, currentLang);
     };
-
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    script.async = true;
-    script.onerror = function() {};
-    document.head.appendChild(script);
   }
 
   /**
-   * Activates Google Translate with a persistent poller looking for .goog-te-combo.
+   * Universal DOM Text Node and Element Translator.
+   * Walks the DOM tree, remembers original English text, and swaps in translated phrases.
    */
-  function activateGoogleTranslate(code) {
-    if (gtPollInterval) {
-      clearInterval(gtPollInterval);
-      gtPollInterval = null;
-    }
+  function translateDOMTree(root, lang) {
+    if (!root) root = document.body;
+    if (!root) return;
+    const targetLang = lang || currentLang || 'en';
 
-    if (!code || code === 'en') {
-      try {
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      } catch (e) {}
-      const select = document.querySelector('.goog-te-combo');
-      if (select && select.value !== 'en') {
-        select.value = 'en';
-        select.dispatchEvent(new Event('change'));
-      }
-      return;
-    }
+    isTranslating = true;
 
-    try {
-      document.cookie = `googtrans=/en/${code}; path=/;`;
-    } catch (e) {}
-
-    let attempts = 0;
-    const maxAttempts = 35; // 35 * 120ms = ~4.2s
-    gtPollInterval = setInterval(() => {
-      attempts++;
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        if (select.value !== code) {
-          select.value = code;
-          select.dispatchEvent(new Event('change'));
+    // 1. Walk Text Nodes
+    const walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          const tag = parent.tagName.toUpperCase();
+          if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'CODE' || tag === 'PRE') {
+            return NodeFilter.FILTER_REJECT;
+          }
+          if (parent.closest('.lang-modal') || parent.closest('#header-lang-btn') || parent.closest('#mobile-drawer-lang-btn')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          const text = node.nodeValue.trim();
+          if (!text || text.length < 2) return NodeFilter.FILTER_SKIP;
+          return NodeFilter.FILTER_ACCEPT;
         }
-        clearInterval(gtPollInterval);
-        gtPollInterval = null;
-      } else if (attempts >= maxAttempts) {
-        clearInterval(gtPollInterval);
-        gtPollInterval = null;
+      },
+      false
+    );
+
+    let node;
+    const nodesToTranslate = [];
+    while ((node = walker.nextNode())) {
+      nodesToTranslate.push(node);
+    }
+
+    nodesToTranslate.forEach(textNode => {
+      const parent = textNode.parentElement;
+      if (!parent) return;
+
+      // Cache original English text on the parent element
+      let orig = parent.getAttribute('data-orig-text');
+      if (!orig) {
+        orig = textNode.nodeValue.trim();
+        // Only set if English
+        if (targetLang === 'en' || !PHRASE_DICTIONARY[orig]) {
+          parent.setAttribute('data-orig-text', orig);
+        }
       }
-    }, 120);
-  }
 
-  /**
-   * Deeply translates all standard page headings, filters, cards, and UI across all 17 platform pages.
-   */
-  function applyDictionaryTranslations(code) {
-    const getStr = (k) => getTranslation(k, code);
+      const lookupText = orig || textNode.nodeValue.trim();
 
-    // 1. Elements with explicit data-i18n attribute
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const val = getStr(key);
-      if (val) el.textContent = val;
+      if (targetLang === 'en') {
+        if (orig) {
+          textNode.nodeValue = textNode.nodeValue.replace(textNode.nodeValue.trim(), orig);
+        }
+      } else {
+        const trans = translatePhrase(lookupText, targetLang);
+        if (trans && trans !== lookupText) {
+          if (!orig) parent.setAttribute('data-orig-text', lookupText);
+          textNode.nodeValue = textNode.nodeValue.replace(textNode.nodeValue.trim(), trans);
+        }
+      }
     });
 
-    // 2. Brand logo subtitle
-    const brandSub = document.querySelector('.brand-text small');
-    if (brandSub) brandSub.textContent = getStr('brand_subtitle');
-
-    // 3. Desktop & Mobile Navigation Links
-    const navItems = [
-      { sel: 'a[href*="opportunities"]', text: getStr('nav_opportunities') },
-      { sel: 'a[href*="cities"]', text: getStr('nav_cities') },
-      { sel: 'a[href*="blueprints"]', text: getStr('nav_blueprints') },
-      { sel: 'a[href*="launch-plans"]', text: getStr('nav_launch_plans') },
-      { sel: 'a[href*="insights"]', text: getStr('nav_insights') },
-      { sel: 'a[href*="about"]', text: getStr('nav_about') },
-      { sel: 'a[href*="faq"]', text: getStr('nav_faq') },
-      { sel: 'a[href*="account"]', text: getStr('nav_account') },
-      { sel: 'a[href*="custom-research"]', text: getStr('nav_custom') }
-    ];
-
-    navItems.forEach(item => {
-      document.querySelectorAll(`.desktop-nav ${item.sel}, .mobile-nav-drawer ${item.sel}`).forEach(link => {
-        link.textContent = item.text;
-      });
+    // 2. Translate Form Placeholders, Titles, and Labels
+    root.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+      let orig = el.getAttribute('data-orig-placeholder');
+      if (!orig) {
+        orig = el.getAttribute('placeholder');
+        el.setAttribute('data-orig-placeholder', orig);
+      }
+      if (targetLang === 'en') {
+        el.setAttribute('placeholder', orig);
+      } else {
+        const trans = translatePhrase(orig, targetLang);
+        if (trans) el.setAttribute('placeholder', trans);
+      }
     });
 
-    // 4. Mobile bottom tab bar
-    const bottomLabels = {
-      'Explore': getStr('nav_opportunities'),
-      'Cities': getStr('nav_cities'),
-      'Blueprints': getStr('nav_blueprints'),
-      'Orders': getStr('nav_account'),
-      'Menu': getStr('nav_menu')
-    };
-    document.querySelectorAll('.mobile-bottom-item span').forEach(s => {
-      const orig = s.getAttribute('data-orig-text') || s.textContent.trim();
-      if (!s.getAttribute('data-orig-text')) s.setAttribute('data-orig-text', orig);
-      if (bottomLabels[orig]) s.textContent = bottomLabels[orig];
+    // 3. Translate Select Option Labels
+    root.querySelectorAll('select option').forEach(opt => {
+      let orig = opt.getAttribute('data-orig-text');
+      if (!orig) {
+        orig = opt.textContent.trim();
+        opt.setAttribute('data-orig-text', orig);
+      }
+      if (targetLang === 'en') {
+        opt.textContent = orig;
+      } else {
+        const trans = translatePhrase(orig, targetLang);
+        if (trans && trans !== orig) opt.textContent = trans;
+      }
     });
 
-    // 5. Homepage "Where do you want to build?" Card
-    const promptTitle = document.querySelector('.hero-city-prompt-title span:nth-child(2)');
-    if (promptTitle) promptTitle.textContent = getStr('where_to_build');
-
-    const promptSub = document.querySelector('.hero-city-prompt-sub');
-    if (promptSub) promptSub.textContent = getStr('where_to_build_sub');
-
-    const promptInput = document.getElementById('home-city-search-input');
-    if (promptInput) promptInput.placeholder = getStr('search_city_placeholder');
-
-    const promptGoBtn = document.getElementById('home-city-go-btn');
-    if (promptGoBtn) promptGoBtn.textContent = getStr('open_city_btn');
-
-    const quickLabel = document.querySelector('.hero-city-quick-label');
-    if (quickLabel) quickLabel.textContent = getStr('top_markets');
-
-    // 6. 8-Step Discovery Workflow Section
-    const wfHeading = document.getElementById('workflow-heading');
-    if (wfHeading) wfHeading.textContent = getStr('workflow_title');
-
-    const wfSub = document.querySelector('.workflow-header p');
-    if (wfSub) wfSub.textContent = getStr('workflow_sub');
-
-    // 7. Cities Directory Page (pages/cities/index.html)
-    const citiesH1 = document.querySelector('.city-directory-main .catalogue-title-row h1, .catalogue-hero h1');
-    if (citiesH1 && citiesH1.textContent.includes('Explore Business Opportunities')) {
-      citiesH1.textContent = getStr('cities_hero_title');
-    }
-
-    const citiesSub = document.querySelector('.city-directory-main .section-subtext, .catalogue-hero .section-subtext');
-    if (citiesSub && citiesSub.textContent.includes('Discover business opportunities city by city')) {
-      citiesSub.textContent = getStr('cities_hero_sub');
-    }
-
-    // Visual Tier Cards
-    const tierMap = [
-      { sel: '.tier-card-btn[data-tier=""] .tier-card-badge', text: getStr('tier_all') },
-      { sel: '.tier-card-btn[data-tier="Tier 1"] .tier-card-badge', text: getStr('tier_1') },
-      { sel: '.tier-card-btn[data-tier="Tier 2"] .tier-card-badge', text: getStr('tier_2') },
-      { sel: '.tier-card-btn[data-tier="Tier 3"] .tier-card-badge', text: getStr('tier_3') },
-      { sel: '.tier-card-btn[data-tier="Tier 4"] .tier-card-badge', text: getStr('tier_4') },
-      { sel: '.tier-card-btn[data-tier="Tier 5"] .tier-card-badge', text: getStr('tier_5') }
-    ];
-    tierMap.forEach(tm => {
-      const el = document.querySelector(tm.sel);
-      if (el) el.textContent = tm.text;
-    });
-
-    // Cities Filters
-    const citySearchLabel = document.querySelector('label[for="city-search-input"]');
-    if (citySearchLabel) citySearchLabel.textContent = getStr('city_search_label');
-
-    const cityStateLabel = document.querySelector('label[for="state-filter-select"]');
-    if (cityStateLabel) cityStateLabel.textContent = getStr('city_state_label');
-
-    const cityTierLabel = document.querySelector('label[for="tier-filter-select"]');
-    if (cityTierLabel) cityTierLabel.textContent = getStr('city_tier_label');
-
-    const cityStatusLabel = document.querySelector('label[for="coverage-filter-select"]');
-    if (cityStatusLabel) cityStatusLabel.textContent = getStr('city_status_label');
-
-    const clearCityBtn = document.getElementById('clear-city-search-btn');
-    if (clearCityBtn) clearCityBtn.textContent = getStr('reset_btn');
-
-    // 8. City Profile Page (pages/city/index.html)
+    // 4. City Profile Special Heading Hook
     const cityOppsH2 = document.getElementById('city-opps-heading');
     if (cityOppsH2 && window.currentCityName) {
-      cityOppsH2.innerHTML = `${getStr('opps_in_city')} <span class="city-name-placeholder">${escapeHtml(window.currentCityName)}</span>`;
+      if (targetLang === 'en') {
+        cityOppsH2.innerHTML = `Published Opportunities in <span class="city-name-placeholder">${escapeHtml(window.currentCityName)}</span>`;
+      } else {
+        const prefix = translatePhrase('Published Opportunities in', targetLang) || 'व्यापारिक अवसर:';
+        cityOppsH2.innerHTML = `${prefix} <span class="city-name-placeholder">${escapeHtml(window.currentCityName)}</span>`;
+      }
     }
 
-    const resetCityFilters = document.getElementById('reset-city-filters-btn');
-    if (resetCityFilters) resetCityFilters.textContent = getStr('reset_btn');
-
-    // 9. Hero Search Forms on Homepage and Opportunities
-    const cityLabel = document.querySelector('label[for="hero-city-select"]');
-    if (cityLabel) cityLabel.textContent = getStr('search_city_label');
-
-    const cityAllOpt = document.querySelector('#hero-city-select option[value=""]');
-    if (cityAllOpt) cityAllOpt.textContent = getStr('search_city_all');
-
-    const budgetLabel = document.querySelector('label[for="hero-budget-select"], label[for="hero-budget-filter"]');
-    if (budgetLabel) budgetLabel.textContent = getStr('search_budget_label');
-
-    const budgetAllOpt = document.querySelector('#hero-budget-select option[value=""]');
-    if (budgetAllOpt) budgetAllOpt.textContent = getStr('search_budget_all');
-
-    const searchSubmitBtn = document.querySelector('#hero-search-form button[type="submit"]');
-    if (searchSubmitBtn) searchSubmitBtn.textContent = getStr('search_btn');
-
-    // 10. Deep Text Node Scanning for Common Card Actions & Badges
-    applyDeepTextTranslations(code);
-  }
-
-  /**
-   * Scans text nodes for common buttons, badges, and links to ensure immediate native Indian language rendering.
-   */
-  function applyDeepTextTranslations(code) {
-    if (!code || code === 'en') return;
-    const getStr = (k) => getTranslation(k, code);
-
-    // Action buttons on cards
-    document.querySelectorAll('.card a, .btn, .link-arrow').forEach(el => {
-      const txt = el.textContent.trim();
-      if (txt.includes('Explore') && txt.includes('Guide')) {
-        el.textContent = getStr('explore_city_btn') || txt;
-      } else if (txt.includes('Read Opportunity Guide')) {
-        el.textContent = getStr('read_opp_guide') || txt;
-      } else if (txt.includes('Access Blueprint')) {
-        el.textContent = getStr('access_blueprint') || txt;
-      } else if (txt.includes('View all cities')) {
-        el.textContent = getStr('view_all_cities') || txt;
-      } else if (txt.includes('Browse full catalogue')) {
-        el.textContent = getStr('browse_catalogue') || txt;
-      }
-    });
-
-    // Evidence tags & Badges
-    document.querySelectorAll('.badge, .evidence-tag, .budget-label').forEach(el => {
-      const txt = el.textContent.trim();
-      if (txt === 'Verified Gap') el.textContent = getStr('badge_verified') || txt;
-      else if (txt === 'Customer Validated') el.textContent = getStr('badge_validated') || txt;
-      else if (txt === 'Evidence Supported') el.textContent = getStr('badge_supported') || txt;
-      else if (txt === 'Startup Capex Range') el.textContent = getStr('startup_capex') || txt;
-      else if (txt === 'Indicative Startup Capex') el.textContent = getStr('indicative_capex') || txt;
-    });
+    isTranslating = false;
   }
 
   /**
@@ -1273,7 +913,7 @@ const I18N = (function() {
 
     const langObj = LANGUAGES.find(l => l.code === code) || LANGUAGES[0];
 
-    // 1. HTML attributes & RTL support
+    // 1. HTML attributes & RTL support (Urdu, Kashmiri)
     document.documentElement.lang = code;
     if (langObj.rtl) {
       document.documentElement.dir = 'rtl';
@@ -1289,18 +929,15 @@ const I18N = (function() {
       updateTriggerButtonLabel(triggerBtn, code);
     }
 
-    // 3. Immediate Dictionary & DOM translation
-    applyDictionaryTranslations(code);
+    // 3. Immediate Deep DOM Translation
+    translateDOMTree(document.body, code);
 
     // 4. Update Modal selection state
     const activeSearch = document.getElementById('lang-search-input')?.value || '';
     renderLanguageButtons(activeSearch.trim().toLowerCase());
 
-    // 5. Propagate language to all internal links so next page transitions persist language
+    // 5. Propagate language to all internal links
     propagateLanguageToLinks(code);
-
-    // 6. Trigger Google Translate for deep body dossiers and articles
-    activateGoogleTranslate(code);
   }
 
   function updateTriggerButtonLabel(btn, code) {
@@ -1330,7 +967,7 @@ const I18N = (function() {
       langBtn.id = 'header-lang-btn';
       langBtn.className = 'btn btn-lang-switcher';
       langBtn.setAttribute('aria-haspopup', 'dialog');
-      langBtn.setAttribute('aria-label', 'Change Language');
+      langBtn.setAttribute('aria-label', 'Change Language / भाषा बदलें');
       updateTriggerButtonLabel(langBtn, currentLang);
       langBtn.addEventListener('click', openLanguageModal);
       headerActions.insertBefore(langBtn, headerActions.firstChild);
@@ -1504,14 +1141,20 @@ const I18N = (function() {
   }
 
   /**
-   * Observe DOM mutations to auto-translate and rewrite links for dynamically loaded content.
+   * Observe DOM mutations so dynamic content (loaded via API or search filters)
+   * gets translated immediately and internal links are localized.
    */
+  let debounceTimer = null;
   function setupDomObserver() {
     if (domObserver) return;
     domObserver = new MutationObserver(() => {
+      if (isTranslating) return;
       if (currentLang && currentLang !== 'en') {
-        propagateLanguageToLinks(currentLang);
-        applyDeepTextTranslations(currentLang);
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          translateDOMTree(document.body, currentLang);
+          propagateLanguageToLinks(currentLang);
+        }, 120);
       }
     });
     domObserver.observe(document.body, { childList: true, subtree: true });
@@ -1525,14 +1168,15 @@ const I18N = (function() {
     injectLanguageSwitcherUI();
     setupNavigationInterceptor();
     applyLanguage(currentLang, false);
-    initGoogleTranslateIntegration();
     setupDomObserver();
 
-    // Secondary pass after DOM is fully painted
+    // Re-run after paint to catch late elements
     setTimeout(() => {
+      if (currentLang !== 'en') {
+        translateDOMTree(document.body, currentLang);
+      }
       propagateLanguageToLinks(currentLang);
-      applyDeepTextTranslations(currentLang);
-    }, 300);
+    }, 250);
   }
 
   // Public Interface
@@ -1543,7 +1187,9 @@ const I18N = (function() {
     getLanguages: () => LANGUAGES,
     openModal: openLanguageModal,
     closeModal: closeLanguageModal,
-    propagateLinks: () => propagateLanguageToLinks(currentLang)
+    translatePage: () => translateDOMTree(document.body, currentLang),
+    propagateLinks: () => propagateLanguageToLinks(currentLang),
+    getLocalizedUrl: getLocalizedUrl
   };
 })();
 

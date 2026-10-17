@@ -23,9 +23,154 @@ const App = (function() {
 
       // 4. Initialize Hero Search Widget Event Handlers
       initHeroSearchWidget();
+
+      // 5. Initialize Homepage Instant "Where do you want to build?" City Search
+      initHomeCitySearch();
     } catch (err) {
       console.error('App initialization error:', err);
     }
+  }
+
+  /**
+   * Homepage Instant "Where do you want to build?" City Search.
+   * Provides real-time typing autocomplete across all 88+ Indian cities
+   * and routes straight to /pages/city/index.html?slug={city_slug}.
+   */
+  function initHomeCitySearch() {
+    const input = document.getElementById('home-city-search-input');
+    const dropdown = document.getElementById('home-city-suggestions');
+    if (!input || !dropdown) return;
+
+    let selectedIndex = -1;
+    let currentMatches = [];
+
+    function getCities() {
+      return (typeof window !== 'undefined' && window.INDIA_CITIES_MASTER) ? window.INDIA_CITIES_MASTER : [];
+    }
+
+    function renderDropdown(matches) {
+      currentMatches = matches;
+      selectedIndex = -1;
+      if (matches.length === 0) {
+        dropdown.innerHTML = `
+          <li style="padding: 12px 16px; color: var(--text-muted); font-size: 0.88rem; text-align: center;">
+            No cities found matching "${escapeHtml(input.value.trim())}".
+            <br><a href="pages/cities/index.html" style="color: var(--teal-dark); font-weight: 700; margin-top: 4px; display: inline-block;">Browse full directory &rarr;</a>
+          </li>
+        `;
+        dropdown.hidden = false;
+        return;
+      }
+
+      dropdown.innerHTML = matches.slice(0, 10).map((c, idx) => {
+        const tier = c.tier || c.platform_city_tier || 'Tier 2';
+        const oppCount = c.opportunity_count ? `${c.opportunity_count} Opportunities` : (c.coverage_status || 'Active');
+        return `
+          <li class="hero-city-suggestion-row" data-slug="${escapeHtml(c.slug)}" data-idx="${idx}">
+            <div>
+              <strong style="color: var(--navy); font-size: 0.95rem;">${escapeHtml(c.city_name)}</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 6px;">${escapeHtml(c.state)}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; background: var(--bg-light); color: var(--text-muted); font-weight: 700;">${escapeHtml(tier)}</span>
+              <span style="font-size: 0.76rem; color: var(--teal-dark); font-weight: 750;">${escapeHtml(oppCount)}</span>
+            </div>
+          </li>
+        `;
+      }).join('');
+
+      dropdown.hidden = false;
+
+      dropdown.querySelectorAll('.hero-city-suggestion-row').forEach(row => {
+        row.addEventListener('click', () => {
+          const slug = row.getAttribute('data-slug');
+          if (slug) {
+            window.location.href = `pages/city/index.html?slug=${encodeURIComponent(slug)}`;
+          }
+        });
+      });
+    }
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        dropdown.hidden = true;
+        dropdown.innerHTML = '';
+        currentMatches = [];
+        return;
+      }
+
+      const cities = getCities();
+      const matches = cities.filter(c => {
+        const name = (c.city_name || '').toLowerCase();
+        const state = (c.state || '').toLowerCase();
+        const ind = (c.major_industries || '').toLowerCase();
+        return name.includes(q) || state.includes(q) || ind.includes(q);
+      });
+
+      renderDropdown(matches);
+    });
+
+    input.addEventListener('keydown', (e) => {
+      const rows = dropdown.querySelectorAll('.hero-city-suggestion-row');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (rows.length === 0) return;
+        selectedIndex = (selectedIndex + 1) % rows.length;
+        updateSelection(rows);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (rows.length === 0) return;
+        selectedIndex = (selectedIndex - 1 + rows.length) % rows.length;
+        updateSelection(rows);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        window.navigateToSelectedCity();
+      } else if (e.key === 'Escape') {
+        dropdown.hidden = true;
+      }
+    });
+
+    function updateSelection(rows) {
+      rows.forEach((r, i) => {
+        if (i === selectedIndex) {
+          r.classList.add('is-active');
+          r.scrollIntoView({ block: 'nearest' });
+        } else {
+          r.classList.remove('is-active');
+        }
+      });
+    }
+
+    window.navigateToSelectedCity = function() {
+      if (selectedIndex >= 0 && currentMatches[selectedIndex]) {
+        window.location.href = `pages/city/index.html?slug=${encodeURIComponent(currentMatches[selectedIndex].slug)}`;
+        return;
+      }
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        window.location.href = 'pages/cities/index.html';
+        return;
+      }
+      const cities = getCities();
+      const match = cities.find(c => {
+        const name = (c.city_name || '').toLowerCase();
+        const slug = (c.slug || '').toLowerCase();
+        return name === q || slug === q || name.startsWith(q);
+      }) || currentMatches[0];
+
+      if (match) {
+        window.location.href = `pages/city/index.html?slug=${encodeURIComponent(match.slug)}`;
+      } else {
+        window.location.href = `pages/cities/index.html?search=${encodeURIComponent(q)}`;
+      }
+    };
+
+    document.addEventListener('click', (e) => {
+      if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.hidden = true;
+      }
+    });
   }
 
   /**

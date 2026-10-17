@@ -17,6 +17,31 @@ function doGet(e) {
         result = PublicApi.getCities();
         break;
 
+      case 'city':
+      case 'city_by_slug':
+        result = PublicApi.getCityBySlug(params.slug || params.city_id);
+        break;
+
+      case 'cities_by_tier':
+        result = PublicApi.getCitiesByTier(params.tier);
+        break;
+
+      case 'cities_by_state':
+        result = PublicApi.getCitiesByState(params.state);
+        break;
+
+      case 'cities_by_region':
+        result = PublicApi.getCitiesByRegion(params.region);
+        break;
+
+      case 'featured_cities':
+        result = PublicApi.getFeaturedCities();
+        break;
+
+      case 'city_opportunity_count':
+        result = { city_id: params.city_id, opportunity_count: PublicApi.getCityOpportunityCount(params.city_id) };
+        break;
+
       case 'opportunities':
         result = PublicApi.getOpportunities();
         break;

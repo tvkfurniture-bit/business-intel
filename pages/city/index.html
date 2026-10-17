@@ -421,10 +421,12 @@
 
     <!-- Core Scripts & Dynamic City Engine -->
     <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/cities-data.js"></script>
     <script src="../../assets/js/api.js"></script>
     <script src="../../assets/js/search.js"></script>
     <script src="../../assets/js/forms.js"></script>
     <script src="../../assets/js/navigation.js"></script>
+    <script src="../../assets/js/i18n.js"></script>
     <script>
         /**
          * Dynamic City Page Controller
@@ -438,24 +440,20 @@
 
             document.addEventListener('DOMContentLoaded', async () => {
                 const slug = extractCitySlug();
-                if (!slug) {
-                    window.location.href = '../cities/index.html';
-                    return;
-                }
                 await loadCityPageData(slug);
                 setupCityFilterHandlers();
             });
 
             function extractCitySlug() {
-                // Support path format (/city/mumbai/) and query parameter (?slug=mumbai)
                 const urlParams = new URLSearchParams(window.location.search);
                 const querySlug = urlParams.get('slug');
-                if (querySlug) return querySlug;
+                if (querySlug) return querySlug.toLowerCase().trim();
 
                 const pathSegments = window.location.pathname.split('/').filter(Boolean);
                 const cityIdx = pathSegments.indexOf('city');
                 if (cityIdx !== -1 && pathSegments[cityIdx + 1]) {
-                    return pathSegments[cityIdx + 1];
+                    const seg = pathSegments[cityIdx + 1].toLowerCase().replace(/\.html$/, '');
+                    if (seg !== 'index') return seg;
                 }
                 return 'mumbai'; // Fallback demo city
             }
@@ -468,20 +466,40 @@
                         API.get('products')
                     ]);
 
-                    const cities = Array.isArray(citiesRes) ? citiesRes : [];
-                    currentCity = cities.find(c => c.city_slug === slug) || cities[0];
+                    const cities = Array.isArray(citiesRes) && citiesRes.length > 0 
+                        ? citiesRes 
+                        : (window.INDIA_CITIES_MASTER || []);
+
+                    // Match by slug, city_slug, city_id, or name
+                    currentCity = cities.find(c => {
+                        const s = (c.slug || c.city_slug || '').toLowerCase();
+                        const id = (c.city_id || '').toLowerCase();
+                        const name = (c.city_name || '').toLowerCase();
+                        return s === slug || id === slug || name === slug;
+                    }) || cities[0];
 
                     if (!currentCity) {
                         window.location.href = '../cities/index.html';
                         return;
                     }
 
-                    // Filter published records matching this city ID
+                    // Filter published records matching this city ID or city name
                     const allOpps = Array.isArray(oppsRes) ? oppsRes : [];
-                    cityOpportunities = allOpps.filter(o => o.city_id === currentCity.city_id);
+                    const cityIdNorm = (currentCity.city_id || '').toLowerCase();
+                    const cityNameNorm = (currentCity.city_name || '').toLowerCase();
+
+                    cityOpportunities = allOpps.filter(o => {
+                        const oCityId = (o.city_id || '').toLowerCase();
+                        const oState = (o.state || '').toLowerCase();
+                        const oLoc = (o.target_city || o.city || '').toLowerCase();
+                        return oCityId === cityIdNorm || oLoc === cityNameNorm || (currentCity.slug && oCityId.includes(currentCity.slug));
+                    });
 
                     const allProds = Array.isArray(prodsRes) ? prodsRes : [];
-                    cityProducts = allProds.filter(p => p.city_id === currentCity.city_id || p.city_id === 'GLOBAL');
+                    cityProducts = allProds.filter(p => {
+                        const pCityId = (p.city_id || '').toLowerCase();
+                        return pCityId === cityIdNorm || pCityId === 'global';
+                    });
 
                     applyCityMetadata();
                     renderCityHero();
@@ -494,15 +512,25 @@
 
             function applyCityMetadata() {
                 const cityName = currentCity.city_name;
-                const pageTitle = `${currentCity.seo_title || `Business Opportunities in ${cityName}`} — Business Scope`;
-                const pageDesc = currentCity.seo_description || `Discover verified business opportunities, economic profiles, and market gaps in ${cityName}, ${currentCity.state}.`;
+                const tier = currentCity.tier || currentCity.platform_city_tier || 'Tier 2';
+                const pageTitle = `${currentCity.seo_title || `Business Opportunities in ${cityName} (${tier})`} — Business Scope`;
+                const pageDesc = currentCity.seo_description || currentCity.economic_profile || `Discover verified business opportunities, economic profiles, and market gaps in ${cityName}, ${currentCity.state}.`;
 
                 document.title = pageTitle;
-                document.getElementById('page-title').textContent = pageTitle;
-                document.getElementById('page-description').setAttribute('content', pageDesc);
-                document.getElementById('og-title').setAttribute('content', pageTitle);
-                document.getElementById('og-description').setAttribute('content', pageDesc);
-                document.getElementById('page-canonical').setAttribute('href', `https://businessscopeinyourcity.in/city/${currentCity.city_slug}/`);
+                const titleEl = document.getElementById('page-title');
+                if (titleEl) titleEl.textContent = pageTitle;
+
+                const descEl = document.getElementById('page-description');
+                if (descEl) descEl.setAttribute('content', pageDesc);
+
+                const ogTitleEl = document.getElementById('og-title');
+                if (ogTitleEl) ogTitleEl.setAttribute('content', pageTitle);
+
+                const ogDescEl = document.getElementById('og-description');
+                if (ogDescEl) ogDescEl.setAttribute('content', pageDesc);
+
+                const canEl = document.getElementById('page-canonical');
+                if (canEl) canEl.setAttribute('href', `https://businessscopeinyourcity.in/city/${currentCity.slug || currentCity.city_slug}/`);
 
                 // Update text placeholders throughout the page
                 document.querySelectorAll('.city-name-placeholder').forEach(el => {
@@ -511,16 +539,54 @@
             }
 
             function renderCityHero() {
-                document.getElementById('breadcrumb-city-name').textContent = currentCity.city_name;
-                document.getElementById('city-headline-name').textContent = `Business Opportunities in ${currentCity.city_name}`;
-                document.getElementById('city-state-text').textContent = currentCity.state;
-                document.getElementById('city-intro-text').textContent = currentCity.introduction;
-                document.getElementById('city-coverage-badge').textContent = `${currentCity.research_coverage} Coverage`;
-                document.getElementById('city-region-tag').textContent = currentCity.region;
+                const tier = currentCity.tier || currentCity.platform_city_tier || 'Tier 2';
+                const coverage = currentCity.coverage_status || currentCity.research_coverage || 'Active';
+
+                const bCityName = document.getElementById('breadcrumb-city-name');
+                if (bCityName) bCityName.textContent = currentCity.city_name;
+
+                const hName = document.getElementById('city-headline-name');
+                if (hName) hName.textContent = `Business Opportunities in ${currentCity.city_name}`;
+
+                const sText = document.getElementById('city-state-text');
+                if (sText) sText.textContent = `${currentCity.state} (${tier})`;
+
+                const introEl = document.getElementById('city-intro-text');
+                if (introEl) introEl.textContent = currentCity.economic_profile || currentCity.introduction || 'Local commercial environment and market analysis under active research.';
+
+                const cBadge = document.getElementById('city-coverage-badge');
+                if (cBadge) cBadge.textContent = `${coverage} Research`;
+
+                const rTag = document.getElementById('city-region-tag');
+                if (rTag) rTag.textContent = `${currentCity.region} • ${tier}`;
 
                 // Live calculated stats
-                document.getElementById('city-stat-opps').textContent = cityOpportunities.length;
-                document.getElementById('city-stat-blueprints').textContent = cityProducts.length;
+                const statOpps = document.getElementById('city-stat-opps');
+                if (statOpps) statOpps.textContent = cityOpportunities.length;
+
+                const statBp = document.getElementById('city-stat-blueprints');
+                if (statBp) statBp.textContent = cityProducts.length;
+
+                const statSectors = document.getElementById('city-stat-sectors');
+                if (statSectors && currentCity.major_industries) {
+                    statSectors.textContent = currentCity.major_industries;
+                }
+
+                // Render ground-truth findings dynamically based on city data
+                const rentalText = document.getElementById('finding-rental-text');
+                if (rentalText && currentCity.infrastructure_level) {
+                    rentalText.innerHTML = `<strong>Infrastructure:</strong> ${escapeHtml(currentCity.infrastructure_level)}.<br><strong>Business Density:</strong> ${escapeHtml(currentCity.business_density || 'High')}. Commercial leasing rates reflect local ${tier} demand trends.`;
+                }
+
+                const demoText = document.getElementById('finding-demographic-text');
+                if (demoText) {
+                    demoText.innerHTML = `<strong>Population Band:</strong> ${escapeHtml(currentCity.population_band || 'Urban center')}.<br><strong>Consumer Market Strength:</strong> ${escapeHtml(currentCity.consumer_market_strength || 'Moderate')}. Entrepreneurial concentration rated ${escapeHtml(currentCity.entrepreneur_density || 'Growing')}.`;
+                }
+
+                const licenseText = document.getElementById('finding-licensing-text');
+                if (licenseText) {
+                    licenseText.innerHTML = `Regulated under ${escapeHtml(currentCity.state)} municipal and industrial development corporation guidelines. Standard MSME Udyam registration, Shop Act, and municipal trade NOCs apply.`;
+                }
             }
 
             function renderCityOpportunities(list) {
@@ -528,31 +594,52 @@
                 const empty = document.getElementById('city-opps-empty');
 
                 if (!list || list.length === 0) {
-                    grid.innerHTML = '';
-                    empty.hidden = false;
+                    grid.innerHTML = `
+                        <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: var(--white); border: 2px dashed var(--border); border-radius: var(--radius-lg);">
+                            <div style="font-size: 2.4rem; margin-bottom: 12px;">📊</div>
+                            <h3 style="font-size: 1.3rem; color: var(--navy); margin-bottom: 8px;">
+                                Opportunities for ${escapeHtml(currentCity.city_name)} Are Under Active Research
+                            </h3>
+                            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 20px; font-size: 0.95rem; line-height: 1.5;">
+                                Our field analysts are currently assembling empirical customer problems, commercial space lease benchmarks, and supplier networks for <strong>${escapeHtml(currentCity.city_name)}, ${escapeHtml(currentCity.state)}</strong>.
+                            </p>
+                            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                                <a href="../custom-research/index.html?city=${encodeURIComponent(currentCity.city_name)}" class="btn btn-primary btn-sm">
+                                    Commission Custom Study for ${escapeHtml(currentCity.city_name)} &rarr;
+                                </a>
+                                <a href="../opportunities/index.html" class="btn btn-outline btn-sm">
+                                    Browse All India Gaps
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    if (empty) empty.hidden = true;
                     return;
                 }
 
-                empty.hidden = true;
+                if (empty) empty.hidden = true;
                 grid.innerHTML = list.map(o => `
                     <article class="card opportunity-catalogue-card">
                         <div class="card-meta-top">
-                            <span class="badge badge-teal">${escapeHtml(o.category)}</span>
+                            <span class="badge badge-teal">${escapeHtml(o.category || 'General')}</span>
                             <span class="evidence-tag evidence-tag-verified">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
                         </div>
                         <h3 class="card-title">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}">${escapeHtml(o.title)}</a>
+                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug || '')}">${escapeHtml(o.title || 'Untitled Opportunity')}</a>
                         </h3>
-                        <p class="card-location">Model: <strong>${escapeHtml(o.business_model)}</strong></p>
-                        <p class="card-summary">${escapeHtml(o.short_summary)}</p>
+                        <p class="card-location">📍 <strong>${escapeHtml(currentCity.city_name)}</strong> &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
+                        <p class="card-summary">${escapeHtml(o.short_summary || o.problem_statement || '')}</p>
                         <div class="card-budget-box">
                             <div class="budget-col">
                                 <span class="budget-label">Startup Capex Range</span>
-                                <strong class="budget-amount">₹${Number(o.budget_min).toLocaleString('en-IN')} - ₹${Number(o.budget_max).toLocaleString('en-IN')}</strong>
+                                <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} - ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
+                            </div>
+                            <div class="confidence-col">
+                                <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'Medium')} Confidence</span>
                             </div>
                         </div>
                         <div class="card-action-footer">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-outline btn-sm btn-full">Read Opportunity Guide &rarr;</a>
+                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug || '')}" class="btn btn-outline btn-sm btn-full">Read Opportunity Guide &rarr;</a>
                         </div>
                     </article>
                 `).join('');

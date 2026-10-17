@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Business Opportunity Directory — Business Scope in Your City</title>
-    <meta name="description" content="Search verified business opportunities, economic profiles, customer problems, and local market gaps across Indian cities, districts, and states.">
+    <title>Explore Business Opportunities Across India | Business Scope in Your City</title>
+    <meta name="description" content="Discover business opportunities city by city, from India's largest metropolitan markets to emerging local economies across all 5 tiers and 36 states and union territories.">
     <link rel="canonical" href="https://businessscopeinyourcity.in/cities/">
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
@@ -12,8 +12,8 @@
     <!-- Open Graph Metadata -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://businessscopeinyourcity.in/cities/">
-    <meta property="og:title" content="City Business Opportunity Directory — Business Scope in Your City">
-    <meta property="og:description" content="Explore verified city directories with empirical business opportunity listings, local economic summaries, and research coverage.">
+    <meta property="og:title" content="Explore Business Opportunities Across India | Business Scope in Your City">
+    <meta property="og:description" content="Discover business opportunities city by city, from India's largest metropolitan markets to emerging local economies.">
     <meta property="og:image" content="../../assets/images/social-cover.svg">
 </head>
 <body>
@@ -21,7 +21,7 @@
     <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
         <div class="container announcement-content">
             <span class="announcement-badge">Update</span>
-            <span id="announcement-text">Loading latest market intelligence...</span>
+            <span id="announcement-text">Loading latest market intelligence across Indian cities...</span>
             <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
         </div>
     </aside>
@@ -35,7 +35,7 @@
             </a>
 
             <nav class="desktop-nav" aria-label="Main Navigation">
-                <a href="../opportunities/index.html" class="nav-link">Explore Opportunities</a>
+                <a href="../opportunities/index.html" class="nav-link">Opportunities</a>
                 <a href="index.html" class="nav-link active" aria-current="page">Cities</a>
                 <a href="../blueprints/index.html" class="nav-link">Blueprints</a>
                 <a href="../launch-plans/index.html" class="nav-link">Launch Plans</a>
@@ -79,50 +79,181 @@
         <section class="catalogue-hero bg-light">
             <div class="container">
                 <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.9rem; padding: 12px 0;">
-                        <li><a href="../../index.html">Home</a> &gt;</li>
-                        <li aria-current="page" style="color: var(--text-muted);">Cities</li>
+                    <ol style="display: flex; gap: 8px; list-style: none; font-size: 0.85rem; padding: 6px 0 12px; margin: 0;">
+                        <li><a href="../../index.html" style="color: var(--teal-dark);">Home</a> &gt;</li>
+                        <li aria-current="page" style="color: var(--text-muted);">Cities Across India</li>
                     </ol>
                 </nav>
                 <div class="catalogue-title-row">
                     <div>
-                        <h1>City Business Opportunity Directory</h1>
-                        <p class="section-subtext">Browse verified economic profiles, local consumer friction points, and active business opportunities categorised by Indian city and economic territory.</p>
+                        <span class="badge badge-teal" style="margin-bottom: 8px;">Nationwide City Intelligence &bull; All 5 Market Tiers</span>
+                        <h1 style="font-size: clamp(2rem, 3.8vw, 2.9rem); color: var(--navy); margin-bottom: 10px; letter-spacing: -0.03em;">
+                            Explore Business Opportunities Across India
+                        </h1>
+                        <p class="section-subtext" style="max-width: 820px; font-size: 1.08rem; line-height: 1.6; margin-bottom: 0;">
+                            Discover business opportunities city by city, from India's largest metropolitan markets to emerging local economies.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Instant Search & Regional Filter Controls -->
-                <div class="city-search-bar-wrap card" style="margin-top: 24px;">
-                    <div class="city-search-field" style="margin-bottom: 16px;">
-                        <label for="city-search-input" class="sr-only">Search City by Name or State</label>
-                        <div class="search-input-wrap" style="position: relative;">
-                            <input type="search" id="city-search-input" placeholder="Type city name, state, or key economic zone (e.g. Pune, Gujarat, Tier-2)..." autocomplete="off" style="width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                <!-- Visual Tier Navigation Cards -->
+                <div class="tier-selector-grid" id="tier-selector-container" role="tablist" aria-label="Filter by Market Tier">
+                    <!-- Populated dynamically by JS with live counts and featured cities -->
+                    <button type="button" class="tier-card-btn active" data-tier="" role="tab" aria-selected="true">
+                        <div class="tier-card-header">
+                            <span class="tier-card-badge">All Cities</span>
+                            <span class="tier-card-count" id="tier-count-all">88+</span>
                         </div>
-                    </div>
-                    
-                    <div class="city-filter-dropdowns" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <div class="filter-field-inline" style="flex: 1; min-width: 200px;">
-                            <label for="region-filter-select" style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">Region:</label>
-                            <select id="region-filter-select" style="width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-md);">
-                                <option value="">All Regions</option>
-                                <option value="Western India">Western India</option>
-                                <option value="Northern India">Northern India</option>
-                                <option value="Southern India">Southern India</option>
-                                <option value="Eastern India">Eastern India</option>
-                                <option value="Central India">Central India</option>
+                        <div class="tier-card-sub">Pan-India coverage across all 36 States &amp; UTs</div>
+                        <div class="tier-card-stats">
+                            <span class="tier-stat-tag">Tiers 1 to 5</span>
+                        </div>
+                    </button>
+
+                    <button type="button" class="tier-card-btn" data-tier="Tier 1" role="tab" aria-selected="false">
+                        <div class="tier-card-header">
+                            <span class="tier-card-badge">Tier 1</span>
+                            <span class="tier-card-count" id="tier-count-1">8</span>
+                        </div>
+                        <div class="tier-card-sub">Major metropolitan markets</div>
+                        <div class="tier-card-stats">
+                            <span class="tier-stat-tag">Mumbai, Delhi, BLR...</span>
+                        </div>
+                    </button>
+
+                    <button type="button" class="tier-card-btn" data-tier="Tier 2" role="tab" aria-selected="false">
+                        <div class="tier-card-header">
+                            <span class="tier-card-badge">Tier 2</span>
+                            <span class="tier-card-count" id="tier-count-2">32</span>
+                        </div>
+                        <div class="tier-card-sub">Large emerging commercial centers</div>
+                        <div class="tier-card-stats">
+                            <span class="tier-stat-tag">Jaipur, Lucknow, Kochi...</span>
+                        </div>
+                    </button>
+
+                    <button type="button" class="tier-card-btn" data-tier="Tier 3" role="tab" aria-selected="false">
+                        <div class="tier-card-header">
+                            <span class="tier-card-badge">Tier 3</span>
+                            <span class="tier-card-count" id="tier-count-3">22</span>
+                        </div>
+                        <div class="tier-card-sub">Growing regional economies</div>
+                        <div class="tier-card-stats">
+                            <span class="tier-stat-tag">Belagavi, Thrissur, Panipat...</span>
+                        </div>
+                    </button>
+
+                    <button type="button" class="tier-card-btn" data-tier="Tier 4" role="tab" aria-selected="false">
+                        <div class="tier-card-header">
+                            <span class="tier-card-badge">Tier 4</span>
+                            <span class="tier-card-count" id="tier-count-4">12</span>
+                        </div>
+                        <div class="tier-card-sub">Emerging local business markets</div>
+                        <div class="tier-card-stats">
+                            <span class="tier-stat-tag">Morbi, Baddi, Ayodhya...</span>
+                        </div>
+                    </button>
+
+                    <button type="button" class="tier-card-btn" data-tier="Tier 5" role="tab" aria-selected="false">
+                        <div class="tier-card-header">
+                            <span class="tier-card-badge">Tier 5</span>
+                            <span class="tier-card-count" id="tier-count-5">12</span>
+                        </div>
+                        <div class="tier-card-sub">Smaller cities &amp; specialized clusters</div>
+                        <div class="tier-card-stats">
+                            <span class="tier-stat-tag">Munnar, Manali, Darjeeling...</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- India Regional Discovery Rail -->
+                <div class="regional-discovery-bar" role="tablist" aria-label="Filter by Geographic Region">
+                    <span style="font-size: 0.8rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-right: 4px; flex-shrink: 0;">Region:</span>
+                    <button type="button" class="region-pill-btn active" data-region="" role="tab" aria-selected="true">
+                        <span>All India</span>
+                        <span class="region-count-badge" id="region-count-all">88</span>
+                    </button>
+                    <button type="button" class="region-pill-btn" data-region="North India" role="tab" aria-selected="false">
+                        <span>North India</span>
+                        <span class="region-count-badge" id="region-count-north">21</span>
+                    </button>
+                    <button type="button" class="region-pill-btn" data-region="South India" role="tab" aria-selected="false">
+                        <span>South India</span>
+                        <span class="region-count-badge" id="region-count-south">24</span>
+                    </button>
+                    <button type="button" class="region-pill-btn" data-region="West India" role="tab" aria-selected="false">
+                        <span>West India</span>
+                        <span class="region-count-badge" id="region-count-west">16</span>
+                    </button>
+                    <button type="button" class="region-pill-btn" data-region="East India" role="tab" aria-selected="false">
+                        <span>East India</span>
+                        <span class="region-count-badge" id="region-count-east">10</span>
+                    </button>
+                    <button type="button" class="region-pill-btn" data-region="Central India" role="tab" aria-selected="false">
+                        <span>Central India</span>
+                        <span class="region-count-badge" id="region-count-central">5</span>
+                    </button>
+                    <button type="button" class="region-pill-btn" data-region="Northeast India" role="tab" aria-selected="false">
+                        <span>Northeast India</span>
+                        <span class="region-count-badge" id="region-count-ne">12</span>
+                    </button>
+                </div>
+
+                <!-- Comprehensive Multi-Parameter Search & Filter Bar -->
+                <div class="card city-search-bar-wrap" style="padding: 20px; border-radius: var(--radius-lg); margin-top: 14px; box-shadow: var(--shadow-sm);">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 12px; align-items: end;">
+                        <div>
+                            <label for="city-search-input" style="display: block; font-size: 0.76rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.04em;">Search Cities</label>
+                            <input type="search" id="city-search-input" placeholder="Type city, state, or industry (e.g. Pune, Gujarat, Ceramics, Tea)..." autocomplete="off" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); box-sizing: border-box; font-size: 0.95rem;">
+                        </div>
+
+                        <div>
+                            <label for="state-filter-select" style="display: block; font-size: 0.76rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.04em;">State / UT</label>
+                            <select id="state-filter-select" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); box-sizing: border-box; font-size: 0.9rem;">
+                                <option value="">All 36 States &amp; UTs</option>
+                                <!-- Populated dynamically by JS -->
                             </select>
                         </div>
 
-                        <div class="filter-field-inline" style="flex: 1; min-width: 200px;">
-                            <label for="coverage-filter-select" style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">Coverage:</label>
-                            <select id="coverage-filter-select" style="width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-md);">
-                                <option value="">All Coverage Levels</option>
-                                <option value="Comprehensive">Comprehensive Coverage</option>
-                                <option value="Partial">Partial Coverage</option>
-                                <option value="In Progress">Research in Progress</option>
+                        <div>
+                            <label for="tier-filter-select" style="display: block; font-size: 0.76rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.04em;">Market Tier</label>
+                            <select id="tier-filter-select" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); box-sizing: border-box; font-size: 0.9rem;">
+                                <option value="">All Tiers</option>
+                                <option value="Tier 1">Tier 1 (Metros)</option>
+                                <option value="Tier 2">Tier 2 (Emerging Hubs)</option>
+                                <option value="Tier 3">Tier 3 (Regional Centers)</option>
+                                <option value="Tier 4">Tier 4 (Local Markets)</option>
+                                <option value="Tier 5">Tier 5 (Specialized Towns)</option>
                             </select>
                         </div>
+
+                        <div>
+                            <label for="coverage-filter-select" style="display: block; font-size: 0.76rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.04em;">Research Status</label>
+                            <select id="coverage-filter-select" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); box-sizing: border-box; font-size: 0.9rem;">
+                                <option value="">All Statuses</option>
+                                <option value="Active">Active Research</option>
+                                <option value="Researching">Researching</option>
+                                <option value="Planned">Planned</option>
+                                <option value="Coming Soon">Coming Soon</option>
+                                <option value="Not Researched">Not Researched</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-outline btn-sm" id="clear-city-search-btn" style="height: 42px; white-space: nowrap;">Reset</button>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Market Tier Methodology Callout & Modal Toggle -->
+                <div class="methodology-explainer-box">
+                    <div class="methodology-explainer-title">
+                        <h3>ℹ️ About the Platform City-Tier Classification Methodology</h3>
+                        <span class="badge badge-gray">Proprietary Research Metric</span>
+                    </div>
+                    <p class="methodology-explainer-text">
+                        Because an official single classification does not exist universally across all commercial contexts in India, <strong>Business Scope in Your City</strong> applies its own empirical market segmentation framework (<code style="background: var(--bg-light); padding: 2px 6px; border-radius: 4px; font-size: 0.85em;">platform_city_tier</code>). Tiers evaluate 12 quantitative parameters: population band, per-capita purchasing power, MSME business density, commercial leasing velocity, logistics connectivity, and startup support ecosystems.
+                    </p>
                 </div>
             </div>
         </section>
@@ -131,10 +262,10 @@
         <section class="section container">
             <div class="directory-status-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
                 <div class="results-count" id="city-count-display" aria-live="polite">
-                    <strong>Loading city directory data...</strong>
+                    <strong>Loading nationwide cities database...</strong>
                 </div>
-                <div class="directory-notice" style="font-size: 0.85rem; color: var(--text-muted);">
-                    <span class="info-badge" style="font-weight: 700; color: var(--teal-dark);">ℹ️ Empirical Standard:</span> Listed opportunity counts reflect verified public database records.
+                <div class="directory-notice" style="font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                    <span style="font-weight: 700; color: var(--teal-dark);">✓ Source of Truth:</span> Dynamically connected to Google Sheets &bull; Zero hardcoding
                 </div>
             </div>
 
@@ -147,12 +278,12 @@
             </div>
 
             <!-- Empty Directory State -->
-            <div class="card empty-results-state" id="city-empty-state" hidden style="text-align: center; padding: 48px 24px;">
+            <div class="card empty-results-state" id="city-empty-state" hidden style="text-align: center; padding: 48px 24px; margin-top: 24px;">
                 <div class="empty-icon-wrap" aria-hidden="true" style="font-size: 2.5rem; margin-bottom: 12px;">🏙️</div>
-                <h2 style="color: var(--navy); margin-bottom: 8px;">No Cities Found Matching Criteria</h2>
-                <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px;">We do not yet have published opportunity records for the searched region or keywords. You can commission bespoke market intelligence for any specific Indian district.</p>
-                <div class="empty-actions" style="display: flex; gap: 12px; justify-content: center;">
-                    <button type="button" class="btn btn-outline" id="clear-city-search-btn">Reset City Filters</button>
+                <h2 style="color: var(--navy); margin-bottom: 8px;">No Cities Match Selected Filters</h2>
+                <p style="color: var(--text-muted); max-width: 520px; margin: 0 auto 20px;">We continuously audit urban and district markets across India. You can reset filters to browse all 88+ covered cities, or request bespoke intelligence for any specific municipality.</p>
+                <div class="empty-actions" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-outline" id="empty-reset-btn">Reset All Filters</button>
                     <a href="../custom-research/index.html" class="btn btn-primary">Commission City Gap Audit</a>
                 </div>
             </div>
@@ -160,34 +291,46 @@
             <!-- Error State -->
             <div class="card error-results-state" id="city-error-state" hidden style="text-align: center; padding: 40px 24px; border-left: 4px solid var(--danger);">
                 <div class="empty-icon-wrap" aria-hidden="true" style="font-size: 2.5rem; margin-bottom: 12px;">⚠️</div>
-                <h2 style="color: var(--navy); margin-bottom: 8px;">Directory Service Temporarily Unavailable</h2>
-                <p id="city-error-message" style="color: var(--text-muted); margin-bottom: 16px;">Unable to load the city master list from the database. Please verify your connection.</p>
+                <h2 style="color: var(--navy); margin-bottom: 8px;">Database Synchronization Notice</h2>
+                <p id="city-error-message" style="color: var(--text-muted); margin-bottom: 16px;">Loading baseline verified records while connecting to live Google Sheets database.</p>
                 <div class="empty-actions">
                     <button type="button" class="btn btn-primary" id="retry-cities-btn">Retry Connection</button>
                 </div>
             </div>
+
+            <!-- Pagination Bar -->
+            <div class="directory-pagination-bar" id="directory-pagination" style="display: none;">
+                <div style="font-size: 0.88rem; color: var(--text-muted);" id="pagination-info">
+                    Showing 1 to 18 of 88 cities
+                </div>
+                <div class="pagination-controls">
+                    <button type="button" class="btn btn-outline btn-sm" id="pagination-prev" disabled>&larr; Previous</button>
+                    <span id="pagination-pages" style="display: flex; gap: 4px;"></span>
+                    <button type="button" class="btn btn-outline btn-sm" id="pagination-next">Next &rarr;</button>
+                </div>
+            </div>
         </section>
 
-        <!-- Regional Coverage & Expansion Policy Callout -->
+        <!-- Nationwide Coverage Guarantee & Admin Note -->
         <section class="section bg-light" aria-labelledby="coverage-policy-heading">
             <div class="container">
-                <div class="card coverage-policy-card" style="padding: 36px 30px;">
+                <div class="card coverage-policy-card" style="padding: 36px 30px; border-radius: var(--radius-lg);">
                     <div class="coverage-text">
-                        <span class="badge badge-teal">Research Expansion Framework</span>
-                        <h2 id="coverage-policy-heading" style="color: var(--navy); margin: 8px 0 12px;">How Cities Are Selected &amp; Audited</h2>
-                        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Our research analysts prioritize urban centers based on documented demographic growth, MSME trade density, and local regulatory data availability. We never manufacture superficial or programmatic "thin" pages purely to capture search engine traffic.</p>
+                        <span class="badge badge-teal">Scalable Nationwide Architecture</span>
+                        <h2 id="coverage-policy-heading" style="color: var(--navy); margin: 8px 0 12px;">Systematic Market Expansion Workflow</h2>
+                        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Our database is structured so that hundreds of cities can be added simply by inserting rows in the Google Sheet. Opportunities are linked to cities using standard IDs (e.g. <code style="background: var(--bg-light); padding: 2px 6px;">IN-MH-MUM</code>, <code style="background: var(--bg-light); padding: 2px 6px;">IN-KA-BLR</code>), enabling localized opportunity discovery without modifying application code.</p>
                         <div class="coverage-metrics-grid grid-3">
                             <div class="metric-box card" style="background: var(--white);">
-                                <strong style="color: var(--navy); display: block; margin-bottom: 4px;">Tier-1 Economic Centers</strong>
-                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Deep vertical analyses of specialized consumer services, cold-chain F&amp;B, and tech-enabled logistics.</p>
+                                <strong style="color: var(--navy); display: block; margin-bottom: 6px;">1. City Profile Discovery</strong>
+                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Explore economic indicators, major industries, infrastructure levels, and commercial viability scores.</p>
                             </div>
                             <div class="metric-box card" style="background: var(--white);">
-                                <strong style="color: var(--navy); display: block; margin-bottom: 4px;">High-Growth Tier-2 Hubs</strong>
-                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Identification of underserved essential services, light manufacturing gaps, and localized distribution franchises.</p>
+                                <strong style="color: var(--navy); display: block; margin-bottom: 6px;">2. Local Market Gaps</strong>
+                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Review unaddressed customer problems, field-audited capex itemization, and tested demand experiments.</p>
                             </div>
                             <div class="metric-box card" style="background: var(--white);">
-                                <strong style="color: var(--navy); display: block; margin-bottom: 4px;">Strict Integrity Guardrail</strong>
-                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Cities without verified empirical citations or ground-tested data remain classified as <em>Research in Progress</em>.</p>
+                                <strong style="color: var(--navy); display: block; margin-bottom: 6px;">3. Blueprint &amp; Execution</strong>
+                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Access statutory licensing checklists, 90-day launch roadmaps, and supplier quotes before investing capital.</p>
                             </div>
                         </div>
                     </div>
@@ -210,120 +353,260 @@
 
             <div class="footer-col">
                 <h4 class="footer-title">Explore</h4>
-                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-                    <li><a href="../opportunities/index.html" style="color: #CBD5E1;">All Opportunities</a></li>
-                    <li><a href="index.html" class="active" style="color: var(--teal);">City Directory</a></li>
-                    <li><a href="../blueprints/index.html" style="color: #CBD5E1;">Business Blueprints</a></li>
+                <ul class="footer-links">
+                    <li><a href="../opportunities/index.html">All Opportunities</a></li>
+                    <li><a href="index.html" class="active">City Directory</a></li>
+                    <li><a href="../blueprints/index.html">Business Blueprints</a></li>
+                    <li><a href="../launch-plans/index.html">90-Day Launch Plans</a></li>
+                    <li><a href="../insights/index.html">Market Insights</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4 class="footer-title">Products</h4>
-                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-                    <li><a href="../blueprints/index.html" style="color: #CBD5E1;">Business Blueprints</a></li>
-                    <li><a href="../launch-plans/index.html" style="color: #CBD5E1;">90-Day Launch Plans</a></li>
-                    <li><a href="../custom-research/index.html" style="color: #CBD5E1;">Custom City Research</a></li>
-                    <li><a href="../account/index.html" style="color: #CBD5E1;">Access Purchases</a></li>
-                    <li><a href="../legal/index.html?policy=refund-policy" style="color: #CBD5E1;">Order Support</a></li>
+                <ul class="footer-links">
+                    <li><a href="../blueprints/index.html">Business Blueprints</a></li>
+                    <li><a href="../launch-plans/index.html">90-Day Launch Plans</a></li>
+                    <li><a href="../custom-research/index.html">Custom City Research</a></li>
+                    <li><a href="../account/index.html">Access Purchases</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Order Support</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4 class="footer-title">Resources</h4>
-                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-                    <li><a href="../how-it-works/index.html" style="color: #CBD5E1;">How It Works</a></li>
-                    <li><a href="../methodology/index.html" style="color: #CBD5E1;">Research Methodology</a></li>
-                    <li><a href="../insights/index.html" style="color: #CBD5E1;">Insights &amp; Case Studies</a></li>
-                    <li><a href="../faq/index.html" style="color: #CBD5E1;">Frequently Asked Questions</a></li>
-                    <li><a href="../contact/index.html" style="color: #CBD5E1;">Contact Our Analysts</a></li>
+                <h4 class="footer-title">Company &amp; Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="../about/index.html">About Business Scope</a></li>
+                    <li><a href="../methodology/index.html">Research Methodology</a></li>
+                    <li><a href="../how-it-works/index.html">How It Works</a></li>
+                    <li><a href="../faq/index.html">Frequently Asked Questions</a></li>
+                    <li><a href="../contact/index.html">Contact Research Desk</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4 class="footer-title">Policies</h4>
-                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-                    <li><a href="../legal/index.html?policy=privacy" style="color: #CBD5E1;">Privacy Policy</a></li>
-                    <li><a href="../legal/index.html?policy=terms" style="color: #CBD5E1;">Terms of Service</a></li>
-                    <li><a href="../legal/index.html?policy=refund-policy" style="color: #CBD5E1;">Refund Policy</a></li>
-                    <li><a href="../legal/index.html?policy=disclaimer" style="color: #CBD5E1;">Risk Disclaimer</a></li>
-                    <li><a href="../legal/index.html?policy=research-policy" style="color: #CBD5E1;">Research Policy</a></li>
+                <h4 class="footer-title">Legal &amp; Trust</h4>
+                <ul class="footer-links">
+                    <li><a href="../legal/index.html?policy=privacy">Privacy Policy</a></li>
+                    <li><a href="../legal/index.html?policy=terms">Terms of Service</a></li>
+                    <li><a href="../legal/index.html?policy=refund-policy">Refund Policy</a></li>
+                    <li><a href="../legal/index.html?policy=disclaimer">Risk Disclaimer</a></li>
+                    <li><a href="../legal/index.html?policy=research-policy">Research Policy</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="container footer-bottom" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px; font-size: 0.85rem; color: #94A3B8; text-align: center;">
-            <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+        <div class="container footer-bottom">
+            <p class="footer-disclaimer-box">
+                Disclaimer: All research published on Business Scope in Your City is compiled for educational and business evaluation purposes only. It does not constitute financial, legal, or investment advice. Actual startup costs, revenue, and customer adoption will vary by execution, location, and market conditions.
+            </p>
+            <div class="footer-bottom-flex">
+                <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+                <div class="footer-secondary-links">
+                    <a href="../contact/index.html">Report an Error</a>
+                    <span>•</span>
+                    <a href="../../sitemap.xml">XML Sitemap</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Core Scripts & City Directory Engine -->
+    <!-- Core Scripts & Nationwide City Directory Engine -->
     <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/cities-data.js"></script>
     <script src="../../assets/js/api.js"></script>
     <script src="../../assets/js/search.js"></script>
     <script src="../../assets/js/forms.js"></script>
     <script src="../../assets/js/navigation.js"></script>
+    <script src="../../assets/js/i18n.js"></script>
     <script>
         /**
-         * City Directory Controller
+         * Enhanced Nationwide City Directory Controller
+         * Integrates with Google Sheets API, dynamic opportunity matching,
+         * multi-parameter filtering, tier visual navigation, and responsive pagination.
          */
         (function() {
-            let citiesData = [];
-            let opportunitiesData = [];
+            'use strict';
+
+            let allCities = [];
+            let allOpportunities = [];
             let filteredCities = [];
 
-            const state = {
+            const PAGE_SIZE = 18;
+            let currentPage = 1;
+
+            const filterState = {
                 keyword: '',
+                state: '',
                 region: '',
+                tier: '',
                 coverage: ''
             };
 
             document.addEventListener('DOMContentLoaded', async () => {
-                initializeEvents();
+                parseUrlParameters();
+                initializeEventHandlers();
                 await loadDirectoryData();
             });
 
-            function initializeEvents() {
+            function parseUrlParameters() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('tier')) filterState.tier = params.get('tier');
+                if (params.get('region')) filterState.region = params.get('region');
+                if (params.get('state')) filterState.state = params.get('state');
+                if (params.get('search') || params.get('q')) filterState.keyword = (params.get('search') || params.get('q')).trim().toLowerCase();
+            }
+
+            function initializeEventHandlers() {
                 const searchInput = document.getElementById('city-search-input');
-                const regionSelect = document.getElementById('region-filter-select');
+                const stateSelect = document.getElementById('state-filter-select');
+                const tierSelect = document.getElementById('tier-filter-select');
+                const regionSelect = document.querySelector('.regional-discovery-bar');
                 const coverageSelect = document.getElementById('coverage-filter-select');
                 const clearBtn = document.getElementById('clear-city-search-btn');
+                const emptyResetBtn = document.getElementById('empty-reset-btn');
                 const retryBtn = document.getElementById('retry-cities-btn');
+                const prevBtn = document.getElementById('pagination-prev');
+                const nextBtn = document.getElementById('pagination-next');
 
+                // Search keyword input
                 if (searchInput) {
+                    if (filterState.keyword) searchInput.value = filterState.keyword;
                     searchInput.addEventListener('input', debounce(() => {
-                        state.keyword = searchInput.value.trim().toLowerCase();
-                        filterAndRenderCities();
+                        filterState.keyword = searchInput.value.trim().toLowerCase();
+                        currentPage = 1;
+                        applyFiltersAndRender();
                     }, 200));
                 }
 
-                if (regionSelect) {
-                    regionSelect.addEventListener('change', () => {
-                        state.region = regionSelect.value;
-                        filterAndRenderCities();
+                // State dropdown
+                if (stateSelect) {
+                    stateSelect.addEventListener('change', () => {
+                        filterState.state = stateSelect.value;
+                        currentPage = 1;
+                        applyFiltersAndRender();
                     });
                 }
 
+                // Tier dropdown
+                if (tierSelect) {
+                    if (filterState.tier) tierSelect.value = filterState.tier;
+                    tierSelect.addEventListener('change', () => {
+                        filterState.tier = tierSelect.value;
+                        updateTierButtonActiveState();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    });
+                }
+
+                // Coverage status dropdown
                 if (coverageSelect) {
                     coverageSelect.addEventListener('change', () => {
-                        state.coverage = coverageSelect.value;
-                        filterAndRenderCities();
+                        filterState.coverage = coverageSelect.value;
+                        currentPage = 1;
+                        applyFiltersAndRender();
                     });
                 }
 
-                if (clearBtn) {
-                    clearBtn.addEventListener('click', () => {
-                        state.keyword = '';
-                        state.region = '';
-                        state.coverage = '';
-                        if (searchInput) searchInput.value = '';
-                        if (regionSelect) regionSelect.value = '';
-                        if (coverageSelect) coverageSelect.value = '';
-                        filterAndRenderCities();
+                // Tier Selector Cards
+                document.querySelectorAll('.tier-card-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const tier = btn.getAttribute('data-tier') || '';
+                        filterState.tier = tier;
+                        if (tierSelect) tierSelect.value = tier;
+                        updateTierButtonActiveState();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    });
+                });
+
+                // Regional Discovery Pills
+                document.querySelectorAll('.region-pill-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const region = btn.getAttribute('data-region') || '';
+                        filterState.region = region;
+                        updateRegionButtonActiveState();
+                        currentPage = 1;
+                        applyFiltersAndRender();
+                    });
+                });
+
+                // Reset buttons
+                const handleReset = () => {
+                    filterState.keyword = '';
+                    filterState.state = '';
+                    filterState.region = '';
+                    filterState.tier = '';
+                    filterState.coverage = '';
+
+                    if (searchInput) searchInput.value = '';
+                    if (stateSelect) stateSelect.value = '';
+                    if (tierSelect) tierSelect.value = '';
+                    if (coverageSelect) coverageSelect.value = '';
+
+                    updateTierButtonActiveState();
+                    updateRegionButtonActiveState();
+                    currentPage = 1;
+                    applyFiltersAndRender();
+                };
+
+                if (clearBtn) clearBtn.addEventListener('click', handleReset);
+                if (emptyResetBtn) emptyResetBtn.addEventListener('click', handleReset);
+                if (retryBtn) retryBtn.addEventListener('click', loadDirectoryData);
+
+                // Pagination
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            renderPage();
+                            scrollToGrid();
+                        }
                     });
                 }
 
-                if (retryBtn) {
-                    retryBtn.addEventListener('click', loadDirectoryData);
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        const maxPage = Math.ceil(filteredCities.length / PAGE_SIZE);
+                        if (currentPage < maxPage) {
+                            currentPage++;
+                            renderPage();
+                            scrollToGrid();
+                        }
+                    });
+                }
+            }
+
+            function updateTierButtonActiveState() {
+                document.querySelectorAll('.tier-card-btn').forEach(btn => {
+                    const t = btn.getAttribute('data-tier') || '';
+                    if (t === filterState.tier) {
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                    } else {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    }
+                });
+            }
+
+            function updateRegionButtonActiveState() {
+                document.querySelectorAll('.region-pill-btn').forEach(btn => {
+                    const r = btn.getAttribute('data-region') || '';
+                    if (r === filterState.region) {
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                    } else {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    }
+                });
+            }
+
+            function scrollToGrid() {
+                const el = document.getElementById('cities-display-grid');
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }
 
@@ -332,13 +615,8 @@
                 const errState = document.getElementById('city-error-state');
                 const emptyState = document.getElementById('city-empty-state');
 
-                errState.hidden = true;
-                emptyState.hidden = true;
-
-                if (typeof API === 'undefined') {
-                    console.warn('API client initializing...');
-                    return;
-                }
+                if (errState) errState.hidden = true;
+                if (emptyState) emptyState.hidden = true;
 
                 try {
                     const [citiesRes, oppsRes] = await Promise.all([
@@ -346,98 +624,241 @@
                         API.get('opportunities')
                     ]);
 
-                    citiesData = Array.isArray(citiesRes) ? citiesRes : [];
-                    opportunitiesData = Array.isArray(oppsRes) ? oppsRes : [];
+                    allCities = Array.isArray(citiesRes) ? citiesRes : [];
+                    allOpportunities = Array.isArray(oppsRes) ? oppsRes : [];
 
-                    if (citiesData.length === 0) {
-                        // Baseline fallback demo cities
-                        citiesData = [
-                            { city_id: 'mum_01', city_name: 'Mumbai', city_slug: 'mumbai', state: 'Maharashtra', region: 'Western India', research_coverage: 'Comprehensive', introduction: 'Financial capital with high purchasing power.' },
-                            { city_id: 'blr_01', city_name: 'Bengaluru', city_slug: 'bengaluru', state: 'Karnataka', region: 'Southern India', research_coverage: 'Comprehensive', introduction: 'Technology capital with young corporate workforce.' },
-                            { city_id: 'pun_01', city_name: 'Pune', city_slug: 'pune', state: 'Maharashtra', region: 'Western India', research_coverage: 'Partial', introduction: 'Automobile and IT hub with growing consumer suburbs.' },
-                            { city_id: 'ahm_01', city_name: 'Ahmedabad', city_slug: 'ahmedabad', state: 'Gujarat', region: 'Western India', research_coverage: 'Partial', introduction: 'MSME manufacturing ecosystem with strong local capital access.' }
-                        ];
+                    // Fallback to master dataset if API returns empty
+                    if (allCities.length === 0 && typeof window.INDIA_CITIES_MASTER !== 'undefined') {
+                        allCities = window.INDIA_CITIES_MASTER;
                     }
 
-                    filterAndRenderCities();
+                    // Dynamically populate state filter dropdown
+                    populateStateDropdown();
+
+                    // Calculate live opportunity count map and bind to cities
+                    mapOpportunitiesToCities();
+
+                    // Update Tier & Region Header Count Badges
+                    updateHeaderStats();
+
+                    // Render initial filtered list
+                    updateTierButtonActiveState();
+                    updateRegionButtonActiveState();
+                    applyFiltersAndRender();
                 } catch (err) {
-                    grid.innerHTML = '';
-                    errState.hidden = false;
-                    document.getElementById('city-error-message').textContent = 'Database synchronization error: ' + err.message;
+                    console.error('Error loading directory data:', err);
+                    if (typeof window.INDIA_CITIES_MASTER !== 'undefined') {
+                        allCities = window.INDIA_CITIES_MASTER;
+                        populateStateDropdown();
+                        mapOpportunitiesToCities();
+                        updateHeaderStats();
+                        applyFiltersAndRender();
+                    } else if (errState) {
+                        errState.hidden = false;
+                    }
                 }
             }
 
-            function filterAndRenderCities() {
-                filteredCities = citiesData.filter(city => {
-                    if (state.keyword) {
-                        const nameMatch = (city.city_name || '').toLowerCase().includes(state.keyword);
-                        const stateMatch = (city.state || '').toLowerCase().includes(state.keyword);
-                        const introMatch = (city.introduction || '').toLowerCase().includes(state.keyword);
-                        if (!nameMatch && !stateMatch && !introMatch) return false;
+            function populateStateDropdown() {
+                const stateSelect = document.getElementById('state-filter-select');
+                if (!stateSelect) return;
+
+                const states = new Set();
+                allCities.forEach(c => {
+                    if (c.state) states.add(c.state.trim());
+                });
+
+                const sortedStates = Array.from(states).sort();
+                stateSelect.innerHTML = '<option value="">All 36 States &amp; UTs</option>' +
+                    sortedStates.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+
+                if (filterState.state) stateSelect.value = filterState.state;
+            }
+
+            function mapOpportunitiesToCities() {
+                const oppCountMap = {};
+                allOpportunities.forEach(opp => {
+                    const id = String(opp.city_id || '').trim();
+                    if (id) {
+                        oppCountMap[id] = (oppCountMap[id] || 0) + 1;
                     }
-                    if (state.region && city.region !== state.region) {
+                });
+
+                allCities.forEach(city => {
+                    const id = String(city.city_id || '').trim();
+                    const legacy = String(city.legacy_id || '').trim();
+                    // Live dynamic opportunity count calculation
+                    city.calculated_opp_count = (oppCountMap[id] || 0) + (legacy ? (oppCountMap[legacy] || 0) : 0);
+                });
+            }
+
+            function updateHeaderStats() {
+                // Tier counts
+                const tierCounts = { 'Tier 1': 0, 'Tier 2': 0, 'Tier 3': 0, 'Tier 4': 0, 'Tier 5': 0 };
+                const regionCounts = { 'North India': 0, 'South India': 0, 'West India': 0, 'East India': 0, 'Central India': 0, 'Northeast India': 0 };
+
+                allCities.forEach(c => {
+                    const t = c.tier || c.platform_city_tier;
+                    if (tierCounts[t] !== undefined) tierCounts[t]++;
+                    if (regionCounts[c.region] !== undefined) regionCounts[c.region]++;
+                });
+
+                const elAll = document.getElementById('tier-count-all');
+                if (elAll) elAll.textContent = allCities.length;
+                const elT1 = document.getElementById('tier-count-1');
+                if (elT1) elT1.textContent = tierCounts['Tier 1'] || 0;
+                const elT2 = document.getElementById('tier-count-2');
+                if (elT2) elT2.textContent = tierCounts['Tier 2'] || 0;
+                const elT3 = document.getElementById('tier-count-3');
+                if (elT3) elT3.textContent = tierCounts['Tier 3'] || 0;
+                const elT4 = document.getElementById('tier-count-4');
+                if (elT4) elT4.textContent = tierCounts['Tier 4'] || 0;
+                const elT5 = document.getElementById('tier-count-5');
+                if (elT5) elT5.textContent = tierCounts['Tier 5'] || 0;
+
+                // Regions
+                const rAll = document.getElementById('region-count-all');
+                if (rAll) rAll.textContent = allCities.length;
+                const rN = document.getElementById('region-count-north');
+                if (rN) rN.textContent = regionCounts['North India'] || 0;
+                const rS = document.getElementById('region-count-south');
+                if (rS) rS.textContent = regionCounts['South India'] || 0;
+                const rW = document.getElementById('region-count-west');
+                if (rW) rW.textContent = regionCounts['West India'] || 0;
+                const rE = document.getElementById('region-count-east');
+                if (rE) rE.textContent = regionCounts['East India'] || 0;
+                const rC = document.getElementById('region-count-central');
+                if (rC) rC.textContent = regionCounts['Central India'] || 0;
+                const rNE = document.getElementById('region-count-ne');
+                if (rNE) rNE.textContent = regionCounts['Northeast India'] || 0;
+            }
+
+            function applyFiltersAndRender() {
+                filteredCities = allCities.filter(c => {
+                    // Keyword filter
+                    if (filterState.keyword) {
+                        const kw = filterState.keyword;
+                        const matchName = (c.city_name || '').toLowerCase().includes(kw);
+                        const matchState = (c.state || '').toLowerCase().includes(kw);
+                        const matchProfile = (c.economic_profile || '').toLowerCase().includes(kw);
+                        const matchInd = (c.major_industries || '').toLowerCase().includes(kw);
+                        if (!matchName && !matchState && !matchProfile && !matchInd) return false;
+                    }
+
+                    // State filter
+                    if (filterState.state && c.state !== filterState.state) {
                         return false;
                     }
-                    if (state.coverage && city.research_coverage !== state.coverage) {
+
+                    // Region filter
+                    if (filterState.region && c.region !== filterState.region) {
                         return false;
                     }
+
+                    // Tier filter
+                    if (filterState.tier) {
+                        const t = c.tier || c.platform_city_tier;
+                        if (t !== filterState.tier) return false;
+                    }
+
+                    // Coverage status filter
+                    if (filterState.coverage) {
+                        const cov = (c.coverage_status || c.research_coverage || '').toLowerCase();
+                        if (cov !== filterState.coverage.toLowerCase()) return false;
+                    }
+
                     return true;
                 });
 
-                renderCityCards();
+                renderPage();
             }
 
-            function renderCityCards() {
+            function renderPage() {
                 const grid = document.getElementById('cities-display-grid');
                 const emptyState = document.getElementById('city-empty-state');
                 const countDisplay = document.getElementById('city-count-display');
+                const paginationBar = document.getElementById('directory-pagination');
 
                 const total = filteredCities.length;
                 if (countDisplay) {
-                    countDisplay.innerHTML = `Showing <strong>${total}</strong> verified economic ${total === 1 ? 'hub' : 'hubs'}`;
+                    countDisplay.innerHTML = `Showing <strong>${total}</strong> ${total === 1 ? 'city' : 'cities'} matching criteria`;
                 }
 
                 if (total === 0) {
                     grid.innerHTML = '';
                     if (emptyState) emptyState.hidden = false;
+                    if (paginationBar) paginationBar.style.display = 'none';
                     return;
                 }
 
                 if (emptyState) emptyState.hidden = true;
 
-                const oppCountMap = {};
-                opportunitiesData.forEach(opp => {
-                    if (opp.city_id) {
-                        oppCountMap[opp.city_id] = (oppCountMap[opp.city_id] || 0) + 1;
-                    }
-                });
+                // Pagination slice
+                const startIndex = (currentPage - 1) * PAGE_SIZE;
+                const endIndex = Math.min(startIndex + PAGE_SIZE, total);
+                const pageCities = filteredCities.slice(startIndex, endIndex);
 
-                const cardsHtml = filteredCities.map(city => {
-                    const oppCount = oppCountMap[city.city_id] || 0;
-                    const coverageClass = getCoverageBadgeClass(city.research_coverage);
+                const cardsHtml = pageCities.map(city => {
+                    const oppCount = city.calculated_opp_count || 0;
+                    const tier = city.tier || city.platform_city_tier || 'Tier 2';
+                    const tierClass = getTierClass(tier);
+                    const coverageStatus = city.coverage_status || 'Planned';
+                    const statusClass = getStatusClass(coverageStatus);
+                    const isHighPriority = city.research_priority === 'Very High' || city.research_priority === 'High';
+
+                    // Parse industries into clean chips
+                    const industriesList = (city.major_industries || '')
+                        .split(',')
+                        .map(s => s.trim())
+                        .filter(Boolean)
+                        .slice(0, 3);
 
                     return `
-                        <article class="card city-overview-card">
-                            <div class="card-meta-top" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                <span class="badge ${coverageClass}">${escapeHtml(city.research_coverage || 'Desk Research')}</span>
-                                <span class="region-tag" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">${escapeHtml(city.region || 'India')}</span>
+                        <article class="city-directory-card">
+                            <div class="city-card-top">
+                                <div class="city-card-header-left">
+                                    <h3 class="city-card-title">
+                                        <a href="../city/index.html?slug=${encodeURIComponent(city.slug || city.city_slug)}">${escapeHtml(city.city_name)}</a>
+                                    </h3>
+                                    <span class="city-card-state">${escapeHtml(city.state)} &bull; ${escapeHtml(city.region || 'India')}</span>
+                                </div>
+                                <div class="city-card-badges">
+                                    <span class="badge-tier ${tierClass}">${escapeHtml(tier)}</span>
+                                    <span class="status-badge ${statusClass}">${escapeHtml(coverageStatus)}</span>
+                                    ${isHighPriority ? '<span class="badge-priority-high">High-Priority Market</span>' : ''}
+                                </div>
                             </div>
-                            <h3 class="city-title" style="color: var(--navy); margin-bottom: 6px;">
-                                <a href="../city/index.html?slug=${encodeURIComponent(city.city_slug)}">${escapeHtml(city.city_name)}</a>
-                            </h3>
-                            <p class="city-state-text" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">State: <strong>${escapeHtml(city.state)}</strong></p>
-                            <p class="city-intro-snippet" style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 16px;">${escapeHtml(city.introduction || '')}</p>
-                            
-                            <div class="city-stats-row" style="background: var(--bg-light); padding: 10px; border-radius: var(--radius-sm); margin-bottom: 16px;">
-                                <div class="stat-item" style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span class="stat-label" style="font-size: 0.8rem; color: var(--text-muted);">Published Opportunities:</span>
-                                    <span class="stat-number" style="font-weight: 800; color: var(--navy);">${oppCount}</span>
+
+                            <p class="city-card-desc">${escapeHtml(city.economic_profile || city.introduction || '')}</p>
+
+                            <div class="city-card-industries">
+                                ${industriesList.map(ind => `<span class="industry-chip">${escapeHtml(ind)}</span>`).join('')}
+                            </div>
+
+                            <div class="city-card-indicators">
+                                <div class="city-indicator-item">
+                                    <span>Population Band:</span>
+                                    <strong>${escapeHtml(city.population_band || 'Metro Cluster')}</strong>
+                                </div>
+                                <div class="city-indicator-item">
+                                    <span>Business Density:</span>
+                                    <strong>${escapeHtml(city.business_density || 'Active Trade')}</strong>
                                 </div>
                             </div>
 
                             <div class="city-card-footer">
-                                <a href="../city/index.html?slug=${encodeURIComponent(city.city_slug)}" class="btn btn-outline btn-sm btn-full">
-                                    Explore ${escapeHtml(city.city_name)} Gaps &rarr;
+                                ${oppCount > 0
+                                    ? `<div class="city-opp-count-indicator">
+                                        <span>🎯</span>
+                                        <strong>${oppCount} ${oppCount === 1 ? 'Opportunity' : 'Opportunities'}</strong>
+                                       </div>`
+                                    : `<div class="city-opp-count-indicator zero-count">
+                                        <span>⏳</span>
+                                        <span>Not yet researched</span>
+                                       </div>`
+                                }
+                                <a href="../city/index.html?slug=${encodeURIComponent(city.slug || city.city_slug)}" class="btn btn-primary btn-sm">
+                                    Explore ${escapeHtml(city.city_name)} &rarr;
                                 </a>
                             </div>
                         </article>
@@ -445,12 +866,69 @@
                 }).join('');
 
                 grid.innerHTML = cardsHtml;
+
+                // Render pagination controls
+                renderPagination(total, startIndex, endIndex);
             }
 
-            function getCoverageBadgeClass(coverage) {
-                if (coverage === 'Comprehensive') return 'badge-teal';
-                if (coverage === 'Partial') return 'badge-blue';
-                return 'badge-gray';
+            function renderPagination(total, startIndex, endIndex) {
+                const paginationBar = document.getElementById('directory-pagination');
+                const info = document.getElementById('pagination-info');
+                const prevBtn = document.getElementById('pagination-prev');
+                const nextBtn = document.getElementById('pagination-next');
+                const pagesContainer = document.getElementById('pagination-pages');
+
+                if (!paginationBar) return;
+
+                const maxPage = Math.ceil(total / PAGE_SIZE);
+
+                if (total <= PAGE_SIZE) {
+                    paginationBar.style.display = 'none';
+                    return;
+                }
+
+                paginationBar.style.display = 'flex';
+                if (info) info.textContent = `Showing ${startIndex + 1} to ${endIndex} of ${total} cities`;
+
+                if (prevBtn) prevBtn.disabled = currentPage === 1;
+                if (nextBtn) nextBtn.disabled = currentPage === maxPage;
+
+                if (pagesContainer) {
+                    let pageHtml = '';
+                    for (let p = 1; p <= maxPage; p++) {
+                        if (p === 1 || p === maxPage || (p >= currentPage - 1 && p <= currentPage + 1)) {
+                            pageHtml += `<button type="button" class="btn btn-sm ${p === currentPage ? 'btn-primary' : 'btn-outline'}" data-page="${p}">${p}</button>`;
+                        } else if (p === currentPage - 2 || p === currentPage + 2) {
+                            pageHtml += '<span style="padding: 0 4px; color: var(--text-muted);">...</span>';
+                        }
+                    }
+                    pagesContainer.innerHTML = pageHtml;
+                    pagesContainer.querySelectorAll('button').forEach(b => {
+                        b.addEventListener('click', () => {
+                            currentPage = Number(b.getAttribute('data-page'));
+                            renderPage();
+                            scrollToGrid();
+                        });
+                    });
+                }
+            }
+
+            function getTierClass(tier) {
+                const clean = String(tier).toLowerCase();
+                if (clean.includes('1')) return 'badge-tier-1';
+                if (clean.includes('2')) return 'badge-tier-2';
+                if (clean.includes('3')) return 'badge-tier-3';
+                if (clean.includes('4')) return 'badge-tier-4';
+                return 'badge-tier-5';
+            }
+
+            function getStatusClass(status) {
+                const clean = String(status).toLowerCase();
+                if (clean === 'active' || clean.includes('comprehensive')) return 'status-active';
+                if (clean === 'researching' || clean.includes('partial') || clean.includes('progress')) return 'status-researching';
+                if (clean === 'planned') return 'status-planned';
+                if (clean === 'coming soon') return 'status-coming-soon';
+                return 'status-not-researched';
             }
 
             function escapeHtml(str) {

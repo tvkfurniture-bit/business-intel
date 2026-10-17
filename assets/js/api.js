@@ -166,6 +166,10 @@ const API = (function() {
         throw new Error('Invalid JSON payload returned by API.');
       }
 
+      if (endpoint === 'cities') {
+        data = normalizeCitiesResponse_(data);
+      }
+
       if (useCache && !data.error) {
         setCachedResponse(cacheKey, data);
       }
@@ -175,16 +179,61 @@ const API = (function() {
       clearTimeout(timeoutId);
       // If fetch fails due to CORS / redirect isolation, fall back to JSONP
       try {
-        const jsonpData = await fetchJsonp(requestUrl);
+        let jsonpData = await fetchJsonp(requestUrl);
+        if (endpoint === 'cities') {
+          jsonpData = normalizeCitiesResponse_(jsonpData);
+        }
         if (useCache && !jsonpData.error) {
           setCachedResponse(cacheKey, jsonpData);
         }
         return jsonpData;
       } catch (jsonpErr) {
         console.error(`API GET Failure on [${endpoint}]:`, fetchErr.message || jsonpErr.message);
+        if (endpoint === 'cities') {
+          return normalizeCitiesResponse_([]);
+        }
         return { error: 'Unable to synchronize with backend database. Please check your network connection.' };
       }
     }
+  }
+
+  /**
+   * Normalize and hydrate city records from Google Sheets with nationwide tier data.
+   * @param {Array<Object>} data Raw sheet records
+   * @returns {Array<Object>}
+   */
+  function normalizeCitiesResponse_(data) {
+    const master = (typeof window !== 'undefined' && window.INDIA_CITIES_MASTER) || (typeof globalThis !== 'undefined' && globalThis.INDIA_CITIES_MASTER) || [];
+    if (!Array.isArray(data) || data.length === 0) {
+      return master;
+    }
+    const existingSlugs = new Set();
+    const existingIds = new Set();
+    const normalized = data.map(c => {
+      const slug = c.slug || c.city_slug || (c.city_name ? c.city_name.toLowerCase().replace(/[\s-]+/g, '-') : '');
+      const tier = c.tier || c.platform_city_tier || 'Tier 2';
+      const city_id = c.city_id || ('IN-' + (c.state_code || 'IND') + '-' + slug.toUpperCase().slice(0, 3));
+      existingSlugs.add(slug.toLowerCase());
+      existingIds.add(city_id.toLowerCase());
+      return {
+        ...c,
+        slug: slug,
+        city_slug: slug,
+        tier: tier,
+        platform_city_tier: tier,
+        city_id: city_id
+      };
+    });
+
+    master.forEach(m => {
+      const s = (m.slug || m.city_slug || '').toLowerCase();
+      const id = (m.city_id || '').toLowerCase();
+      if (!existingSlugs.has(s) && !existingIds.has(id)) {
+        normalized.push(m);
+      }
+    });
+
+    return normalized;
   }
 
   /**

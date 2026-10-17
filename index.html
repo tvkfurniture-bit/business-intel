@@ -95,6 +95,47 @@
         <h1>Find the business scope in your city.</h1>
         <p class="hero-description">Explore practical business possibilities based on local customer problems, your budget, and the way you want to operate. Review assumptions, risks, and low-cost ways to test demand before investing.</p>
 
+        <!-- Prominent "Where do you want to build?" City Search -->
+        <div class="hero-city-prompt-card">
+          <div class="hero-city-prompt-title">
+            <span style="font-size: 1.3rem;">📍</span>
+            <span>Where do you want to build?</span>
+            <span class="badge badge-teal" style="font-size: 0.72rem; margin-left: auto;">Pan-India Coverage</span>
+          </div>
+          <p class="hero-city-prompt-sub">Search any Indian city to open its empirical market profile, local gap analysis, and verified business opportunities.</p>
+          
+          <form class="hero-city-search-row" id="home-city-search-form" onsubmit="event.preventDefault(); window.navigateToSelectedCity && window.navigateToSelectedCity();">
+            <div class="hero-city-input-wrap">
+              <svg class="hero-city-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="search" id="home-city-search-input" placeholder="Search your city (e.g. Mumbai, Bengaluru, Jaipur, Lucknow, Patna, Guwahati)..." autocomplete="off" aria-label="Search city name">
+              <ul class="hero-city-suggestions-dropdown" id="home-city-suggestions" hidden></ul>
+            </div>
+            <button class="btn btn-teal" type="submit" id="home-city-go-btn" style="min-width: 130px; height: 48px;">
+              Open City &rarr;
+            </button>
+          </form>
+
+          <div class="hero-city-quick-pills">
+            <span class="hero-city-quick-label">Top Markets:</span>
+            <a href="pages/city/index.html?slug=mumbai" class="hero-city-pill-btn">Mumbai</a>
+            <a href="pages/city/index.html?slug=delhi" class="hero-city-pill-btn">Delhi NCR</a>
+            <a href="pages/city/index.html?slug=bengaluru" class="hero-city-pill-btn">Bengaluru</a>
+            <a href="pages/city/index.html?slug=kolkata" class="hero-city-pill-btn">Kolkata</a>
+            <a href="pages/city/index.html?slug=hyderabad" class="hero-city-pill-btn">Hyderabad</a>
+            <a href="pages/city/index.html?slug=pune" class="hero-city-pill-btn">Pune</a>
+            <a href="pages/city/index.html?slug=ahmedabad" class="hero-city-pill-btn">Ahmedabad</a>
+            <a href="pages/city/index.html?slug=chennai" class="hero-city-pill-btn">Chennai</a>
+            <a href="pages/city/index.html?slug=jaipur" class="hero-city-pill-btn">Jaipur</a>
+            <a href="pages/city/index.html?slug=lucknow" class="hero-city-pill-btn">Lucknow</a>
+            <a href="pages/city/index.html?slug=nagpur" class="hero-city-pill-btn">Nagpur</a>
+            <a href="pages/city/index.html?slug=indore" class="hero-city-pill-btn">Indore</a>
+            <a href="pages/cities/index.html" class="hero-city-pill-btn" style="background: var(--navy); color: var(--white); font-weight: 750;">All 88+ Cities &rarr;</a>
+          </div>
+        </div>
+
         <!-- Interactive Hero Search Widget -->
         <form class="search-widget" id="hero-search-form" role="search">
           <div class="search-field">
@@ -145,6 +186,68 @@
       </div>
     </section>
 
+    <!-- 8-Step Discovery Workflow Section -->
+    <section class="workflow-section" aria-labelledby="workflow-heading">
+      <div class="container">
+        <div class="workflow-header">
+          <span class="badge badge-teal" style="margin-bottom: 8px;">Structured Methodology</span>
+          <h2 id="workflow-heading">How "Business Scope in Your City" Works</h2>
+          <p>A disciplined, data-driven pathway from identifying a local municipal market to launching a validated business.</p>
+        </div>
+
+        <div class="workflow-track">
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">1</div>
+            <div class="workflow-step-icon">🏙️</div>
+            <div class="workflow-step-title">Select City</div>
+            <div class="workflow-step-desc">Pick from 88+ Tier 1–5 Indian markets</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">2</div>
+            <div class="workflow-step-icon">📋</div>
+            <div class="workflow-step-title">City Profile</div>
+            <div class="workflow-step-desc">Examine infrastructure &amp; demographics</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">3</div>
+            <div class="workflow-step-icon">🔬</div>
+            <div class="workflow-step-title">Market Analysis</div>
+            <div class="workflow-step-desc">Unpack retail leases &amp; MSME density</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">4</div>
+            <div class="workflow-step-icon">💡</div>
+            <div class="workflow-step-title">Opportunities</div>
+            <div class="workflow-step-desc">Discover verified local business gaps</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">5</div>
+            <div class="workflow-step-icon">⚖️</div>
+            <div class="workflow-step-title">Filter by Capex</div>
+            <div class="workflow-step-desc">Align by budget, model &amp; category</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">6</div>
+            <div class="workflow-step-icon">📄</div>
+            <div class="workflow-step-title">Dossier Detail</div>
+            <div class="workflow-step-desc">Analyze unit economics &amp; risks</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">7</div>
+            <div class="workflow-step-icon">🧪</div>
+            <div class="workflow-step-title">Validation Plan</div>
+            <div class="workflow-step-desc">Run a 7-day low-cost demand test</div>
+          </div>
+          <div class="workflow-step-card">
+            <div class="workflow-step-num">8</div>
+            <div class="workflow-step-icon">🚀</div>
+            <div class="workflow-step-title">Launch Blueprint</div>
+            <div class="workflow-step-desc">Execute 90-day operational roadmap</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Cities Directory Spotlight -->
     <section class="section bg-light" id="cities">
       <div class="container">
@@ -189,6 +292,73 @@
             <p style="font-size: 0.9rem; margin-bottom: 16px;">Manufacturing OEM supplies, textile contract packaging, and wholesale trade hubs.</p>
             <a class="btn btn-outline btn-sm btn-full" href="pages/city/index.html?slug=ahmedabad">Explore Ahmedabad Guide &rarr;</a>
           </article>
+        </div>
+
+        <!-- India Regional Discovery Component -->
+        <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <div>
+              <span class="badge badge-teal" style="font-size: 0.74rem;">Pan-India Regional Clusters</span>
+              <h3 style="font-size: 1.4rem; color: var(--navy); margin-top: 4px; letter-spacing: -0.02em;">Explore All 6 Geographic Regions</h3>
+            </div>
+            <a href="pages/cities/index.html" class="link-arrow">Browse complete 88+ city directory &rarr;</a>
+          </div>
+
+          <div class="regional-grid-home">
+            <div class="regional-card-home">
+              <div class="regional-card-top">
+                <span class="regional-name">North India</span>
+                <span class="regional-count">21 Cities</span>
+              </div>
+              <p class="regional-cities-list">Delhi NCR, Jaipur, Lucknow, Kanpur, Chandigarh, Dehradun, Amritsar, Ludhiana, Agra, Varanasi, Prayagraj, Jodhpur, Udaipur, Kota, Srinagar, Jammu, Shimla, Haridwar, Baddi...</p>
+              <a href="pages/cities/index.html?region=North+India" class="regional-card-link">View Northern Hubs &rarr;</a>
+            </div>
+
+            <div class="regional-card-home">
+              <div class="regional-card-top">
+                <span class="regional-name">South India</span>
+                <span class="regional-count">24 Cities</span>
+              </div>
+              <p class="regional-cities-list">Bengaluru, Chennai, Hyderabad, Kochi, Coimbatore, Visakhapatnam, Vijayawada, Mysuru, Mangaluru, Madurai, Thiruvananthapuram, Tiruchirappalli, Salem, Kozhikode, Thrissur, Hubballi...</p>
+              <a href="pages/cities/index.html?region=South+India" class="regional-card-link">View Southern Hubs &rarr;</a>
+            </div>
+
+            <div class="regional-card-home">
+              <div class="regional-card-top">
+                <span class="regional-name">West India</span>
+                <span class="regional-count">16 Cities</span>
+              </div>
+              <p class="regional-cities-list">Mumbai, Pune, Ahmedabad, Surat, Vadodara, Rajkot, Nashik, Chhatrapati Sambhajinagar, Nagpur, Panaji, Kolhapur, Solapur, Bhavnagar, Jamnagar, Gandhinagar, Morbi...</p>
+              <a href="pages/cities/index.html?region=West+India" class="regional-card-link">View Western Hubs &rarr;</a>
+            </div>
+
+            <div class="regional-card-home">
+              <div class="regional-card-top">
+                <span class="regional-name">East India</span>
+                <span class="regional-count">10 Cities</span>
+              </div>
+              <p class="regional-cities-list">Kolkata, Bhubaneswar, Patna, Ranchi, Jamshedpur, Durgapur, Asansol, Siliguri, Cuttack, Rourkela, Dhanbad, Gaya, Darjeeling...</p>
+              <a href="pages/cities/index.html?region=East+India" class="regional-card-link">View Eastern Hubs &rarr;</a>
+            </div>
+
+            <div class="regional-card-home">
+              <div class="regional-card-top">
+                <span class="regional-name">Central India</span>
+                <span class="regional-count">5 Cities</span>
+              </div>
+              <p class="regional-cities-list">Indore, Bhopal, Raipur, Gwalior, Jabalpur, Ujjain, Bilaspur, Durg-Bhilai...</p>
+              <a href="pages/cities/index.html?region=Central+India" class="regional-card-link">View Central Hubs &rarr;</a>
+            </div>
+
+            <div class="regional-card-home">
+              <div class="regional-card-top">
+                <span class="regional-name">Northeast India</span>
+                <span class="regional-count">12 Cities</span>
+              </div>
+              <p class="regional-cities-list">Guwahati, Shillong, Agartala, Imphal, Aizawl, Dimapur, Kohima, Gangtok, Itanagar, Silchar, Dibrugarh, Jorhat...</p>
+              <a href="pages/cities/index.html?region=Northeast+India" class="regional-card-link">View Northeast Hubs &rarr;</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -550,9 +720,11 @@
 
   <!-- JavaScript Modules -->
   <script src="assets/js/config.js"></script>
+  <script src="assets/js/cities-data.js"></script>
   <script src="assets/js/api.js"></script>
   <script src="assets/js/forms.js"></script>
   <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

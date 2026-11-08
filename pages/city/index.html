@@ -623,32 +623,77 @@
                     return;
                 }
 
-                if (empty) empty.hidden = true;
-                grid.innerHTML = list.map(o => `
+                function getCityOppImg(o) {
+                    const slug = (o.slug || '').toLowerCase();
+                    const cat = (o.category || '').toLowerCase();
+                    const title = (o.title || '').toLowerCase();
+                    if (slug.includes('comply-grid') || slug.includes('compliance') || slug.includes('software') || cat.includes('software') || title.includes('copilot') || title.includes('compliance')) {
+                        return '../../assets/images/industrial-compliance-software.jpg';
+                    }
+                    if (slug.includes('scrapbridge') || slug.includes('scrap') || slug.includes('recycling') || slug.includes('waste') || cat.includes('circular') || title.includes('debris') || title.includes('scrap')) {
+                        return '../../assets/images/scrap-recycling-hub.jpg';
+                    }
+                    if (slug.includes('shelfgrid') || slug.includes('warehouse') || slug.includes('storage') || slug.includes('logistics') || slug.includes('coldlink') || slug.includes('railbridge') || cat.includes('logistics')) {
+                        return '../../assets/images/warehouse-pallet-storage.jpg';
+                    }
+                    if (slug.includes('solar') || slug.includes('energy') || cat.includes('energy')) {
+                        return '../../assets/images/rooftop-solar-industrial.jpg';
+                    }
+                    if (slug.includes('ev-') || slug.includes('charger') || slug.includes('fleet') || slug.includes('commute') || title.includes('ev ') || cat.includes('ev') || cat.includes('mobility')) {
+                        return '../../assets/images/commercial-ev-fleet.jpg';
+                    }
+                    if (slug.includes('diaglink') || slug.includes('health') || slug.includes('elder') || slug.includes('pharma') || slug.includes('medical') || cat.includes('health')) {
+                        return '../../assets/images/healthcare-diagnostics-service.jpg';
+                    }
+                    if (slug.includes('coffee') || slug.includes('food') || slug.includes('kitchen') || cat.includes('food') || cat.includes('beverage')) {
+                        return '../../assets/images/specialty-coffee-roastery.jpg';
+                    }
+                    return '../../assets/images/industrial-compliance-software.jpg';
+                }
+
+                grid.innerHTML = list.map(o => {
+                    const statusLabel = formatResearchStatus(o.research_status);
+                    const statusSlug = getEvidenceSlug(o.research_status);
+                    const conf = formatConfidence(o.confidence_level);
+                    const budgetRange = formatBudgetDisplay(o.budget_min, o.budget_max);
+                    const imgUrl = getCityOppImg(o);
+
+                    return `
                     <article class="card opportunity-catalogue-card">
-                        <div class="card-meta-top">
-                            <span class="badge badge-teal">${escapeHtml(o.category || 'General')}</span>
-                            <span class="evidence-tag evidence-tag-verified">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
-                        </div>
-                        <h3 class="card-title">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug || '')}">${escapeHtml(o.title || 'Untitled Opportunity')}</a>
-                        </h3>
-                        <p class="card-location">📍 <strong>${escapeHtml(currentCity.city_name)}</strong> &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
-                        <p class="card-summary">${escapeHtml(o.short_summary || o.problem_statement || '')}</p>
-                        <div class="card-budget-box">
-                            <div class="budget-col">
-                                <span class="budget-label">Startup Capex Range</span>
-                                <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} - ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
-                            </div>
-                            <div class="confidence-col">
-                                <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'Medium')} Confidence</span>
+                        <div class="card-visual-media">
+                            <img src="${imgUrl}" alt="${escapeHtml(o.title || '')}" class="card-visual-img" loading="lazy" />
+                            <div class="card-visual-overlay"></div>
+                            <div class="card-visual-tags">
+                                <span class="card-visual-sector">${escapeHtml(o.category || 'General')}</span>
+                                <span class="card-visual-evidence evidence-tag-${statusSlug}">${escapeHtml(statusLabel)}</span>
                             </div>
                         </div>
-                        <div class="card-action-footer">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug || '')}" class="btn btn-outline btn-sm btn-full">Read Opportunity Guide &rarr;</a>
+                        <div class="card-body-wrap">
+                            <h3 class="card-title">
+                                <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug || '')}">${escapeHtml(o.title || 'Untitled Opportunity')}</a>
+                            </h3>
+                            <p class="card-location">📍 <strong>${escapeHtml(currentCity.city_name)}</strong> &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
+                            <p class="card-summary">${escapeHtml(o.short_summary || o.problem_statement || '')}</p>
+                            <div class="card-budget-box">
+                                <div class="budget-col">
+                                    <span class="budget-label">Startup Capex Range</span>
+                                    <strong class="budget-amount">${budgetRange}</strong>
+                                    <small style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-sans); margin-top: 2px;">(₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')})</small>
+                                </div>
+                                <div class="confidence-col">
+                                    <span class="confidence-badge confidence-${conf.classKey}">${escapeHtml(conf.label)}</span>
+                                </div>
+                            </div>
+                            <div class="card-action-footer">
+                                <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug || '')}" class="btn btn-primary btn-sm btn-full btn-card-guide">
+                                    <span>Read Opportunity Guide</span>
+                                    <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                </a>
+                            </div>
                         </div>
                     </article>
-                `).join('');
+                    `;
+                }).join('');
 
                 if (window.I18N && typeof window.I18N.translatePage === 'function') {
                     window.I18N.translatePage();
@@ -663,18 +708,29 @@
                     return;
                 }
 
-                grid.innerHTML = cityProducts.map(p => `
+                grid.innerHTML = cityProducts.map(p => {
+                    const imgUrl = getCityOppImg(p);
+                    return `
                     <div class="card product-card">
-                        <span class="badge badge-blue">${escapeHtml(p.product_type || 'Blueprint')}</span>
-                        <h3>${escapeHtml(p.title)}</h3>
-                        <p class="product-city">Coverage: ${escapeHtml(currentCity.city_name)} Focus</p>
-                        <p class="product-desc">${escapeHtml(p.short_description || '')}</p>
-                        <div class="product-price-row">
-                            <div class="price-val">₹${Number(p.price_inr).toLocaleString('en-IN')} <span>incl. taxes</span></div>
-                            <a href="../blueprint/index.html?slug=${encodeURIComponent(p.slug)}" class="btn btn-primary btn-sm">View Deliverables</a>
+                        <div class="card-visual-media" style="height: 150px;">
+                            <img src="${imgUrl}" alt="${escapeHtml(p.title)}" class="card-visual-img" loading="lazy" />
+                            <div class="card-visual-overlay"></div>
+                            <div class="card-visual-tags">
+                                <span class="card-visual-sector">${escapeHtml(p.product_type || 'Blueprint')}</span>
+                                <span class="card-visual-evidence" style="background: rgba(2, 132, 199, 0.9);">Coverage: ${escapeHtml(currentCity.city_name)}</span>
+                            </div>
+                        </div>
+                        <div class="card-body-wrap">
+                            <h3 style="font-size: 1.12rem; font-weight: 750; color: var(--navy); margin-bottom: 8px;">${escapeHtml(p.title)}</h3>
+                            <p class="product-desc" style="font-size: 0.88rem; color: #475569; margin-bottom: 14px;">${escapeHtml(p.short_description || '')}</p>
+                            <div class="product-price-row" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;">
+                                <div class="price-val" style="font-size: 1.2rem; font-weight: 800; color: var(--navy);">₹${Number(p.price_inr).toLocaleString('en-IN')} <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted);">incl. taxes</span></div>
+                                <a href="../blueprint/index.html?slug=${encodeURIComponent(p.slug)}" class="btn btn-primary btn-sm" style="white-space: nowrap; padding: 9px 15px; font-weight: 750; min-height: 40px;">View Deliverables</a>
+                            </div>
                         </div>
                     </div>
-                `).join('');
+                `;
+                }).join('');
             }
 
             function setupCityFilterHandlers() {
@@ -710,6 +766,77 @@
                         renderCityOpportunities(cityOpportunities);
                     });
                 }
+            }
+
+            function formatLakhs(amount) {
+                if (!amount) return '0';
+                const l = Number(amount) / 100000;
+                return Number.isInteger(l) ? String(l) : l.toFixed(1);
+            }
+
+            function formatResearchStatus(status) {
+                if (!status) return 'Evidence Supported';
+                const s = String(status).trim();
+                if (/public_research_complete_field_validation_pending/i.test(s) || /field_validation_pending/i.test(s)) {
+                    return 'Field Validation Pending';
+                }
+                if (/demand_validated/i.test(s)) {
+                    return 'Demand Validated';
+                }
+                if (/evidence_supported/i.test(s)) {
+                    return 'Evidence Supported';
+                }
+                if (s.includes('_')) {
+                    return s.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+                }
+                return s;
+            }
+
+            function getEvidenceSlug(status) {
+                if (!status) return 'verified';
+                const s = String(status).toLowerCase();
+                if (s.includes('validated') || s.includes('demand')) return 'validated';
+                if (s.includes('pending')) return 'pending';
+                if (s.includes('supported') || s.includes('complete') || s.includes('verified')) return 'verified';
+                return 'desk';
+            }
+
+            function formatConfidence(level) {
+                if (!level) return { label: 'High Confidence', classKey: 'high' };
+                const str = String(level).trim();
+                const oppMatch = str.match(/opportunity\s*(\d+)\/100/i);
+                if (/validate_first/i.test(str)) {
+                    return {
+                        label: oppMatch ? `Validate First (${oppMatch[1]}/100)` : 'Validate First',
+                        classKey: 'medium'
+                    };
+                }
+                const lower = str.toLowerCase();
+                if (lower === 'high' || lower.includes('high')) {
+                    return { label: 'High Confidence', classKey: 'high' };
+                }
+                if (lower === 'medium' || lower.includes('medium')) {
+                    return { label: 'Medium Confidence', classKey: 'medium' };
+                }
+                if (lower === 'low' || lower.includes('low')) {
+                    return { label: 'Emerging', classKey: 'low' };
+                }
+                return {
+                    label: str.length > 22 ? str.slice(0, 20) + '...' : str,
+                    classKey: 'medium'
+                };
+            }
+
+            function formatBudgetDisplay(min, max) {
+                const numMin = Number(min || 0);
+                const numMax = Number(max || 0);
+                if (numMax < 100000 && numMin < 100000) {
+                    if (numMax === 0 && numMin === 0) return 'Micro / Zero Capex';
+                    const minStr = numMin >= 1000 ? `₹${Math.round(numMin / 1000)}k` : `₹${numMin}`;
+                    const maxStr = numMax >= 1000 ? `₹${Math.round(numMax / 1000)}k` : `₹${numMax}`;
+                    return `${minStr} &ndash; ${maxStr}`;
+                }
+                return `₹${formatLakhs(numMin)}L &ndash; ₹${formatLakhs(numMax)}L`;
             }
 
             function escapeHtml(str) {

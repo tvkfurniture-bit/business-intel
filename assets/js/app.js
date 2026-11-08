@@ -211,6 +211,48 @@ const App = (function() {
   }
 
   /**
+   * Resolve photography image for an opportunity based on slug, category, or industry.
+   */
+  function getOpportunityVisualImage(o) {
+    const slug = (o.slug || '').toLowerCase();
+    const cat = (o.category || '').toLowerCase();
+    const title = (o.title || '').toLowerCase();
+
+    if (slug.includes('comply-grid') || slug.includes('compliance') || slug.includes('software') || cat.includes('software') || title.includes('copilot') || title.includes('compliance')) {
+      return '/assets/images/industrial-compliance-software.jpg';
+    }
+    if (slug.includes('scrapbridge') || slug.includes('scrap') || slug.includes('recycling') || slug.includes('waste') || cat.includes('circular') || title.includes('debris') || title.includes('scrap')) {
+      return '/assets/images/scrap-recycling-hub.jpg';
+    }
+    if (slug.includes('shelfgrid') || slug.includes('warehouse') || slug.includes('storage') || slug.includes('logistics') || slug.includes('coldlink') || slug.includes('railbridge') || cat.includes('logistics')) {
+      return '/assets/images/warehouse-pallet-storage.jpg';
+    }
+    if (slug.includes('solar') || slug.includes('energy') || cat.includes('energy')) {
+      return '/assets/images/rooftop-solar-industrial.jpg';
+    }
+    if (slug.includes('ev-') || slug.includes('charger') || slug.includes('fleet') || slug.includes('commute') || title.includes('ev ') || cat.includes('ev') || cat.includes('mobility')) {
+      return '/assets/images/commercial-ev-fleet.jpg';
+    }
+    if (slug.includes('diaglink') || slug.includes('health') || slug.includes('elder') || slug.includes('pharma') || slug.includes('medical') || cat.includes('health')) {
+      return '/assets/images/healthcare-diagnostics-service.jpg';
+    }
+    if (slug.includes('coffee') || slug.includes('food') || slug.includes('kitchen') || cat.includes('food') || cat.includes('beverage')) {
+      return '/assets/images/specialty-coffee-roastery.jpg';
+    }
+
+    const fallbacks = [
+      '/assets/images/industrial-compliance-software.jpg',
+      '/assets/images/scrap-recycling-hub.jpg',
+      '/assets/images/warehouse-pallet-storage.jpg',
+      '/assets/images/rooftop-solar-industrial.jpg',
+      '/assets/images/commercial-ev-fleet.jpg'
+    ];
+    let hash = 0;
+    for (let i = 0; i < slug.length; i++) hash += slug.charCodeAt(i);
+    return fallbacks[hash % fallbacks.length];
+  }
+
+  /**
    * Load published featured opportunities from the database into the homepage grid.
    */
   async function loadFeaturedOpportunities() {
@@ -238,35 +280,53 @@ const App = (function() {
         featured = featured.slice(0, 3);
       }
 
-      grid.innerHTML = featured.map(o => `
-        <article class="card opportunity-catalogue-card">
-          <div class="card-meta-top">
-            <span class="badge badge-teal">${escapeHtml(o.category || 'General')}</span>
-            <span class="evidence-tag evidence-tag-${getEvidenceSlug(o.research_status)}">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
-          </div>
+      grid.innerHTML = featured.map(o => {
+        const statusLabel = formatResearchStatus(o.research_status);
+        const statusSlug = getEvidenceSlug(o.research_status);
+        const conf = formatConfidence(o.confidence_level);
+        const budgetRange = formatBudgetDisplay(o.budget_min, o.budget_max);
+        const imgUrl = getOpportunityVisualImage(o);
 
-          <h3 class="card-title">
-            <a href="/opportunity/${encodeURIComponent(o.slug)}/">${escapeHtml(o.title)}</a>
-          </h3>
-
-          <p class="card-location">📍 Scope: <strong>${escapeHtml(o.state || 'India')}</strong> &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
-          <p class="card-summary">${escapeHtml(o.short_summary || '')}</p>
-
-          <div class="card-budget-box">
-            <div class="budget-col">
-              <span class="budget-label">Indicative Startup Capex</span>
-              <strong class="budget-amount">₹${Number(o.budget_min || 0).toLocaleString('en-IN')} – ₹${Number(o.budget_max || 0).toLocaleString('en-IN')}</strong>
-            </div>
-            <div class="confidence-col">
-              <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'Medium')} Confidence</span>
+        return `
+        <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}">
+          <div class="card-visual-media">
+            <img src="${imgUrl}" alt="${escapeHtml(o.title)}" class="card-visual-img" loading="lazy" />
+            <div class="card-visual-overlay"></div>
+            <div class="card-visual-tags">
+              <span class="card-visual-sector">${escapeHtml(o.category || 'General')}</span>
+              <span class="card-visual-evidence evidence-tag-${statusSlug}">${escapeHtml(statusLabel)}</span>
             </div>
           </div>
 
-          <div class="card-action-footer">
-            <a href="/opportunity/${encodeURIComponent(o.slug)}/" class="btn btn-outline btn-sm btn-full">Read Opportunity Guide &rarr;</a>
+          <div class="card-body-wrap">
+            <h3 class="card-title">
+              <a href="/opportunity/${encodeURIComponent(o.slug)}/">${escapeHtml(o.title)}</a>
+            </h3>
+
+            <p class="card-location">📍 Scope: <strong>${escapeHtml(o.state || 'India')}</strong> &bull; Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></p>
+            <p class="card-summary">${escapeHtml(o.short_summary || '')}</p>
+
+            <div class="card-budget-box">
+              <div class="budget-col">
+                <span class="budget-label">Indicative Startup Capex</span>
+                <strong class="budget-amount">${budgetRange}</strong>
+                <small style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-sans); margin-top: 2px;">(₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')})</small>
+              </div>
+              <div class="confidence-col">
+                <span class="confidence-badge confidence-${conf.classKey}">${escapeHtml(conf.label)}</span>
+              </div>
+            </div>
+
+            <div class="card-action-footer">
+              <a href="/opportunity/${encodeURIComponent(o.slug)}/" class="btn btn-primary btn-sm btn-full btn-card-guide">
+                <span>Read Opportunity Guide</span>
+                <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </a>
+            </div>
           </div>
         </article>
-      `).join('');
+      `;
+      }).join('');
     } catch (err) {
       grid.innerHTML = `
         <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
@@ -332,18 +392,90 @@ const App = (function() {
       if (categorySelect && categorySelect.value) {
         params.set('category', categorySelect.value);
       }
+      if (window.I18N && window.I18N.getCurrentLanguage() !== 'en') {
+        params.set('lang', window.I18N.getCurrentLanguage());
+      }
 
       const queryString = params.toString();
-      window.location.href = `/opportunities/${queryString ? '?' + queryString : ''}`;
+      const targetUrl = `pages/opportunities/index.html${queryString ? '?' + queryString : ''}`;
+      if (typeof window.navigateTo === 'function') {
+        window.navigateTo(targetUrl);
+      } else {
+        window.location.href = targetUrl;
+      }
     });
   }
 
   // Utilities
+  function formatLakhs(amount) {
+    if (!amount) return '0';
+    const l = Number(amount) / 100000;
+    return Number.isInteger(l) ? String(l) : l.toFixed(1);
+  }
+
+  function formatResearchStatus(status) {
+    if (!status) return 'Evidence Supported';
+    const s = String(status).trim();
+    if (/public_research_complete_field_validation_pending/i.test(s) || /field_validation_pending/i.test(s)) {
+      return 'Field Validation Pending';
+    }
+    if (/demand_validated/i.test(s)) {
+      return 'Demand Validated';
+    }
+    if (/evidence_supported/i.test(s)) {
+      return 'Evidence Supported';
+    }
+    if (s.includes('_')) {
+      return s.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+    }
+    return s;
+  }
+
   function getEvidenceSlug(status) {
-    if (!status) return 'desk';
-    if (status.includes('Validated')) return 'validated';
-    if (status.includes('Supported')) return 'verified';
+    if (!status) return 'verified';
+    const s = String(status).toLowerCase();
+    if (s.includes('validated') || s.includes('demand')) return 'validated';
+    if (s.includes('pending')) return 'pending';
+    if (s.includes('supported') || s.includes('complete') || s.includes('verified')) return 'verified';
     return 'desk';
+  }
+
+  function formatConfidence(level) {
+    if (!level) return { label: 'High Confidence', classKey: 'high' };
+    const str = String(level).trim();
+    const oppMatch = str.match(/opportunity\s*(\d+)\/100/i);
+    if (/validate_first/i.test(str)) {
+      return {
+        label: oppMatch ? `Validate First (${oppMatch[1]}/100)` : 'Validate First',
+        classKey: 'medium'
+      };
+    }
+    const lower = str.toLowerCase();
+    if (lower === 'high' || lower.includes('high')) {
+      return { label: 'High Confidence', classKey: 'high' };
+    }
+    if (lower === 'medium' || lower.includes('medium')) {
+      return { label: 'Medium Confidence', classKey: 'medium' };
+    }
+    if (lower === 'low' || lower.includes('low')) {
+      return { label: 'Emerging', classKey: 'low' };
+    }
+    return {
+      label: str.length > 22 ? str.slice(0, 20) + '...' : str,
+      classKey: 'medium'
+    };
+  }
+
+  function formatBudgetDisplay(min, max) {
+    const numMin = Number(min || 0);
+    const numMax = Number(max || 0);
+    if (numMax < 100000 && numMin < 100000) {
+      if (numMax === 0 && numMin === 0) return 'Micro / Zero Capex';
+      const minStr = numMin >= 1000 ? `₹${Math.round(numMin / 1000)}k` : `₹${numMin}`;
+      const maxStr = numMax >= 1000 ? `₹${Math.round(numMax / 1000)}k` : `₹${numMax}`;
+      return `${minStr} &ndash; ${maxStr}`;
+    }
+    return `₹${formatLakhs(numMin)}L &ndash; ₹${formatLakhs(numMax)}L`;
   }
 
   function escapeHtml(str) {

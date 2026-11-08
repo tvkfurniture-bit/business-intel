@@ -174,18 +174,21 @@ const NavigationManager = (function() {
 
       let navHtml = items.map(item => {
         const isActive = currentPath.includes(item.cleanHref) || currentPath.includes(item.label.toLowerCase());
+        const href = (window.I18N && typeof window.I18N.getLocalizedUrl === 'function') ? window.I18N.getLocalizedUrl(item.href) : item.href;
+        const displayLabel = (window.I18N && typeof window.I18N.translatePhrase === 'function') ? window.I18N.translatePhrase(item.label) : item.label;
         return `
-          <a href="${item.href}" class="mobile-bottom-item ${isActive ? 'active' : ''}" aria-label="${item.label}">
+          <a href="${href}" class="mobile-bottom-item ${isActive ? 'active' : ''}" aria-label="${item.label}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">${item.icon}</svg>
-            <span>${item.label}</span>
+            <span>${displayLabel}</span>
           </a>
         `;
       }).join('');
 
+      const menuLabel = (window.I18N && typeof window.I18N.translatePhrase === 'function') ? window.I18N.translatePhrase('Menu') : 'Menu';
       navHtml += `
         <button type="button" class="mobile-bottom-item" id="bottom-nav-menu-btn" aria-label="Toggle Navigation Drawer">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-          <span>Menu</span>
+          <span>${menuLabel}</span>
         </button>
       `;
 

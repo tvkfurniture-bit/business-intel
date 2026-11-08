@@ -538,43 +538,79 @@
 
                 if (empty) empty.hidden = true;
 
+                function getProductImg(p) {
+                    const slug = (p.slug || '').toLowerCase();
+                    const title = (p.title || '').toLowerCase();
+                    if (slug.includes('compliance') || slug.includes('copilot') || slug.includes('schedule-m') || title.includes('pharma') || title.includes('compliance')) {
+                        return '../../assets/images/industrial-compliance-software.jpg';
+                    }
+                    if (slug.includes('scrap') || slug.includes('debris') || slug.includes('waste') || title.includes('debris') || title.includes('scrap')) {
+                        return '../../assets/images/scrap-recycling-hub.jpg';
+                    }
+                    if (slug.includes('shelfgrid') || slug.includes('warehouse') || slug.includes('storage') || slug.includes('coldlink') || slug.includes('stay') || title.includes('short-stay')) {
+                        return '../../assets/images/warehouse-pallet-storage.jpg';
+                    }
+                    if (slug.includes('solar') || title.includes('solar')) {
+                        return '../../assets/images/rooftop-solar-industrial.jpg';
+                    }
+                    if (slug.includes('ev') || title.includes('ev') || slug.includes('commute')) {
+                        return '../../assets/images/commercial-ev-fleet.jpg';
+                    }
+                    if (slug.includes('elder') || slug.includes('medical') || slug.includes('health')) {
+                        return '../../assets/images/healthcare-diagnostics-service.jpg';
+                    }
+                    return '../../assets/images/warehouse-pallet-storage.jpg';
+                }
+
                 grid.innerHTML = filteredProducts.map(p => {
+                    const imgUrl = getProductImg(p);
                     return `
                         <article class="card product-card">
-                            <div class="card-meta-top" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                <span class="badge badge-blue">${escapeHtml(p.product_type || 'Blueprint')}</span>
-                                <span class="delivery-time-tag" style="font-size: 0.8rem; color: var(--text-muted);">⏱️ ${escapeHtml(p.estimated_delivery_time || 'Instant / Within 2h')}</span>
+                            <div class="card-visual-media" style="height: 160px;">
+                                <img src="${imgUrl}" alt="${escapeHtml(p.title)}" class="card-visual-img" loading="lazy" />
+                                <div class="card-visual-overlay"></div>
+                                <div class="card-visual-tags">
+                                    <span class="card-visual-sector">${escapeHtml(p.product_type || 'Blueprint')}</span>
+                                    <span class="card-visual-evidence" style="background: rgba(2, 132, 199, 0.9);">⏱️ ${escapeHtml(p.estimated_delivery_time || 'Digital Delivery')}</span>
+                                </div>
                             </div>
 
-                            <h3 class="product-title" style="color: var(--navy); margin-bottom: 8px;">
-                                <a href="../blueprint/index.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a>
-                            </h3>
+                            <div class="card-body-wrap">
+                                <h3 class="product-title" style="color: var(--navy); margin-bottom: 8px; font-size: 1.15rem; font-weight: 750; line-height: 1.35; min-height: 48px;">
+                                    <a href="../blueprint/index.html?slug=${encodeURIComponent(p.slug)}" style="color: inherit; text-decoration: none;">${escapeHtml(p.title)}</a>
+                                </h3>
 
-                            <div class="product-audience-box" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-                                <strong>Target Operator:</strong> Aspiring Founders, F&amp;B Operators &amp; Local Investors
-                            </div>
+                                <div class="product-audience-box" style="font-size: 0.83rem; color: var(--text-muted); margin-bottom: 12px;">
+                                    <strong>Target Operator:</strong> Aspiring Founders, F&amp;B Operators &amp; Local Investors
+                                </div>
 
-                            <p class="product-desc" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">${escapeHtml(p.short_description || '')}</p>
+                                <p class="product-desc" style="font-size: 0.88rem; color: #475569; margin-bottom: 16px; line-height: 1.55;">${escapeHtml(p.short_description || '')}</p>
 
-                            <div class="product-deliverables" style="background: var(--bg-light); padding: 12px; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 16px;">
-                                <span style="font-weight: 700; display: block; margin-bottom: 6px;">Core Inclusions:</span>
-                                <ul style="list-style: none; display: flex; flex-direction: column; gap: 4px; color: var(--text-main);">
-                                    <li>✓ 45+ Page Operational Manual (PDF)</li>
-                                    <li>✓ 3-Year Dynamic Excel Financial Model</li>
-                                    <li>✓ Verified Tooling &amp; Machinery Contacts</li>
-                                    <li>✓ Statutory License Application Scripts</li>
-                                </ul>
-                            </div>
+                                <div class="product-deliverables" style="background: var(--bg-light); padding: 12px; border-radius: var(--radius-md); font-size: 0.83rem; margin-bottom: 16px;">
+                                    <span style="font-weight: 750; display: block; margin-bottom: 6px; color: var(--navy);">Core Inclusions:</span>
+                                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 4px; color: var(--text-main);">
+                                        <li>✓ 45+ Page Operational Manual (PDF)</li>
+                                        <li>✓ 3-Year Dynamic Excel Financial Model</li>
+                                        <li>✓ Verified Tooling &amp; Machinery Contacts</li>
+                                        <li>✓ Statutory License Application Scripts</li>
+                                    </ul>
+                                </div>
 
-                            <div class="product-price-row" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 14px;">
-                                <div class="price-val" style="font-size: 1.3rem; font-weight: 800; color: var(--navy);">₹${Number(p.price_inr).toLocaleString('en-IN')} <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted);">incl. GST</span></div>
-                                <div class="product-card-actions">
-                                    <a href="../blueprint/index.html?slug=${encodeURIComponent(p.slug)}" class="btn btn-primary btn-sm">View Deliverables &rarr;</a>
+                                <div class="product-price-row" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 14px; margin-top: auto;">
+                                    <div class="price-val" style="font-size: 1.25rem; font-weight: 800; color: var(--navy);">₹${Number(p.price_inr).toLocaleString('en-IN')} <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted);">incl. GST</span></div>
+                                    <div class="product-card-actions">
+                                        <a href="../blueprint/index.html?slug=${encodeURIComponent(p.slug)}" class="btn btn-primary btn-sm" style="white-space: nowrap; padding: 10px 16px; font-weight: 750; min-height: 42px;">View Deliverables &rarr;</a>
+                                    </div>
                                 </div>
                             </div>
                         </article>
                     `;
                 }).join('');
+
+                if (window.I18N && typeof window.I18N.translatePage === 'function') {
+                    window.I18N.translatePage();
+                    window.I18N.propagateLinks();
+                }
             }
 
             function escapeHtml(str) {

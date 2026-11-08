@@ -721,6 +721,11 @@
                 if (p.sample_file_id) {
                     sampleBtn.setAttribute('href', `https://drive.google.com/file/d/${p.sample_file_id}/view?usp=sharing`);
                 }
+
+                if (window.I18N && typeof window.I18N.translatePage === 'function') {
+                    window.I18N.translatePage();
+                    window.I18N.propagateLinks();
+                }
             }
 
             function parseSafe(val) {

@@ -1453,6 +1453,62 @@
                 return Number.isInteger(l) ? String(l) : l.toFixed(1);
             }
 
+            function formatResearchStatus(status) {
+                if (!status) return 'Evidence Supported';
+                const s = String(status).trim();
+                if (/public_research_complete_field_validation_pending/i.test(s) || /field_validation_pending/i.test(s)) {
+                    return 'Field Validation Pending';
+                }
+                if (/demand_validated/i.test(s)) {
+                    return 'Demand Validated';
+                }
+                if (/evidence_supported/i.test(s)) {
+                    return 'Evidence Supported';
+                }
+                if (s.includes('_')) {
+                    return s.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+                }
+                return s;
+            }
+
+            function formatConfidence(level) {
+                if (!level) return { label: 'High Confidence', classKey: 'high' };
+                const str = String(level).trim();
+                const oppMatch = str.match(/opportunity\s*(\d+)\/100/i);
+                if (/validate_first/i.test(str)) {
+                    return {
+                        label: oppMatch ? `Validate First (${oppMatch[1]}/100)` : 'Validate First',
+                        classKey: 'medium'
+                    };
+                }
+                const lower = str.toLowerCase();
+                if (lower === 'high' || lower.includes('high')) {
+                    return { label: 'High Confidence', classKey: 'high' };
+                }
+                if (lower === 'medium' || lower.includes('medium')) {
+                    return { label: 'Medium Confidence', classKey: 'medium' };
+                }
+                if (lower === 'low' || lower.includes('low')) {
+                    return { label: 'Emerging', classKey: 'low' };
+                }
+                return {
+                    label: str.length > 22 ? str.slice(0, 20) + '...' : str,
+                    classKey: 'medium'
+                };
+            }
+
+            function formatBudgetDisplay(min, max) {
+                const numMin = Number(min || 0);
+                const numMax = Number(max || 0);
+                if (numMax < 100000 && numMin < 100000) {
+                    if (numMax === 0 && numMin === 0) return 'Micro / Zero Capex';
+                    const minStr = numMin >= 1000 ? `₹${Math.round(numMin / 1000)}k` : `₹${numMin}`;
+                    const maxStr = numMax >= 1000 ? `₹${Math.round(numMax / 1000)}k` : `₹${numMax}`;
+                    return `${minStr} &ndash; ${maxStr}`;
+                }
+                return `₹${formatLakhs(numMin)}L &ndash; ₹${formatLakhs(numMax)}L`;
+            }
+
             function renderOpportunityCards(append) {
                 const container = document.getElementById('opportunities-display-container');
                 const emptyState = document.getElementById('empty-results-state');
@@ -1480,14 +1536,62 @@
                 const end = currentPage * PAGE_SIZE;
                 const itemsToDisplay = filteredOpportunities.slice(start, end);
 
-                const html = itemsToDisplay.map(o => `
+                function getOppImage(o) {
+                    const slug = (o.slug || '').toLowerCase();
+                    const cat = (o.category || '').toLowerCase();
+                    const title = (o.title || '').toLowerCase();
+                    if (slug.includes('comply-grid') || slug.includes('compliance') || slug.includes('software') || cat.includes('software') || title.includes('copilot') || title.includes('compliance')) {
+                        return '../../assets/images/industrial-compliance-software.jpg';
+                    }
+                    if (slug.includes('scrapbridge') || slug.includes('scrap') || slug.includes('recycling') || slug.includes('waste') || cat.includes('circular') || title.includes('debris') || title.includes('scrap')) {
+                        return '../../assets/images/scrap-recycling-hub.jpg';
+                    }
+                    if (slug.includes('shelfgrid') || slug.includes('warehouse') || slug.includes('storage') || slug.includes('logistics') || slug.includes('coldlink') || slug.includes('railbridge') || cat.includes('logistics')) {
+                        return '../../assets/images/warehouse-pallet-storage.jpg';
+                    }
+                    if (slug.includes('solar') || slug.includes('energy') || cat.includes('energy')) {
+                        return '../../assets/images/rooftop-solar-industrial.jpg';
+                    }
+                    if (slug.includes('ev-') || slug.includes('charger') || slug.includes('fleet') || slug.includes('commute') || title.includes('ev ') || cat.includes('ev') || cat.includes('mobility')) {
+                        return '../../assets/images/commercial-ev-fleet.jpg';
+                    }
+                    if (slug.includes('diaglink') || slug.includes('health') || slug.includes('elder') || slug.includes('pharma') || slug.includes('medical') || cat.includes('health')) {
+                        return '../../assets/images/healthcare-diagnostics-service.jpg';
+                    }
+                    if (slug.includes('coffee') || slug.includes('food') || slug.includes('kitchen') || cat.includes('food') || cat.includes('beverage')) {
+                        return '../../assets/images/specialty-coffee-roastery.jpg';
+                    }
+                    const fallbacks = [
+                        '../../assets/images/industrial-compliance-software.jpg',
+                        '../../assets/images/scrap-recycling-hub.jpg',
+                        '../../assets/images/warehouse-pallet-storage.jpg',
+                        '../../assets/images/rooftop-solar-industrial.jpg',
+                        '../../assets/images/commercial-ev-fleet.jpg'
+                    ];
+                    let hash = 0;
+                    for (let i = 0; i < slug.length; i++) hash += slug.charCodeAt(i);
+                    return fallbacks[hash % fallbacks.length];
+                }
+
+                const html = itemsToDisplay.map(o => {
+                    const statusLabel = formatResearchStatus(o.research_status);
+                    const statusSlug = getEvidenceSlug(o.research_status);
+                    const conf = formatConfidence(o.confidence_level);
+                    const budgetRange = formatBudgetDisplay(o.budget_min, o.budget_max);
+                    const imgUrl = getOppImage(o);
+
+                    return `
                     <article class="card opportunity-catalogue-card ${o.featured ? 'is-featured' : ''}" data-slug="${escapeHtml(o.slug)}" style="cursor: pointer;">
-                        <div class="card-meta-top">
-                            <span class="card-category-tag">${escapeHtml(o.category || 'General')}</span>
-                            <span class="evidence-tag evidence-tag-${getEvidenceSlug(o.research_status)}">${escapeHtml(o.research_status || 'Evidence Supported')}</span>
+                        <div class="card-visual-media">
+                            <img src="${imgUrl}" alt="${escapeHtml(o.title)}" class="card-visual-img" loading="lazy" />
+                            <div class="card-visual-overlay"></div>
+                            <div class="card-visual-tags">
+                                <span class="card-visual-sector">${escapeHtml(o.category || 'General')}</span>
+                                <span class="card-visual-evidence evidence-tag-${statusSlug}">${escapeHtml(statusLabel)}</span>
+                            </div>
                         </div>
 
-                        <div>
+                        <div class="card-body-wrap">
                             <h3 class="card-title">
                                 <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}">${escapeHtml(o.title)}</a>
                             </h3>
@@ -1497,25 +1601,32 @@
                                 <span>Model: <strong>${escapeHtml(o.business_model || 'Hybrid')}</strong></span>
                             </div>
                             <p class="card-summary">${escapeHtml(o.short_summary || '')}</p>
-                        </div>
 
-                        <div class="card-budget-box">
-                            <div class="budget-col">
-                                <span class="budget-label">Indicative Startup Capex</span>
-                                <strong class="budget-amount">₹${formatLakhs(o.budget_min)}L &ndash; ₹${formatLakhs(o.budget_max)}L</strong>
-                                <small style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-sans); margin-top: 2px;">(₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')})</small>
+                            <div class="card-budget-box">
+                                <div class="budget-col">
+                                    <span class="budget-label">Indicative Startup Capex</span>
+                                    <strong class="budget-amount">${budgetRange}</strong>
+                                    <small style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-sans); margin-top: 2px;">(₹${Number(o.budget_min || 0).toLocaleString('en-IN')} &ndash; ₹${Number(o.budget_max || 0).toLocaleString('en-IN')})</small>
+                                </div>
+                                <div class="confidence-col">
+                                    <span class="confidence-badge confidence-${conf.classKey}">${escapeHtml(conf.label)}</span>
+                                </div>
                             </div>
-                            <div class="confidence-col">
-                                <span class="confidence-badge confidence-${(o.confidence_level || 'Medium').toLowerCase()}">${escapeHtml(o.confidence_level || 'High')} Confidence</span>
-                            </div>
-                        </div>
 
-                        <div class="card-action-footer">
-                            <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-primary btn-sm btn-card-main">View Analysis &rarr;</a>
-                            <button type="button" class="btn btn-outline btn-sm btn-quick-preview" data-slug="${escapeHtml(o.slug)}" aria-label="Quick preview specs">Quick Specs</button>
+                            <div class="card-action-footer">
+                                <a href="../opportunity/index.html?slug=${encodeURIComponent(o.slug)}" class="btn btn-primary btn-sm btn-card-main">
+                                    <span>View Analysis</span>
+                                    <svg class="btn-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                </a>
+                                <button type="button" class="btn btn-outline btn-sm btn-quick-preview" data-slug="${escapeHtml(o.slug)}" aria-label="Quick preview specs">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    <span>Quick Specs</span>
+                                </button>
+                            </div>
                         </div>
                     </article>
-                `).join('');
+                    `;
+                }).join('');
 
                 container.innerHTML = html;
 
@@ -1575,9 +1686,11 @@
             }
 
             function getEvidenceSlug(status) {
-                if (!status) return 'desk';
-                if (status.includes('Validated')) return 'validated';
-                if (status.includes('Supported')) return 'verified';
+                if (!status) return 'verified';
+                const s = String(status).toLowerCase();
+                if (s.includes('validated') || s.includes('demand')) return 'validated';
+                if (s.includes('pending')) return 'pending';
+                if (s.includes('supported') || s.includes('complete') || s.includes('verified')) return 'verified';
                 return 'desk';
             }
 

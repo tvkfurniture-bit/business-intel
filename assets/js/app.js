@@ -320,16 +320,46 @@ const App = (function() {
               </div>
             </div>
 
-            <div class="card-action-footer">
-              <a href="/opportunity/${encodeURIComponent(o.slug)}/" class="btn btn-primary btn-sm btn-full btn-card-guide">
+            <div class="card-action-footer" style="display: flex; gap: 8px; align-items: stretch;">
+              <a href="/opportunity/${encodeURIComponent(o.slug)}/" class="btn btn-primary btn-sm btn-card-guide" style="flex: 1;">
                 <span>Read Opportunity Guide</span>
                 <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
               </a>
+              <button type="button" class="btn-quick-wa-share" data-title="${escapeHtml(o.title)}" data-slug="${escapeHtml(o.slug)}" data-capex="${escapeHtml(budgetRange)}" data-city="${escapeHtml(o.state || 'India')}" data-category="${escapeHtml(o.category || '')}" title="Share to WhatsApp" aria-label="Share this opportunity on WhatsApp" style="width: 48px; min-height: 48px; border-radius: var(--radius-md); background: #DCFCE7; border: 1px solid #86EFAC; color: #166534; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; flex-shrink: 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.58 2.007.92 2.791.92 3.182 0 5.77-2.587 5.77-5.766.001-3.183-2.585-5.768-5.77-5.768zm0 10.375c-.752 0-1.748-.287-2.431-.722l-.174-.11-1.58.414.423-1.542-.119-.19c-.482-.767-.743-1.603-.742-2.459.001-2.463 2.005-4.468 4.623-4.468 2.463 0 4.47 2.005 4.47 4.469 0 2.462-2.007 4.468-4.47 4.468zm2.607-3.328c-.143-.072-.846-.417-.977-.465-.131-.048-.226-.072-.321.072-.095.143-.369.465-.452.56-.083.096-.167.108-.31.036-.143-.072-.604-.223-1.15-.71-.426-.38-.713-.85-.796-.993-.083-.143-.009-.22.063-.292.065-.064.143-.167.214-.25.071-.084.095-.143.143-.238.048-.096.024-.18-.012-.251-.036-.072-.321-.774-.44-1.06-.116-.279-.234-.241-.321-.246-.083-.004-.179-.005-.274-.005-.095 0-.25.036-.381.18-.131.143-.5.488-.5 1.19s.512 1.381.583 1.477c.071.096 1.008 1.539 2.442 2.158.341.147.607.235.815.301.343.109.655.094.902.057.275-.041.846-.346.965-.68.119-.333.119-.619.083-.679-.036-.06-.131-.096-.274-.168z"/>
+                </svg>
+              </button>
             </div>
           </div>
         </article>
       `;
       }).join('');
+
+      // Wire quick WhatsApp share buttons
+      grid.querySelectorAll('.btn-quick-wa-share').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const title = btn.getAttribute('data-title');
+          const slug = btn.getAttribute('data-slug');
+          const capex = btn.getAttribute('data-capex');
+          const city = btn.getAttribute('data-city');
+          const category = btn.getAttribute('data-category');
+          const url = `${window.location.origin}/pages/opportunity/index.html?slug=${encodeURIComponent(slug)}`;
+
+          if (window.ViralShare) {
+            window.ViralShare.openShareModal({
+              title,
+              slug,
+              capex,
+              city,
+              category,
+              url
+            });
+          }
+        });
+      });
     } catch (err) {
       grid.innerHTML = `
         <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">

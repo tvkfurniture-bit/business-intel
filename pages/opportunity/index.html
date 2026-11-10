@@ -906,14 +906,24 @@
                     </ol>
                 </nav>
 
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-teal btn-sm" id="btn-share-viral-card" style="box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        <span>Share Opportunity Card</span>
+                    </button>
                     <button type="button" class="btn btn-outline btn-sm" id="btn-copy-link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        <span id="copy-btn-text">Share Dossier</span>
+                        <span id="copy-btn-text">Copy Link</span>
                     </button>
                     <button type="button" class="btn btn-outline btn-sm" onclick="window.print()">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                        <span>Print / Save PDF</span>
+                        <span>Print</span>
                     </button>
                 </div>
             </div>
@@ -1133,6 +1143,24 @@
                         </div>
                     </div>
                     <div id="opp-validation-container" style="margin-top: 18px;"></div>
+
+                    <!-- Free 7-Day Demand Validation Field Manual Lead Magnet Banner -->
+                    <div class="field-manual-banner" style="margin-top: 24px; padding: 22px 24px; background: linear-gradient(135deg, rgba(13,148,136,0.12), rgba(15,23,42,0.92)); border: 1px solid rgba(13,148,136,0.35); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                        <div style="flex: 1; min-width: 260px;">
+                            <div style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-light); margin-bottom: 4px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                Free Founder Field Manual
+                            </div>
+                            <h4 style="margin: 0 0 6px; font-size: 1.15rem; color: #fff;">7-Day Customer Demand Validation Field Script</h4>
+                            <p style="margin: 0; font-size: 0.86rem; color: #cbd5e1; line-height: 1.5;">
+                                Download the verbatim 15-question customer interview script, Hinglish cold WhatsApp outreach templates, and stop-loss kill gate scorecard.
+                            </p>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="btn-open-field-manual" style="padding: 10px 20px; font-weight: 700; background: linear-gradient(135deg, #0d9488, #059669); border: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Open Field Manual (PDF / Print)
+                        </button>
+                    </div>
                 </section>
 
                 <!-- 11. Statutory Disclaimer -->
@@ -1171,6 +1199,40 @@
                             <li>Verified Machinery Tooling Contacts</li>
                             <li>Statutory Licensing Application Scripts</li>
                         </ul>
+                    </div>
+
+                    <!-- Viral Dealflow & Co-Founder Sharing Card -->
+                    <div class="card" style="padding: 24px; border-radius: var(--radius-xl); border: 1.5px solid rgba(13, 148, 136, 0.3); background: linear-gradient(180deg, #F0FDFA 0%, #FFFFFF 100%); box-shadow: 0 4px 16px rgba(13, 148, 136, 0.08);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-size: 0.72rem; font-weight: 850; color: #0D9488; text-transform: uppercase; letter-spacing: 0.06em;">Viral Distribution</span>
+                            <span style="font-size: 0.72rem; font-weight: 750; background: #CCFBF1; color: #0F766E; padding: 2px 7px; border-radius: 4px;">1-Click Card</span>
+                        </div>
+                        <h4 style="color: var(--navy); font-size: 1.15rem; font-weight: 850; margin-bottom: 6px; letter-spacing: -0.015em;">Share with Partner / Investor</h4>
+                        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin-bottom: 16px;">
+                            Export a branded visual infographic card with verified Capex, margins, and 7-day kill gates directly to WhatsApp or LinkedIn.
+                        </p>
+                        <button type="button" class="btn btn-teal btn-full" id="btn-sidebar-share-card" style="min-height: 46px; font-weight: 750; margin-bottom: 10px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                            Export Shareable Card &rarr;
+                        </button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                            <button type="button" class="btn btn-outline btn-full btn-sm" id="btn-sidebar-quick-wa" style="font-size: 0.8rem; background: #F0FDF4; border-color: #86EFAC; color: #166534; font-weight: 700;">
+                                WhatsApp
+                            </button>
+                            <button type="button" class="btn btn-outline btn-full btn-sm" id="btn-sidebar-quick-li" style="font-size: 0.8rem; background: #F8FAFC; color: #0A66C2; font-weight: 700;">
+                                LinkedIn
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-outline btn-full btn-sm" id="btn-sidebar-field-manual" style="font-size: 0.82rem; font-weight: 700; border-color: rgba(13,148,136,0.6); color: var(--teal-light); display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            7-Day Field Manual (PDF / Script)
+                        </button>
                     </div>
 
                     <div class="card" style="padding: 24px; border-radius: var(--radius-lg);">
@@ -1248,6 +1310,7 @@
     <script src="../../assets/js/api.js"></script>
     <script src="../../assets/js/navigation.js"></script>
     <script src="../../assets/js/i18n.js"></script>
+    <script src="../../assets/js/viral-share.js"></script>
     <script>
         (function() {
             document.addEventListener('DOMContentLoaded', async () => {
@@ -1573,6 +1636,26 @@
                     `).join('');
                 }
 
+                // Prepare unified payload for viral share card
+                const econParsed = parseSafe(o.unit_economics_json) || {};
+                const capexStr = `₹${Number(o.budget_min).toLocaleString('en-IN')} – ₹${Number(o.budget_max).toLocaleString('en-IN')}`;
+                currentOppPayload = {
+                    title: o.title,
+                    slug: o.slug,
+                    city: o.resolved_location,
+                    category: o.category,
+                    business_model: o.business_model,
+                    capex: capexStr,
+                    budget_min: o.budget_min,
+                    budget_max: o.budget_max,
+                    margin: econParsed.target_gross_margin || econParsed.gross_margin || '55% – 70%',
+                    payback: econParsed.target_payback_months ? `${econParsed.target_payback_months} Months` : '4 – 6 Months',
+                    risk: o.confidence_level ? formatConfidence(o.confidence_level).label : 'Low–Medium (3.4)',
+                    sprint: o.proposed_solution || o.short_summary,
+                    gate: 'Fewer than 3 signed LOIs in 7 days',
+                    url: window.location.href.split('#')[0]
+                };
+
                 if (window.I18N && typeof window.I18N.translatePage === 'function') {
                     window.I18N.translatePage();
                     window.I18N.propagateLinks();
@@ -1638,17 +1721,141 @@
                 try { return JSON.parse(val); } catch(e) { return null; }
             }
 
+            let currentOppPayload = null;
+
             function initCopyLink() {
-                const btn = document.getElementById('btn-copy-link');
-                const text = document.getElementById('copy-btn-text');
-                if (!btn) return;
-                btn.addEventListener('click', async () => {
-                    try {
-                        await navigator.clipboard.writeText(window.location.href);
-                        text.textContent = 'Copied!';
-                        setTimeout(() => { text.textContent = 'Share Dossier'; }, 2500);
-                    } catch (e) { text.textContent = 'Link Ready'; }
+                const copyBtn = document.getElementById('btn-copy-link');
+                const copyText = document.getElementById('copy-btn-text');
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', async () => {
+                        try {
+                            const url = window.location.href.split('#')[0] + '?utm_source=direct_link&utm_medium=viral_share';
+                            await navigator.clipboard.writeText(url);
+                            if (copyText) copyText.textContent = 'Copied!';
+                            setTimeout(() => { if (copyText) copyText.textContent = 'Copy Link'; }, 2200);
+                        } catch (e) {
+                            if (copyText) copyText.textContent = 'Link Ready';
+                        }
+                    });
+                }
+
+                // Top Bar Share Opportunity Card Button
+                const topShareBtn = document.getElementById('btn-share-viral-card');
+                if (topShareBtn) {
+                    topShareBtn.addEventListener('click', () => {
+                        if (window.ViralShare && currentOppPayload) {
+                            window.ViralShare.openShareModal(currentOppPayload);
+                        }
+                    });
+                }
+
+                // Sidebar Share Card Button
+                const sidebarShareBtn = document.getElementById('btn-sidebar-share-card');
+                if (sidebarShareBtn) {
+                    sidebarShareBtn.addEventListener('click', () => {
+                        if (window.ViralShare && currentOppPayload) {
+                            window.ViralShare.openShareModal(currentOppPayload);
+                        }
+                    });
+                }
+
+                // Sidebar Quick WhatsApp Button
+                const quickWaBtn = document.getElementById('btn-sidebar-quick-wa');
+                if (quickWaBtn) {
+                    quickWaBtn.addEventListener('click', () => {
+                        if (window.ViralShare && currentOppPayload) {
+                            const text = window.ViralShare.formatWhatsAppText(currentOppPayload);
+                            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+                        }
+                    });
+                }
+
+                // Sidebar Quick LinkedIn Button
+                const quickLiBtn = document.getElementById('btn-sidebar-quick-li');
+                if (quickLiBtn) {
+                    quickLiBtn.addEventListener('click', async () => {
+                        if (window.ViralShare && currentOppPayload) {
+                            const text = window.ViralShare.formatLinkedInText(currentOppPayload);
+                            try {
+                                await navigator.clipboard.writeText(text);
+                                quickLiBtn.textContent = '✓ Copied!';
+                                setTimeout(() => { quickLiBtn.textContent = 'LinkedIn'; }, 2200);
+                            } catch (e) {
+                                window.ViralShare.openShareModal(currentOppPayload);
+                            }
+                        }
+                    });
+                }
+
+                // Field Manual Lead Magnet Trigger Buttons
+                const openFmBtn = document.getElementById('btn-open-field-manual');
+                const sidebarFmBtn = document.getElementById('btn-sidebar-field-manual');
+                const fmModal = document.getElementById('field-manual-modal');
+                const fmCloseBtn = document.getElementById('fm-close-btn');
+                const fmCloseBottomBtn = document.getElementById('fm-btn-close-bottom');
+                const fmPrintBtn = document.getElementById('fm-btn-print');
+                const fmWhatsAppBtn = document.getElementById('fm-btn-whatsapp');
+                const fmTitleEl = document.getElementById('fm-modal-title');
+
+                function openFieldManual() {
+                    if (fmTitleEl && currentOppPayload) {
+                        fmTitleEl.textContent = `7-Day Field Manual: ${currentOppPayload.title || 'Market Opportunity'}`;
+                    }
+                    if (fmModal) {
+                        fmModal.hidden = false;
+                        document.body.style.overflow = 'hidden';
+                    }
+                }
+
+                function closeFieldManual() {
+                    if (fmModal) {
+                        fmModal.hidden = true;
+                        document.body.style.overflow = '';
+                    }
+                }
+
+                if (openFmBtn) openFmBtn.addEventListener('click', openFieldManual);
+                if (sidebarFmBtn) sidebarFmBtn.addEventListener('click', openFieldManual);
+                if (fmCloseBtn) fmCloseBtn.addEventListener('click', closeFieldManual);
+                if (fmCloseBottomBtn) fmCloseBottomBtn.addEventListener('click', closeFieldManual);
+
+                // Tab switching in Field Manual Modal
+                const tabBtns = document.querySelectorAll('.fm-tab-btn');
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const targetTab = btn.getAttribute('data-fm-tab');
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        document.querySelectorAll('.fm-tab-pane').forEach(p => {
+                            p.hidden = (p.id !== `fm-pane-${targetTab}`);
+                        });
+                    });
                 });
+
+                // Print / Save as PDF
+                if (fmPrintBtn) {
+                    fmPrintBtn.addEventListener('click', () => {
+                        window.print();
+                    });
+                }
+
+                // Send Script to WhatsApp
+                if (fmWhatsAppBtn) {
+                    fmWhatsAppBtn.addEventListener('click', () => {
+                        const oppName = currentOppPayload ? currentOppPayload.title : 'Target Opportunity';
+                        const oppCity = currentOppPayload ? currentOppPayload.scope : 'Local Cluster';
+                        const shareText = `*7-Day Customer Demand Validation Field Script* 📋\n\n` +
+                            `*Opportunity:* ${oppName} (${oppCity})\n\n` +
+                            `*Core 7-Day Kill Gate:* Interview 15 local commercial prospects. If fewer than 4 request pilot quotes or fewer than 2 agree to a paid pilot within 7 days, STOP capital deployment.\n\n` +
+                            `*Top Customer Discovery Questions:*\n` +
+                            `1. What exact workaround are you currently using to solve this?\n` +
+                            `2. How much does the status quo failure mode cost you monthly?\n` +
+                            `3. If we deliver this service next Monday with 15% lower friction, can we start a 14-day paid pilot?\n\n` +
+                            `Get the full 15-question script and field manual:\n${window.location.href}&utm_source=whatsapp&utm_medium=field_manual`;
+                        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+                    });
+                }
             }
 
             function formatDate(iso) {
@@ -1666,5 +1873,122 @@
             }
         })();
     </script>
+
+    <!-- 7-Day Demand Validation Field Manual Lead Magnet Modal -->
+    <div id="field-manual-modal" class="field-manual-modal-overlay" hidden>
+        <div class="field-manual-modal-content">
+            <div class="field-manual-modal-header">
+                <div>
+                    <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-light); font-weight: 700;">Pre-Capex Validation Toolkit</span>
+                    <h3 id="fm-modal-title" style="margin: 4px 0 0; font-size: 1.35rem; color: #fff;">7-Day Customer Demand Validation Field Script</h3>
+                </div>
+                <button type="button" id="fm-close-btn" class="fm-close-btn" aria-label="Close modal">&times;</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="fm-tabs-bar">
+                <button type="button" class="fm-tab-btn active" data-fm-tab="questions">15 Discovery Questions</button>
+                <button type="button" class="fm-tab-btn" data-fm-tab="scripts">Cold WhatsApp &amp; Call Script</button>
+                <button type="button" class="fm-tab-btn" data-fm-tab="killgate">7-Day Kill Gate Rule</button>
+            </div>
+
+            <div class="fm-modal-body">
+                <!-- Tab 1: 15 Questions -->
+                <div class="fm-tab-pane" id="fm-pane-questions">
+                    <p style="font-size: 0.88rem; color: #94a3b8; margin: 0 0 16px; line-height: 1.5;">
+                        Conduct verbatim with 15 target buyers (plant heads, warehouse supervisors, procurement officers) in your cluster before signing leases or buying equipment.
+                    </p>
+
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div class="fm-question-item">
+                            <h5>1. How do you currently handle this requirement today?</h5>
+                            <p>Identifies incumbent alternatives and informal manual workarounds in use.</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>2. What is the most painful friction point in your current setup?</h5>
+                            <p>Detects whether this is a genuine top-3 burning operational headache or minor nuisance.</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>3. How much did you pay for this service or material over the last 90 days?</h5>
+                            <p>Anchors actual purchasing budget rather than hypothetical intent.</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>4. Who in your company signs off on this purchase invoice?</h5>
+                            <p>Maps the decision-maker hierarchy (owner vs purchase manager vs plant GM).</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>5. What happens to your operations if this service is delayed by 48 hours?</h5>
+                            <p>Tests mission-critical urgency and downside financial risk to the client.</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>6. Have you evaluated other vendors in the past 12 months? Why didn't you switch?</h5>
+                            <p>Surfaces switching barriers, existing credit cycles, and supplier lock-in.</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>7. What credit payment terms do you require from an authorized vendor?</h5>
+                            <p>Validates cash flow compatibility (e.g. advance vs 15-day vs 60-day credit).</p>
+                        </div>
+                        <div class="fm-question-item">
+                            <h5>8. If we launch next Monday with guaranteed SLAs and verified billing, would you issue a trial PO?</h5>
+                            <p>The definitive commercial test: moves prospect from complimenting you to commercial commitment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Cold Outreach Scripts -->
+                <div class="fm-tab-pane" id="fm-pane-scripts" hidden>
+                    <p style="font-size: 0.88rem; color: #94a3b8; margin: 0 0 16px; line-height: 1.5;">
+                        Tested cold WhatsApp message and call intro for Indian MSME owners and procurement managers.
+                    </p>
+
+                    <div class="fm-script-box">
+                        <div style="font-size: 0.78rem; text-transform: uppercase; color: var(--teal-light); font-weight: 700; margin-bottom: 6px;">WhatsApp Cold Outreach Script (Hinglish / B2B)</div>
+                        <div style="font-size: 0.88rem; color: #f1f5f9; line-height: 1.6; white-space: pre-wrap;">"Namaste [Name] ji, my name is [Your Name]. We operate a specialized service for [Sector/Cluster] units in [City].
+Many plant owners in [Industrial Area] told us that existing vendors are creating delays with [Specific Pain Point].
+We have structured a zero-overhead pilot to solve this with direct billing and guaranteed turnaround.
+Can I share a 1-page rate card and visit your unit tomorrow for a quick 10-minute audit? Regards, [Your Name] | [Your Phone]"</div>
+                    </div>
+
+                    <div class="fm-script-box">
+                        <div style="font-size: 0.78rem; text-transform: uppercase; color: #f59e0b; font-weight: 700; margin-bottom: 6px;">Phone Call 30-Second Intro Formula</div>
+                        <div style="font-size: 0.88rem; color: #f1f5f9; line-height: 1.6; white-space: pre-wrap;">"Hello [Name] sir, I'm calling from [Company Name] in [City]. I know you're busy running the plant so I'll be brief. We are helping 12 units in [Industrial Area] cut their [Scrap / Logistics / Compliance] leakage by 18-22%. I'm not selling you anything today—I just want to see if your unit qualifies for our upcoming 14-day trial dispatch. Who handles the vendor approval for this?"</div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: 7-Day Kill Gate Rule -->
+                <div class="fm-tab-pane" id="fm-pane-killgate" hidden>
+                    <p style="font-size: 0.88rem; color: #94a3b8; margin: 0 0 16px; line-height: 1.5;">
+                        The defensive stop-loss framework to protect your family and hard-earned capital from unviable ideas.
+                    </p>
+
+                    <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; padding: 18px; margin-bottom: 16px;">
+                        <h4 style="margin: 0 0 8px; color: #fca5a5; font-size: 1.05rem;">The Non-Negotiable Kill Gate:</h4>
+                        <p style="margin: 0; font-size: 0.9rem; color: #fecaca; line-height: 1.6;">
+                            Within 7 days of field discovery, you must interview 15 genuine target buyers in person or over phone. <strong>If fewer than 4 buyers formally request a commercial quote, or fewer than 2 agree to a paid pilot trial: STOP. DO NOT LEASE PREMISES. DO NOT BUY MACHINERY. DO NOT INCORPORATE A PRIVATE LIMITED.</strong>
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.3); border-radius: 8px; padding: 18px;">
+                        <h4 style="margin: 0 0 8px; color: var(--teal-light); font-size: 1.05rem;">When to Proceed (Green Light):</h4>
+                        <p style="margin: 0; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6;">
+                            Proceed only when at least 2 buyers provide an advance or written letter of intent (LOI) agreeing to pay upon delivery at unit economics that yield &gt;20% gross margin.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-manual-modal-footer">
+                <button type="button" id="fm-btn-print" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, #0d9488, #059669); border: none; font-weight: 700;">
+                    Print / Save as PDF
+                </button>
+                <button type="button" id="fm-btn-whatsapp" class="btn btn-outline btn-sm" style="border-color: #25D366; color: #25D366; font-weight: 700;">
+                    Send Script to WhatsApp
+                </button>
+                <button type="button" id="fm-btn-close-bottom" class="btn btn-outline btn-sm">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

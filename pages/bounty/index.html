@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Gap Bounty Portal — Earn 25% Researcher Royalty | Business Scope</title>
+    <meta name="description" content="Report an unserved B2B or industrial gap in your city. If verified and published as a commercial blueprint, earn a 25% perpetual researcher royalty.">
+    <link rel="canonical" href="https://businessscopeinyourcity.in/bounty/">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://businessscopeinyourcity.in/bounty/">
+    <meta property="og:title" content="Local Gap Bounty Portal — Spot a City Gap, Earn 25% Royalty">
+    <meta property="og:description" content="Report unserved supply bottlenecks, godown shortages, or recycling gaps in your industrial cluster.">
+    <meta property="og:image" content="../../assets/images/social-cover.svg">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <aside id="announcement-bar" class="announcement-bar" style="display: none;" aria-label="Announcement">
+        <div class="container announcement-content">
+            <span class="announcement-badge">Crowdsource Bounty</span>
+            <span id="announcement-text">Now accepting field submissions for Tier-2 and Tier-3 industrial corridors.</span>
+            <button type="button" class="announcement-close" id="announcement-close-btn" aria-label="Dismiss Announcement">&times;</button>
+        </div>
+    </aside>
+
+    <!-- Global Responsive Header -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="../../index.html" class="brand-logo" aria-label="Business Scope in Your City Homepage">
+                <img src="../../assets/images/logo.svg" alt="Logo" class="brand-logo-img">
+                <span class="brand-text">Business Scope <small>in Your City</small></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="../opportunities/index.html" class="nav-link">Explore Opportunities</a>
+                <a href="../cities/index.html" class="nav-link">Cities</a>
+                <a href="../compare/index.html" class="nav-link">City Arbitrage</a>
+                <a href="index.html" class="nav-link active" style="color: var(--teal-light); font-weight: 600;">Gap Bounty</a>
+                <a href="../insights/index.html" class="nav-link">Insights</a>
+                <a href="../about/index.html" class="nav-link">About</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="../account/index.html" class="btn btn-outline btn-sm">Access Purchases</a>
+                <a href="../custom-research/index.html" class="btn btn-primary btn-sm">Custom Research</a>
+            </div>
+
+            <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-drawer" id="mobile-drawer" aria-label="Mobile Navigation" hidden>
+            <a href="../opportunities/index.html">Explore Opportunities</a>
+            <a href="../cities/index.html">Cities</a>
+            <a href="../compare/index.html">City Arbitrage</a>
+            <a href="index.html" class="active">Gap Bounty</a>
+            <a href="../insights/index.html">Insights</a>
+            <a href="../about/index.html">About</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="section" style="padding: 56px 0 36px; background: radial-gradient(circle at 50% 10%, rgba(13, 148, 136, 0.15) 0%, transparent 60%);">
+            <div class="container text-center" style="max-width: 820px;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal-light); margin-bottom: 12px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #25D366;"></span>
+                    Community Field Intelligence
+                </div>
+                <h1 style="font-size: 2.5rem; line-height: 1.2; margin: 0 0 16px; font-weight: 800; color: #fff;">
+                    Spot a Business Gap in Your City.<br>Earn a 25% Research Royalty.
+                </h1>
+                <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; margin: 0 auto 28px; max-width: 660px;">
+                    Are local factories struggling with industrial scrap disposal? Is your MIDC/GIDC zone lacking temperature-controlled pallets? Submit the gap. When our analysts verify and publish the commercial teardown, you receive perpetual attribution and 25% royalty on all paid blueprint downloads.
+                </p>
+
+                <!-- Value Props 3-Column -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; text-align: left;">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px;">
+                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px; font-size: 0.95rem;">1. Submit Field Evidence</div>
+                        <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">Describe the broken workaround or unmet need in your local industrial pocket.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px;">
+                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px; font-size: 0.95rem;">2. Analyst Verification</div>
+                        <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">Our desk models unit economics, surveys 15 local buyers, and constructs the launch guide.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px;">
+                        <div style="font-weight: 700; color: var(--teal-light); margin-bottom: 4px; font-size: 0.95rem;">3. Perpetual 25% Payout</div>
+                        <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">Receive automatic quarterly UPI payouts as founders license your city blueprint.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bounty Submission Form -->
+        <section class="section" style="padding: 16px 0 64px;">
+            <div class="container" style="max-width: 760px;">
+                <div class="card" style="padding: 36px 32px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
+
+                    <div id="bounty-form-container">
+                        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 24px;">
+                            <h2 style="font-size: 1.45rem; margin: 0 0 6px; color: #fff;">Field Opportunity Submission Form</h2>
+                            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">All submissions are timestamped and assigned a confidential researcher tracking hash.</p>
+                        </div>
+
+                        <form id="bounty-submission-form" style="display: flex; flex-direction: column; gap: 20px;">
+                            <!-- Contributor Info -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                                <div>
+                                    <label for="bounty-name" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Your Name / Scout Alias *</label>
+                                    <input type="text" id="bounty-name" required placeholder="e.g. Rahul Deshmukh" class="form-control" style="width: 100%; min-height: 46px;">
+                                </div>
+                                <div>
+                                    <label for="bounty-phone" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">WhatsApp Phone (for royalty UPI) *</label>
+                                    <input type="tel" id="bounty-phone" required placeholder="10-digit number" pattern="[0-9]{10}" class="form-control" style="width: 100%; min-height: 46px;">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                                <div>
+                                    <label for="bounty-email" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Business Email *</label>
+                                    <input type="email" id="bounty-email" required placeholder="rahul@example.com" class="form-control" style="width: 100%; min-height: 46px;">
+                                </div>
+                                <div>
+                                    <label for="bounty-city" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">City & Industrial Pocket *</label>
+                                    <input type="text" id="bounty-city" required placeholder="e.g. Pune (Chakan / Bhosari)" class="form-control" style="width: 100%; min-height: 46px;">
+                                </div>
+                            </div>
+
+                            <!-- Opportunity Details -->
+                            <div>
+                                <label for="bounty-category" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Industry Sector *</label>
+                                <select id="bounty-category" required class="form-control" style="width: 100%; min-height: 46px; background: rgba(15,23,42,0.9); color: #fff;">
+                                    <option value="" disabled selected>Select industry sector...</option>
+                                    <option value="Industrial Scrap & Recycling">Circular Economy / Industrial Scrap</option>
+                                    <option value="Warehousing & Shared Logistics">Godown Storage & Logistics Brokerage</option>
+                                    <option value="MSME Compliance & Regulatory">MSME Compliance Automation & Filings</option>
+                                    <option value="Clean Energy & Industrial Solar">Industrial Solar & Power Auditing</option>
+                                    <option value="B2B Raw Material Aggregation">B2B Raw Material & Polymer Aggregation</option>
+                                    <option value="Other High-Margin B2B Service">Other High-Margin B2B Service</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="bounty-gap-title" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">What Business or Service Is Missing? *</label>
+                                <input type="text" id="bounty-gap-title" required placeholder="e.g. Sub-50 pallet cold storage aggregation for mango exporters" class="form-control" style="width: 100%; min-height: 46px;">
+                            </div>
+
+                            <div>
+                                <label for="bounty-workaround" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Current Broken Workaround (How do buyers solve it today?) *</label>
+                                <textarea id="bounty-workaround" required rows="3" placeholder="Describe why existing options fail (e.g. Large parks require 5,000 sqft minimums; small shippers pay 3x to unorganized brokers)." class="form-control" style="width: 100%; line-height: 1.5; padding: 10px;"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="bounty-buyer-profile" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">Who are the Target Paying Customers? *</label>
+                                <input type="text" id="bounty-buyer-profile" required placeholder="e.g. 80+ automotive tier-3 suppliers in Talegaon MIDC" class="form-control" style="width: 100%; min-height: 46px;">
+                            </div>
+
+                            <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: var(--text-muted); cursor: pointer;">
+                                <input type="checkbox" id="bounty-terms" required style="width: auto; min-height: auto; margin-top: 3px;">
+                                <span>I agree to the Contributor Research Terms. If approved, I will be listed as Lead Contributor and receive a 25% royalty on all paid blueprint downloads.</span>
+                            </label>
+
+                            <div id="bounty-feedback" class="form-feedback" hidden></div>
+
+                            <button type="submit" id="btn-submit-bounty" class="btn btn-primary" style="min-height: 50px; font-size: 1rem; font-weight: 700; background: linear-gradient(135deg, #0d9488, #059669); border: none; box-shadow: 0 4px 14px rgba(13, 148, 136, 0.4);">
+                                Transmit Opportunity Bounty &rarr;
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success State -->
+                    <div id="bounty-success-view" hidden style="text-align: center; padding: 20px 10px;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(37,211,102,0.15); border: 2px solid #25D366; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; color: #25D366;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h3 style="font-size: 1.6rem; color: #fff; margin: 0 0 8px;">Opportunity Bounty Logged!</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+                            Your submission has been assigned reference <strong id="bounty-ref-code" style="color: var(--teal-light); font-feature-settings: 'tnum' 1;">BS-BTY-849201</strong>. Our analyst desk in Pune/Mumbai will audit the ground demand within 72 hours.
+                        </p>
+
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; max-width: 480px; margin: 0 auto 24px; text-align: left;">
+                            <div style="font-size: 0.8rem; color: var(--teal-light); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Viral Bounty Booster</div>
+                            <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0 0 12px; line-height: 1.5;">
+                                Invite business owners in your cluster to confirm this problem. More confirmations accelerate analyst prioritization!
+                            </p>
+                            <button id="btn-share-bounty-wa" type="button" class="btn btn-primary btn-sm" style="width: 100%; background: #25D366; color: #000; font-weight: 700; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                                Share Bounty to Local WhatsApp Group
+                            </button>
+                        </div>
+
+                        <a href="../opportunities/index.html" class="btn btn-outline btn-sm">Explore Existing Blueprints</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" id="site-footer">
+        <div class="container footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; padding: 48px 0;">
+            <div class="footer-col" style="grid-column: span 1.5;">
+                <div class="brand-logo" style="margin-bottom: 16px;">
+                    <img src="../../assets/images/logo.svg" alt="Logo" class="brand-logo-img">
+                    <span class="brand-text">Business Scope <small>in Your City</small></span>
+                </div>
+                <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.6; margin-bottom: 16px;">
+                    Empirical business opportunity blueprints, unit economics, startup capex benchmarks, and demand validation field guides for 88+ Indian commercial hubs.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Tools & Analysis</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../compare/index.html" style="color: #CBD5E1;">City vs City Arbitrage</a></li>
+                    <li><a href="../../index.html#founder-matchmaker" style="color: #CBD5E1;">Founder Diagnostic Matchmaker</a></li>
+                    <li><a href="index.html" class="active" style="color: var(--teal-light);">Local Gap Bounty Portal</a></li>
+                    <li><a href="../cities/index.html" style="color: #CBD5E1;">All 88 Covered Cities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../how-it-works/index.html" style="color: #CBD5E1;">How It Works</a></li>
+                    <li><a href="../methodology/index.html" style="color: #CBD5E1;">Research Methodology</a></li>
+                    <li><a href="../insights/index.html" style="color: #CBD5E1;">Insights &amp; Case Studies</a></li>
+                    <li><a href="../faq/index.html" style="color: #CBD5E1;">Frequently Asked Questions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../legal/index.html?policy=privacy" style="color: #CBD5E1;">Privacy Policy</a></li>
+                    <li><a href="../legal/index.html?policy=terms" style="color: #CBD5E1;">Terms of Service</a></li>
+                    <li><a href="../legal/index.html?policy=disclaimer" style="color: #CBD5E1;">Risk Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px; font-size: 0.85rem; color: #94A3B8; text-align: center;">
+            <p>&copy; <span id="current-year">2026</span> Business Scope in Your City. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/navigation.js"></script>
+    <script src="../../assets/js/bounty.js"></script>
+</body>
+</html>

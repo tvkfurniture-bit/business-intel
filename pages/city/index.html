@@ -119,8 +119,14 @@
                             <span class="metric-label">Average MSME Capex Range:</span>
                             <strong class="metric-val" id="city-stat-capex">₹5L – ₹25L</strong>
                         </div>
-                        <div class="city-hero-cta">
+                        <div class="city-hero-cta" style="display: flex; flex-direction: column; gap: 8px;">
                             <a href="#city-opportunities" class="btn btn-primary btn-full btn-sm">View Local Opportunities &darr;</a>
+                            <button type="button" class="btn btn-outline btn-full btn-sm" id="btn-share-city-wa" style="background: #F0FDF4; border-color: #86EFAC; color: #166534; font-weight: 750; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.58 2.007.92 2.791.92 3.182 0 5.77-2.587 5.77-5.766.001-3.183-2.585-5.768-5.77-5.768zm0 10.375c-.752 0-1.748-.287-2.431-.722l-.174-.11-1.58.414.423-1.542-.119-.19c-.482-.767-.743-1.603-.742-2.459.001-2.463 2.005-4.468 4.623-4.468 2.463 0 4.47 2.005 4.47 4.469 0 2.462-2.007 4.468-4.47 4.468zm2.607-3.328c-.143-.072-.846-.417-.977-.465-.131-.048-.226-.072-.321.072-.095.143-.369.465-.452.56-.083.096-.167.108-.31.036-.143-.072-.604-.223-1.15-.71-.426-.38-.713-.85-.796-.993-.083-.143-.009-.22.063-.292.065-.064.143-.167.214-.25.071-.084.095-.143.143-.238.048-.096.024-.18-.012-.251-.036-.072-.321-.774-.44-1.06-.116-.279-.234-.241-.321-.246-.083-.004-.179-.005-.274-.005-.095 0-.25.036-.381.18-.131.143-.5.488-.5 1.19s.512 1.381.583 1.477c.071.096 1.008 1.539 2.442 2.158.341.147.607.235.815.301.343.109.655.094.902.057.275-.041.846-.346.965-.68.119-.333.119-.619.083-.679-.036-.06-.131-.096-.274-.168z"/>
+                                </svg>
+                                <span>Share City Scope to WhatsApp</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -592,6 +598,23 @@
                 const licenseText = document.getElementById('finding-licensing-text');
                 if (licenseText) {
                     licenseText.innerHTML = `Regulated under ${escapeHtml(currentCity.state)} municipal and industrial development corporation guidelines. Standard MSME Udyam registration, Shop Act, and municipal trade NOCs apply.`;
+                }
+
+                // Wire WhatsApp city share
+                const waBtn = document.getElementById('btn-share-city-wa');
+                if (waBtn) {
+                    waBtn.onclick = function() {
+                        const url = window.location.href.split('#')[0] + '?utm_source=whatsapp_city&utm_medium=viral_share';
+                        const text = `🏙️ *LOCAL BUSINESS SCOPE: ${currentCity.city_name.toUpperCase()}, ${currentCity.state.toUpperCase()}*\n\n` +
+                            `Audited local market intelligence and validated business gaps:\n` +
+                            `• Published Opportunities: ${cityOpportunities.length}\n` +
+                            `• Dominant Gaps: ${currentCity.major_industries || 'B2B Services, Clean Energy, Logistics'}\n` +
+                            `• Average MSME Capex: ₹5L – ₹25L\n` +
+                            `• Territory Classification: ${tier}\n\n` +
+                            `Explore local ground truth, rental trends, and verified unit economics:\n${url}`;
+
+                        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+                    };
                 }
             }
 

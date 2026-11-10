@@ -92,13 +92,15 @@ const FormManager = (function() {
         e.preventDefault();
 
         const emailInput = form.querySelector('input[type="email"]');
+        const phoneInput = form.querySelector('input[type="tel"]') || form.querySelector('#newsletter-phone');
+        const citySelect = form.querySelector('select[name="city"]') || form.querySelector('#newsletter-city');
         const submitBtn = form.querySelector('button[type="submit"]');
         const consentCheckbox = form.querySelector('input[type="checkbox"]');
-        let feedbackEl = form.querySelector('.form-feedback') || document.getElementById('newsletter-msg');
+        let feedbackEl = form.querySelector('.form-feedback') || document.getElementById('newsletter-msg') || document.getElementById('newsletter-feedback');
 
-        if (!emailInput) return;
-
-        const email = emailInput.value.trim();
+        const email = emailInput ? emailInput.value.trim() : '';
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        const city = citySelect ? citySelect.value : 'All Indian Cities';
 
         // Consent verification if checkbox exists
         if (consentCheckbox && !consentCheckbox.checked) {
@@ -106,8 +108,13 @@ const FormManager = (function() {
           return;
         }
 
-        if (!isValidEmail(email)) {
+        if (email && !isValidEmail(email)) {
           showFeedback(feedbackEl, 'Please enter a valid business email address.', 'error');
+          return;
+        }
+
+        if (!email && !phone) {
+          showFeedback(feedbackEl, 'Please provide either a WhatsApp phone number or business email.', 'error');
           return;
         }
 
@@ -115,10 +122,16 @@ const FormManager = (function() {
         setButtonLoading(submitBtn, true, 'Subscribing...', 'Subscribe Free');
 
         try {
-          const response = await API.post('subscribe_newsletter', { email: email });
+          const response = await API.post('subscribe_newsletter', {
+            email: email || (phone + '@whatsapp.subscriber'),
+            phone: phone,
+            city: city,
+            channel: phone ? 'whatsapp_and_email' : 'email_only',
+            timestamp: new Date().toISOString()
+          });
 
           if (response && response.status === 'success') {
-            showFeedback(feedbackEl, '✓ Successfully subscribed to weekly market intelligence!', 'success');
+            showFeedback(feedbackEl, `✓ Subscribed! You will receive the Tuesday 9 AM Blueprint Drop${city !== 'All Indian Cities' ? ' for ' + city : ''}. Check WhatsApp/Email.`, 'success');
             form.reset();
           } else {
             throw new Error((response && response.message) ? response.message : 'Subscription request failed.');

@@ -26,6 +26,9 @@ const App = (function() {
 
       // 5. Initialize Homepage Instant "Where do you want to build?" City Search
       initHomeCitySearch();
+
+      // 6. Initialize Hero Interactive Dossier Switcher
+      initHeroDossierSwitcher();
     } catch (err) {
       console.error('App initialization error:', err);
     }
@@ -364,6 +367,141 @@ const App = (function() {
     } catch (e) {
       // Fail silently and keep default labels
     }
+  }
+
+  /**
+   * Hero Section Interactive Dossier Showcase.
+   * Switches live preview data, photography, unit economics, and deep link
+   * when visitor toggles between flagship dossiers.
+   */
+  function initHeroDossierSwitcher() {
+    const tabs = document.querySelectorAll('.hero-tab-btn');
+    if (!tabs || tabs.length === 0) return;
+
+    const dossiers = {
+      complygrid: {
+        img: '/assets/images/industrial-compliance-software.jpg',
+        alt: 'ComplyGrid Industrial MSME Compliance Workspace',
+        cat: 'Business Software · Compliance Automation',
+        badge: 'Evidence Supported',
+        scope: 'Scope: West Bengal & Pune MSME Belts',
+        model: 'SaaS + Managed B2B Hybrid',
+        title: 'ComplyGrid — Compliance Calendar & Filing Assistant for Industrial MSMEs',
+        summary: 'Convert statutory factory deadlines (GST, e-way bill, PF/ESIC, pollution consents) into an automated subscription workflow for small factories and logistics hubs.',
+        capex: '₹20,000 – ₹1.5L',
+        margin: '55% – 70%',
+        payback: '4 – 6 Months',
+        risk: 'Low–Medium (3.4/10)',
+        sprintTitle: '7-Day Falsification Test',
+        sprintGate: 'Kill Gate: < 3 LOIs',
+        sprint: 'Pitch 15 factory owners a ₹1,499/mo compliance monitoring pilot. Require minimum 3 signed LOIs before building automated tooling.',
+        slug: 'comply-grid-msme-compliance-automation'
+      },
+      scrapbridge: {
+        img: '/assets/images/scrap-recycling-hub.jpg',
+        alt: 'Dankuni ScrapBridge Industrial Secondary Material Sorting Hub',
+        cat: 'Circular Economy · B2B Marketplace',
+        badge: 'Evidence Supported',
+        scope: 'Scope: West Bengal & Howrah Foundry Belt',
+        model: 'Managed B2B Marketplace (Take Rate)',
+        title: 'Dankuni ScrapBridge — Industrial Secondary Material Marketplace',
+        summary: 'Aggregate scrap metal, pallets, and industrial polybags directly from manufacturing units and sell in bulk to verified regional re-rollers with guaranteed pickup.',
+        capex: '₹50,000 – ₹4.0L',
+        margin: '12% – 18%',
+        payback: '3 – 5 Months',
+        risk: 'Medium (4.8/10)',
+        sprintTitle: '7-Day Falsification Test',
+        sprintGate: 'Kill Gate: < 2 Repeat Deals',
+        sprint: 'Visit 10 metal fabrication shops, secure commitments for 5 tons of mixed scrap, and quote 2 certified recyclers with a ₹1.5/kg margin spread.',
+        slug: 'dankuni-scrapbridge-business-blueprint'
+      },
+      shelfgrid: {
+        img: '/assets/images/warehouse-pallet-storage.jpg',
+        alt: 'Dankuni ShelfGrid Pallet Racks and Staging Storage Godown',
+        cat: 'Logistics · Managed Storage Marketplace',
+        badge: 'Evidence Supported',
+        scope: 'Scope: Kolkata & Dankuni Logistics Corridor',
+        model: 'Managed Capacity Take Rate (15–20%)',
+        title: 'Dankuni ShelfGrid — Micro-Warehousing & Pallet Staging Network',
+        summary: 'Monetize idle godown floor space by aggregating small 20–50 pallet lots for D2C brands, distributors, and seasonal FMCG merchants needing short-term staging.',
+        capex: '₹60,000 – ₹2.5L',
+        margin: '22% – 32%',
+        payback: '5 – 7 Months',
+        risk: 'Low–Medium (3.8/10)',
+        sprintTitle: '7-Day Falsification Test',
+        sprintGate: 'Kill Gate: < 60% Capacity in 30d',
+        sprint: 'Contract 200 sq.ft of empty godown corner on revenue share, then sell 15 pallets of overflow storage to 3 local distributors at ₹220/pallet/month.',
+        slug: 'dankuni-shelfgrid-business-blueprint'
+      },
+      roofgrid: {
+        img: '/assets/images/rooftop-solar-industrial.jpg',
+        alt: 'RoofGrid Industrial Warehouse Rooftop Solar Installation',
+        cat: 'Clean Energy · Project Management & Lead-Gen',
+        badge: 'Evidence Supported',
+        scope: 'Scope: Maharashtra & Gujarat Industrial Parks',
+        model: 'Commission & EPC Coordination Desk',
+        title: 'RoofGrid — Industrial Rooftop Solar Aggregation Desk',
+        summary: 'Audit flat concrete warehouse and factory roofs, aggregate 50kW–200kW rooftop solar demands, and broker EPC installations for 4–6% origination fees.',
+        capex: '₹50,000 – ₹2.0L',
+        margin: '65% – 80%',
+        payback: '2 – 4 Months',
+        risk: 'Low (2.8/10)',
+        sprintTitle: '7-Day Falsification Test',
+        sprintGate: 'Kill Gate: < 2 Bill Audits',
+        sprint: 'Audit 8 warehouse electricity bills, perform shadow-free satellite roof assessments, and secure 2 signed EPC feasibility authorization letters.',
+        slug: 'roofgrid-warehouse-rooftop-solar-aggregator'
+      }
+    };
+
+    const imgEl = document.getElementById('hero-dossier-img');
+    const catEl = document.getElementById('hero-dossier-cat');
+    const badgeEl = document.getElementById('hero-dossier-badge');
+    const scopeEl = document.getElementById('hero-dossier-scope');
+    const modelEl = document.getElementById('hero-dossier-model');
+    const titleEl = document.getElementById('hero-dossier-title');
+    const summaryEl = document.getElementById('hero-dossier-summary');
+    const capexEl = document.getElementById('hero-dossier-capex');
+    const marginEl = document.getElementById('hero-dossier-margin');
+    const paybackEl = document.getElementById('hero-dossier-payback');
+    const riskEl = document.getElementById('hero-dossier-risk');
+    const sprintEl = document.getElementById('hero-dossier-sprint');
+    const linkEl = document.getElementById('hero-dossier-link');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.getAttribute('data-dossier');
+        const data = dossiers[key];
+        if (!data) return;
+
+        tabs.forEach(t => {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+
+        if (imgEl) {
+          imgEl.style.opacity = '0.3';
+          setTimeout(() => {
+            imgEl.src = data.img;
+            imgEl.alt = data.alt;
+            imgEl.style.opacity = '1';
+          }, 150);
+        }
+        if (catEl) catEl.textContent = data.cat;
+        if (badgeEl) badgeEl.textContent = data.badge;
+        if (scopeEl) scopeEl.textContent = data.scope;
+        if (modelEl) modelEl.textContent = data.model;
+        if (titleEl) titleEl.textContent = data.title;
+        if (summaryEl) summaryEl.textContent = data.summary;
+        if (capexEl) capexEl.textContent = data.capex;
+        if (marginEl) marginEl.textContent = data.margin;
+        if (paybackEl) paybackEl.textContent = data.payback;
+        if (riskEl) riskEl.textContent = data.risk;
+        if (sprintEl) sprintEl.textContent = data.sprint;
+        if (linkEl) linkEl.href = `pages/opportunity/index.html?slug=${encodeURIComponent(data.slug)}`;
+      });
+    });
   }
 
   /**
